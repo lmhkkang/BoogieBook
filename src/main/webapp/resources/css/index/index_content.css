@@ -1,0 +1,380 @@
+@charset "UTF-8";
+
+#content{
+	width: 100%;
+	margin: 0px auto;
+	border: 0px solid red;
+}
+
+#content #center{
+    overflow: hidden;
+}
+
+.center{
+    width: 1000px;
+    margin: 0px auto;
+}
+
+.slide_banner{
+    border: 1px solid #CCCCCC;
+    width: 1000px;
+    height: 400px;
+}
+
+.mySlides {display: none;}
+
+.slide_banner img{
+    vertical-align: middle;
+}
+
+/* Slideshow container */
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+
+/* Caption text */
+.text {
+  color: #000000;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .text {font-size: 11px}
+}
+
+#content > .section1{
+	width: 100%;
+	height: 400px;
+    background-color: #edf6ff;
+	border: 0px solid #CCCCCC;
+    margin-bottom: 40px;
+}
+
+.section1 > #center{
+    background-color: #edf6ff;
+}
+
+#content > .section2{
+	width: 100%;
+    border: 0px dotted blue;
+    margin-bottom: 40px;
+}
+
+#content > .section3{
+	width: 100%;
+    margin-bottom: 40px;
+}
+
+
+
+#content .tmp1{
+	border: 0px solid #CCCCCC;
+	text-align: center;
+	line-height: 200px;
+}
+
+.todayBook_form{
+    border: 1px solid #CCCCCC;
+    width: 80%;
+    height: 200px;
+    margin: 10px auto;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.todayBook_img{
+    border: 1px solid black;
+    float: left;
+    width: 20%;
+    height: 100%;
+}
+
+.todayBook_subject_form{
+    border: 0px solid #CCCCCC;
+    float: left;
+    width: 75%;
+    height: 100%;
+    margin-left: 20px;
+}
+
+.todayBook_sub{
+    border: 0px dotted green;
+    width: 100%;
+    height: 45%;
+}
+
+.todayBook_subject{
+    width: 75%;
+    height: 100%;
+    border: 0px solid black;
+    float: left;
+}
+.todayBook_subject1{
+    width: 100%;
+    height: 30%;
+    border: 0px solid red;
+    font-size: 0.8em;
+    text-align: left;
+    line-height:3;
+    color: green;
+    opacity: 0.7;
+    
+}
+.todayBook_subject2{
+    width: 100%;
+    height: 30%;
+    border: 0px solid red;
+    text-align: left;
+    line-height: 1.3;
+    font-size: 1.3em;
+}
+.todayBook_subject3{
+    width: 100%;
+    height: 30%;
+    border: 0px solid red;
+    text-align: left;
+    line-height: 2;
+    opacity: 0.8;
+}
+
+.todayBook_subject_img{
+    width: 20%;
+    height: 100%;
+    border: 1px solid black;
+    float: right;
+}
+
+.todayBook_des{
+    border: 0px dotted green;
+    width: 100%;
+    height: 45%;
+    text-align: left;
+    line-height: 1.3;
+    font-size: 0.9em;
+    margin-top:  10px;
+    opacity: 0.7;
+}
+
+#content .tmp2{
+	border: 0px solid #CCCCCC;
+	text-align: center;
+	line-height: 200px;
+}
+
+.best_header{
+    width: 100%;
+    height: 10%;
+    border: 0px solid blue;
+    line-height: 1.5;
+    text-align: left;
+    font-family: 'Black Han Sans', sans-serif;
+    font-size:1.5em;
+}
+.best_body{
+    width: 100%;
+    height: 80%;
+    border: 0px dotted pink;
+}
+
+
+#content .tmp3{
+	height: 200px;
+	border: 0px solid #CCCCCC;
+	text-align: center;
+	line-height: 200px;
+}
+
+#content > .section4{
+	width: 100%;
+	height: 155px;
+}
+
+.spot_form{
+    width: 95%;
+    height: 150px;
+    border: 0px solid red;
+    margin: 0px auto;
+    
+}
+
+.spot_l{
+    width: 10%;
+    height: 145px;
+    border: 0px solid red;
+    float: left;
+}
+
+.spot_inside{
+    width: 100%;
+    height: 70px;
+    border: 0px solid blue;
+    line-height:1.5;
+    margin-top: 30px;
+    font-size: 1.2em;
+}
+
+.spot_m{
+    width: 10%;
+    height: 145px;
+    border: 1px solid black;
+    float: left;
+    margin-left: 7px;
+}
+
+.spot_r{
+    width: 70%;
+    height: 145px;
+    border: 0px solid #CCCCCC;
+    float: left;
+}
+
+.spot_r_inside{
+    width: 90%;
+    height: 100px;
+    border: 1px solid #CCCCCC;
+    margin: 25px auto;
+}
+
+.spot_list{
+    padding-left: 10px;
+    margin-top: 30px;
+}
+
+.spot_list li{
+    padding-right: 15px;
+    line-height: 1;
+    font-size: 0.8em;
+    float: left;
+    height: 14px;
+    margin-right: 9px;
+    margin-bottom: 13px;
+    border-right: 1px solid black;
+}
+
+.spot_list a:hover{
+    cursor: pointer;
+    text-decoration: none;
+    color: darkblue;
+    font-weight: bold;
+}
+
+.best_container{
+    margin: 0 auto;
+    overflow: hidden;
+    border: 0px dotted red;
+}
+
+.best_body ul{
+    width: 98%;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px solid #CCCCCC;
+}
+.best_body li{
+    border: 2px solid #CCCCCC;
+    width: 170px;
+    height: 200px;
+    float: left;
+    margin: 19px;
+}
+
+.best_img{
+    border: 0.5px solid #CCCCCC;
+    width: 60%;
+    height: 65%;
+    margin: auto;
+    margin-top: 10px;
+}
+
+
+.best_body li:hover{
+     border: 2px solid #5e6b9e;
+}
+
+.best_sort{
+    border: 0px solid black;
+    overflow: hidden;
+    margin: 0 auto;
+    padding-left: 30px;
+}
+
+.th{
+    margin-top: 5px;
+    width: 100%;
+    height: 20px;
+    border: 0px dotted blue;
+    line-height: 1;
+}
+
+.su{
+    margin-top: 5px;
+    width: 100%;
+    height: 20px;
+    border: 0px dotted blue;
+    line-height: 1;
+}
+
+.th_txt{
+    font-size: 0.6em;
+    color: dodgerblue;
+}
+
+.th_txt:hover, .su_txt:hover{
+    text-decoration: none;
+    font-weight: bold;
+}
+,su_txt{
+    font-size: 0.7em;
+}
+
+

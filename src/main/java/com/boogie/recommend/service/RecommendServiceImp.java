@@ -17,6 +17,7 @@ public class RecommendServiceImp implements RecommendService {
 	public void recommendMain(ModelAndView mav) {
 		// TODO Auto-generated method stub
 		BookAspect.logger.info(BookAspect.logMsg+"OK");
+		
 		mav.setViewName("recommend/recommend_main");
 		
 	}

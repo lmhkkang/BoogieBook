@@ -39,12 +39,15 @@ button{
 .book_list li{
     font-size: 0.8em;
     margin: 5px;
+    color: black;
 }
 
 .book_list li:hover{
     font-weight: bold;
     cursor: pointer;
 }
+
+
 
 .center > .section1_r{
 	width: 75%;

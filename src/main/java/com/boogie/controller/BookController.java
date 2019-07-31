@@ -17,11 +17,13 @@ public class BookController
 	@Autowired
 	private RecommendService recommendService;
 	
-	@RequestMapping(value = "/recommend/recommendMain.book", method = RequestMethod.POST)
+	@RequestMapping(value = "/recommend/recommendMain.do", method = RequestMethod.GET)
 	public ModelAndView recommendMain(HttpServletRequest request, HttpServletResponse response)
 	{
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request",request);
+		
+		recommendService.recommendMain(mav);
 		
 		return mav;
 	}

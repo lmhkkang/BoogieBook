@@ -8,16 +8,14 @@
 		<meta charset="UTF-8">
 		<title>shop</title>
         <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Maven+Pro|Play&display=swap" rel="stylesheet">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<link rel="styleSheet" type="text/css" href="${root}/resources/css/recommend/recommend_content.css"/>
-		<link rel="styleSheet" type="text/css" href="${root}/resources/css/recommend/recommend_footer.css"/>
-	
     <script type="text/javascript">
 
     </script>
     </head>
 	<body>
-        <div class="center">
+		<jsp:include page="../../../header.jsp"></jsp:include>
+		<div class="center">
             <div class="section1_l">
                 <ul class="book_list">
                     <li><a>종합</a></li>
@@ -133,7 +131,8 @@
                         <div class="recommend_body"></div>
                     </div>
                 </div>
+        	</div>
         </div>
-
+        <jsp:include page="../../../footer.jsp"></jsp:include>
 	</body>
 </html>

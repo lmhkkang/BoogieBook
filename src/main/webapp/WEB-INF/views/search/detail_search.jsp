@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="styleSheet" type="text/css"
+	<link rel="styleSheet" type="text/css"
 	href="${root}/resources/css/search/search.css" />
 	<link rel="styleSheet" type="text/css"
 	href="${root}/resources/css/index/index_footer.css" />

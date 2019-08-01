@@ -37,17 +37,20 @@ button{
 }
 
 .book_list li{
-    font-size: 0.8em;
+	font-size: 0.8em;
     margin: 5px;
-    color: black;
+    color: black !important;
+}
+
+.book_list a{
+	height: 100px !important;
+	color: black !important;
 }
 
 .book_list li:hover{
     font-weight: bold;
     cursor: pointer;
 }
-
-
 
 .center > .section1_r{
 	width: 75%;
@@ -77,16 +80,24 @@ button{
 }
 
 .interest_top_l{
-    width: 50%;
+    width: 50% !important;
     float: left;
     text-align: left;
-    font-size: 0.8em;
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 1.5em;
 }
 .interest_top_r{
     width: 40%;
+    height: 50px;
     float: right;
     border: 0px solid red;
     text-align: right;
+}
+
+.interest_top_r button{
+	height: 35px;
+	line-height:0;
+	margin-bottom: 10px;
 }
 
 .interest_body{
@@ -94,14 +105,16 @@ button{
     height: 80%;
     border: 1px solid #CCCCCC;
     margin-top: 10px;
+    margin-left: 10px;
 }
 
 .interest_img{
-    border: 1px solid black;
+    border: 1px solid #CCCCCC;
     float: left;
     width: 20%;
-    height: 60%;
+    height: 70%;
     margin-top: 20px;
+    margin-left: 10px;
 }
 
 .interest_subject_form{

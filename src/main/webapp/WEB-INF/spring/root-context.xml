@@ -18,12 +18,9 @@
 
 
  		<!-- POOL  -->
-		<bean id="dataSource"
-			class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-			<property name="driverClassName"
-				value="oracle.jdbc.driver.OracleDriver"></property>
-			<property name="url"
-				value="jdbc:oracle:thin:@192.168.12.42:1521:xe"></property>
+		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+			<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+			<property name="url" value="jdbc:oracle:thin:@192.168.12.42:1521:xe"></property>
 			<property name="username" value="boogie"></property>
 			<property name="password" value="1234"></property>
 	
@@ -33,23 +30,21 @@
 		</bean>
 
  		<!-- MyBatis : sqlSessionFactoryBean  -->
-<!-- 		<bean id="sqlSessionFactoryBean" -->
-<!-- 			class="org.mybatis.spring.SqlSessionFactoryBean"> -->
-<!-- 			<property name="dataSource" ref="dataSource"></property> -->
-<!-- 			<property name="mapperLocations"> -->
-<!-- 				<list> -->
-<!-- 					<value></value> -->
-<!-- 					<value></value> -->
-<!-- 					<value></value> -->
-<!-- 				</list> -->
-<!-- 			</property> -->
-<!-- 		</bean> -->
+		<bean id="sqlSessionFactoryBean"
+			class="org.mybatis.spring.SqlSessionFactoryBean">
+			<property name="dataSource" ref="dataSource"></property>
+			<property name="mapperLocations">
+				<list>
+					<value>classpath:com/boogie/recommend/dao/mapper/RecommendMapper.xml</value>
+				</list>
+			</property>
+		</bean>
 
 	 	<!-- MyBatis : sqlSessionTemplate  -->
-<!-- 		<bean id="sqlSessionTemplate" -->
-<!-- 			class="org.mybatis.spring.SqlSessionTemplate"> -->
-<!-- 			<constructor-arg ref="sqlSessionFactoryBean"></constructor-arg> -->
-<!-- 		</bean> -->
+		<bean id="sqlSessionTemplate"
+			class="org.mybatis.spring.SqlSessionTemplate">
+			<constructor-arg ref="sqlSessionFactoryBean"></constructor-arg>
+		</bean>
 
  		<!-- Transaction  -->
 <!-- 		<bean id="transactionManager" -->

@@ -10,12 +10,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.boogie.recommend.service.RecommendService;
+import com.boogie.search.service.SearchService;
 
 @Controller
 public class BookController 
 {
 	@Autowired
 	private RecommendService recommendService;
+	
+	@Autowired
+	private SearchService searchService;
 	
 	@RequestMapping(value = "/recommend/recommendMain.do", method = RequestMethod.GET)
 	public ModelAndView recommendMain(HttpServletRequest request, HttpServletResponse response)
@@ -24,6 +28,17 @@ public class BookController
 		mav.addObject("request",request);
 		
 		recommendService.recommendMain(mav);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/search/detailSearch.do", method = RequestMethod.GET)
+	public ModelAndView detailSearchMain(HttpServletRequest request, HttpServletResponse response)
+	{
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request",request);
+		
+		searchService.detailSearch(mav);
 		
 		return mav;
 	}

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
@@ -39,17 +40,17 @@
                 <div class="section2">
                     <div class="interest">
                         <div class="interest_top">
-                            <div class="interest_top_l">국내도서 > 과학 > 물리학</div>
+                            <div class="interest_top_l">ID 님의 관심분야책</div>
                             <div class="interest_top_r"><button>다른 관심분야 선택하러가기</button></div>
                         </div>
                         <div class="interest_body">
-                            <div class="interest_img"></div>
+                            <div class="interest_img"><img src="${interestDto.img_path}" width="100%" height="100%"></div>
                             <div class="interest_subject_form">
                                 <div class="interest_sub">
                                     <div class="interest_subject">
-                                        <div class="interest_subject1">책 소제목 </div>
-                                        <div class="interest_subject2"><b>책 제목</b></div>
-                                        <div class="interest_subject3">인터넷 판매가: <b style="color: red">19,800원</b> (출판사 | 지은이)</div>
+                                        <div class="interest_subject1"><fmt:formatDate value="${interestDto.publish_date}" pattern="yyyy-MM-dd"/> </div>
+                                        <div class="interest_subject2"><b>${interestDto.book_name}</b></div>
+                                        <div class="interest_subject3">인터넷 판매가: <b style="color: red"><fmt:formatNumber value="${interestDto.price}" pattern="#,###"/>원</b> (${interestDto.publisher} | ${interestDto.author})</div>
                                     </div>
                                 </div>
                                 <div class="interest_des">

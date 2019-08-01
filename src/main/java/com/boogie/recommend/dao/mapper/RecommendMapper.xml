@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="dao.recommendMapper">
+
+  <select id="RecommendSelectInterest" parameterType="String" resultType="String">
+    select interest from member where member_id = #{id}
+  </select>
+  
+  
+  <select id="RecommendSelectInterestBook" parameterType="String" resultType="com.boogie.recommend.dto.RecommendInterestDto">
+  	<![CDATA[
+  	select * from (select * from book where type02 = #{interest} order by dbms_random.value) where rownum = 1
+  	]]>
+  </select>
+</mapper>

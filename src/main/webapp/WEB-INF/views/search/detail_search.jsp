@@ -1,17 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
+<c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <meta charset="UTF-8">
-	<link rel="styleSheet" type="text/css"
-	href="${root}/resources/css/search/search.css" />
-	<link rel="styleSheet" type="text/css"
-	href="${root}/resources/css/index/index_footer.css" />
-	<link rel="styleSheet" type="text/css"
-	href="${root}/resources/css/index/index_header.css" />
+	<link rel="styleSheet" type="text/css" href="${root}/resources/css/search/search.css" />
+	<link rel="styleSheet" type="text/css" href="${root}/resources/css/index/index_footer.css" />
+	<link rel="styleSheet" type="text/css" href="${root}/resources/css/index/index_header.css" />
 	<script type="text/javascript" src="${root}/resources/jquery/jquery.js"></script>
-<script type="text/javascript">
+	<script type="text/javascript">
 	$(function(){
 		$("#menu1").click(function(){
 			$(".tap").find("li").eq(0).css({"background-color":"#cee7ff"});
@@ -19,7 +22,7 @@
 			$(".tap").find("li").eq(1).css({"background-color":"#003a75"});
 			$(".tap").find("a").eq(1).css({"color":"white"});
 			$.ajax({
-				url:"search_detail.html",
+				url:"${root}/views/search/search_detail.html",
 				type:"get",
 				dataType: "html",
 				success: toServer

@@ -8,9 +8,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.boogie.member.dto.MemberDto;
+import com.boogie.member.service.MemberService;
+import com.boogie.recommend.service.RecommendService;
 
 @Controller
 public class BookController {
+	
+	@Autowired
+	private RecommendService recommendService;
+	
+	@Autowired
+	private MemberService memberService;
+	
+	@RequestMapping(value = "/recommend/recommendMain.do", method = RequestMethod.GET)
+	public ModelAndView recommendMain(HttpServletRequest request, HttpServletResponse response)
+	{
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request",request);
+		
+		recommendService.recommendMain(mav);
+		
+		return mav;
+	}
 	
 	@RequestMapping(value="/member/register.do", method=RequestMethod.GET)
 	public ModelAndView memberRegister(HttpServletRequest request, HttpServletResponse response){
@@ -18,13 +40,22 @@ public class BookController {
 		return new ModelAndView("member/register");
 	}
 	
+	@RequestMapping(value="/member/registerOk.do", method=RequestMethod.POST)
+	public ModelAndView memberRegisterOk(HttpServletRequest request, HttpServletResponse response){		
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		
+		memberService.memberRegisterOk(mav);
+		return mav;
+	}
+	
 	@RequestMapping(value = "/member/idCheck.do" , method = RequestMethod.POST)
 	public @ResponseBody String idCheck(HttpServletRequest request, HttpServletResponse response)  {
 		int result = 0;
 		System.out.println(result);
 	    return String.valueOf(result);
-		
-		
+			
 //		System.out.println("123");
 //		ModelAndView mav=new ModelAndView();
 //		mav.addObject("request", request);
@@ -51,28 +82,12 @@ public class BookController {
 //		}		
 	}
 	
-	@RequestMapping(value="/member/content1.do", method=RequestMethod.GET)
+	@RequestMapping(value="/member/content.do", method=RequestMethod.GET)
 	public ModelAndView readContent1(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView mav=new ModelAndView();
 		
-		return new ModelAndView("member/content1");
-	}
-	
-	@RequestMapping(value="/member/content2.do", method=RequestMethod.GET)
-	public ModelAndView readContent2(HttpServletRequest request, HttpServletResponse response){
-		
-		return new ModelAndView("member/content2");
-	}
-	
-	@RequestMapping(value="/member/content3.do", method=RequestMethod.GET)
-	public ModelAndView readContent3(HttpServletRequest request, HttpServletResponse response){
-		
-		return new ModelAndView("member/content3");
-	}
-	
-	@RequestMapping(value="/member/content4.do", method=RequestMethod.GET)
-	public ModelAndView readContent4(HttpServletRequest request, HttpServletResponse response){
-		
-		return new ModelAndView("member/content4");
-	}
-	    
+		mav.addObject("check", request.getParameter("check"));
+		mav.setViewName("member/content");
+		return mav;
+	}	    
 }

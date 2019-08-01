@@ -13,10 +13,14 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="${root}/resources/css/member/register_css.css" rel="stylesheet">
 <script src="${root}/resources/javascript/member/register_js.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <title>BoogieBook</title>
 </head>
 <body>
+
+<jsp:include page="../../../header.jsp"></jsp:include>
+
 <div class="container" style="border: 0px solid blue; margin: 0px auto; height:400px; margin-top:50px; margin-left: 120px;">
 	<div class="row">
     <div class="col-md-8" style="width: 1000px; height: 400px; margin: 0px auto;">  
@@ -58,19 +62,19 @@
             	<ul class="agreement_ul">
             		<li>
      					<input type="button" value="내용보기" style="width: 70px; height: 25px; line-height:25px; text-align: center; font-size: 12px;"
-     						onclick="readContent1()"/>
+     						onclick="readContent(1)"/>
      				</li>
      				<li>
      					<input type="button" value="내용보기" style="width: 70px; height: 25px; line-height:25px; text-align: center; font-size: 12px;"
-     						onclick="readContent2()"/>
+     						onclick="readContent(2)"/>
      				</li>
      				<li>
      					<input type="button" value="내용보기" style="width: 70px; height: 25px; line-height:25px; text-align: center; font-size: 12px;"
-     						onclick="readContent3()"/>
+     						onclick="readContent(3)"/>
      				</li>
      				<li>
 						<input type="button" value="내용보기" style="width: 70px; height: 25px; line-height:25px; text-align: center; font-size: 12px;"
-							onclick="readContent4()"/>
+							onclick="readContent(4)"/>
      				</li>
             	</ul>
             </div>                
@@ -84,7 +88,7 @@
     </div>
 </div>
 </div>
-	<div class="container" style="border: 0px solid red; margin: 0px auto; height: 700px; margin-left: 105px;">
+	<div class="container" style="border: 0px solid red; margin: 0px auto; height: 700px; margin-left: 105px; margin-bottom: 250px;">
 	<div class="row" style="margin: 0px auto; border: 0px solid red;">
     <div class="col-md-8" style="width: 1000px; height: 700px; margin: 0px auto;">  
         <h1 class="entry-title" style="border-bottom: 3px solid black; padding-bottom: 10px;"><span>회원가입</span> </h1>
@@ -96,7 +100,7 @@
           <div class="col-md-8 col-sm-9">
               <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-              <input type="text" style="width: 350px" class="form-control" name="id" id="id" placeholder="아이디를 입력하세요." value="" oninput="checkId()">
+              <input type="text" style="width: 350px" class="form-control" name="member_id" id="id" placeholder="아이디를 입력하세요." value="" oninput="checkId()">
             </div>
             <small class="chkIdMsg"> 공백없는 6~20자의 영문/숫자 조합, 아이디 첫글자는 영문 소문자만 가능합니다. </small> </div>
         </div>
@@ -126,7 +130,7 @@
           <div class="col-md-8 col-sm-9">
               <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-              <input type="email" style="width: 350px" class="form-control" name="email" id="email" placeholder="이메일을 입력하세요." value="" oninput="checkEmail()">
+              <input type="text" style="width: 350px" class="form-control" name="email" id="email" placeholder="이메일을 입력하세요." value="" oninput="checkEmail()">
             </div> 
             <small class="chkEmailMsg"> </small>  
             </div>
@@ -135,7 +139,7 @@
         <div class="form-group" >
           <label class="control-label col-sm-3">이름 <span class="text-danger">*</span></label>
           <div class="col-md-8 col-sm-9">
-            <input type="text" style="width: 230px" class="form-control" name="mem_name" id="mem_name" placeholder="이름을 입력하세요." value="">
+            <input type="text" style="width: 230px" class="form-control" name="name" id="mem_name" placeholder="이름을 입력하세요." value="">
           </div>
         </div>
         <div class="form-group">
@@ -165,6 +169,7 @@
               </div>
                           
             </div>
+            <input type="hidden" name="birth_date"/>
           </div>
         </div>
         <div class="form-group">
@@ -184,7 +189,7 @@
           <div class="col-md-5 col-sm-8">
           	<div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-            <input type="text" style="width: 350px" class="form-control" name="contactNum" id="contactNum" 
+            <input type="text" style="width: 350px" class="form-control" name="phone" id="contactNum" 
             placeholder="' - ' 제외한 휴대폰 번호를 입력하세요." value="" oninput="checkContactNum()">
             </div>
             <small class="chkContactNumMsg"> </small>  
@@ -194,39 +199,41 @@
           <label class="control-label col-sm-3">주소 <br></label>
           <div class="col-md-5 col-sm-8" style=" width: 500px; height: 90px; border: 0px solid red;">
           	<div style="width: 550px; height: 40px; border: 0px solid red">
-            	<input type="text" class="form-control" name="contactnum2" id="contactnum2" placeholder="" value="" 
-            	style="width: 150px; margin-bottom: 10px; float: left;">
+            	<input type="text" class="form-control" name="zipcode" id="zipcode" placeholder="" value="" 
+            	style="width: 150px; margin-bottom: 10px; float: left;" disabled>
             
-            	<input type = "button" value = "우편번호 검색" style="float: left; margin-left: 10px;" onclick=""/>
+            	<input type = "button" value = "우편번호 검색" style="float: left; margin-left: 10px;" 
+            			onclick="zipcodeRead()"/>
             </div>
             
-            <div style="width: 550px; height: 40px; border: 0px solid red; float: left;">
-            	<input type="text" class="form-control" name="contactnum2" id="contactnum2" placeholder="" value=""
-            	style="width: 250px;  float: left; margin-left: 0px;"/>
+            <div style="width: 550px; height: 40px; border: 0px solid red; float: left; ">
+            	<input type="text" class="form-control" name="addr1" id="addr1" placeholder="" value=""
+            	style="width: 250px;  float: left; margin-left: 0px;" disabled/>
             
-            	<input type="text" class="form-control" name="contactnum2" id="contactnum2" placeholder="상세 주소 입력" value=""
+            	<input type="text" class="form-control" name="addr2" id="addr2" placeholder="상세 주소 입력" value=""
             	style="width: 250px; float: left; margin-left: 10px;"/>
             </div>    
           </div>
         </div>
         
+          
         <div class="form-group">
           <label class="control-label col-sm-3">직업</label>
           <div class="col-md-8 col-sm-9">
             	<select name = "job" class="form-control" style="width: 80px; height: 30px; padding: 0px">
 					<option></option>				
-					<option value = "pupil">초중고 학생</option>
-					<option value = "student">대학생</option>
-					<option value = "officeWorker">일반회사원</option>
-					<option value = "designer">디자이너</option>
-					<option value = "publicOfficial">공무원</option>
-					<option value = "soldier">군인</option>
-					<option value = "policeOfficer">경찰</option>
-					<option value = "fireFighter">소방관</option>
-					<option value = "doctor">의사</option>
-					<option value = "nurse">간호사</option>
-					<option value = "laywer">변호사</option>
-					<option value = "etc">기타</option>
+					<option value = "초중고 학생">초중고 학생</option>
+					<option value = "대학생">대학생</option>
+					<option value = "일반회사원">일반회사원</option>
+					<option value = "디자이너">디자이너</option>
+					<option value = "공무원">공무원</option>
+					<option value = "군인">군인</option>
+					<option value = "경찰">경찰</option>
+					<option value = "소방관">소방관</option>
+					<option value = "의사">의사</option>
+					<option value = "간호사">간호사</option>
+					<option value = "변호사">변호사</option>
+					<option value = "기타">기타</option>
 				</select>
           </div>
         </div>
@@ -234,50 +241,67 @@
         <div class="form-group" style="border: 0px solid red">
           <label class="control-label col-sm-3">관심분야</label>
           <div class="col-md-8 col-sm-9" style="border: 0px solid red; width: 600px;">
-            <input type = "checkbox" name = "interestValue" value = "economy"/> 
+          
+            	<input type = "checkbox" name = "interestValue" value = "소설"/> 
 				<span>소설</span>
-				<input type = "checkbox" name = "interestValue" value = "IT"/>
-				<span>장르소설</span>
-				<input type = "checkbox" name = "interestValue" value = "music"/>
-				<span>시/에세이/기행</span>
-				<input type = "checkbox" name = "interestValue" value = "art"/>
-				<span>인물/교양/철학</span>
-				<input type = "checkbox" name = "interestValue" value = "art"/>
-				<span>종교</span>
-				<input type = "checkbox" name = "interestValue" value = "IT"/>
+				<input type = "checkbox" name = "interestValue" value = "시/에세이"/>
+				<span>시/에세이</span>
+				<input type = "checkbox" name = "interestValue" value = "경제/경영"/>
 				<span>경제/경영</span>
-				<input type = "checkbox" name = "interestValue" value = "art"/>
+				<input type = "checkbox" name = "interestValue" value = "자기계발"/>
 				<span>자기계발</span>
-				<input type = "checkbox" name = "interestValue" value = "music"/>
-				<span>사회/정치/법률</span>
-				<input type = "checkbox" name = "interestValue" value = "art"/>
-				<span>외국어/사전</span>
-				<input type = "checkbox" name = "interestValue" value = "IT"/>
-				<span>가정/생활/요리</span>
-				<input type = "checkbox" name = "interestValue" value = "music"/>
-				<span>여행/취미/레저</span>
-				<input type = "checkbox" name = "interestValue" value = "art"/>
-				<span>건강/의학/미용</span>
-				<input type = "checkbox" name = "interestValue" value = "art"/>
-				<span>예술/대중문화</span>
-				<input type = "checkbox" name = "interestValue" value = "IT"/>
-				<span>청소년교양</span>
-				<input type = "checkbox" name = "interestValue" value = "music"/>
-				<span>대학교재</span>
-				<input type = "checkbox" name = "interestValue" value = "art"/>
-				<span>서양서</span>
-				<input type = "checkbox" name = "interestValue" value = "art"/>
-				<span>만화</span>
-				<input type = "checkbox" name = "interestValue" value = "IT"/>
-				<span>자연과학/공학</span>
-				<input type = "checkbox" name = "interestValue" value = "music"/>
-				<span>일본서</span>
-				<input type = "checkbox" name = "interestValue" value = "art"/>
-				<span>컴퓨터/IT</span>
-				<input type = "checkbox" name = "interestValue" value = "art"/>
+				<input type = "checkbox" name = "interestValue" value = "인문"/>
+				<span>인문</span>
+				<input type = "checkbox" name = "interestValue" value = "역사/문화"/>
+				<span>역사/문화</span>
+				<input type = "checkbox" name = "interestValue" value = "종교"/>
+				<span>종교</span>
+				<input type = "checkbox" name = "interestValue" value = "정치/사회"/>
+				<span style = "margin-right: 20px;">정치/사회</span>
+				<input type = "checkbox" name = "interestValue" value = "예술/대중문화"/>
+				<span style = "margin-right: 6px;">예술/대중문화</span>
+				<input type = "checkbox" name = "interestValue" value = "과학"/>
+				<span style = "margin-right: 6px;">과학</span>
+				<input type = "checkbox" name = "interestValue" value = "기술/공학"/>
+				<span style = "margin-right: 6px;">기술/공학</span>
+				<input type = "checkbox" name = "interestValue" value = "컴퓨터/IT"/>
+				<span style = "margin-right: 6px;">컴퓨터/IT</span>
+				<input type = "checkbox" name = "interestValue" value = "유아(0~7세)"/>
+				<span style = "margin-right: 6px;">유아(0~7세)</span>
+				<input type = "checkbox" name = "interestValue" value = "어린이(초등)"/>
+				<span style = "margin-right: 30px;">어린이(초등)</span>
+				<input type = "checkbox" name = "interestValue" value = "어린이전집"/>
+				<span style = "margin-right: 5px;">어린이전집</span>
+				<input type = "checkbox" name = "interestValue" value = "어린이영어"/>
+				<span style = "margin-right: 5px;">어린이영어</span>
+				<input type = "checkbox" name = "interestValue" value = "청소년"/>
+				<span style = "margin-right: 5px;">청소년</span>
+				<input type = "checkbox" name = "interestValue" value = "초등참고서"/>
+				<span style = "margin-right: 5px;">초등참고서</span>
+				<input type = "checkbox" name = "interestValue" value = "중/고등참고서"/>
+				<span style = "margin-right: 5px;">중/고등참고서</span>
+				<input type = "checkbox" name = "interestValue" value = "대학교재"/>
+				<span style = "margin-right: 30px;">대학교재</span>
+				<input type = "checkbox" name = "interestValue" value = "취업/수험서"/>
+				<span>취업/수험서</span>
+				<input type = "checkbox" name = "interestValue" value = "외국어"/>
+				<span>외국어</span>
+				<input type = "checkbox" name = "interestValue" value = "가정/육아"/>
+				<span>가정/육아</span>
+				<input type = "checkbox" name = "interestValue" value = "건강"/>
+				<span>건강</span>
+				<input type = "checkbox" name = "interestValue" value = "여행"/>
+				<span>여행</span>
+				<input type = "checkbox" name = "interestValue" value = "요리"/>
+				<span>요리</span>
+				<input type = "checkbox" name = "interestValue" value = "취미/실용/스포츠"/>
+				<span>취미/실용/스포츠</span>
+				<input type = "checkbox" name = "interestValue" value = "잡지"/>
 				<span>잡지</span>
-				<input type = "checkbox" name = "interestValue" value = "art"/>
-				<span>중/고등참고서</span>
+				<input type = "checkbox" name = "interestValue" value = "만화"/>
+				<span>만화</span>
+				<input type = "checkbox" name = "interestValue" value = "한국소개도서"/>
+				<span>한국소개도서</span>
 						
 				<input type="hidden" name="interest"/>
           </div>
@@ -294,5 +318,6 @@
 </div>
 </div>
 
+<jsp:include page="../../../footer.jsp"></jsp:include>
 </body>
 </html>

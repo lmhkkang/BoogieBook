@@ -3,6 +3,11 @@
  */
 
 var idCheck = 0;
+var passwordCheck = 0;
+var passwordkDoublcCheck = 0;
+var emailCheck = 0;
+var contactNumCheck = 0;
+
 function registerForm(obj){
 	//alert("OK");
 	if(!$("input[name=item01]").prop("checked") || !$("input[name=item02]").prop("checked")) {
@@ -20,9 +25,55 @@ function registerForm(obj){
 		alert("아이디를 확인하세요.");
 		obj.id.focus();
 		return false;
+	}	
+	
+	if(obj.password.value==""){
+		alert("비밀번호를 입력하세요.");
+		obj.password.focus();
+		return false;
 	}
 	
+	if(passwordCheck == 0){
+		alert("비밀번호를 확인하세요.");
+		obj.password.focus();
+		return false;
+	}
 	
+	if(obj.cpassword.value==""){
+		alert("비밀번호확인을 입력하세요. ");
+		obj.cpassword.focus();
+		return false;
+	}
+	
+	if(passwordkDoublcCheck == 0){
+		alert("비밀번호가 서로 다릅니다.");
+		obj.cpassword.focus();
+		return false;
+	}
+	
+	if(obj.email.value==""){
+		alert("이메일을 입력하세요. ");
+		obj.email.focus();
+		return false;
+	}
+	
+	if(emailCheck == 0){
+		alert("이메일을 양식에 맞게 입력하세요.");
+		obj.email.focus();
+		return false;
+	}
+	
+	if(obj.contactNum.value==""){
+		alert("전화번호를 입력하세요. ");
+		obj.contactNum.focus();
+		return false;
+	}
+	
+	if(contactNumCheck == 0){
+		alert("잘못된 전화번호 양식 입니다.");
+		obj.contactNum.focus();
+		return false;
+	}
 }
 
 function selectAll(){
@@ -100,14 +151,17 @@ function checkPassword(){
     if($("input[name=password]").val()==""){
     	$('.chkPasswordMsg').css( "color" , "black")
     	$('.chkPasswordMsg').html("공백없는 10~15자의 영문/숫자 조합");
+    	passwordCheck = 0;
     }
     else if(!passwordReg.test(password) || !checkNum.test(password)
     		|| (!checkEng1.test(password) && !checkEng2.test(password))) {
     	$('.chkPasswordMsg').css( "color" , "red");
     	$('.chkPasswordMsg').html("공백없는 10~15자의 영문/숫자 조합");
+    	passwordCheck = 0;
     }else{
     	$('.chkPasswordMsg').css( "color" , "green");
     	$('.chkPasswordMsg').html("해당 비밀번호는 사용가능합니다.");
+    	passwordCheck = 1;
     }
 };
 
@@ -116,12 +170,15 @@ function doubleCheckPassword(){
 	
 	if($("input[name=cpassword]").val()==""){
 		$('.chkCpasswordMsg').html("");
+		passwordkDoublcCheck = 0;
 	}else if($("input[name=password]").val()==cpassword){
     	$('.chkCpasswordMsg').css( "color" , "green")
     	$('.chkCpasswordMsg').html("비밀번호가 일치합니다.");
+    	passwordkDoublcCheck = 1;
     }else{
     	$('.chkCpasswordMsg').css( "color" , "red");
     	$('.chkCpasswordMsg').html("비밀번호가 일치하지 않습니다.");
+    	passwordkDoublcCheck = 0;
     }
 }
 
@@ -131,47 +188,51 @@ function checkEmail(){
 
 	if($("input[name=email]").val()==""){
 		$('.chkEmailMsg').html("");
+		emailCheck = 0;
 	}else if(emailReg.test(email)){
     	$('.chkEmailMsg').css( "color" , "green")
     	$('.chkEmailMsg').html("해당 이메일은 사용 가능합니다.");
+    	emailCheck = 1;
     }else{
     	$('.chkEmailMsg').css( "color" , "red");
     	$('.chkEmailMsg').html("이메일 양식에 맞지 않습니다.");
+    	emailCheck = 0;
     }
 }
 
 function checkContactNum(){
 	var ContactNum = $('#contactNum').val();
 	var NumReg = /[^0-9]/g;
-	if($("input[name=contactNum]").val()==""){
+	if($("input[name=phone]").val()==""){
 		$('.chkContactNumMsg').html("");
+		contactNumCheck = 0;
 	}else if(!NumReg.test(ContactNum)){
 		$('.chkContactNumMsg').html("");
+		contactNumCheck = 1;
     }else{
     	$('.chkContactNumMsg').css( "color" , "red");
     	$('.chkContactNumMsg').html("잘못된 전화번호 양식 입니다.");
+    	contactNumCheck = 0;
     }
 }
 
-function readContent1(){
-	var url="/homepage/member/content1.do";
+function readContent(obj){
+	var url="/homepage/member/content.do?" + "check=" + obj ;
 	window.open(url, "", "width=400, height=400, scrollbars=yes");
 }
 
-function readContent2(){
-	var url="/homepage/member/content2.do";
-	window.open(url, "", "width=400, height=400, scrollbars=yes");
+function zipcodeRead(){
+	new daum.Postcode({
+        oncomplete: function(data) {
+        	document.getElementById('zipcode').value = data.zonecode;
+        	document.getElementById('addr1').value = data.roadAddress;
+        	$('#addr2').focus();
+        }
+    }).open();
 }
 
-function readContent3(){
-	var url="/homepage/member/content3.do";
-	window.open(url, "", "width=400, height=400, scrollbars=yes");
-}
 
-function readContent4(){
-	var url="/homepage/member/content4.do";
-	window.open(url, "", "width=400, height=400, scrollbars=yes");
-}
+
 
 
 

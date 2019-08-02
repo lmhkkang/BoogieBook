@@ -9,7 +9,8 @@ var emailCheck = 0;
 var contactNumCheck = 0;
 
 function registerForm(obj){
-	//alert("OK");
+	makeBirthDate();
+	
 	if(!$("input[name=item01]").prop("checked") || !$("input[name=item02]").prop("checked")) {
 		alert("필수 약관동의를 하지 않을시 회원가입 할 수 없습니다.");
 		return false;
@@ -63,17 +64,47 @@ function registerForm(obj){
 		return false;
 	}
 	
-	if(obj.contactNum.value==""){
+	if(obj.name.value==""){
+		alert("이름을 입력하세요. ");
+		obj.name.focus();
+		return false;
+	}
+	
+	if(obj.yyyy.value=="" || obj.mm.value=="" || obj.dd.value==""){
+		alert("생년월일을 입력하세요.");
+		obj.name.focus();
+		return false;
+	}
+	
+	if(obj.phone.value==""){
 		alert("전화번호를 입력하세요. ");
-		obj.contactNum.focus();
+		obj.phone.focus();
 		return false;
 	}
 	
 	if(contactNumCheck == 0){
 		alert("잘못된 전화번호 양식 입니다.");
-		obj.contactNum.focus();
+		obj.phone.focus();
 		return false;
 	}
+	
+	if(obj.zipcode.value=="" || obj.addr1.value==""  || obj.addr2.value=="" ){
+		alert("주소를 입력하세요. ");
+		obj.zipcode.focus();
+		return false;
+	}
+	
+	if(obj.job.value==""){
+		alert("직업을 입력하세요. ");
+		obj.job.focus();
+		return false;
+	}
+}
+
+function makeBirthDate(){
+	var birth_date = $("select[name=yyyy]").val() + "-" + $("select[name=mm]").val() + "-" + $("select[name=dd]").val();
+	$("input[name=birth_date]").val = birth_date;	
+	document.getElementById('birth_date').value = birth_date;
 }
 
 function selectAll(){
@@ -108,19 +139,19 @@ function checkId(){
     var path = "/homepage/member/idCheck.do";
     var idReg = /^[a-z]+[a-zA-Z0-9]{5,19}$/g;
 
-    if($("input[name=id]").val()==""){
+    if($("input[name=member_id]").val()==""){
     	$('.chkIdMsg').css( "color" , "black")
     	$('.chkIdMsg').html("공백없는 6~20자의 영문/숫자 조합, 아이디 첫글자는 영문 소문자만 가능합니다.");
     	idCheck = 0;
     }
-    else if(!idReg.test( $("input[name=id]").val())) {
+    else if(!idReg.test( $("input[name=member_id]").val())) {
     	$('.chkIdMsg').css( "color" , "red");
     	$('.chkIdMsg').html("공백없는 6~20자의 영문/숫자 조합, 아이디 첫글자는 영문 소문자만 가능합니다.");
     	idCheck = 0;
     }else{
     	$.ajax({
             url:path,
-            type:'post',
+            type:'get',
             data:{id:id},
             success:function(data){
                 if($.trim(data)==0){
@@ -152,16 +183,44 @@ function checkPassword(){
     	$('.chkPasswordMsg').css( "color" , "black")
     	$('.chkPasswordMsg').html("공백없는 10~15자의 영문/숫자 조합");
     	passwordCheck = 0;
-    }
-    else if(!passwordReg.test(password) || !checkNum.test(password)
+    	if($("input[name=cpassword]").val()!="" && $("input[name=password]").val()!=$('#cpassword').val()){
+    		$('.chkCpasswordMsg').css( "color" , "red");
+        	$('.chkCpasswordMsg').html("비밀번호가 일치하지 않습니다.");
+    		passwordkDoublcCheck = 0;
+    	}else if($("input[name=password]").val()==$('#cpassword').val()){
+        	$('.chkCpasswordMsg').css( "color" , "green")
+        	$('.chkCpasswordMsg').html("비밀번호가 일치합니다.");
+        	passwordkDoublcCheck = 1;
+        }
+    } else if(!passwordReg.test(password) || !checkNum.test(password)
     		|| (!checkEng1.test(password) && !checkEng2.test(password))) {
     	$('.chkPasswordMsg').css( "color" , "red");
     	$('.chkPasswordMsg').html("공백없는 10~15자의 영문/숫자 조합");
     	passwordCheck = 0;
+    	
+    	if($("input[name=cpassword]").val()!="" && $("input[name=password]").val()!=$('#cpassword').val()){
+    		$('.chkCpasswordMsg').css( "color" , "red");
+        	$('.chkCpasswordMsg').html("비밀번호가 일치하지 않습니다.");
+    		passwordkDoublcCheck = 0;
+    	}else if($("input[name=password]").val()==$('#cpassword').val()){
+        	$('.chkCpasswordMsg').css( "color" , "green")
+        	$('.chkCpasswordMsg').html("비밀번호가 일치합니다.");
+        	passwordkDoublcCheck = 1;
+        }
     }else{
     	$('.chkPasswordMsg').css( "color" , "green");
     	$('.chkPasswordMsg').html("해당 비밀번호는 사용가능합니다.");
     	passwordCheck = 1;
+    	
+    	if($("input[name=cpassword]").val()!="" && $("input[name=password]").val()!=$('#cpassword').val()){
+    		$('.chkCpasswordMsg').css( "color" , "red");
+        	$('.chkCpasswordMsg').html("비밀번호가 일치하지 않습니다.");
+    		passwordkDoublcCheck = 0;
+    	}else if($("input[name=password]").val()==$('#cpassword').val()){
+        	$('.chkCpasswordMsg').css( "color" , "green")
+        	$('.chkCpasswordMsg').html("비밀번호가 일치합니다.");
+        	passwordkDoublcCheck = 1;
+        }
     }
 };
 

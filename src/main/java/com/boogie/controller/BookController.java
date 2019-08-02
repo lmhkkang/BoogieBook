@@ -1,5 +1,7 @@
 package com.boogie.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.boogie.member.dto.MemberDto;
 import com.boogie.member.service.MemberService;
 import com.boogie.recommend.service.RecommendService;
 
@@ -40,9 +41,9 @@ public class BookController {
 		return new ModelAndView("member/register");
 	}
 	
-	@RequestMapping(value="/member/registerOk.do", method=RequestMethod.POST)
+	@RequestMapping(value="/member/registerOk.do", method=RequestMethod.GET)
 	public ModelAndView memberRegisterOk(HttpServletRequest request, HttpServletResponse response){		
-		
+
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request", request);
 		
@@ -50,36 +51,17 @@ public class BookController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/member/idCheck.do" , method = RequestMethod.POST)
+	@RequestMapping(value = "/member/idCheck.do" , method = RequestMethod.GET)
 	public @ResponseBody String idCheck(HttpServletRequest request, HttpServletResponse response)  {
-		int result = 0;
-		System.out.println(result);
-	    return String.valueOf(result);
-			
-//		System.out.println("123");
-//		ModelAndView mav=new ModelAndView();
-//		mav.addObject("request", request);
-//		
-//		boardService.idDuplChk(mav);
-//		
-//		Map<String, Object> map=mav.getModelMap();
-//		String check = (String) map.get("check");	
-//		
-//		BoardAscpect.logger.info(BoardAscpect.logMsg + "check : " + check);
-//		
-//		JSONObject jso = new JSONObject();
-//		jso.put("data", check);
-//		response.setContentType("text/html;charset=utf-8");
-//		
-//		
-//		try {
-//			PrintWriter out;
-//			out = response.getWriter();
-//			out.print(jso.get("data"));
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		
+		memberService.idDuplChk(mav);
+		
+		Map<String, Object> map=mav.getModelMap();
+		String check = (String) map.get("check");
+		
+		return check;	
 	}
 	
 	@RequestMapping(value="/member/content.do", method=RequestMethod.GET)
@@ -90,4 +72,10 @@ public class BookController {
 		mav.setViewName("member/content");
 		return mav;
 	}	    
+	
+	@RequestMapping(value="/member/login.do", method=RequestMethod.GET)
+	public ModelAndView memberLogin(HttpServletRequest request, HttpServletResponse response){
+
+		return new ModelAndView("member/login");
+	}
 }

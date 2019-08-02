@@ -18,7 +18,6 @@
 <script type="text/javascript">
 	
 	function toServer(root, book_name) {
-		
 		var url = root + "/recommend/recommendProcxy.do?bookName=" + book_name;
 
 		//alert(markList);

@@ -28,7 +28,6 @@
 			<property name="maxIdle" value="10"></property>
 			<property name="maxWait" value="2000"></property>
 		</bean>
-
  		<!-- MyBatis : sqlSessionFactoryBean  -->
 		<bean id="sqlSessionFactoryBean"
 			class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -36,7 +35,11 @@
 			<property name="mapperLocations">
 				<list>
 					<value>classpath:com/boogie/recommend/dao/mapper/RecommendMapper.xml</value>
+<<<<<<< HEAD
 					<value>classpath:com/boogie/search/dao/mapper/SearchMapper.xml</value>
+=======
+					<value>classpath:com/boogie/member/dao/mapper/MemberMapper.xml</value>
+>>>>>>> c4735126e7da83b0f2161e40f1865a3971cd510b
 				</list>
 			</property>
 		</bean>

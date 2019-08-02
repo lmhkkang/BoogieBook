@@ -15,4 +15,22 @@
   	select * from (select * from book where type02 = #{interest} order by dbms_random.value) where rownum = 1
   	]]>
   </select>
+  
+  <select id="MarkSelectBookName" resultType="String">
+  	<![CDATA[
+  		select book_id from (select book_id, avg(rate) aver from review group by book_id ORDER by aver DESC) where rownum < 5
+  	]]>
+  </select>
+  
+  <select id="MarkSelectList" resultType="Float">
+  	<![CDATA[
+  		select * from (select avg(rate) aver from review group by book_id ORDER by aver DESC) where rownum < 5
+  	]]>
+  </select>
+  
+  <select id="MarkSelectBook" parameterType="String" resultType="com.boogie.recommend.dto.RecommendMarkDto">
+  	<![CDATA[
+  		select * from book where book_id=#{input}
+  	]]>
+  </select>
 </mapper>

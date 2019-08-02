@@ -6,6 +6,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,77 +18,84 @@ import org.springframework.web.servlet.ModelAndView;
 import com.boogie.aop.BookAspect;
 import com.boogie.recommend.dao.RecommendDao;
 import com.boogie.recommend.dto.RecommendInterestDto;
+import com.boogie.recommend.dto.RecommendMarkDto;
 
 /**
- * @Author	: 나다윤
- * @Date	: 2019. 8. 1.
+ * @Author : 나다윤
+ * @Date : 2019. 8. 1.
  * @Description :
  */
 
 @Component
-public class RecommendServiceImp implements RecommendService {
+public class RecommendServiceImp implements RecommendService 
+{
 
 	@Autowired
-	private RecommendDao recommandDao; 
-	
+	private RecommendDao recommandDao;
+
 	@Override
 	public void recommendMain(ModelAndView mav) 
 	{
 		Map<String, Object> map = mav.getModelMap();
-		
+
 		RecommendInterestDto interestDto = new RecommendInterestDto();
-		
-		HttpServletRequest request = (HttpServletRequest)map.get("request");
-		
-		//String id = request.getParameter("id");
-		String id = "tmp";
-		
+
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+
+		// String id = request.getParameter("id");
+		String id = "lmhkkang";
+
 		String interest = recommandDao.getInterest(id);
-		BookAspect.logger.info(BookAspect.logMsg+"interest: "+interest);
-		
-		//임시
-		interest="소설";
+		BookAspect.logger.info(BookAspect.logMsg + "interest: " + interest);
+
+		// 관심분야 도서 가져오기
+		// interest="소설";
 		interestDto = recommandDao.getBookInterest(interest);
-		BookAspect.logger.info(BookAspect.logMsg+interestDto.toString());
-		
-		//네이버 책 검색 api를 통해 줄거리 미리보기 가져오기
+		BookAspect.logger.info(BookAspect.logMsg + interestDto.toString());
 
-		String clientId = "v8R5FbX43_upxHbbKBRy";//애플리케이션 클라이언트 아이디값";
-        String clientSecret = "GAYVywiXFj";//애플리케이션 클라이언트 시크릿값";
-        try {
-            String text = URLEncoder.encode(interestDto.getBook_name(), "UTF-8");
-            String apiURL = "https://openapi.naver.com/v1/search/blog?query="+ text; // json 결과
-            //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // xml 결과
-            URL url = new URL(apiURL);
-            HttpURLConnection con = (HttpURLConnection)url.openConnection();
-            con.setRequestMethod("GET");
-            con.setRequestProperty("X-Naver-Client-Id", clientId);
-            con.setRequestProperty("X-Naver-Client-Secret", clientSecret);
-            int responseCode = con.getResponseCode();
-            BufferedReader br;
-            if(responseCode==200) { // 정상 호출
-                br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            } else {  // 에러 발생
-                br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-            }
-            String inputLine;
-            StringBuffer response = new StringBuffer();
-            while ((inputLine = br.readLine()) != null) {
-                response.append(inputLine);
-            }
-            br.close();
-            System.out.println(response.toString());
-            
-        } catch (Exception e) {
-           e.printStackTrace();
-        }
-	 
+		// 평점 순으로 추천
+		List<String> markBookName = recommandDao.getMarkBookName();
+		BookAspect.logger.info(BookAspect.logMsg + "markBookName.size:" + markBookName.size());
 
-		
+		List<Float> markList = recommandDao.getMarkList();
+		BookAspect.logger.info(BookAspect.logMsg + "markList.size:" + markList.size());
+
+		List<RecommendMarkDto> markBookList = recommandDao.getMarkBookList(markBookName);
+		BookAspect.logger.info(BookAspect.logMsg + "markBookList.size:" + markBookList.size());
+
+		String[] markBookIcon = new String[4];
+		for (int i = 0; i < 4; i++) 
+		{
+			if (markList.get(i) > 0 && markList.get(i) < 1) {
+				markBookIcon[i]="/resources/images/mark/05.PNG";
+			} else if (markList.get(i) == 1) {
+				markBookIcon[i]="/resources/images/mark/1.PNG";
+			} else if (markList.get(i) > 1 && markList.get(i) < 2) {
+				markBookIcon[i]="/resources/images/mark/15.PNG";
+			} else if (markList.get(i) == 2) {
+				markBookIcon[i]="/resources/images/mark/2.PNG";
+			} else if (markList.get(i) > 2 && markList.get(i) < 3) {
+				markBookIcon[i]="/resources/images/mark/25.PNG";
+			} else if (markList.get(i) == 3) {
+				markBookIcon[i]="/resources/images/mark/3.PNG";
+			} else if (markList.get(i) > 3 && markList.get(i) < 4) {
+				markBookIcon[i]="/resources/images/mark/35.PNG";
+			} else if (markList.get(i) == 4) {
+				markBookIcon[i]="/resources/images/mark/4.PNG";
+			} else if (markList.get(i) > 4 && markList.get(i) < 5) {
+				markBookIcon[i]="/resources/images/mark/45.PNG";
+			} else if (markList.get(i) == 5) {
+				markBookIcon[i]="/resources/images/mark/5.PNG";
+			}
+		}
+
+		mav.addObject("markBookIcon",markBookIcon);
+		mav.addObject("markList", markList);
+		mav.addObject("markBookList", markBookList);
 		mav.addObject("interestDto", interestDto);
-		
-		//mav.setViewName("recommend/recommendMain");
-		
+
+		// mav.setViewName("recommend/recommendMain");
+
 	}
 
 }

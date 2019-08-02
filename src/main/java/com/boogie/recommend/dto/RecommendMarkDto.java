@@ -4,11 +4,11 @@ import java.util.Date;
 
 /**
  * @Author	: 나다윤
- * @Date	: 2019. 8. 1.
+ * @Date	: 2019. 8. 2.
  * @Description :
  */
 
-public class RecommendInterestDto 
+public class RecommendMarkDto 
 {
 	private String type01;
 	private String type02;
@@ -30,9 +30,9 @@ public class RecommendInterestDto
 	
 	private Date enrolled_date;
 	
-	public RecommendInterestDto() {}
+	public RecommendMarkDto() {}
 
-	public RecommendInterestDto(String type01, String type02, String type03, String img_path, String book_name,
+	public RecommendMarkDto(String type01, String type02, String type03, String img_path, String book_name,
 			String author, String publisher, Date publish_date, int price, String book_id, String story,
 			int sales_volume, Date enrolled_date) {
 		super();
@@ -162,9 +162,6 @@ public class RecommendInterestDto
 				+ publish_date + ", price=" + price + ", book_id=" + book_id + ", story=" + story + ", sales_volume="
 				+ sales_volume + ", enrolled_date=" + enrolled_date + "]";
 	}
-	
-	
-	
 	
 
 }

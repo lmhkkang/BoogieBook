@@ -8,7 +8,8 @@
 		<meta charset="UTF-8">
 		<title>shop</title>
         <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Maven+Pro|Play&display=swap" rel="stylesheet">
-        
+       	<link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
+       	 
 		<link rel="styleSheet" type="text/css" href="${root}/resources/css/index/index_header.css"/>
 		<link rel="styleSheet" type="text/css" href="${root}/resources/css/index/index_content.css"/>
 		<link rel="styleSheet" type="text/css" href="${root}/resources/css/index/index_footer.css"/>
@@ -16,29 +17,7 @@
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 		
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	
-    <script type="text/javascript">
-        var slideIndex = 0;
-        showSlides();
 
-        function showSlides() {
-            var i;
-            var slides = document.getElementsByClassName("mySlides");
-            var dots = document.getElementsByClassName("dot");
-            for (i = 0; i < slides.length; i++) {
-               slides[i].style.display = "none";  
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) {slideIndex = 1}    
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
-            }
-            $(slides[slideIndex-1]).css({display:"block"});
-            setTimeout(showSlides, 5000); // Change image every 2 seconds
-        }
-
-    </script>
     </head>
 	<body>
 		<header>

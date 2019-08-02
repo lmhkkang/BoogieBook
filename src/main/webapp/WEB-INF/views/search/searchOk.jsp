@@ -16,19 +16,25 @@
 </head>
 <body>
 <jsp:include page="../../../header.jsp"></jsp:include>
-	  <div class="center">
+<c:if test="${searchResult.size()==0}">
+	<p>찾는책이 없습니다.</p>
+</c:if>
 
+
+	  <div class="center">
+<c:if test="${searchResult.size()>0}">
+	<c:forEach var="searchDto" items="${searchResult}">
             <div class="section1_r">
                 <div class="section2">
                     <div class="interest">
                         
                         <div class="interest_body">
-                            <div class="interest_img"><img src=""></div>
+                            <div class="interest_img"><img src="${searchDto.img_path}"></div>
                             <div class="interest_subject_form">
                                 <div class="interest_sub">
                                     <div class="interest_subject">
                                         <div class="interest_subject1">책 소제목 </div>
-                                        <div class="interest_subject2"><b>책 제목</b></div>
+                                        <div class="interest_subject2"><b>${searchDto.book_name}</b></div>
                                         <div class="interest_subject3">인터넷 판매가: <b style="color: red">0원</b> (출판사 | 지은이)</div>
                                     </div>
                                 </div>
@@ -44,6 +50,9 @@
                     </div>
                 </div>
         	</div>
+        
+        </c:forEach>
+        </c:if>
         </div>
         <jsp:include page="../../../footer.jsp"></jsp:include>
 </body>

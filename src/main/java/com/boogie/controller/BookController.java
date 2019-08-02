@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.boogie.member.service.MemberService;
 import com.boogie.recommend.service.RecommendService;
+import com.boogie.search.service.SearchService;
 
 @Controller
 public class BookController {
@@ -22,7 +23,11 @@ public class BookController {
 	private RecommendService recommendService;
 	
 	@Autowired
+
 	private MemberService memberService;
+	@Autowired
+	private SearchService searchService;
+
 	
 	@RequestMapping(value = "/recommend/recommendMain.do", method = RequestMethod.GET)
 	public ModelAndView recommendMain(HttpServletRequest request, HttpServletResponse response)
@@ -34,7 +39,7 @@ public class BookController {
 		
 		return mav;
 	}
-	
+
 	@RequestMapping(value="/member/register.do", method=RequestMethod.GET)
 	public ModelAndView memberRegister(HttpServletRequest request, HttpServletResponse response){
 		
@@ -77,5 +82,17 @@ public class BookController {
 	public ModelAndView memberLogin(HttpServletRequest request, HttpServletResponse response){
 
 		return new ModelAndView("member/login");
+	}
+
+	@RequestMapping(value = "/search/detailSearch.do", method = RequestMethod.GET)
+	public ModelAndView detailSearchMain(HttpServletRequest request, HttpServletResponse response)
+	{
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request",request);
+		
+		searchService.detailSearch(mav);
+		
+		return mav;
+
 	}
 }

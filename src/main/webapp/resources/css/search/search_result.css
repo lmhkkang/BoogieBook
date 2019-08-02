@@ -1,0 +1,179 @@
+@charset "UTF-8";
+
+button{
+    border: 1px solid #5e6b9e;
+    background-color: rgba(0,0,0,0);
+    color: #5e6b9e;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#content{
+	width: 100%;
+	margin: 0px auto;
+	border: 0px solid red;
+}
+
+#content #center{
+    overflow: hidden;
+}
+
+.center{
+    width: 1000px;
+    border: 0px solid blue;
+    margin: 0px auto;
+}
+
+.center > .section1_l{
+	width: 20%;
+    overflow: hidden;
+	border: 0px solid #CCCCCC;
+    float: left;
+}
+
+.book_list{
+    border: 1px solid #5e6b9e;
+    margin: 40px 20px;
+}
+
+.book_list li{
+    font-size: 0.8em;
+    margin: 5px;
+    color: black;
+}
+
+.book_list li:hover{
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+
+.center > .section1_r{
+	width: 75%;
+	overflow: hidden;
+	border: 1px solid #CCCCCC;
+}
+
+.section2{
+    width: 98%;
+    border: 0px solid red;
+    height: 360px;
+    margin: auto;
+}
+
+.section2 .interest{
+    border: 0px solid #CCCCCC;
+    width: 90%;
+    height: 350px;
+    margin: 40px auto;
+}
+
+.interest_top{
+    width: 100%;
+    height: 30px;
+    border: 0px solid blue;
+    line-height: 30px;
+}
+
+.interest_top_l{
+    width: 50%;
+    float: left;
+    text-align: left;
+    font-size: 0.8em;
+}
+.interest_top_r{
+    width: 40%;
+    float: right;
+    border: 0px solid red;
+    text-align: right;
+}
+
+.interest_body{
+    width: 100%;
+    height: 80%;
+    border: 1px solid #CCCCCC;
+    margin-top: 10px;
+}
+
+.interest_img{
+    border: 1px solid black;
+    float: left;
+    width: 20%;
+    height: 60%;
+    margin-top: 20px;
+}
+
+.interest_subject_form{
+    border: 0px solid #CCCCCC;
+    float: left;
+    width: 75%;
+    height: 80%;
+    margin-left: 20px;
+}
+
+.interest_sub{
+    border: 0px dotted green;
+    width: 100%;
+    height: 35%;
+}
+
+.todayBook_subject{
+    width: 75%;
+    height: 100%;
+    border: 0px solid black;
+    float: left;
+}
+.interest_subject1{
+    width: 100%;
+    height: 30%;
+    border: 0px solid red;
+    font-size: 0.8em;
+    text-align: left;
+    line-height:3;
+    color: green;
+    opacity: 0.7;
+
+}
+.interest_subject2{
+    width: 100%;
+    height: 30%;
+    border: 0px solid red;
+    text-align: left;
+    line-height: 1.3;
+    font-size: 1.3em;
+}
+.interest_subject3{
+    width: 100%;
+    height: 30%;
+    border: 0px solid red;
+    text-align: left;
+    line-height: 2;
+    opacity: 0.8;
+}
+
+.interest_des{
+    border: 0px dotted green;
+    width: 100%;
+    height: 45%;
+    text-align: left;
+    line-height: 1.3;
+    font-size: 0.9em;
+    margin-top:  30px;
+    opacity: 0.7;
+}
+
+.interest_btn{
+    padding-top: 10px;
+    border: 0px solid blue;
+    width: 100%;
+    height: 10%;
+    text-align: right;
+}
+
+
+.section2{
+	width: 100%;
+    border: 0px dotted blue;
+    margin-bottom: 40px;
+}

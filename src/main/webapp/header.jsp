@@ -30,8 +30,8 @@
 				<li	class="topHeader_r"><a href="#"><img width="13px" height="13px" src="${root}/resources/images/keep.jpg"><span>0</span></a></li>
 				<li class="topHeader_r"><a href="#">고객센터</a></li>
 				<li class="topHeader_r"><a href="#">주문배송</a></li>					
-				<li class="topHeader_r"><a href="#">회원가입</a></li>
-				<li class="topHeader_r"><a href="#">로그인</a></li>
+				<li class="topHeader_r"><a href="${root}/member/register.do">회원가입</a></li>
+				<li class="topHeader_r"><a href="${root}/member/login.do">로그인</a></li>
 								
 									
 			</ul>
@@ -73,7 +73,7 @@
                         <li><a href="#">국내도서</a></li>
                         <li><a href="#">베스트셀러</a></li>
                         <li><a href="#">신간도서</a></li>
-                        <li><a href="#">상세검색</a></li>
+                        <li><a href="${root}/search/detailSearch.do">상세검색</a></li>
                         <li><a href="${root}/recommend/recommendMain.do">추천도서</a></li>
                         <li><a href="#">매장안내</a></li>
                     </ul>

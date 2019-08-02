@@ -43,7 +43,7 @@ public class RecommendServiceImp implements RecommendService
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 
 		// String id = request.getParameter("id");
-		String id = "lmhkkang";
+		String id = "a123123";
 
 		String interest = recommandDao.getInterest(id);
 		BookAspect.logger.info(BookAspect.logMsg + "interest: " + interest);

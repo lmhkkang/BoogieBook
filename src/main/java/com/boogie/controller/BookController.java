@@ -147,4 +147,16 @@ public class BookController {
 		return mav;
 
 	}
+	
+	
+		@RequestMapping(value = "/search/searchOk.do", method = RequestMethod.GET)
+	public ModelAndView detailSearchResult(HttpServletRequest request, HttpServletResponse response)
+	{
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request",request);
+		
+		searchService.searchResult(mav);
+		
+		return mav;
+	}	
 }

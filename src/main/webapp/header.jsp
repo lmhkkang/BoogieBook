@@ -52,16 +52,18 @@
                        	</ul>
                        </div>                        	
                        <div class="search">
+                       <form action="${root}/search/searchOk.do"method="get">
                        <div id="custom-search-input">
                            <div class="input-group col-md-12">
-                               <input type="text" class="  search-query form-control" placeholder="Search" />
+                               <input type="text" class="  search-query form-control" name="keyword" placeholder="Search" />
                                <span class="input-group-btn">
-                                   <button class="btn btn-danger" type="button">
+                                   <button class="btn btn-danger" type="submit" >
                                        <span class=" glyphicon glyphicon-search"></span>
                                    </button>
                                </span>
                            </div>
                        </div>
+                       </form>
                        </div>
                    </div>
                </div>

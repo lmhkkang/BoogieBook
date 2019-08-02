@@ -1,5 +1,9 @@
 package com.boogie.search.dao;
 
-public interface SearchDao {
+import java.util.List;
 
+import com.boogie.search.dto.SearchDto;
+
+public interface SearchDao {
+	public List<SearchDto>keywordSearch(String keyword);
 }

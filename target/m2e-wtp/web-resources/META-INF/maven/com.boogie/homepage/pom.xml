@@ -204,9 +204,56 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
 			<version>3.1.4.RELEASE</version>
-		</dependency>	     		
+		</dependency>	     	
+		
+		<!-- java mail -->
+	    <dependency>
+	        <groupId>javax.mail</groupId>
+	        <artifactId>mail</artifactId>
+	        <version>1.4.7</version>
+	    </dependency>
+	    
+	    <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>4.0.4.RELEASE</version>
+        </dependency>
+ 		
+		<!-- Hadoop -->
+		<dependency>
+		  <groupId>org.apache.hadoop</groupId>
+		  <artifactId>hadoop-core</artifactId>
+		  <version>1.1.2</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.mahout/mahout-core -->
+		<dependency>
+		    <groupId>org.apache.mahout</groupId>
+		    <artifactId>mahout-core</artifactId>
+		    <version>0.9</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.mahout/mahout-math -->
+		<dependency>
+		    <groupId>org.apache.mahout</groupId>
+		    <artifactId>mahout-math</artifactId>
+		    <version>0.13.0</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.mahout/mahout-hdfs -->
+		<dependency>
+		    <groupId>org.apache.mahout</groupId>
+		    <artifactId>mahout-hdfs</artifactId>
+		    <version>0.13.0</version>
+		</dependency>  
+		
+		<dependency>
+		   <groupId>net.sf.opencsv</groupId>
+		   <artifactId>opencsv</artifactId>
+		   <version>2.0</version>
+		</dependency>   		
 	</dependencies>
-	
+
 	
     <build>
         <plugins>

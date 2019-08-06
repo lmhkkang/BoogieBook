@@ -1,0 +1,4 @@
+eclipse.preferences.version=1
+encoding//src/main/webapp/WEB-INF/views/order/orderForm.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/order/payProgress.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/order/paymentComplete.jsp=UTF-8

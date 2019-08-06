@@ -17,12 +17,7 @@
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 		
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-		<script type="text/javascript">
-		$(function(){
-			$(".logo").click(function(){
-				$("a").href("${root}/index.do");
-			};
-		</script>
+		
     </head>
 	<body>
 		<header>

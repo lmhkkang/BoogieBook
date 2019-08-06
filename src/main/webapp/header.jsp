@@ -13,7 +13,7 @@
 		<link rel="styleSheet" type="text/css" href="${root}/resources/css/index/index_header.css"/>
 		<link rel="styleSheet" type="text/css" href="${root}/resources/css/index/index_content.css"/>
 		<link rel="styleSheet" type="text/css" href="${root}/resources/css/index/index_footer.css"/>
-	
+		<script src="${root}/resources/javascript/index/header_js.js"></script>
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 		
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
@@ -34,9 +34,17 @@
 				<li class="topHeader_r"><a href="#"></a></li>
 				<li	class="topHeader_r"><a href="#"><img width="13px" height="13px" src="${root}/resources/images/keep.jpg"><span>0</span></a></li>
 				<li class="topHeader_r"><a href="#">고객센터</a></li>
-				<li class="topHeader_r"><a href="#">주문배송</a></li>					
-				<li class="topHeader_r"><a href="${root}/member/register.do">회원가입</a></li>
-				<li class="topHeader_r"><a href="${root}/member/login.do">로그인</a></li>
+				<li class="topHeader_r"><a href="#">주문배송</a></li>	
+				
+				<c:if test="${id == null}">				
+					<li class="topHeader_r"><a href="${root}/member/register.do">회원가입</a></li>
+					<li class="topHeader_r"><a href="javascript:OpenLoginFrame()">로그인</a></li>
+				</c:if>
+				<c:if test="${id !=null}">					
+					<li class="topHeader_r"><a href="#">마이페이지</a></li>
+					<li class="topHeader_r"><a href="${root}/member/logout.do">로그아웃</a></li>
+					<li class="topHeader_r"><b>${id}님 환영합니다.</b></li>
+				</c:if>
 								
 									
 			</ul>

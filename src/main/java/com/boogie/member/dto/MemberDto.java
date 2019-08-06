@@ -1,6 +1,5 @@
 package com.boogie.member.dto;
 
-
 import java.util.Date;
 
 /**
@@ -27,6 +26,7 @@ public class MemberDto {
 	private int non_member;
 	private int sns_num;
 	private Date register_date;
+
 	public int getMember_num() {
 		return member_num;
 	}

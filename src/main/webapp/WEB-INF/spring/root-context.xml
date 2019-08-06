@@ -35,8 +35,11 @@
 			<property name="mapperLocations">
 				<list>
 					<value>classpath:com/boogie/recommend/dao/mapper/RecommendMapper.xml</value>
+					<value>classpath:com/boogie/order/dao/mapper/orderMapper.xml</value>
+					<value>classpath:com/boogie/bookInfo/dao/mapper/BookInfoMapper.xml</value>
 					<value>classpath:com/boogie/search/dao/mapper/SearchMapper.xml</value>
 					<value>classpath:com/boogie/member/dao/mapper/MemberMapper.xml</value>
+
 				</list>
 			</property>
 		</bean>
@@ -55,4 +58,26 @@
 
 		<tx:annotation-driven
 			transaction-manager="transactionManager" />	
+			
+	<!-- gmail -->
+    <bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl" >
+        <property name="host" value="smtp.gmail.com" />
+        <property name="port" value="587" />
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="username" value="jamieshin1450@gmail.com" />
+        <property name="password" value="AB123123123!" />
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.smtp.auth">true</prop>  
+                <prop key="mail.smtp.starttls.enable">true</prop>
+              	<prop key="mail.debug">true</prop>       
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="email" class="com.boogie.email.Email"></bean>
+    
+    <bean id="emailSender" class="com.boogie.email.EmailSender"></bean>
+    
 </beans>

@@ -8,18 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <title>shop</title>
-<link
-	href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Maven+Pro|Play&display=swap"
-	rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Maven+Pro|Play&display=swap" rel="stylesheet">
+	<link rel="styleSheet" type="text/css" href="${root}/resources/css/index/index_content.css" />
+	<link rel="styleSheet" type="text/css" href="${root}/resources/css/index/index_footer.css" />
 
-<link rel="styleSheet" type="text/css"
-	href="${root}/resources/css/index/index_content.css" />
-<link rel="styleSheet" type="text/css"
-	href="${root}/resources/css/index/index_footer.css" />
-
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 	var slideIndex = 0;
 	showSlides();
@@ -45,9 +38,9 @@
 	}
 </script>
 </head>
-
 <body>
 	<jsp:include page="./header.jsp"></jsp:include>
+
 	<div id="content">
 		<div class="section1">
 			<div class="center" id="center">

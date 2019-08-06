@@ -18,11 +18,9 @@
 	href="${root}/resources/css/index/index_content.css" />
 <link rel="styleSheet" type="text/css"
 	href="${root}/resources/css/index/index_footer.css" />
-
 </head>
 <body>
-
-	<jsp:include page="./header.jsp"></jsp:include>
+<jsp:include page="./header.jsp"></jsp:include>
 	<div id="content">
 		<div class="section1">
 			<div class="center" id="center">

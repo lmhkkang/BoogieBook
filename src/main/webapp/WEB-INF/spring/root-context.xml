@@ -36,6 +36,8 @@
 			<property name="mapperLocations">
 				<list>
 					<value>classpath:com/boogie/recommend/dao/mapper/RecommendMapper.xml</value>
+					<value>classpath:com/boogie/order/dao/mapper/orderMapper.xml</value>
+					<value>classpath:com/boogie/bookInfo/dao/mapper/BookInfoMapper.xml</value>
 				</list>
 			</property>
 		</bean>

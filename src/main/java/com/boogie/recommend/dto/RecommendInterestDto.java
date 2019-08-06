@@ -29,6 +29,27 @@ public class RecommendInterestDto
 	private int sales_volume;
 	
 	private Date enrolled_date;
+	
+	public RecommendInterestDto() {}
+
+	public RecommendInterestDto(String type01, String type02, String type03, String img_path, String book_name,
+			String author, String publisher, Date publish_date, int price, String book_id, String story,
+			int sales_volume, Date enrolled_date) {
+		super();
+		this.type01 = type01;
+		this.type02 = type02;
+		this.type03 = type03;
+		this.img_path = img_path;
+		this.book_name = book_name;
+		this.author = author;
+		this.publisher = publisher;
+		this.publish_date = publish_date;
+		this.price = price;
+		this.book_id = book_id;
+		this.story = story;
+		this.sales_volume = sales_volume;
+		this.enrolled_date = enrolled_date;
+	}
 
 	public String getType01() {
 		return type01;

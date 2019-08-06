@@ -1,5 +1,8 @@
 package com.boogie.member.service;
 
-public interface MemberService {
+import org.springframework.web.servlet.ModelAndView;
 
+public interface MemberService {
+	public void memberRegisterOk(ModelAndView mav);
+	public void idDuplChk(ModelAndView mav);
 }

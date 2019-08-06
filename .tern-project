@@ -10,9 +10,12 @@
     "browser-extension": {
       
     },
+<<<<<<< HEAD
     "jquery-ui1-12": {
       
     },
+=======
+>>>>>>> c5279d1c2bf040be748d1064f22dba6eb8ef490e
     "jquery-extension": {
       
     }

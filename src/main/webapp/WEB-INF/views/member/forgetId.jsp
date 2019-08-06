@@ -25,7 +25,7 @@
         <h2 class="entry-title" style="border-bottom: 3px solid black; padding-bottom: 10px; width: 300px;"><span>아이디찾기</span> </h2>
         <hr>
         <form class="form-horizontal" action="${root}/member/findId.do" method="get" name="signup" id="signup" enctype="multipart/form-data"
-        	onsubmit="forgetIdForm(this)">       
+        	onsubmit="return forgetIdForm(this)">       
         <div class="form-group">
           <label class="control-label col-sm-3">이름</label>
           <div class="col-md-8 col-sm-9">

@@ -14,7 +14,7 @@
 <link href="${root}/resources/css/member/register_css.css" rel="stylesheet">
 <script src="${root}/resources/javascript/member/register_js.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script src="${root}/resources/javascript/member/forgetpassword_js.js"></script>
+<script src="${root}/resources/javascript/member/forgetPassword_js.js"></script>
 
 <title>비밀번호 찾기</title>
 </head>
@@ -25,7 +25,7 @@
         <h2 class="entry-title" style="border-bottom: 3px solid black; padding-bottom: 10px; width: 300px;"><span>비밀번호 찾기</span> </h2>
         <hr>
         <form class="form-horizontal" action="${root}/member/findPassword.do" method="get" name="signup" id="signup" enctype="multipart/form-data"
-        	onsubmit="forgetPassword(this)">       
+        	onsubmit="return forgetPasswordForm(this)">       
         <div class="form-group">
           <label class="control-label col-sm-3">아이디</label>
           <div class="col-md-8 col-sm-9">

@@ -215,6 +215,7 @@ public class BookController {
         
         Map<String, Object> map=mav.getModelMap();
 		String temporaryPw = (String) map.get("temporaryPw");
+		int check = (Integer) map.get("check");
 		String id = request.getParameter("member_id");
 		String userEmail = request.getParameter("email");
 		String content = id + "님의 임시비밀번호는 "+ temporaryPw + " 입니다."
@@ -223,20 +224,15 @@ public class BookController {
         		+ id + "'>"
         		+ "새로운 비밀번호 설정" + "</a>";
 			
-		int check = 0;
-        if(id != null) {
+        if(check > 0) {
             email.setContent(content);
             email.setReceiver(userEmail);
             email.setSubject(id + "님 아이디 찾기 메일입니다.");
             
             System.out.println(email.toString());
             emailSender.SendEmail(email);
-                      
-            check = 1;         
-        }else {
-        	check = 0;
-        }
-               
+                             
+        }      
         mav = new ModelAndView("member/findPassword");
         mav.addObject("check", check);
         return mav;

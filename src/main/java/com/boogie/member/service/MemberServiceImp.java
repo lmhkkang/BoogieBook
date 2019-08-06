@@ -133,7 +133,7 @@ public class MemberServiceImp implements MemberService {
 		int check = memberDao.memberFindPassword(member_id, email, sb.toString());
 		
 		BookAspect.logger.info(BookAspect.logMsg + check);
-		
+		mav.addObject("check", check);
 		mav.addObject("temporaryPw", sb.toString());		
 	}
 

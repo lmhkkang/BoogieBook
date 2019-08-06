@@ -25,7 +25,7 @@
 	<c:if test="${check == 0}">
 		<script type="text/javascript">
 			alert("이름과 이메일을 확인하세요.");
-			location.href="${root}/member/login.do";
+			location.href="${root}/member/forgetId.do";
 		</script>
 	</c:if>
 </body>

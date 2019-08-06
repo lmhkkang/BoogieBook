@@ -14,7 +14,6 @@
 <script src="${root}/resources/javascript/member/login_js.js"></script>
 <script src="http://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
-<a href="#" onclick="window.open(url,'',width=800, height=800)">aa</a>
 	<div class="container" style="border: 0px solid blue; width: 670px; margin: 0px auto; height:400px; margin-top:30px;">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3"

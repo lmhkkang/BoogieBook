@@ -15,4 +15,20 @@
 		select count(*) from member where member_id = #{id}
 </select>
 
+<select id="memberLogin" parameterType="java.util.HashMap" resultType="int">
+		select count(*) from member where member_id=#{id} and password=#{password}
+</select>
+
+<select id="memberFindId" parameterType="java.util.HashMap" resultType="String">
+		select member_id from member where name=#{name} and email=#{email}
+</select>
+
+<update id="memberFindPassword" parameterType="java.util.HashMap">
+		update member set password = #{temporaryPw} where member_id=#{member_id} and email=#{email}
+</update>
+
+<update id="memberMakePassword" parameterType="java.util.HashMap">
+		update member set password = #{newPassword} where member_id=#{member_id}
+</update>
+	
 </mapper>

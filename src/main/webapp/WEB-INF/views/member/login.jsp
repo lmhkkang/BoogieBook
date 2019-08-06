@@ -14,10 +14,11 @@
 <script src="${root}/resources/javascript/member/login_js.js"></script>
 <script src="http://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
-	<div class="container" style="border: 0px solid blue; width: 600px; margin: 0px auto; height:400px; margin-top:50px; margin-left: 250px;">
+<a href="#" onclick="window.open(url,'',width=800, height=800)">aa</a>
+	<div class="container" style="border: 0px solid blue; width: 670px; margin: 0px auto; height:400px; margin-top:30px;">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3"
-				style="width: 600px; height: 400px; margin: 0px auto; border: 0px solid red;">
+				style="width: 600px; height: 400px; margin: 0px auto; border: 0px solid red; margin-left:30px;">
 				<div class="panel panel-login">
 					<div class="panel-heading">
 						<div class="row">
@@ -33,10 +34,10 @@
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								<form id="login-form"
-									method="post" role="form" style="display: block;">
+								<form id="login-form" action="${root}/member/loginOk.do"
+									method="post" role="form" onsubmit="return loginForm(this)" style="display: block;" >
 									<div class="form-group">
-										<input type="text" name="username" id="username" tabindex="1"
+										<input type="text" name="id" id="username" tabindex="1"
 											class="form-control" placeholder="아이디" value="">
 									</div>
 									<div class="form-group">
@@ -50,22 +51,22 @@
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3"
-												style="width: 530px; margin: 0px auto; padding-left: 15px;">
+												style="width: 520px; margin: 0px auto; padding-left: 15px;">
 												<input type="submit" name="login-submit" id="login-submit"
-													tabindex="4" class="form-control btn btn-login" value="로그인">
+													tabindex="4" class="form-control btn btn-login" value="로그인" >
 											</div>
 										</div>
 
-										<div class="row">
+										<div class="row"  style="border: 1px solid red;">
 											<div class="col-sm-6 col-sm-offset-3"
-												style="width: 270px; margin: 0px auto; border: 1px solid red;">
+												style="width: 230px; float:left; margin: 0px auto; border: 1px solid red; margin-left:25px; margin-right: 0px;">
 												<a id="kakao-login-btn"></a>
 											</div>
 
 											<div class="col-sm-6 col-sm-offset-3"
-												style="width: 270px; margin: 0px auto">
+												style="width: 230px; margin: 0px auto; float: left; border: 1px solid red; margin-left:0px;">
 												<input type="submit" name="login-submit" id="login-submit"
-													tabindex="4" class="form-control btn btn-login" value="로그인">
+													tabindex="3" class="form-control btn btn-login" value="로그인">
 											</div>
 										</div>
 									</div>
@@ -73,11 +74,11 @@
 										<div class="row">
 											<div class="col-lg-12">
 												<div class="text-center">
-													<a href="https://phpoll.com/recover" tabindex="5"
+													<a href="javascript:forgetIdFun()" tabindex="5"
 														class="forgot-id">아이디 찾기</a> <a
-														href="https://phpoll.com/recover" tabindex="5"
+														href="javascript:forgetPasswordFun()" tabindex="5"
 														class="forgot-password">비밀번호 찾기</a> <a
-														href="https://phpoll.com/recover" tabindex="5"
+														href="javascript:registerFun()" tabindex="5"
 														class="register-member">회원가입</a>
 												</div>
 											</div>

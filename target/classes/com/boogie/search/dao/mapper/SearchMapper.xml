@@ -2,13 +2,27 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-  <mapper namespace="dao.searchMapper">
-  
-  <select id="searchList" parameterType="String" resultType="com.boogie.search.dto.SearchDto">
+
+<mapper namespace="dao.searchMapper">
+
+	<select id="searchList" parameterType="String"	resultType="com.boogie.search.dto.SearchDto">
   	<![CDATA[
   	select * from book where book_name like '%'||#{keyword}||'%'
   	 ]]>
-  </select>
-  
-  </mapper>
+	</select>
+	
+	<select id="searchPageResult" parameterType="java.util.HashMap"	resultType="com.boogie.search.dto.SearchDto">
+  <![CDATA[
+  select * from (select rownum rnum, a.* from (select * from book 
+order by book_name desc) a)b where b.rnum >=#{startRow} and rnum <=#{endRow}
+   ]]>
+	</select>
+	
+	<select id="PageList" parameterType="java.util.HashMap"	resultType="com.boogie.search.dto.SearchDto">
+	<![CDATA[
+	select * from (select rownum rnum, a.* from (select * from book where book_name like '%'||#{keyword}||'%') a)b where b.rnum >=#{startRow} and rnum <=#{endRow}
+	]]>
+	</select>
+	
+	
+</mapper>

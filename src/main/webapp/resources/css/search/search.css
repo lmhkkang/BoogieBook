@@ -205,3 +205,7 @@ color: white;
     margin: 0px auto;
     font-size: 13px;
 }
+.content_body2 > .table> .row label{	
+	margin: 0px;
+	margin-top: 15px;
+}

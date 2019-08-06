@@ -293,6 +293,18 @@ public class BookController {
 		return mav;
 	}
 
+		
+			@RequestMapping(value = "/search/mulitOk.do", method = RequestMethod.GET)
+		public ModelAndView multiResult(HttpServletRequest request, HttpServletResponse response)
+		{
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("request",request);
+			
+			searchService.multiOk(mav);
+			
+			return mav;
+		}
+
 
 	@RequestMapping(value = "/order/cart.do", method = RequestMethod.GET)
 	public ModelAndView cartWrite(HttpServletRequest request, HttpServletResponse response) {

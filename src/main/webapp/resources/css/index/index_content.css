@@ -21,7 +21,7 @@
     height: 400px;
 }
 
-.mySlides {display: none;}
+.mySlides {display: none !important;}
 
 .slide_banner img{
     vertical-align: middle;
@@ -94,7 +94,6 @@
 
 #content > .section1{
 	width: 100%;
-	height: 400px;
     background-color: #edf6ff;
 	border: 0px solid #CCCCCC;
     margin-bottom: 40px;

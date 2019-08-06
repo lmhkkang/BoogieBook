@@ -1,46 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <head>
 <meta charset="UTF-8">
 <title>shop</title>
-		<link
-			href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Maven+Pro|Play&display=swap"
-			rel="stylesheet">
-		<link rel="styleSheet" type="text/css"
-			href="${root}/resources/css/index/index_header.css" />
-		<link rel="styleSheet" type="text/css"
-			href="${root}/resources/css/index/index_content.css" />
-		<link rel="styleSheet" type="text/css"
-			href="${root}/resources/css/index/index_footer.css" />
+<link
+	href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Maven+Pro|Play&display=swap"
+	rel="stylesheet">
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	
-      <script type="text/javascript">
-        var slideIndex = 0;
-        showSlides();
+<link rel="styleSheet" type="text/css"
+	href="${root}/resources/css/index/index_content.css" />
+<link rel="styleSheet" type="text/css"
+	href="${root}/resources/css/index/index_footer.css" />
 
-        function showSlides() {
-            var i;
-            var slides = document.getElementsByClassName("mySlides");
-            var dots = document.getElementsByClassName("dot");
-            for (i = 0; i < slides.length; i++) {
-               slides[i].style.display = "none";  
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) {slideIndex = 1}    
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
-            }
-            $(slides[slideIndex-1]).css({display:"block"});
-            setTimeout(showSlides, 2000); // Change image every 2 seconds
-        }
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-    </script>
+<script type="text/javascript">
+	var slideIndex = 0;
+	showSlides();
+
+	function showSlides() {
+		var i;
+		var slides = document.getElementsByClassName("mySlides");
+		var dots = document.getElementsByClassName("dot");
+		for (i = 0; i < slides.length; i++) {
+			slides[i].style.display = "none";
+		}
+		slideIndex++;
+		if (slideIndex > slides.length) {
+			slideIndex = 1
+		}
+		for (i = 0; i < dots.length; i++) {
+			dots[i].className = dots[i].className.replace(" active", "");
+		}
+		$(slides[slideIndex - 1]).css({
+			display : "block"
+		});
+		setTimeout(showSlides, 2000); // Change image every 2 seconds
+	}
+</script>
 </head>
 
 <body>
@@ -48,34 +51,30 @@
 	<div id="content">
 		<div class="section1">
 			<div class="center" id="center">
-				<div class="slide_banner">
-					<div class="slideshow-container">
-						<div class="mySlides fade">
-							<div class="numbertext">1 / 3</div>
-							<img src="http://placehold.it/300x100" style="width: 100%">
-							<div class="text">Caption One</div>
-						</div>
-
-						<div class="mySlides fade">
-							<div class="numbertext">2 / 3</div>
-							<img src="http://placehold.it/300x100" style="width: 100%">
-							<div class="text">Caption Two</div>
-						</div>
-
-						<div class="mySlides fade">
-							<div class="numbertext">3 / 3</div>
-							<img src="http://placehold.it/300x100" style="width: 100%">
-							<div class="text">Caption Three</div>
-						</div>
-
-					</div>
-					<br>
-
-					<div style="text-align: center">
-						<span class="dot"></span> <span class="dot"></span> <span
-							class="dot"></span>
-					</div>
-				</div>
+				<div id="cp_widget_8c00dbf7-5662-4233-bc5e-098546cf5f5a">...</div>
+				<script type="text/javascript">
+					var cpo = [];
+					cpo["_object"] = "cp_widget_8c00dbf7-5662-4233-bc5e-098546cf5f5a";
+					cpo["_fid"] = "AoEADhOEO_Ty";
+					var _cpmp = _cpmp || [];
+					_cpmp.push(cpo);
+					(function() {
+						var cp = document.createElement("script");
+						cp.type = "text/javascript";
+						cp.async = true;
+						cp.src = "//www.cincopa.com/media-platform/runtime/libasync.js";
+						var c = document.getElementsByTagName("script")[0];
+						c.parentNode.insertBefore(cp, c);
+					})();
+				</script>
+				<noscript>
+					<span>New Gallery 2019/8/5</span><span>originaldate</span><span>
+						1/1/0001 6:00:00 AM</span><span>width</span><span> 1266</span><span>height</span><span>
+						503</span><span>originaldate</span><span> 1/1/0001 6:00:00 AM</span><span>width</span><span>
+						1261</span><span>height</span><span> 504</span><span>originaldate</span><span>
+						1/1/0001 6:00:00 AM</span><span>width</span><span> 1264</span><span>height</span><span>
+						506</span>
+				</noscript>
 			</div>
 		</div>
 

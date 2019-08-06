@@ -28,12 +28,11 @@ public class BookController {
 
 	@Autowired
 	private RecommendService recommendService;
-
 	@Autowired
-
 	private MemberService memberService;
 	@Autowired
 	private SearchService searchService;
+	
 
 	@RequestMapping(value = "/recommend/recommendMain.do", method = RequestMethod.GET)
 	public ModelAndView recommendMain(HttpServletRequest request, HttpServletResponse response) {
@@ -148,7 +147,6 @@ public class BookController {
 
 	}
 	
-	
 		@RequestMapping(value = "/search/searchOk.do", method = RequestMethod.GET)
 	public ModelAndView detailSearchResult(HttpServletRequest request, HttpServletResponse response)
 	{
@@ -158,5 +156,6 @@ public class BookController {
 		searchService.searchResult(mav);
 		
 		return mav;
-	}	
+	}
+		
 }

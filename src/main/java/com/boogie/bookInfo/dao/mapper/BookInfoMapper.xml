@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.bookInfoMapper">
+   <select id="selectBookInfo" parameterType="int" resultType="com.boogie.bookInfo.dto.BookInfoDto">
+   		select * from book where book_id = #{book_id}
+   </select>
+   
+   <select id="selectReviewList" parameterType="int" resultType="java.util.List">
+   		select * 
+   		from review 
+   		where book_id = #{book_id}
+   </select>
+</mapper>

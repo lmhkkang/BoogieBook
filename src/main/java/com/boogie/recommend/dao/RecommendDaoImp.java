@@ -1,7 +1,9 @@
 package com.boogie.recommend.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,5 +71,23 @@ public class RecommendDaoImp implements RecommendDao
 	@Override
 	public List<Float> getMarkList() {
 		return sqlSessionTemplate.selectList("dao.recommendMapper.MarkSelectList");
+	}
+	
+	@Override
+	public List<String[]> getReview() {
+		List<Map<String, Object>> tmp = new ArrayList<Map<String,Object>>();
+		tmp = sqlSessionTemplate.selectList("dao.recommendMapper.ReviewSelectList");
+			
+		List<String[]> result = new ArrayList<String[]>();
+		for(int i = 0 ; i < tmp.size() ; i++) {
+			String[] tmp_s = new String[3];
+			tmp_s[0]=String.valueOf(tmp.get(i).get("MEMBER_NUM"));
+			tmp_s[1]=String.valueOf(tmp.get(i).get("BOOK_ID"));
+			tmp_s[2]=String.valueOf(tmp.get(i).get("RATE"));
+			
+			result.add(tmp_s);
+		}
+		
+		return result;
 	}
 }

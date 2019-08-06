@@ -18,7 +18,6 @@
 <script type="text/javascript">
 	
 	function toServer(root, book_name) {
-		
 		var url = root + "/recommend/recommendProcxy.do?bookName=" + book_name;
 
 		//alert(markList);
@@ -90,7 +89,7 @@
 											pattern="yyyy-MM-dd" />
 									</div>
 									<div class="interest_subject2">
-										<b>${interestDto.book_name}</b>
+										<a href="#"><b>${interestDto.book_name}</b></a>
 									</div>
 									<div class="interest_subject3">
 										인터넷 판매가: <b style="color: red"><fmt:formatNumber value="${interestDto.price}" pattern="#,###" />원</b>
@@ -186,7 +185,10 @@
 			<div class="section4">
 				<div class="recommend_form">
 					<div class="recommend_top">ID 님이 좋아할만한 책</div>
-					<div class="recommend_body"></div>
+					<div class="recommend_body" style="background-image: url('${root}/resources/images/background.jpg');">
+						<div class="rocommend_left"></div>
+						<div class="rocommend_right"></div>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -37,7 +37,7 @@
 		<div class="footer_section2">
 			<div class="center" id="center">
 				<div class="sec2">
-					<div class="footer_img">img</div>
+					<div class="footer_img"><img width="100%" height="100%" src="${root}/resources/images/BoogieBook_Logo.png"></div>
 					<div class="last_footer_l">
 						㈜ 교보문고 서울시 종로구 종로 1 대표이사 : 박영규<br /> 사업자등록번호 : 102-81-11670<br />
 						<b>대표전화 : 1544-1900 (발신자 부담전화)</b> 팩스 : 0502-987-5711 (지역번호공통)<br />

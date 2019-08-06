@@ -1,5 +1,8 @@
 package com.boogie.recommend.service;
 
+import java.io.IOException;
+
+import org.apache.mahout.cf.taste.common.TasteException;
 import org.springframework.web.servlet.ModelAndView;
 
 /**

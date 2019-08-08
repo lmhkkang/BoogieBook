@@ -26,4 +26,8 @@ public interface OrderDao {
 
 	int deleteFromCart(String member_id);
 
+	String getUserEmail(String member_id);
+
+	int addToCart(int book_id, String member_id);
+
 }

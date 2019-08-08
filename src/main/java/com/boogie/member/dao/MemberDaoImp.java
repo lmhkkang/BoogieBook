@@ -55,12 +55,37 @@ public class MemberDaoImp implements MemberDao {
 	}
 
 	@Override
-	public int memberMakePassword(String member_id, String newPassword) {
+	public MemberDto memberSearch(String id) {
+		return sqlSession.selectOne("dao.MemberMapper.memberSearch", id);
+	}
+
+	@Override
+	public int memberUpdate(MemberDto memberDto) {
+		return sqlSession.update("dao.MemberMapper.memberUpdate", memberDto);
+	}
+
+	@Override
+	public int memberKaKaoInsert(MemberDto memberDto) {
+		return sqlSession.insert("dao.MemberMapper.memberKaKaoInsert", memberDto);
+	}
+
+	@Override
+	public int memberKaKaoUpdate(MemberDto memberDto) {
+		return sqlSession.update("dao.MemberMapper.memberKaKaoUpdate", memberDto);
+	}
+
+	@Override
+	public int memberDelete(String id, String password) {
 		Map<String, String> hMap=new HashMap<String, String>();
-		hMap.put("member_id", member_id);
-		hMap.put("newPassword", newPassword);
+		hMap.put("id", id);
+		hMap.put("password", password);
 		
-		return sqlSession.update("dao.MemberMapper.memberMakePassword", hMap);
+		return sqlSession.delete("dao.MemberMapper.memberDelete", hMap);
+	}
+
+	@Override
+	public int memberKaKaoDelete(String id) {
+		return sqlSession.delete("dao.MemberMapper.memberKaKaoDelete", id);
 	}
 	
 }

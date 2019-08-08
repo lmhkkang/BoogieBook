@@ -68,4 +68,17 @@ public class OrderDaoImp implements OrderDao {
 	public int deleteFromCart(String member_id) {
 		return sqlSessionTemplate.delete("deleteFromCart",member_id);
 	}
+
+	@Override
+	public String getUserEmail(String member_id) {
+		return sqlSessionTemplate.selectOne("selectUserEmail", member_id);
+	}
+
+	@Override
+	public int addToCart(int book_id, String member_id) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("book_id",(Integer)book_id);
+		map.put("member_id",(String)member_id);
+		return sqlSessionTemplate.selectOne("insertToCart",map);
+	}
 }

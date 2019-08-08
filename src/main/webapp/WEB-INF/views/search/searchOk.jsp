@@ -17,9 +17,6 @@
 </head>
 <body>
 <jsp:include page="../../../header.jsp"></jsp:include>
-
-
-
 	  <div class="center">
 	  <c:if test="${count==0 ||searchResult.size()==0}">
 		<p>전체 "${keyword}"검색결과 총 0건</p>
@@ -61,14 +58,8 @@
         <div align="center">
 		<c:if test="${count>0}">
 			<c:set var="pageBlock" value="${3}"/>
-			<fmt:parseNumber var="pageCount" value="${count/boardSize+(count%boardSize==0 ? 0:1)}" integerOnly="true"/><%--전체페이지수 --%>
+			<fmt:parseNumber var="pageCount" value="${count/boardSize+(count%boardSize==0 ? 0:1)}" integerOnly="true"/>
 			
-			<%--
-				int startPage=(int)((currentPage-1)/pageBlock)*pageBlock+1; 소수점나오면 안대서 int형으로
-										(3-1)=2/10=0*10=0+1=1
-				int endPage=startPage+pageBlock-1;
-									1+10-1=10
-			 --%>
 			 <fmt:parseNumber var="result" value="${(currentPage-1)/pageBlock}" integerOnly="true"/>
 			 <c:set var="startPage" value="${result*pageBlock+1}"/>
 			 <c:set var="endPage" value="${startPage+pageBlock-1}"/>

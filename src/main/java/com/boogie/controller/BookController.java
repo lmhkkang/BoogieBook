@@ -33,12 +33,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 
-import com.boogie.aop.BookAspect;
 import com.boogie.email.Email;
 import com.boogie.email.EmailSender;
 import com.boogie.member.service.MemberService;
 
 import com.boogie.recommend.service.RecommendService;
+import com.boogie.review.service.ReviewService;
 import com.boogie.search.service.SearchService;
 
 
@@ -61,12 +61,13 @@ public class BookController {
 	private MemberService memberService;
 	@Autowired
 	private SearchService searchService;
-	
 	@Autowired
 	private EmailSender emailSender;
-	
 	@Autowired
 	private Email email;
+	@Autowired
+	private ReviewService reviewService;
+	
 
 	@RequestMapping(value = "/recommend/recommendMain.do", method = RequestMethod.GET)
 	public ModelAndView recommendMain(HttpServletRequest request, HttpServletResponse response) {
@@ -348,9 +349,20 @@ public class BookController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
 			
-		bookInfoService.writeBookInfo(mav);
+		bookInfoService.BookInfoMain(mav);
 		
 		return mav;
+	}
+	
+	@RequestMapping(value = "/review/reviewWrite.do", method = RequestMethod.GET)
+	public void reviewWrite(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response",response);
+			
+		reviewService.reviewWrite(mav);
+		
+		return;
 	}
 
 }

@@ -7,9 +7,15 @@
    		select * from book where book_id = #{book_id}
    </select>
    
-   <select id="selectReviewList" parameterType="int" resultType="java.util.List">
-   		select * 
-   		from review 
-   		where book_id = #{book_id}
+   <select id="selectReviewList" parameterType="int" resultType="com.boogie.review.dto.ReviewDto">
+   		select * from review where book_id = #{book_id} order by review_id desc
+   </select>
+   
+   <select id="selectIDList" parameterType="int" resultType="String">
+   		select member_id from member where member_num=#{member_num}
+   </select>
+   
+   <select id="selectRateAverate" parameterType="int" resultType="float">
+   		select avg(rate) from review where book_id=#{book_id}
    </select>
 </mapper>

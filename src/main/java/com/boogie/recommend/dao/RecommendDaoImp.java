@@ -90,4 +90,15 @@ public class RecommendDaoImp implements RecommendDao
 		
 		return result;
 	}
+	
+	@Override
+	public String getImag(String result_book_id) {
+		
+		return sqlSessionTemplate.selectOne("dao.recommendMapper.RecommendImgSelect",result_book_id);
+	}
+	
+	@Override
+	public int getRMemberNum(String id) {
+		return sqlSessionTemplate.selectOne("dao.recommendMapper.getMemberNum",id);
+	}
 }

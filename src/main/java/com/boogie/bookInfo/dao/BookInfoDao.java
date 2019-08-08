@@ -7,8 +7,9 @@ import com.boogie.review.dto.ReviewDto;
 
 public interface BookInfoDao {
 
-	BookInfoDto writeBookInfo(int book_id);
-
-	List<ReviewDto> getReviewList(int book_id);
+	public BookInfoDto writeBookInfo(int book_id);
+	public List<ReviewDto> getReviewList(int book_id);
+	public String getIdList(int member_num);
+	public float getRateAverage(int book_id);
 
 }

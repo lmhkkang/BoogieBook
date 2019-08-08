@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="dao.reviewMapper">
+	<insert id="reviewWrite" parameterType="java.util.HashMap">
+		<![CDATA[
+			insert into review values(REVIEW_ID_SEQ.nextval,#{rate},#{review_content},(select member_num from member where member_id=#{id}),#{book_id},sysdate)
+		]]>
+	</insert>
+</mapper>

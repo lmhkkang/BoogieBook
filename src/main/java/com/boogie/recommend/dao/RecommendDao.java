@@ -13,4 +13,6 @@ public interface RecommendDao
 	public List<RecommendMarkDto> getMarkBookList(List<String> markBookName);
 	public List<Float> getMarkList();
 	public List<String[]> getReview();
+	public String getImag(String result_book_id);
+	public int getRMemberNum(String id);
 }

@@ -34,6 +34,7 @@
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 		
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
 		
 		<script type="text/javascript" src="${root}/resources/jquery/jquery.js"></script>
 		
@@ -66,7 +67,6 @@
 	        
 	    });
 	</script>
-		
     </head>
 	<body>
 		<header>
@@ -81,14 +81,20 @@
 				<li class="topHeader_r"><a href="#">고객센터</a></li>
 				<li class="topHeader_r"><a href="#">주문배송</a></li>	
 				
-				<c:if test="${id == null}">				
+				<c:if test="${name == null}">				
 					<li class="topHeader_r"><a href="${root}/member/register.do">회원가입</a></li>
 					<li class="topHeader_r"><a href="javascript:OpenLoginFrame()">로그인</a></li>
 				</c:if>
-				<c:if test="${id !=null}">					
+				<c:if test="${name !=null}">					
 					<li class="topHeader_r"><a href="#">마이페이지</a></li>
+					<c:if test="${snsNum == 3}">
+						<li class="topHeader_r"><a href="${root}/member/memberEdit.do?id=${id}">회원정보수정</a></li>
+					</c:if>
+					<c:if test="${snsNum == 1}">
+						<li class="topHeader_r"><a href="${root}/member/KaKaoEdit.do?id=${id}">회원정보수정</a></li>
+					</c:if>
 					<li class="topHeader_r"><a href="${root}/member/logout.do">로그아웃</a></li>
-					<li class="topHeader_r"><b>${id}님 환영합니다.</b></li>
+					<li class="topHeader_r"><b>${name}님 환영합니다.</b></li>
 				</c:if>
 								
 									
@@ -134,7 +140,7 @@
                         <li><a href="#">베스트셀러</a></li>
                         <li><a href="#">신간도서</a></li>
                         <li><a href="${root}/search/detailSearch.do">상세검색</a></li>
-                        <li><a href="${root}/recommend/recommendMain.do">추천도서</a></li>
+                        <li><a href="${root}/recommend/recommendMain.do?id=${id}">추천도서</a></li>
                         <li><a href="#">매장안내</a></li>
                     </ul>
                 </div>

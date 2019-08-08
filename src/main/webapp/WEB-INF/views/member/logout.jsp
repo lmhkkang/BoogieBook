@@ -6,9 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>로그아웃</title>
+<script src="${root}/resources/javascript/member/login_js.js"></script>
 </head>
+
 <body>
+	<c:if test="${snsNum == 1}">
+		logoutWithKakao();
+	</c:if>
 	<c:remove var="id" scope="session"/>
+	<c:remove var="name" scope="session"/>
+	<c:remove var="snsNum" scope="session"/>
 	
 	<c:set var="root" value="${pageContext.request.contextPath}"/>
 	

@@ -178,6 +178,16 @@ public class BookController {
 		return mav;
 	}
 	
+	@RequestMapping(value = "/member/KaKaologinOk.do", method = RequestMethod.GET)
+	public ModelAndView memberKaKaologinOk(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);		
+		memberService.memberKaKaologinOk(mav);
+		
+		return mav;
+	}
+	
 	@RequestMapping(value="/member/logout.do", method=RequestMethod.GET)
 	public ModelAndView memberLogout(HttpServletRequest request, HttpServletResponse response){
 		return new ModelAndView("member/logout");
@@ -238,14 +248,14 @@ public class BookController {
 		String userEmail = request.getParameter("email");
 		String content = id + "님의 임시비밀번호는 "+ temporaryPw + " 입니다."
         		+ "<br/>아래 링크를 이용해 새로운 비밀번호를 설정하세요.<br/>" 
-        		+ "<a href='http://localhost:8181/homepage/member/makePassword.do?member_id="
+        		+ "<a href='http://localhost:8181/homepage/member/memberEdit.do?id="
         		+ id + "'>"
         		+ "새로운 비밀번호 설정" + "</a>";
 			
         if(check > 0) {
             email.setContent(content);
             email.setReceiver(userEmail);
-            email.setSubject(id + "님 아이디 찾기 메일입니다.");
+            email.setSubject(id + "님 비밀번호 찾기 메일입니다.");
             
             System.out.println(email.toString());
             emailSender.SendEmail(email);
@@ -262,16 +272,99 @@ public class BookController {
 		return new ModelAndView("member/makePassword");
 	}
 	
-	@RequestMapping(value = "/member/makePasswordOk.do", method = RequestMethod.GET)
-	public ModelAndView memberMakePasswordOk(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/member/memberEdit.do", method = RequestMethod.GET)
+	public ModelAndView memberEdit(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		memberService.memberEdit(mav);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/member/memberEditOk.do", method = RequestMethod.GET)
+	public ModelAndView memberEditOk(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
-		memberService.makePasswordOk(mav);
+		memberService.memberEditOk(mav);
 
 		return mav;
 	}
 	
+	@RequestMapping(value = "/member/KaKaoRegister.do", method = RequestMethod.GET)
+	public ModelAndView memberKaKaoRegister(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView mav = new ModelAndView();
+		String id = request.getParameter("id");
+		mav.addObject("id", id);
+		mav.setViewName("member/KaKaoRegister");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/member/KaKaoRegisterOk.do", method = RequestMethod.GET)
+	public ModelAndView memberKaKaoRegisterOk(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		memberService.memberKaKaoRegisterOk(mav);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/member/KaKaoEdit.do", method = RequestMethod.GET)
+	public ModelAndView memberKaKaoEdit(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		memberService.memberKaKaoEdit(mav);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/member/KaKaoEditOk.do", method = RequestMethod.GET)
+	public ModelAndView memberKaKaoEditOk(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		memberService.memberKaKaoEditOk(mav);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/member/withdrawal.do", method = RequestMethod.GET)
+	public ModelAndView memberWithdrawal(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("id", request.getParameter("id"));
+		mav.setViewName("member/memberWithdrawal");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/member/memberWithdrawalOk.do", method = RequestMethod.GET)
+	public ModelAndView memberWithdrawalOk(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		
+		memberService.memberWithdrawalOk(mav);
+		return mav;
+	}
+	@RequestMapping(value = "/member/KaKaoWithdrawal.do", method = RequestMethod.GET)
+	public ModelAndView memberKaKaoWithdrawal(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("id", request.getParameter("id"));
+		mav.setViewName("member/KaKaoWithdrawal");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/member/KaKaoWithdrawalOk.do", method = RequestMethod.GET)
+	public ModelAndView memberKaKaoWithdrawalOk(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		
+		memberService.memberKaKaoWithdrawalOk(mav);
+		return mav;
+	}	
+	
+	
+		
 	@RequestMapping(value = "/search/detailSearch.do", method = RequestMethod.GET)
 	public ModelAndView detailSearchMain(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();

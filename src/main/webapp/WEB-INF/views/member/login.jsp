@@ -125,7 +125,28 @@
 			</div>
 		</div>
 	</div>
-<script type="text/javascript">
+<script type='text/javascript'>
+
+function checkKaKaoId(kakaoId){
+	var path = "/homepage/member/idCheck.do";
+	var id = kakaoId;
+	var check = 0;
+	$.ajax({
+        url:path,
+        type:'get',
+        data:{id:id},
+        async:false,
+        success:function(data){
+        	check = $.trim(data);
+
+        },
+        error:function(){
+                alert("에러입니다");
+        }
+    });
+	return check;
+}
+
 // 로그인 및 로그아웃 버튼 생성 처리
 var cookiedata = document.cookie;
  
@@ -183,29 +204,22 @@ Kakao.Auth.createLoginButton({
   	 	Kakao.API.request({
             url: '/v2/user/me',
             success: function(res) {
-           		alert(JSON.stringify(res));
-           		alert(res.id);
-           		
-           		var form = document.createElement("form");
-           		var hiddenField = document.createElement("input");
-
-           		hiddenField.setAttribute("type", "hidden");
-           		hiddenField.setAttribute("name", "resId");
-           		hiddenField.setAttribute("value", res.id);
-           		
-           		var hiddenField2 = document.createElement("input");
-
-           		hiddenField2.setAttribute("type", "hidden");
-           		hiddenField2.setAttribute("name", "su");
-           		hiddenField2.setAttribute("value", "123");
-           		
-           		form.setAttribute("method", "get");
-           		form.setAttribute("action", "logout.jsp");
-           		form.appendChild(hiddenField);
-           		form.appendChild(hiddenField2);
-           		document.body.appendChild(form);
-
-           		form.submit();
+// 				alert(JSON.stringify(res));        		     
+//                	var userEmail = res.kakao_account.email;   //유저의 이메일
+//              	var userNickName = res.properties.nickname; //유저가 등록한 별명
+//                 alert(userEmail);
+//  				alert(userNickName);
+ 				
+ 				var userId = res.id; //유저의 카카오톡 고유 id
+				var check = checkKaKaoId(userId);
+				
+ 				if(check == 1){
+ 					opener.location.href ="${root}/member/KaKaologinOk.do?id="+ userId; //부모창 리프레쉬
+ 				    self.close();
+ 				}else{
+ 					opener.location.href ="${root}/member/KaKaoRegister.do?id=" + userId; //부모창 리프레쉬
+ 				    self.close();
+ 				}
           	},
            	fail: function(error) {
             	alert(JSON.stringify(error));
@@ -224,7 +238,7 @@ function logoutWithKakao(){
     setCookie("kakao_login","",-1);  // 쿠키삭제 (로그아웃)
     //deleteCookie( "kakao_login" ); 쿠키삭제 다른 방법
     createLoginKakao();
-    window.location.href="../FinalProjectLogin/MemberLogin.jsp";
+    window.location.href="/homepage/index.jsp";
 }
  
  
@@ -246,5 +260,4 @@ function createLogoutKakao(){
  document.getElementById('kakao_btn_changed').innerHTML = logout_btn;
  
 }
-  //]]>
 </script>

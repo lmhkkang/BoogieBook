@@ -21,7 +21,8 @@
 		$(function(){
 			$(".logo").click(function(){
 				$("a").href("${root}/index.do");
-			};
+			})
+		);
 		</script>
     </head>
 	<body>
@@ -36,14 +37,20 @@
 				<li class="topHeader_r"><a href="#">고객센터</a></li>
 				<li class="topHeader_r"><a href="#">주문배송</a></li>	
 				
-				<c:if test="${id == null}">				
+				<c:if test="${name == null}">				
 					<li class="topHeader_r"><a href="${root}/member/register.do">회원가입</a></li>
 					<li class="topHeader_r"><a href="javascript:OpenLoginFrame()">로그인</a></li>
 				</c:if>
-				<c:if test="${id !=null}">					
+				<c:if test="${name !=null}">					
 					<li class="topHeader_r"><a href="#">마이페이지</a></li>
+					<c:if test="${snsNum == 3}">
+						<li class="topHeader_r"><a href="${root}/member/memberEdit.do?id=${id}">회원정보수정</a></li>
+					</c:if>
+					<c:if test="${snsNum == 1}">
+						<li class="topHeader_r"><a href="${root}/member/KaKaoEdit.do?id=${id}">회원정보수정</a></li>
+					</c:if>
 					<li class="topHeader_r"><a href="${root}/member/logout.do">로그아웃</a></li>
-					<li class="topHeader_r"><b>${id}님 환영합니다.</b></li>
+					<li class="topHeader_r"><b>${name}님 환영합니다.</b></li>
 				</c:if>
 								
 									

@@ -3,31 +3,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원 탈퇴완료</title>
 </head>
 <body>
-	<c:set var="root" value="${pageContext.request.contextPath}"/>
-	
-	<c:if test="${check > 0 }">
+	<c:if test="${check == 1}">
+		<c:remove var="id" scope="session"/>
+		<c:remove var="name" scope="session"/>
+		<c:remove var="snsNum" scope="session"/>
 		<script type="text/javascript">
-			alert("회원가입이 완료 되었습니다. 로그인 해주세요.");
+			alert("회원탈퇴 완료");
 			location.href="${root}/index.jsp";
 		</script>
 	</c:if>
 	
 	<c:if test="${check == 0}">
 		<script type="text/javascript">
-			alert("회원가입 완료 되지 않았습니다.");
-			location.href="${root}/member/register.do";
+			alert("회원탈퇴 실패");
 		</script>
 	</c:if>
 </body>
 </html>
-
-
-
-
-
-

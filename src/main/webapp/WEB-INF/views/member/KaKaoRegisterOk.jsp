@@ -5,29 +5,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원가입 완료</title>
 </head>
 <body>
 	<c:set var="root" value="${pageContext.request.contextPath}"/>
 	
-	<c:if test="${check > 0 }">
+	<c:if test="${check == 1}">
+		<c:set var="id" value="${id}" scope="session"/> <%--application --%>
+		<c:set var="name" value="${name}" scope="session"/> <%--application --%>
+		<c:set var="snsNum" value="${snsNum}" scope="session"/> <%--application --%>
+		
 		<script type="text/javascript">
-			alert("회원가입이 완료 되었습니다. 로그인 해주세요.");
-			location.href="${root}/index.jsp";
+			alert("회원가입 성공");
+			location.href ="${root}/index.jsp"; //부모창 리프레쉬
 		</script>
 	</c:if>
 	
 	<c:if test="${check == 0}">
 		<script type="text/javascript">
-			alert("회원가입 완료 되지 않았습니다.");
-			location.href="${root}/member/register.do";
+			alert("회원가입 실패");
 		</script>
 	</c:if>
 </body>
 </html>
-
-
-
-
-
-

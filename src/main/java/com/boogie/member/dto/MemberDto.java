@@ -14,7 +14,7 @@ public class MemberDto {
 	private String password;
 	private String email;
 	private String name;
-	private String birth_date;
+	private Date birth_date;
 	private int gender;
 	private String phone;
 	private String zipcode;
@@ -26,7 +26,6 @@ public class MemberDto {
 	private int non_member;
 	private int sns_num;
 	private Date register_date;
-
 	public int getMember_num() {
 		return member_num;
 	}
@@ -57,10 +56,10 @@ public class MemberDto {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getBirth_date() {
+	public Date getBirth_date() {
 		return birth_date;
 	}
-	public void setBirth_date(String birth_date) {
+	public void setBirth_date(Date birth_date) {
 		this.birth_date = birth_date;
 	}
 	public int getGender() {
@@ -131,6 +130,7 @@ public class MemberDto {
 				+ ", interest=" + interest + ", non_member=" + non_member + ", sns_num=" + sns_num + ", register_date="
 				+ register_date + "]";
 	}
+
 	
 	
 	

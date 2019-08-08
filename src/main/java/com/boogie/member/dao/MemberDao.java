@@ -8,5 +8,10 @@ public interface MemberDao {
 	public int memberLoginOk(String id, String password);
 	public String memberFindId(String name, String email);
 	public int memberFindPassword(String id, String email, String  temporaryPw);
-	public int memberMakePassword(String id, String newPassword);
+	public MemberDto memberSearch(String id);
+	public int memberUpdate(MemberDto memberDto);
+	public int memberKaKaoInsert(MemberDto memberDto);
+	public int memberKaKaoUpdate(MemberDto memberDto);
+	public int memberDelete(String id, String password);
+	public int memberKaKaoDelete(String id);
 }

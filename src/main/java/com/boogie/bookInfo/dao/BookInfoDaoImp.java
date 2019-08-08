@@ -24,5 +24,16 @@ public class BookInfoDaoImp implements BookInfoDao {
 	public List<ReviewDto> getReviewList(int book_id) {
 		return sqlSessionTemplate.selectList("selectReviewList",book_id);
 	}
+	
+	@Override
+	public String getIdList(int member_num) {
+		return sqlSessionTemplate.selectOne("selectIDList",member_num);
+	}
+	
+	@Override
+	public float getRateAverage(int book_id) {
+		
+		return sqlSessionTemplate.selectOne("selectRateAverate",book_id);
+	}
 
 }

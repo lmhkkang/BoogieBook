@@ -345,20 +345,20 @@ button{
 
 .rocommend_left{
 	border: 1px solid #CCCCCC;
-	width: 30%;
-	height: 80%;
+	width: 35%;
+	height: 75%;
 	float: left;
 	margin: 30px auto;
-	margin-left: 100px;
+	margin-left: 80px;
 }
 
 .rocommend_right{
 	border: 1px solid #CCCCCC;
-	width: 30%;
+	width: 35%;
 	float: left;
-	height: 80%;
+	height: 75%;
 	margin: 30px auto;
-	margin-left: 80px;
+	margin-left: 45px;
 }
 
 

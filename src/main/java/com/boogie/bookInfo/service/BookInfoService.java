@@ -4,6 +4,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface BookInfoService {
 
-	void writeBookInfo(ModelAndView mav);
+	public void BookInfoMain(ModelAndView mav);
 
 }

@@ -70,4 +70,12 @@ public class SearchServiceImp implements SearchService {
 
 		mav.setViewName("search/searchOk");
 	}
+	@Override
+	public void multiOk(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		String keyword = request.getParameter("keyword");
+		
+		mav.setViewName("search/multiOk");
+	}
 }

@@ -32,7 +32,8 @@
 		<bean id="sqlSessionFactoryBean"
 			class="org.mybatis.spring.SqlSessionFactoryBean">
 			<property name="dataSource" ref="dataSource"></property>
-			<property name="mapperLocations">
+			<property name="configLocation" value="classpath:com/boogie/search/dao/mapper/sqlMapconfig.xml"></property>
+			<property name="mapperLocations">			
 				<list>
 					<value>classpath:com/boogie/recommend/dao/mapper/RecommendMapper.xml</value>
 					<value>classpath:com/boogie/order/dao/mapper/orderMapper.xml</value>
@@ -58,7 +59,9 @@
 
 		<tx:annotation-driven
 			transaction-manager="transactionManager" />	
-			
+	
+	<bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+
 	<!-- gmail -->
     <bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl" >
         <property name="host" value="smtp.gmail.com" />

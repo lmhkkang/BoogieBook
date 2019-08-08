@@ -1,11 +1,14 @@
 package com.boogie.controller;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.ParseException;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
@@ -29,6 +32,12 @@ import com.boogie.bookInfo.service.BookInfoService;
 import com.boogie.order.dto.OrderDto;
 import com.boogie.order.service.OrderService;
 
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -39,7 +48,9 @@ import com.boogie.email.EmailSender;
 import com.boogie.member.service.MemberService;
 
 import com.boogie.recommend.service.RecommendService;
+import com.boogie.search.dto.SearchDto;
 import com.boogie.search.service.SearchService;
+import com.fasterxml.jackson.core.JsonParser;
 
 
 /**
@@ -294,8 +305,8 @@ public class BookController {
 	}
 
 		
-			@RequestMapping(value = "/search/mulitOk.do", method = RequestMethod.GET)
-		public ModelAndView multiResult(HttpServletRequest request, HttpServletResponse response)
+			@RequestMapping(value = "/search/multiOk.do", method = RequestMethod.GET)
+		public ModelAndView multiResult(HttpServletRequest request, HttpServletResponse response) throws ParseException
 		{
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("request",request);
@@ -351,6 +362,25 @@ public class BookController {
 		bookInfoService.writeBookInfo(mav);
 		
 		return mav;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/search/autocomplet.do", method=RequestMethod.GET)
+	public String[] autocomplete(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("auto");
+		mav.addObject("request", request);
+		List<SearchDto> a=searchService.autocomplete(mav);
+		String ab="";
+		String [] acc=new String[a.size()];
+		for(int i=0; i<a.size();i++) {
+		acc[i]=a.get(i).getBook_name();		
+		}
+		 
+
+
+		 
+		return acc;
 	}
 
 }

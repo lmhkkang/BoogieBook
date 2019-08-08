@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
@@ -121,8 +121,8 @@
 								</div>
 							</div>
 							<div class="interest_btn">
-								<button>바로 구매하기</button>
-								<button>장바구니 담기</button>
+									<button type="submit" class="btn" onclick="javascript:moveToCart('${root}','${bookInfoDto.book_id}')">장바구니담기</button>
+									<button type="submit" class="btn" onclick="javascript:moveToOrderForm('${root}',${bootInfoDto.book_id}')">바로구매</button>
 							</div>
 						</div>
 					</div>

@@ -5,12 +5,15 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.boogie.aop.BookAspect;
+import com.boogie.email.Email;
+import com.boogie.email.EmailSender;
 import com.boogie.member.dto.MemberDto;
 import com.boogie.order.dao.OrderDao;
 import com.boogie.order.dto.OrderDto;
@@ -32,17 +35,22 @@ import com.boogie.order.dto.OrderDto;
 public class OrderServiceImp implements OrderService {
 	@Autowired
 	private OrderDao orderDao;
+	@Autowired
+	private EmailSender emailSender;
+	@Autowired
+	private Email email;
 	
 	@Override
 	public void getCartInfo(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		String member_id = request.getParameter("member_id");
+		
+		HttpSession  session = request.getSession();
+		String member_id = (String) session.getAttribute("id");
 		BookAspect.logger.info(BookAspect.logMsg + "member_id:" + member_id);
 		
 		if (member_id == null) {
 			System.out.println("장바구니에 존재하는 Item이 없습니다.");
-			member_id = "minho";
 		}
 		
 		List<OrderDto> cartList = new ArrayList<OrderDto>();
@@ -59,9 +67,10 @@ public class OrderServiceImp implements OrderService {
 	public void getOrderForm(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
-			
+		
+		HttpSession  session = request.getSession();
+		String member_id = (String) session.getAttribute("id");
 		String total = request.getParameter("total");
-		String member_id = request.getParameter("member_id");
 		BookAspect.logger.info(BookAspect.logMsg + "total: " + total + "member_id" + member_id);	
 		
 		MemberDto memberDto = new MemberDto();
@@ -82,10 +91,10 @@ public class OrderServiceImp implements OrderService {
 		OrderDto orderDto = new OrderDto();
 		List<OrderDto> bookList = new ArrayList<OrderDto>();
 		Map<String, Object> map = mav.getModelMap();
-		
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		HttpSession  session = request.getSession();
 		
-		String member_id = request.getParameter("member_id");
+		String member_id = (String) session.getAttribute("id");
 		String total = request.getParameter("total");
 		BookAspect.logger.info(BookAspect.logMsg + "주문정보 member_id : "+ member_id + "total:" + total);
 		
@@ -128,14 +137,134 @@ public class OrderServiceImp implements OrderService {
 			bookList.add(orderDto);
 		}
 		BookAspect.logger.info(BookAspect.logMsg + "bookList.size() : " +bookList.size());
-		
-		//주문이 완료되면 DB에서 장바구상품을 삭제시킨다.
-		int check = orderDao.deleteFromCart(member_id);
-		BookAspect.logger.info(BookAspect.logMsg + "check : " +check);
+
+		orderInfoSendEmail(member_id, oDto, bookList);
 		
 		mav.addObject("orderDto", oDto);
 		mav.addObject("bookList", bookList);
 		mav.setViewName("order/paymentComplete");
+		
+		//주문이 완료되면 DB에서 장바구상품을 삭제시킨다.
+		int check = orderDao.deleteFromCart(member_id);
+		BookAspect.logger.info(BookAspect.logMsg + "check : " +check);
 	}
 
+	public void orderInfoSendEmail(String member_id, OrderDto oDto, List<OrderDto> bookList) {
+		String id = member_id;
+		String userEmail = orderDao.getUserEmail(member_id); 
+		String content = id + "<!doctypeHTML>" + 
+				"    <html>" + 
+				"" + 
+				"    <head>" + 
+				"        <title>Book Info</title>" + 
+				"        <meta charset=\"utf-8\">" + 
+				"        <link rel=\"stylesheet\" type=\"text/css\" href=\"bookInfo.css\" />" + 
+				"        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">" + 
+				"        <style type=\"text/css\">" + 
+				"            " + 
+				"        </style>" + 
+				"    </head>" + 
+				"    <body>" + 
+				"        <table class=\"table table-striped\">" + 
+				"            <thead>" + 
+				"                <tr>" + 
+				"                    <th scope=\"col\">" + 
+				"                        <h3>"+id+"님의 주문정보</h3>" + 
+				"                    </th>" + 
+				"                </tr>" + 
+				"            </thead>" + 
+				"            <tbody>" + 
+				"                <tr>" + 
+				"                    <td style=\"padding-left:60px;\"><label>주문번호</label> </td>" + 
+				"                    <td></td>" + 
+				"                    <td>"+ oDto.getOrder_id() +"</td>" + 
+				"                    <td></td>" + 
+				"                    <td class=\"text-right\"></td>" + 
+				"                    <td class=\"text-right\"></td>" + 
+				"                </tr>" + 
+				"                <tr>" + 
+				"                    <td style=\"padding-left:60px;\"><label>주문날짜</label> </td>" + 
+				"                    <td></td>" + 
+				"                    <td>"+ oDto.getOrder_date()+"</td>" + 
+				"                    <td></td>" + 
+				"                    <td class=\"text-right\"></td>" + 
+				"                    <td class=\"text-right\"></td>" + 
+				"                </tr>" + 
+				"                <tr>" + 
+				"                    <td style=\"padding-left:60px;\"><label>배송지</label> </td>" + 
+				"                    <td></td>" + 
+				"                    <td>"+oDto.getAddr1() +" " + oDto.getAddr2()+"</td>" + 
+				"                    <td></td>" + 
+				"                    <td class=\"text-right\"></td>" + 
+				"                    <td class=\"text-right\"></td>" + 
+				"                </tr>" + 
+				"                <tr>" + 
+				"                    <td style=\"padding-left:60px;\"><label>주문자</label></td>" + 
+				"                    <td></td>" + 
+				"                    <td>"+ oDto.getName() +"</td>" + 
+				"                    <td></td>" + 
+				"                    <td></td>" + 
+				"                    <td class=\"text-right\"></td>" + 
+				"                </tr>" + 
+				"" + 
+				"                <tr>" + 
+				"                    <td></td>";
+				for(int i=0; i<bookList.size(); i++) {
+					OrderDto orderDto = new OrderDto();
+					orderDto = bookList.get(i);
+					content += "<td style=\"padding-left:60px;\"><label>"+ orderDto.getBook_name()+"("+orderDto.getQuantity()+")" +"</label></td>";
+				}
+				content += "                        <td>" + 
+				"                        </td>" + 
+
+				"                    <td></td>" + 
+				"                    <td><strong></strong></td>" + 
+				"                    <td class=\"text-right\"><strong></strong></td>" + 
+				"                </tr>" + 
+				"                <tr>" + 
+				"                    <td style=\"padding-left:60px;\"><label>주문금액</label></td>" + 
+				"                    <td></td>" + 
+				"                    <td><strong>"+oDto.getTotal_price()+"</strong>원</td>" + 
+				"                    <td></td>" + 
+				"                    <td></td>" + 
+				"                    <td class=\"text-right\"></td>" + 
+				"                </tr>" + 
+				"            </tbody>" + 
+				"        </table>" + 
+				"    </body>" + 
+				"" + 
+				"    </html>" + 
+				"";
+		
+		if(userEmail != null) {
+			email.setContent(content);
+			email.setReceiver(userEmail);
+			email.setSubject(id + "님의 주문정보 입니다.");
+
+			System.out.println(email.toString());
+			try {
+				emailSender.SendEmail(email);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}	
+	}
+
+	@Override
+	public void addToCart(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		HttpSession  session = request.getSession();
+		
+		String member_id = (String) session.getAttribute("id");
+		int book_id = Integer.parseInt(request.getParameter("book_id"));
+		BookAspect.logger.info(BookAspect.logMsg + book_id + " " + member_id);
+		
+		int check = orderDao.addToCart(book_id, member_id);
+		BookAspect.logger.info(BookAspect.logMsg + check);
+				
+	}
+
+	
+	
 }

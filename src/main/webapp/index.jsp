@@ -12,6 +12,9 @@
 	<link rel="styleSheet" type="text/css" href="${root}/resources/css/index/index_content.css" />
 	<link rel="styleSheet" type="text/css" href="${root}/resources/css/index/index_footer.css" />
 
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 	var slideIndex = 0;
@@ -182,17 +185,15 @@
 						<div class="spot_r">
 							<div class="spot_r_inside">
 								<ul class="spot_list">
-									<li><a>종각 종로본점</a></li>
-									<li><a>스타필드 코엑스몰점</a></li>
-									<li><a>강남역점</a></li>
-									<li><a>서초역점</a></li>
-									<li><a>여의도 IFC몰점</a></li>
-									<li><a>김포공항 롯데점</a></li>
+									<li><a>강남점</a></li>
+									<li><a>천호점</a></li>
+									<li><a>군자역점</a></li>
+									<li><a>발산점</a></li>
+									<li><a>목동점</a></li>
+									<li><a>상봉점</a></li>
 									<li><a>홍대점</a></li>
-									<li><a>가산 마리오점</a></li>
-									<li><a>강남 포스코점</a></li>
-									<li><a>동대문점</a></li>
-									<li><a>신촌역점</a></li>
+									<li><a>신촌점</a></li>
+									<li><a>코엑스점</a></li>
 								</ul>
 							</div>
 						</div>

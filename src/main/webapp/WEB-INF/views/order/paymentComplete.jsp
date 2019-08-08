@@ -96,7 +96,7 @@
                        
                     </div>
                     <div class="col-sm-12 col-md-6 text-right">
-                        <button type="button" class="btn btn-primary btn-lg">확인</button>
+                        <button type="button" class="btn btn-primary btn-lg" onclick="location.href='${root}/index.jsp'">확인</button>
                     </div>
                 </div>
             </div>

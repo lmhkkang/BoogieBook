@@ -62,4 +62,15 @@
    		where member_id=#{member_id}
    </delete>
    
+   <select id="selectUserEmail" parameterType="String" resultType="String">
+   		select email
+   		from member
+   		where member_id = #{member_id}
+   </select>
+   
+   <insert id="insertToCart" parameterType="java.util.Map">
+   		insert into cart
+   		values(#{member_id},#{book_id},1,sysdate)
+   </insert>
+    
 </mapper>

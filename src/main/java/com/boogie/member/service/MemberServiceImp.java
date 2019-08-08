@@ -1,5 +1,7 @@
 package com.boogie.member.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
@@ -28,7 +30,7 @@ public class MemberServiceImp implements MemberService {
 		
 		int gender = 0;;
 		
-		if(request.getParameter("gender").equals("male")) {
+		if(request.getParameter("gender").equals("Male")) {
 			gender = 1;
 		}
 		else {
@@ -39,7 +41,12 @@ public class MemberServiceImp implements MemberService {
 		memberDto.setPassword(request.getParameter("password"));
 		memberDto.setEmail(request.getParameter("email"));
 		memberDto.setName(request.getParameter("name"));
-		memberDto.setBirth_date(request.getParameter("birth_date"));
+
+		try {
+			memberDto.setBirth_date(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("birth_date")));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		memberDto.setGender(gender);
 		memberDto.setPhone(request.getParameter("phone"));
 		memberDto.setZipcode(request.getParameter("zipcode"));
@@ -84,7 +91,15 @@ public class MemberServiceImp implements MemberService {
 		String password = request.getParameter("password");
 		BookAspect.logger.info(BookAspect.logMsg + "id : " + id + ", password" + password);
 		
+		
 		int check = memberDao.memberLoginOk(id, password);
+		if(check > 0) {
+			MemberDto memberDto = memberDao.memberSearch(id);
+			String name = memberDto.getName();
+			int snsNum = memberDto.getSns_num();
+			mav.addObject("name", name);
+			mav.addObject("snsNum", snsNum);
+		}
 		BookAspect.logger.info(BookAspect.logMsg + check);
 		
 		mav.addObject("id", id);
@@ -138,14 +153,241 @@ public class MemberServiceImp implements MemberService {
 	}
 
 	@Override
-	public void makePasswordOk(ModelAndView mav) {
+	public void memberEdit(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		String id = request.getParameter("id");
+		
+		MemberDto memberDto = memberDao.memberSearch(id);
+		
+		String birthDate = new SimpleDateFormat("yyyy-MM-dd").format(memberDto.getBirth_date());
+	
+		String[] birth_date = birthDate.split("-");
+		int yyyy = Integer.parseInt(birth_date[0]);
+		int mm = Integer.parseInt(birth_date[1]);
+		int dd = Integer.parseInt(birth_date[2]);
+		
+		mav.addObject("memberDto", memberDto);
+		mav.addObject("yyyy", yyyy);
+		mav.addObject("mm", mm);
+		mav.addObject("dd", dd);
+		mav.setViewName("member/memberEdit");
+		
+	}
+
+	@Override
+	public void memberEditOk(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
 		
-		String newPassword = request.getParameter("newPassword"); 
-		String member_id = request.getParameter("member_id");
+		MemberDto memberDto = new MemberDto();
 		
-		int check = memberDao.memberMakePassword(member_id, newPassword);
+		int gender = 0;;
+		
+		if(request.getParameter("gender").equals("Male")) {
+			gender = 1;
+		}
+		else {
+			gender = 2;
+		}
+		
+		memberDto.setMember_id(request.getParameter("member_id"));
+		memberDto.setPassword(request.getParameter("password"));
+		memberDto.setEmail(request.getParameter("email"));
+		memberDto.setName(request.getParameter("name"));
+
+		try {
+			memberDto.setBirth_date(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("birth_date")));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		memberDto.setGender(gender);
+		memberDto.setPhone(request.getParameter("phone"));
+		memberDto.setZipcode(request.getParameter("zipcode"));
+		memberDto.setAddr1(request.getParameter("addr1"));
+		memberDto.setAddr2(request.getParameter("addr2"));
+		memberDto.setJob(request.getParameter("job"));
+		memberDto.setInterest(request.getParameter("interestValue"));
+		
+		BookAspect.logger.info(BookAspect.logMsg + memberDto.toString());
+				
+		int check = memberDao.memberUpdate(memberDto);
+		BookAspect.logger.info(BookAspect.logMsg + check);
+
 		mav.addObject("check", check);
+		mav.addObject("id", memberDto.getMember_id());
+		mav.addObject("name", memberDto.getName());
+		mav.addObject("snsNum", memberDto.getSns_num());
+		mav.setViewName("member/memberEditOk");	
+	
+	}
+
+	@Override
+	public void memberKaKaoRegisterOk(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		
+		MemberDto memberDto = new MemberDto();
+		
+		int gender = 0;;
+		
+		if(request.getParameter("gender").equals("Male")) {
+			gender = 1;
+		}
+		else {
+			gender = 2;
+		}
+		
+		memberDto.setMember_id(request.getParameter("id"));
+		memberDto.setName(request.getParameter("name"));
+
+		try {
+			memberDto.setBirth_date(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("birth_date")));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		memberDto.setGender(gender);
+		memberDto.setPhone(request.getParameter("phone"));
+		memberDto.setZipcode(request.getParameter("zipcode"));
+		memberDto.setAddr1(request.getParameter("addr1"));
+		memberDto.setAddr2(request.getParameter("addr2"));
+		memberDto.setJob(request.getParameter("job"));
+		memberDto.setInterest(request.getParameter("interestValue"));
+		memberDto.setNon_member(1);
+		memberDto.setSns_num(1);
+		memberDto.setRegister_date(new Date());
+		
+		BookAspect.logger.info(BookAspect.logMsg + memberDto.toString());
+				
+		int check = memberDao.memberKaKaoInsert(memberDto);
+		BookAspect.logger.info(BookAspect.logMsg + check);
+
+		mav.addObject("check", check);
+		mav.addObject("id", memberDto.getMember_id());
+		mav.addObject("name", memberDto.getName());
+		mav.addObject("snsNum", memberDto.getSns_num());
+		
+		// mav.setViewName("member/registerOk");	
+		mav.setViewName("member/KaKaoRegisterOk");	
+	}
+
+	@Override
+	public void memberKaKaologinOk(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		
+		String id = request.getParameter("id");
+		BookAspect.logger.info(BookAspect.logMsg + "id : " + id);
+		
+		MemberDto memberDto = memberDao.memberSearch(id);
+		System.out.println(memberDto.toString());
+		String name = memberDto.getName();
+		int snsNum = memberDto.getSns_num();
+		
+		mav.addObject("check", 1);
+		mav.addObject("id", id);
+		mav.addObject("name", name);
+		mav.addObject("snsNum", snsNum);
+		mav.setViewName("member/loginOk");		
+	}
+
+	@Override
+	public void memberKaKaoEdit(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		String id = request.getParameter("id");
+		
+		MemberDto memberDto = memberDao.memberSearch(id);
+		
+		String birthDate = new SimpleDateFormat("yyyy-MM-dd").format(memberDto.getBirth_date());
+	
+		String[] birth_date = birthDate.split("-");
+		int yyyy = Integer.parseInt(birth_date[0]);
+		int mm = Integer.parseInt(birth_date[1]);
+		int dd = Integer.parseInt(birth_date[2]);
+		
+		mav.addObject("memberDto", memberDto);
+		mav.addObject("yyyy", yyyy);
+		mav.addObject("mm", mm);
+		mav.addObject("dd", dd);
+		mav.setViewName("member/KaKaoEdit");		
+	}
+
+	@Override
+	public void memberKaKaoEditOk(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		
+		MemberDto memberDto = new MemberDto();
+		
+		int gender = 0;;
+		
+		if(request.getParameter("gender").equals("Male")) {
+			gender = 1;
+		}
+		else {
+			gender = 2;
+		}
+		memberDto.setMember_id(request.getParameter("id"));
+		memberDto.setName(request.getParameter("name"));
+
+		try {
+			memberDto.setBirth_date(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("birth_date")));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		memberDto.setGender(gender);
+		memberDto.setPhone(request.getParameter("phone"));
+		memberDto.setZipcode(request.getParameter("zipcode"));
+		memberDto.setAddr1(request.getParameter("addr1"));
+		memberDto.setAddr2(request.getParameter("addr2"));
+		memberDto.setJob(request.getParameter("job"));
+		memberDto.setInterest(request.getParameter("interestValue"));
+		
+		BookAspect.logger.info(BookAspect.logMsg + memberDto.toString());
+				
+		int check = memberDao.memberKaKaoUpdate(memberDto);
+		BookAspect.logger.info(BookAspect.logMsg + check);
+
+		mav.addObject("check", check);
+		mav.addObject("id", memberDto.getMember_id());
+		mav.addObject("name", memberDto.getName());
+		mav.addObject("snsNum", memberDto.getSns_num());
+		mav.setViewName("member/KaKaoEditOk");	
+		
+	}
+
+	@Override
+	public void memberWithdrawalOk(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		
+		String id = request.getParameter("member_id");
+		String password = request.getParameter("password");
+		BookAspect.logger.info(BookAspect.logMsg + id + ", " + password);
+		
+		int check = memberDao.memberDelete(id, password);
+		BookAspect.logger.info(BookAspect.logMsg + check);
+
+		mav.addObject("check", check);
+		
+		mav.setViewName("member/memberWithdrawalOk");
+		
+	}
+
+	@Override
+	public void memberKaKaoWithdrawalOk(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		
+		String id = request.getParameter("id");
+		BookAspect.logger.info(BookAspect.logMsg + id);
+		
+		int check = memberDao.memberKaKaoDelete(id);
+		BookAspect.logger.info(BookAspect.logMsg + check);
+		
+		mav.addObject("check", check);
+		mav.setViewName("member/KaKaoWithdrawalOk");
+		
 	}
 }

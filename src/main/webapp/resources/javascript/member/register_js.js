@@ -187,7 +187,7 @@ function checkPassword(){
     		$('.chkCpasswordMsg').css( "color" , "red");
         	$('.chkCpasswordMsg').html("비밀번호가 일치하지 않습니다.");
     		passwordkDoublcCheck = 0;
-    	}else if($("input[name=password]").val()==$('#cpassword').val()){
+    	}else if($("input[name=cpassword]").val()!="" && $("input[name=password]").val()==$('#cpassword').val()){
         	$('.chkCpasswordMsg').css( "color" , "green")
         	$('.chkCpasswordMsg').html("비밀번호가 일치합니다.");
         	passwordkDoublcCheck = 1;
@@ -202,7 +202,7 @@ function checkPassword(){
     		$('.chkCpasswordMsg').css( "color" , "red");
         	$('.chkCpasswordMsg').html("비밀번호가 일치하지 않습니다.");
     		passwordkDoublcCheck = 0;
-    	}else if($("input[name=password]").val()==$('#cpassword').val()){
+    	}else if($("input[name=cpassword]").val()!="" && $("input[name=password]").val()==$('#cpassword').val()){
         	$('.chkCpasswordMsg').css( "color" , "green")
         	$('.chkCpasswordMsg').html("비밀번호가 일치합니다.");
         	passwordkDoublcCheck = 1;

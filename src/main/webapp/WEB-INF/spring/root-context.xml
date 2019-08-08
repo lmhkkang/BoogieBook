@@ -26,21 +26,21 @@
 	
 			<property name="maxActive" value="50"></property>
 			<property name="maxIdle" value="10"></property>
-			<property name="maxWait" value="2000"></property>
 		</bean>
  		<!-- MyBatis : sqlSessionFactoryBean  -->
 		<bean id="sqlSessionFactoryBean"
 			class="org.mybatis.spring.SqlSessionFactoryBean">
 			<property name="dataSource" ref="dataSource"></property>
-			<property name="mapperLocations">
+			<property name="configLocation" value="classpath:com/boogie/search/dao/mapper/sqlMapconfig.xml"></property>
+			<property name="mapperLocations">			
 				<list>
+					<value>classpath:com/boogie/review/dao/mapper/ReviewMapper.xml</value>
 					<value>classpath:com/boogie/recommend/dao/mapper/RecommendMapper.xml</value>
 					<value>classpath:com/boogie/order/dao/mapper/orderMapper.xml</value>
 					<value>classpath:com/boogie/bookInfo/dao/mapper/BookInfoMapper.xml</value>
 					<value>classpath:com/boogie/search/dao/mapper/SearchMapper.xml</value>
 					<value>classpath:com/boogie/member/dao/mapper/MemberMapper.xml</value>
 					<value>classpath:com/boogie/customerCenter/dao/mapper/CustomerCenterMapper.xml</value>
-
 				</list>
 			</property>
 		</bean>
@@ -59,7 +59,9 @@
 
 		<tx:annotation-driven
 			transaction-manager="transactionManager" />	
-			
+	
+	<bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+
 	<!-- gmail -->
     <bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl" >
         <property name="host" value="smtp.gmail.com" />

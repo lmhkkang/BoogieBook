@@ -20,6 +20,8 @@ var arr = new Array();
 function sendRequest(method,url,callback,params)
 {					// ("GET","getResponse.txt",fromServer,null)
 
+	//alert("TEST");
+	
 	var httpMethod = method.toUpperCase();
 	if(httpMethod!="GET" && httpMethod!="POST")
 	{
@@ -34,10 +36,10 @@ function sendRequest(method,url,callback,params)
 		httpUrl+="?"+httpParams;
 	}
 	
-	//arr.push("전송방식"+httpMethod);
-	//arr.push("서버파일"+httpUrl);
-	//arr.push("데이터"+httpParams);
-	//alert(arr.join("\n"));
+//	arr.push("전송방식"+httpMethod);
+//	arr.push("서버파일"+httpUrl);
+//	arr.push("데이터"+httpParams);
+//	alert(arr.join("\n"));
 	
 	xhr = createXHR();
 	

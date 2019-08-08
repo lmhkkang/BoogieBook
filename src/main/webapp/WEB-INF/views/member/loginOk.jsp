@@ -12,14 +12,21 @@
 	
 	<c:if test="${check == 1}">
 		<c:set var="id" value="${id}" scope="session"/> <%--application --%>
+		<c:set var="name" value="${name}" scope="session"/> <%--application --%>
+		<c:set var="snsNum" value="${snsNum}" scope="session"/> <%--application --%>
+		
 		<script type="text/javascript">
 			alert("로그인 성공");
-
+			var snsNum = ${snsNum};
+			
+			if(snsNum == 3){
 		    setTimeout(function() {
-		    opener.location.reload(); //부모창 리프레쉬
+		    opener.location.href ="${root}/index.jsp"; //부모창 리프레쉬
 		    self.close(); //현재창 닫기
 		    }, 500); // 2초후 실행 1000당 1초
-
+		}else{
+			location.href="${root}/index.jsp";
+		}
 		</script>
 	</c:if>
 	

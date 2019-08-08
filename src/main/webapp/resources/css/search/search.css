@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-*{ margin:0px; padding: 0px; font-family: 고딕; }
+*{ margin:0px; padding: 0px;  }
 a{text-decoration: none; }
 li{list-style-type: none;}
 
@@ -135,13 +135,13 @@ color: white;
 #state{
 	width: 100px;
 }
-.btn{
-	border: 0px green solid;
+.btns{
+	border: 4px green solid;
 	width:820px; overflow:hidden;
 	text-align:center;
 	display: block;
 }
-.btn input{
+.btns input{
 	width: 100px; height: 50px;
 	margin: 0px 20px;
 	background-color: #003a75;
@@ -184,13 +184,13 @@ color: white;
   line-height: 1.5;
   margin: 5px; font-size: 13.5px;
 }
-.btn{
+.btns{
 	border: 0px green solid;
 	width:820px; overflow:hidden;
 	text-align:center;
   margin: 10px auto;
 }
-.btn input{
+.btns input{
 	width: 100px; height: 50px;
 	margin: 10px 20px;
 	background-color: #003a75;

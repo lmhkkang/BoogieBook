@@ -27,8 +27,38 @@
 		update member set password = #{temporaryPw} where member_id=#{member_id} and email=#{email}
 </update>
 
-<update id="memberMakePassword" parameterType="java.util.HashMap">
-		update member set password = #{newPassword} where member_id=#{member_id}
+<select id="memberSearch" parameterType="String" resultType="com.boogie.member.dto.MemberDto">
+		select * from member where member_id=#{id}
+</select>
+
+<update id="memberUpdate" parameterType="com.boogie.member.dto.MemberDto">
+		update member set name=#{name}, password=#{password}, gender=#{gender},
+		birth_date=#{birth_date}, phone=#{phone}, email=#{email}, interest=#{interest},
+		job=#{job}, addr1=#{addr1}, addr2=#{addr2}, zipcode=#{zipcode}
+		where member_id=#{member_id}
 </update>
-	
+
+<insert id="memberKaKaoInsert" parameterType="com.boogie.member.dto.MemberDto">
+		insert into member(member_num, member_id, name, gender, birth_date, phone,
+		interest, job, addr1, addr2, zipcode, non_member, sns_num, register_date)
+		values(member_num_seq.nextval, #{member_id}, #{name}, #{gender}, 
+				#{birth_date}, #{phone},  #{interest}, #{job},
+				#{addr1}, #{addr2}, #{zipcode}, #{non_member}, #{sns_num}, #{register_date})
+</insert>
+
+<update id="memberKaKaoUpdate" parameterType="com.boogie.member.dto.MemberDto">
+		update member set name=#{name}, gender=#{gender},
+		birth_date=#{birth_date}, phone=#{phone}, interest=#{interest},
+		job=#{job}, addr1=#{addr1}, addr2=#{addr2}, zipcode=#{zipcode}
+		where member_id=#{member_id}
+</update>
+
+<delete id="memberDelete" parameterType="java.util.HashMap">
+		delete from member where member_id=#{id} and password=#{password} 
+</delete>
+
+<delete id="memberKaKaoDelete" parameterType="String">
+		delete from member where member_id=#{id}
+</delete>
+
 </mapper>

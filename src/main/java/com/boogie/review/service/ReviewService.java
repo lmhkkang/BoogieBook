@@ -1,5 +1,7 @@
 package com.boogie.review.service;
 
-public interface ReviewService {
+import org.springframework.web.servlet.ModelAndView;
 
+public interface ReviewService {
+	public void reviewWrite(ModelAndView mav);
 }

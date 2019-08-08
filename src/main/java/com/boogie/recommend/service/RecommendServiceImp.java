@@ -63,14 +63,13 @@ public class RecommendServiceImp implements RecommendService {
 
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 
-		// String id = request.getParameter("id");
-		String id = "a123123";
+		String id = request.getParameter("id");
+
 
 		String interest = recommandDao.getInterest(id);
 		BookAspect.logger.info(BookAspect.logMsg + "interest: " + interest);
 
 		// 관심분야 도서 가져오기
-		// interest="소설";
 		interestDto = recommandDao.getBookInterest(interest);
 		BookAspect.logger.info(BookAspect.logMsg + interestDto.toString());
 
@@ -170,6 +169,10 @@ public class RecommendServiceImp implements RecommendService {
 			e.printStackTrace();
 		}
 	
+		
+		String[] recommend_imgs = new String[2];
+		String[] recommend_imgs_book_id = new String[2];
+		
 		try {
 			
 			//CSVReader reader = new CSVReader(new FileReader(filename));
@@ -179,6 +182,7 @@ public class RecommendServiceImp implements RecommendService {
 			File out_file = new File("data.csv");
 			if(out_file.exists()){
 	            System.out.println("파일이 존재합니다.");
+	            //System.out.println(out_file.getAbsolutePath());
 	        }else{
 	            System.out.println("파일이 존재하지 않습니다.");
 	        }
@@ -190,18 +194,27 @@ public class RecommendServiceImp implements RecommendService {
 			UserBasedRecommender recommender = new GenericUserBasedRecommender(model, neighborhood, similarity);
 
 			//ID가 2번인 사람에게 3개의 아이템을 추천
-			List<RecommendedItem> recommendations = recommender.recommend(10, 1);
+			int member_num = recommandDao.getRMemberNum(id);
+			List<RecommendedItem> recommendations = recommender.recommend(member_num, 2);
 			
 			BookAspect.logger.info(BookAspect.logMsg+"recommendations_size: "+recommendations.size());
 			
+			
+			int i = 0;
 			for (RecommendedItem recommendation : recommendations) {
-				System.out.println(recommendation);
+				String result_book_id = String.format("%-20s", recommendation.getItemID());
+				//System.out.println(result_member_num);
+				recommend_imgs[i]=recommandDao.getImag(result_book_id);
+				recommend_imgs_book_id[i]=result_book_id;
+				i+=1;
 			}
 		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+		mav.addObject("recommend_imgs_book_id",recommend_imgs_book_id);
+		mav.addObject("recommend_imgs",recommend_imgs);
 		mav.addObject("markBookIcon",markBookIcon);
 		mav.addObject("markList", markList);
 		mav.addObject("markBookList", markBookList);

@@ -24,5 +24,85 @@ order by book_name desc) a)b where b.rnum >=#{startRow} and rnum <=#{endRow}
 	]]>
 	</select>
 	
+	<select id="searchCount" parameterType="java.util.HashMap"	resultType="int">
+  	
+  	select count(*) from book 
+  	<where>
+  		<if test="#{book_name}!=null or #{book_name}!=''">
+  		<![CDATA[
+  		 book_name like '%'||#{book_name}||'%'
+  		]]>
+  		</if>
+  		
+  		<if test="#{author}!=null or #{author}!=''">
+  		<![CDATA[
+  		and author like '%'||#{author}||'%'
+  		]]>
+  		</if>
+  		
+  		<if test="#{author}!=null or #{author}!=''">
+  		<![CDATA[
+  		and author like '%'||#{author}||'%'
+  		]]>
+  		</if>
+  		
+  		<if test="#{publisher}!=null or #{publisher}!=''">
+  		<![CDATA[
+  		and publisher like '%'||#{publisher}||'%'
+  		]]>
+  		</if>
+  		
+  		<if test="#{type}!=null or #{type}!=''">
+  		<![CDATA[
+  		and type02 like '%'||#{type}||'%'
+  		]]>
+  		</if>
+  </where>
+	</select>
+	
+	<select id="multiList" parameterType="java.util.HashMap" resultType="com.boogie.search.dto.SearchDto">
+	<![CDATA[
+	select * from (select rownum rnum, a.* from (select * from book
+	]]>
+	<where>
+  		<if test="#{book_name}!=null or #{book_name}!=''">
+  		<![CDATA[
+  		 book_name like '%'||#{book_name}||'%'
+  		]]>
+  		</if>
+  		
+  		<if test="#{author}!=null or #{author}!=''">
+  		<![CDATA[
+  		and author like '%'||#{author}||'%'
+  		]]>
+  		</if>
+  		
+  		<if test="#{author}!=null or #{author}!=''">
+  		<![CDATA[
+  		and author like '%'||#{author}||'%'
+  		]]>
+  		</if>
+  		
+  		<if test="#{publisher}!=null or #{publisher}!=''">
+  		<![CDATA[
+  		and publisher like '%'||#{publisher}||'%'
+  		]]>
+  		</if>
+  		
+  		<if test="#{type}!=null or #{type}!=''">
+  		<![CDATA[
+  		and type02 like '%'||#{type}||'%'
+  		]]>
+  		</if>
+  </where>
+	<![CDATA[ )a)b where b.rnum >=#{startRow} and rnum <=#{endRow}]]>
+
+	</select>
+	
+	<select id="autoList" resultType="com.boogie.search.dto.SearchDto">
+		<![CDATA[
+		select book_name from book
+		]]>
+	</select>
 	
 </mapper>

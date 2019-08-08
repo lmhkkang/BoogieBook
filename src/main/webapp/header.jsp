@@ -3,10 +3,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-	<c:set var="root" value="${pageContext.request.contextPath}"></c:set>
-	<head>
+<c:set var="root" value="${pageContext.request.contextPath}"></c:set>
+<head>
 	<meta charset="UTF-8">
 	<title>shop</title>
+	<style type="text/css">
+	.ui-autocomplete {
+		max-height: 300px;
+		overflow-y: auto; /* prevent horizontal scrollbar */
+		overflow-x: hidden;
+	}
+	/* IE 6 doesn't support max-height
+	     * we use height instead, but this forces the menu to always be this tall
+	     */
+	html .ui-autocomplete {
+		height: 300px;
+	}
+	</style>
 	<link
 		href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Maven+Pro|Play&display=swap"
 		rel="stylesheet">
@@ -24,37 +37,74 @@
 	<link
 		href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"
 		rel="stylesheet" id="bootstrap-css">
+	
 	<script
 		src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	
+	
+	<script type="text/javascript" src="${root}/resources/jquery/jquery.js"></script>
+	
+	<link
+		href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"
+		rel="stylesheet" type="text/css" />
+	
+	<!-- jQuery library -->
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<!-- jQuery ui library -->
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
 	<script type="text/javascript">
-			$(function(){
-				$(".logo").click(function(){
-					$("a").href("${root}/index.do");
-				});
-			}
-			</script>
+	      
+	       $(function() {
+	          var bookList = new Array();
+	          $.ajax({
+	                type : "get",
+	                url : "${root}/search/autocomplet.do",
+	                dataType : "text",
+	                success : function(data) {
+	                   
+	                   bookList = data.split(",");
+	                   for(var i=0; i<bookList.length; i++){
+	                      bookList[i].replace("\"", "");
+	                   }
+	                   $("#term").autocomplete({              
+	                       source : bookList
+	                   });
+	                }
+	            });
+	           
+	       });
+	   </script>
 </head>
 <body>
 	<header>
+		<div id="result"></div>
 		<div class="gnb">
 			<ul class="center">
 				<li class="topHeader_l"><a href="${root}/customerCenter/storeMap.do">매장안내</a><span>∨</span></li>
 				<li class="topHeader_l"><a href="#">회원혜택</a><span>∨</span></li>
 				<li></li>
 				<li class="topHeader_r"><a href="#"></a></li>
-				<li class="topHeader_r"><a href="${root}/order/cart.do"><img
-						width="13px" height="13px" src="${root}/resources/images/keep.jpg"><span>0</span></a></li>
+				<li class="topHeader_r"><a href="${root}/order/cart.do"><img width="13px" height="13px" src="${root}/resources/images/keep.jpg"><span>0</span></a></li>
 				<li class="topHeader_r"><a href="${root}/customerCenter/customerService.do">고객센터</a></li>
 				<li class="topHeader_r"><a href="#">주문배송</a></li>
 
-				<c:if test="${id == null}">
+				<c:if test="${name == null}">
 					<li class="topHeader_r"><a href="${root}/member/register.do">회원가입</a></li>
 					<li class="topHeader_r"><a href="javascript:OpenLoginFrame()">로그인</a></li>
 				</c:if>
-				<c:if test="${id !=null}">
+				<c:if test="${name !=null}">
 					<li class="topHeader_r"><a href="#">마이페이지</a></li>
+					<c:if test="${snsNum == 3}">
+						<li class="topHeader_r"><a
+							href="${root}/member/memberEdit.do?id=${id}">회원정보수정</a></li>
+					</c:if>
+					<c:if test="${snsNum == 1}">
+						<li class="topHeader_r"><a
+							href="${root}/member/KaKaoEdit.do?id=${id}">회원정보수정</a></li>
+					</c:if>
 					<li class="topHeader_r"><a href="${root}/member/logout.do">로그아웃</a></li>
-					<li class="topHeader_r"><b>${id}님 환영합니다.</b></li>
+					<li class="topHeader_r"><b>${name}님 환영합니다.</b></li>
 				</c:if>
 
 
@@ -90,7 +140,7 @@
 							<div id="custom-search-input">
 								<div class="input-group col-md-12">
 									<input type="text" class="  search-query form-control"
-										name="keyword" placeholder="Search" /> <span
+										name="keyword" id="term" placeholder="Search" /> <span
 										class="input-group-btn">
 										<button class="btn btn-danger" type="submit">
 											<span class=" glyphicon glyphicon-search"></span>
@@ -111,8 +161,8 @@
 					<li><a href="#">베스트셀러</a></li>
 					<li><a href="#">신간도서</a></li>
 					<li><a href="${root}/search/detailSearch.do">상세검색</a></li>
-					<li><a href="${root}/recommend/recommendMain.do">추천도서</a></li>
-					<li><a href="#">매장안내</a></li>
+					<li><a href="${root}/recommend/recommendMain.do?id=${id}">추천도서</a></li>
+					<li><a href="${root}/customerCenter/storeMap.do">매장안내</a></li>
 				</ul>
 			</div>
 		</div>

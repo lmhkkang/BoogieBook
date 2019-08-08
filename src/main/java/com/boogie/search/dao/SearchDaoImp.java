@@ -35,4 +35,29 @@ public class SearchDaoImp implements SearchDao {
 		hMap.put("keyword", keyword);
 		return sqlSessionTemplate.selectList("dao.searchMapper.PageList", hMap);
 	}
+	@Override
+	public int searchCount(String type, String book_name, String author, String publisher) {
+		HashMap<String, Object> hMap=new HashMap<String, Object>();
+		hMap.put("book_name", book_name);
+		hMap.put("type", type);
+		hMap.put("author", author);
+		hMap.put("publisher", publisher);		
+		return sqlSessionTemplate.selectOne("dao.searchMapper.searchCount", hMap);
+	}
+	@Override
+	public List<SearchDto> multiPageList(String type, String book_name, String author, String publisher, int startRow,
+			int endRow) {
+		HashMap<String, Object> hMap=new HashMap<String, Object>();
+		hMap.put("type", type);
+		hMap.put("book_name", book_name);
+		hMap.put("author", author);
+		hMap.put("publisher", publisher);
+		hMap.put("startRow", startRow);
+		hMap.put("endRow", endRow);
+		return sqlSessionTemplate.selectList("dao.searchMapper.multiList", hMap);
+	}
+	@Override
+	public List<SearchDto> listAll2() {
+		return sqlSessionTemplate.selectList("dao.searchMapper.autoList");
+	}
 }

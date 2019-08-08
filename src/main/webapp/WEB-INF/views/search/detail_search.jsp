@@ -10,15 +10,87 @@
 <head>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <meta charset="UTF-8">
- <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Maven+Pro|Play&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Maven+Pro|Play&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
 	<link rel="styleSheet" type="text/css" href="${root}/resources/css/search/search.css" />
+	
 	<script src="${root}/resources/javascript/search/search.js"></script>
 	<script type="text/javascript" src="${root}/resources/jquery/jquery.js"></script>		
 	<script type="text/javascript">
+	
+	function appendYear(){
+
+		var date = new Date();
+		var year = date.getFullYear();
+		var selectValue = document.getElementById("year");
+		var selectValue2 = document.getElementById("year2");
+		var optionIndex = 0;
+
+
+		for(var i=year;i>year-50;i--){
+				
+				selectValue2.add(new Option(i,i),optionIndex++);
+		}
+		for(var i=year-50;i<year;i++){
+			selectValue.add(new Option(i,i),optionIndex++);
+		}
+
+	}
+
+	function appendMonth(){
+		var date = new Date();
+		var month = date.getMonth();
+		var selectValue = document.getElementById("month");
+		var selectValue2 = document.getElementById("month2"); 
+		var optionIndex = 0;
+
+		for(var i=1;i<=12;i++){
+			if(i<10){
+			selectValue.add(new Option("0"+i,"0"+i),optionIndex++);
+			selectValue2.add(new Option("0"+i,"0"+i),optionIndex++);
+			}
+			if(i>=10){
+				selectValue.add(new Option(i,i),optionIndex++);
+				selectValue2.add(new Option(i,i),optionIndex++);
+			}
+		}
+		
+		$("#month2 option:eq("+month+")").attr("selected","selecetd");
+
+	}
+
+	
 	function a(){
 		$("#message2").hide();
+		$(".tap").find("li").eq(0).css({"background-color":"#cee7ff"});
+		$(".tap").find("a").eq(0).css({"color":"black"});
+		appendMonth();
+		appendYear();
 	}
+	
 	$(function(){
+		
+		$("#1mbtn").click(function(){
+			 var num = $("#month2 option:selected").val()-2;
+			$("#month option:eq("+num+")").attr("selected","selecetd");
+		});
+		
+		$("#3mbtn").click(function(){
+			 var num = $("#month2 option:selected").val()-4;
+			$("#month option:eq("+num+")").attr("selected","selecetd");
+		});
+		
+		$("#6mbtn").click(function(){
+			 var num = $("#month2 option:selected").val()-7;
+			$("#month option:eq("+num+")").attr("selected","selecetd");
+		});
+		
+		$("#1ybtn").click(function(){
+			 var num = $("#year2 option").index()-1;
+			$("#year option:eq("+num+")").attr("selected","selecetd");
+		});
+		
 		$("#menu1").click(function(){
 			$(".tap").find("li").eq(0).css({"background-color":"#cee7ff"});
 			$(".tap").find("a").eq(0).css({"color":"black"});
@@ -26,11 +98,8 @@
 			$(".tap").find("a").eq(1).css({"color":"white"});
 			$("#message2").hide()
 			$("#message1").show()
-		});
-		
-		
-		
-		
+		});				
+				
 		$("#menu2").click(function(){
 			$(".tap").find("li").eq(1).css({"background-color":"#cee7ff"});
 			$(".tap").find("a").eq(1).css({"color":"black"});
@@ -40,13 +109,9 @@
 			$("#message2").show()
 		});
 		
-		$("#1mbtn").click(function(){
-			var a = $("#1ms> option").index(this);
-			alert(a);
-			 var num = $("#1ms > option:eq("+a+")").val();
-			$("#1ms").val(a);
-		});
+		
 	});
+	
 </script>
 <title>Insert title here</title>
 </head>
@@ -72,7 +137,7 @@
 					<li><a href="#">eBook</a></li>
 				</ul>
 			</div>
-			 <form action="${root}/search/searchOk.do" method="get" onsubmit="return searchForm(this)">
+			 <form action="${root}/search/multiOk.do" method="get" onsubmit="return searchForm(this)">
 			<div class="content_body_all">
 			<div class="content_body1">
 				<div class="table">
@@ -121,7 +186,7 @@
 				</div>
 
 				<div class="table">
-					<div class="text1">도서명(ISDN)</div>
+					<div class="text1">도서명</div>
 					<div class="row">
 						<input type="text" name="book_name">
 					</div>
@@ -155,122 +220,20 @@
 				<div class="table">
 				<div class="text1"></div>
 				<div class="row">
-					<select id="1ys" name="year01">
-						<option value="2019">2019</option>
-						<option value="2018">2018</option>
-						<option value="2017">2017</option>
-						<option value="2016">2017</option>
-						<option value="2015">2015</option>
-						<option value="2014">2014</option>
-						<option value="2013">2013</option>
-						<option value="2012">2012</option>
-						<option value="2011">2011</option>
-						<option value="2010">2010</option>
-						<option value="2009">2009</option>
-						<option value="2008">2008</option>
-						<option value="2007">2007</option>
-						<option value="2006">2006</option>
-						<option value="2005">2005</option>
-						<option value="2004">2004</option>
-						<option value="2003">2003</option>
-						<option value="2002">2002</option>
-						<option value="2001">2001</option>
-						<option value="2000">2000</option>
-						<option value="1999">1999</option>
-						<option value="1998">1998</option>
-						<option value="1997">1997</option>
-						<option value="1996">1996</option>
-						<option value="1995">1995</option>
-						<option value="1994">1994</option>
-						<option value="1993">1993</option>
-						<option value="1992">1992</option>
-						<option value="1991">1991</option>
-						<option value="1990">1990</option>
-						<option value="1989">1989</option>
-						<option value="1988">1988</option>
-						<option value="1987">1987</option>
-						<option value="1986">1986</option>
-						<option value="1985">1985</option>
-						<option value="1984">1984</option>
-						<option value="1983">1983</option>
-						<option value="1982">1982</option>
-						<option value="1981">1981</option>
-						<option selected="selected" value="1980">1980</option>
+					<select id="year" name="year01">												
+					</select>
 						
-						</select>
-						<label>년</label>
-						<select id="1ms" name="month01">
-						<option value="01">01</option>
-						<option value="02">02</option>
-						<option value="03">03</option>
-						<option value="04">04</option>
-						<option value="05">05</option>
-						<option value="06">06</option>
-						<option value="07">07</option>
-						<option value="08">08</option>
-						<option value="09">09</option>
-						<option value="10">10</option>
-						<option value="11">11</option>
-						<option value="12">12</option>
-						</select>
-						
+					<label>년</label>
+					<select id="month" name="month01">						
+					</select>						
 						<label>월 ~</label>
-						<select id="2ys" name="year02">
-						<option value="2019">2019</option>
-						<option value="2018">2018</option>
-						<option value="2017">2017</option>
-						<option value="2016">2017</option>
-						<option value="2015">2015</option>
-						<option value="2014">2014</option>
-						<option value="2013">2013</option>
-						<option value="2012">2012</option>
-						<option value="2011">2011</option>
-						<option value="2010">2010</option>
-						<option value="2009">2009</option>
-						<option value="2008">2008</option>
-						<option value="2007">2007</option>
-						<option value="2006">2006</option>
-						<option value="2005">2005</option>
-						<option value="2004">2004</option>
-						<option value="2003">2003</option>
-						<option value="2002">2002</option>
-						<option value="2001">2001</option>
-						<option value="2000">2000</option>
-						<option value="1999">1999</option>
-						<option value="1998">1998</option>
-						<option value="1997">1997</option>
-						<option value="1996">1996</option>
-						<option value="1995">1995</option>
-						<option value="1994">1994</option>
-						<option value="1993">1993</option>
-						<option value="1992">1992</option>
-						<option value="1991">1991</option>
-						<option value="1990">1990</option>
-						<option value="1989">1989</option>
-						<option value="1988">1988</option>
-						<option value="1987">1987</option>
-						<option value="1986">1986</option>
-						<option value="1985">1985</option>
-						<option value="1984">1984</option>
-						<option value="1983">1983</option>
-						<option value="1982">1982</option>
-						<option value="1981">1981</option>
-						<option value="1980">1980</option>
+						
+					<select id="year2" name="year02">
+						
 						</select>
 						<label>년</label>
-						<select id="2ms" name="month02">
-						<option value="01">01</option>
-						<option value="02">02</option>
-						<option value="03">03</option>
-						<option value="04">04</option>
-						<option value="05">05</option>
-						<option value="06">06</option>
-						<option value="07">07</option>
-						<option value="08">08</option>
-						<option value="09">09</option>
-						<option value="10">10</option>
-						<option value="11">11</option>
-						<option value="12">12</option>
+						<select id="month2" name="month02">
+						
 						</select>
 						<label>월</label>
 				</div>
@@ -283,27 +246,10 @@
 						</div>
 					</div>
 
-					<div class="table">
-						<div class="text1">정렬방법</div>
-						<div class="row">
-							<select id="state" name="solt">
-								<option value="정확도">정확도</option>
-								<option value="판매량">판매량</option>
-								<option value="평점">평점</option>
-								<option value="리뷰">리뷰</option>
-							</select>
-						</div>
-					</div>
-
-					<div class="table">
-						<div class="text1">판매상태</div>
-						<div class="row" >
-							<input type="checkbox" name="" value=""> 품절/절판제외
-						</div>
-					</div>
+					
 			</div>
 			<input type="hidden" name="detailtype" value="detailtype"/>
-			<div class="btn">
+			<div class="btns">
 				<input type="submit" value="검색"/>
 				<input type="reset" value="초기화"/>
 			</div>
@@ -327,7 +273,7 @@
 					</ul>
 				</div>
 				</div>
-				<div class="btn">
+				<div class="btns">
 					<input type="submit" value="검색"/>
 					<input type="reset" value="초기화"/>
 				</div>

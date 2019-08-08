@@ -1,38 +1,12 @@
 {
-  "ecmaVersion": 5,
-  "plugins": {
-    "guess-types": {
-      
-    },
-    "outline": {
-      
-    },
-    "browser-extension": {
-      
-    },
-<<<<<<< HEAD
-    "jquery-ui1-12": {
-      
-    },
-    "jquery-extension": {
-      
-    },
-    "jquery-mobile1.5": {
-      
-=======
-<<<<<<< HEAD
-    "jquery-ui1-12": {
-      
-    },
-=======
->>>>>>> c5279d1c2bf040be748d1064f22dba6eb8ef490e
-    "jquery-extension": {
-      
->>>>>>> 18d38292ecd8e930581609ca181fb407508aeb3f
-    }
-  },
   "libs": [
     "browser",
     "jquery"
-  ]
+  ],
+  "plugins": {
+    "jquery-ui1-12": {
+      
+    }
+  },
+  "ecmaVersion": 6
 }

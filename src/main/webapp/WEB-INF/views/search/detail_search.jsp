@@ -10,11 +10,15 @@
 <head>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <meta charset="UTF-8">
- <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Maven+Pro|Play&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Maven+Pro|Play&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
 	<link rel="styleSheet" type="text/css" href="${root}/resources/css/search/search.css" />
+	
 	<script src="${root}/resources/javascript/search/search.js"></script>
 	<script type="text/javascript" src="${root}/resources/jquery/jquery.js"></script>		
 	<script type="text/javascript">
+	
 	function appendYear(){
 
 		var date = new Date();
@@ -25,33 +29,68 @@
 
 
 		for(var i=year;i>year-50;i--){
-				selectValue.add(new Option(i,i),optionIndex++);
+				
 				selectValue2.add(new Option(i,i),optionIndex++);
+		}
+		for(var i=year-50;i<year;i++){
+			selectValue.add(new Option(i,i),optionIndex++);
 		}
 
 	}
 
 	function appendMonth(){
-
+		var date = new Date();
+		var month = date.getMonth();
 		var selectValue = document.getElementById("month");
 		var selectValue2 = document.getElementById("month2"); 
 		var optionIndex = 0;
 
 		for(var i=1;i<=12;i++){
+			if(i<10){
+			selectValue.add(new Option("0"+i,"0"+i),optionIndex++);
+			selectValue2.add(new Option("0"+i,"0"+i),optionIndex++);
+			}
+			if(i>=10){
 				selectValue.add(new Option(i,i),optionIndex++);
 				selectValue2.add(new Option(i,i),optionIndex++);
+			}
 		}
+		
+		$("#month2 option:eq("+month+")").attr("selected","selecetd");
 
 	}
 
 	
 	function a(){
 		$("#message2").hide();
+		$(".tap").find("li").eq(0).css({"background-color":"#cee7ff"});
+		$(".tap").find("a").eq(0).css({"color":"black"});
 		appendMonth();
 		appendYear();
 	}
 	
 	$(function(){
+		
+		$("#1mbtn").click(function(){
+			 var num = $("#month2 option:selected").val()-2;
+			$("#month option:eq("+num+")").attr("selected","selecetd");
+		});
+		
+		$("#3mbtn").click(function(){
+			 var num = $("#month2 option:selected").val()-4;
+			$("#month option:eq("+num+")").attr("selected","selecetd");
+		});
+		
+		$("#6mbtn").click(function(){
+			 var num = $("#month2 option:selected").val()-7;
+			$("#month option:eq("+num+")").attr("selected","selecetd");
+		});
+		
+		$("#1ybtn").click(function(){
+			 var num = $("#year2 option").index()-1;
+			$("#year option:eq("+num+")").attr("selected","selecetd");
+		});
+		
 		$("#menu1").click(function(){
 			$(".tap").find("li").eq(0).css({"background-color":"#cee7ff"});
 			$(".tap").find("a").eq(0).css({"color":"black"});
@@ -70,12 +109,7 @@
 			$("#message2").show()
 		});
 		
-		$("#1mbtn").click(function(){
-			var a = $("#1ms> option").index(this);
-			alert(a);
-			 var num = $("#1ms > option:eq("+a+")").val();
-			$("#1ms").val(a);
-		});
+		
 	});
 	
 </script>
@@ -103,7 +137,7 @@
 					<li><a href="#">eBook</a></li>
 				</ul>
 			</div>
-			 <form action="${root}/search/mulitOk.do" method="get" onsubmit="return searchForm(this)">
+			 <form action="${root}/search/multiOk.do" method="get" onsubmit="return searchForm(this)">
 			<div class="content_body_all">
 			<div class="content_body1">
 				<div class="table">
@@ -152,7 +186,7 @@
 				</div>
 
 				<div class="table">
-					<div class="text1">도서명(ISDN)</div>
+					<div class="text1">도서명</div>
 					<div class="row">
 						<input type="text" name="book_name">
 					</div>
@@ -212,27 +246,10 @@
 						</div>
 					</div>
 
-					<div class="table">
-						<div class="text1">정렬방법</div>
-						<div class="row">
-							<select id="state" name="solt">
-								<option value="정확도">정확도</option>
-								<option value="판매량">판매량</option>
-								<option value="평점">평점</option>
-								<option value="리뷰">리뷰</option>
-							</select>
-						</div>
-					</div>
-
-					<div class="table">
-						<div class="text1">판매상태</div>
-						<div class="row" >
-							<input type="checkbox" name="" value=""> 품절/절판제외
-						</div>
-					</div>
+					
 			</div>
 			<input type="hidden" name="detailtype" value="detailtype"/>
-			<div class="btn">
+			<div class="btns">
 				<input type="submit" value="검색"/>
 				<input type="reset" value="초기화"/>
 			</div>
@@ -256,7 +273,7 @@
 					</ul>
 				</div>
 				</div>
-				<div class="btn">
+				<div class="btns">
 					<input type="submit" value="검색"/>
 					<input type="reset" value="초기화"/>
 				</div>

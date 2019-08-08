@@ -7,6 +7,23 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>shop</title>
+		<style type="text/css">
+    .ui-autocomplete
+    {
+        max-height: 300px;
+        overflow-y: auto; /* prevent horizontal scrollbar */
+        overflow-x: hidden;
+    }
+    /* IE 6 doesn't support max-height
+     * we use height instead, but this forces the menu to always be this tall
+     */
+    html .ui-autocomplete
+    {
+        height: 300px;
+    }
+</style>
+
+
         <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Maven+Pro|Play&display=swap" rel="stylesheet">
        	<link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
        	 
@@ -17,16 +34,43 @@
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 		
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+		
+		<script type="text/javascript" src="${root}/resources/jquery/jquery.js"></script>
+		
+		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+		
+		<!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- jQuery ui library -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
 		<script type="text/javascript">
-		$(function(){
-			$(".logo").click(function(){
-				$("a").href("${root}/index.do");
-			})
-		);
-		</script>
+		
+	    $(function() {
+	    	var bookList = new Array();
+	    	$.ajax({
+                type : "get",
+                url : "${root}/search/autocomplet.do",
+                dataType : "text",
+                success : function(data) {
+                	
+                	bookList = data.split(",");
+                	for(var i=0; i<bookList.length; i++){
+                		bookList[i].replace("\"", "");
+                	}
+                	$("#term").autocomplete({	        	
+        	            source : bookList
+        	        });
+                }
+            });
+	        
+	    });
+	</script>
     </head>
 	<body>
 		<header>
+		<div id="result"></div>
 		<div class="gnb">
 			<ul class="center">
 				<li class="topHeader_l"><a href="#">매장안내</a><span>∨</span></li>
@@ -75,7 +119,7 @@
                        <form action="${root}/search/searchOk.do"method="get">
                        <div id="custom-search-input">
                            <div class="input-group col-md-12">
-                               <input type="text" class="  search-query form-control" name="keyword" placeholder="Search" />
+                               <input type="text" class="  search-query form-control" name="keyword" id="term" placeholder="Search" />
                                <span class="input-group-btn">
                                    <button class="btn btn-danger" type="submit" >
                                        <span class=" glyphicon glyphicon-search"></span>

@@ -42,4 +42,13 @@
     <!-- AOP -->
     <aop:aspectj-autoproxy/>
     
+    <!-- JsonView -->
+<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
+    <beans:property name="contentType" value="application/json;charset=UTF-8"> </beans:property>
+</beans:bean>
+<!-- JsonViewResolver -->
+<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+    <beans:property name="order" value="0" />
+</beans:bean>
+
 </beans:beans>

@@ -204,9 +204,22 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
 			<version>3.1.4.RELEASE</version>
-		</dependency>
+		</dependency>	     	
 		
-				<!-- Hadoop -->
+		<!-- java mail -->
+	    <dependency>
+	        <groupId>javax.mail</groupId>
+	        <artifactId>mail</artifactId>
+	        <version>1.4.7</version>
+	    </dependency>
+	    
+	    <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>4.0.4.RELEASE</version>
+        </dependency>
+ 		
+		<!-- Hadoop -->
 		<dependency>
 		  <groupId>org.apache.hadoop</groupId>
 		  <artifactId>hadoop-core</artifactId>
@@ -240,6 +253,7 @@
 		   <version>2.0</version>
 		</dependency>   		
 	</dependencies>
+
 	
     <build>
         <plugins>

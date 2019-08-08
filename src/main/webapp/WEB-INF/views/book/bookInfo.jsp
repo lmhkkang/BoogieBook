@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="root" value="${pageContext.request.contextPath }"/>
 <!DOCTYPE html>
 <html>
@@ -9,9 +10,11 @@
 	<title>Book Info</title>
     <link rel="stylesheet" type="text/css" href="${root}/resources/css/book/bookInfo.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="${root}/resources/javascript/book/bookInfo.js"></script>
 </head>
 <body>
 <c:set var="bookInfoDto" value="${bookInfoDto}"/>
+
 	<jsp:include page="../../../header.jsp"></jsp:include>
 	<div class="container">
 		<div class="subContainer1">
@@ -22,24 +25,23 @@
 				</div>
 				<div id="bookTextInfo">
 					<p>${bookInfoDto.book_name}</p>
-					<p>${bookInfoDto.author} | ${bookInfoDto.publisher} | ${bookInfoDto.publish_date}</p>
+					<p>${bookInfoDto.author} | ${bookInfoDto.publisher} |${bookInfoDto.publish_date}</p>
 					<p>DB에서 가져올 평점</p>
-					<p>${bookInfoDto.price}</p>
+					<p><strong>${bookInfoDto.price}원</strong></p>
 					<p>DB에서 가져올 줄거리 -----------------------------------------</p>
-
 				</div>
-				<hr />
+				<hr/>
 			</div>
 			<div id="buttons">
-				<button type="button" class="btn" onclick="">장바구니담기</button>
-				<button type="button" class="btn" onclick="">바로구매</button>
+				<button type="submit" class="btn" onclick="javascript:moveToCart('${root}','${bookInfoDto.book_id}')">장바구니담기</button>
+				<button type="submit" class="btn" onclick="javascript:moveToOrderForm('${root}',${bootInfoDto.book_id}')">바로구매</button>
 			</div>
 		</div>
 
 		<div class="subContainer2">
 			<h3 style="text-align: left; margin-left: 55px; margin-bottom: 0px;">회원
 				리뷰</h3>
-			<hr />
+			<hr/>
 			<form action="#" method="get">
 				<div id="review">
 					<div id="commentArea">

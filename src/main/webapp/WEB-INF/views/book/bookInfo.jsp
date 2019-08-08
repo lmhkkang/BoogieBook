@@ -19,7 +19,47 @@
 		
 	<link rel="styleSheet" type="text/css" href="${root}/resources/css/book/bookInfo.css" />
 </head>
-<body>
+<script type="text/javascript">
+
+	var sell_price;
+	var amount;
+	
+	function init () {
+		sell_price = document.form.sell_price.value;
+		amount = document.form.amount.value;
+		document.form.sum.value = sell_price;
+		change();
+	}
+	
+	function add () {
+		hm = document.form.amount;
+		sum = document.form.sum;
+		hm.value ++ ;
+	
+		sum.value = parseInt(hm.value) * sell_price;
+	}
+	
+	function del () {
+		hm = document.form.amount;
+		sum = document.form.sum;
+			if (hm.value > 1) {
+				hm.value -- ;
+				sum.value = parseInt(hm.value) * sell_price;
+			}
+	}
+	
+	function change () {
+		hm = document.form.amount;
+		sum = document.form.sum;
+	
+			if (hm.value < 0) {
+				hm.value = 0;
+			}
+		sum.value = parseInt(hm.value) * sell_price;
+	}  
+
+</script>
+<body onload="init();">
 	<jsp:include page="../../../header.jsp"></jsp:include>
 	<div class="center">
 		<div class="section1_l">
@@ -45,7 +85,7 @@
 			<div class="section2">
 				<div class="interest">
 					<div class="interest_top">
-						<div class="interest_top_l">대분류&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;중분류&nbsp;&nbsp;>&nbsp;&nbsp;소분류</div>
+						<div class="interest_top_l">${bookInfoDto.type01}&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;${bookInfoDto.type02}&nbsp;&nbsp;>&nbsp;&nbsp;${bookInfoDto.type03}</div>
 						<div class="interest_top_r">
 						</div>
 					</div>
@@ -57,19 +97,29 @@
 							<div class="interest_sub">
 								<div class="interest_subject">
 									<div class="interest_subject1">
-										<fmt:formatDate value="${bookInfoDto.publish_date}"
-											pattern="yyyy-MM-dd" />
+										[<fmt:formatDate value="${bookInfoDto.publish_date}"
+											pattern="yyyy-MM-dd" />]
 									</div>
 									<div class="interest_subject2">
-										<a href="#"><b>${bookInfoDto.book_name}</b></a>
+										<b>${bookInfoDto.book_name}</b>
 									</div>
 									<div class="interest_subject3">
-										인터넷 판매가: <b style="color: red"><fmt:formatNumber value="${bookInfoDto.price}" pattern="#,###" />원</b>
-										(${bookInfoDto.publisher} | ${bookInfoDto.author})
+										인터넷 판매가:&nbsp;<b style="color: red; font-size: 1.5em;"><fmt:formatNumber value="${bookInfoDto.price}" pattern="#,###" />원</b>
+										<br/>출판사:&nbsp;<b style="font-size:1.2em;">${bookInfoDto.publisher}</b>
+										<br/>저자:&nbsp;<b style="font-size:1.2em;">${bookInfoDto.author}</b>
 									</div>
+									<div class="book_volume">
+										<form name="form" method="get">
+											수량 : <input type=hidden name="sell_price" value="${bookInfoDto.price}">
+											<input type="text" name="amount" value="1" size="3" onchange="change();">
+											<input type="button" value="－" onclick="del();"><input type="button" value="＋" onclick="add();"><br>
+											
+											금액 : <input type="text" class="sell_price" name="sum" size="11" readonly>원
+										</form>
+									</div>
+									<div class="delivery">배송비:&nbsp;<b style="font-size:1.2em;">무료</b></div>
 								</div>
 							</div>
-							<div class="interest_des" id="interest_des"></div>
 							<div class="interest_btn">
 								<button>바로 구매하기</button>
 								<button>장바구니 담기</button>

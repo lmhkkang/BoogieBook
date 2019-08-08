@@ -79,7 +79,7 @@
 					</div>
 					<div class="interest_body">
 						<div class="interest_img">
-							<img src="${interestDto.img_path}" width="100%" height="100%">
+							<a href="${root}/book/bookInfo.do?book_id=${interestDto.book_id}"><img src="${interestDto.img_path}" width="100%" height="100%"></a>
 						</div>
 						<div class="interest_subject_form">
 							<div class="interest_sub">
@@ -89,7 +89,7 @@
 											pattern="yyyy-MM-dd" />
 									</div>
 									<div class="interest_subject2">
-										<a href="#"><b>${interestDto.book_name}</b></a>
+										<a href="${root}/book/bookInfo.do?book_id=${interestDto.book_id}"><b>${interestDto.book_name}</b></a>
 									</div>
 									<div class="interest_subject3">
 										인터넷 판매가: <b style="color: red"><fmt:formatNumber value="${interestDto.price}" pattern="#,###" />원</b>

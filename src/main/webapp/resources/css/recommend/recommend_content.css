@@ -2,6 +2,12 @@
 
 a:hover{
 	cursor: pointer;
+	text-decoration: none;
+	color:black;
+}
+
+body a{
+	color:black;
 }
 
 .interest_subject2 a{

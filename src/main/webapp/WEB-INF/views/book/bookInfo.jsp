@@ -12,6 +12,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
 	
+	<script type="text/javascript" src="${root}/resources/javascript/book/bookInfo.js"></script>
 	<script type="text/javascript" src="${root}/resources/javascript/review/reviewWrite.js"></script>
 	<script type="text/javascript" src="${root}/resources/javascript/review/reviewDelete.js"></script>
 	<script type="text/javascript" src="${root}/resources/javascript/review/reviewSelect.js"></script>

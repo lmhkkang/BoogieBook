@@ -8,14 +8,15 @@
 <head>
 <meta charset="UTF-8">
 <title>shop</title>
+	<link href="https://fonts.googleapis.com/css?family=Gothic+A1|Lacquer|Noto+Sans+KR&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Maven+Pro|Play&display=swap" rel="stylesheet">
 	<link rel="styleSheet" type="text/css" href="${root}/resources/css/index/index_content.css" />
 	<link rel="styleSheet" type="text/css" href="${root}/resources/css/index/index_footer.css" />
 
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 	var slideIndex = 0;
 	showSlides();
@@ -47,11 +48,11 @@
 	<div id="content">
 		<div class="section1">
 			<div class="center" id="center">
-				<div id="cp_widget_8c00dbf7-5662-4233-bc5e-098546cf5f5a">...</div>
+				<div id="cp_widget_47e7b676-c357-476a-9d90-b765f88ec166">...</div>
 				<script type="text/javascript">
 					var cpo = [];
-					cpo["_object"] = "cp_widget_8c00dbf7-5662-4233-bc5e-098546cf5f5a";
-					cpo["_fid"] = "AoEADhOEO_Ty";
+					cpo["_object"] = "cp_widget_47e7b676-c357-476a-9d90-b765f88ec166";
+					cpo["_fid"] = "AgJAcjuKZDUJ";
 					var _cpmp = _cpmp || [];
 					_cpmp.push(cpo);
 					(function() {
@@ -64,12 +65,15 @@
 					})();
 				</script>
 				<noscript>
-					<span>New Gallery 2019/8/5</span><span>originaldate</span><span>
-						1/1/0001 6:00:00 AM</span><span>width</span><span> 1266</span><span>height</span><span>
-						503</span><span>originaldate</span><span> 1/1/0001 6:00:00 AM</span><span>width</span><span>
-						1261</span><span>height</span><span> 504</span><span>originaldate</span><span>
-						1/1/0001 6:00:00 AM</span><span>width</span><span> 1264</span><span>height</span><span>
-						506</span>
+					<span>New Gallery 2019/8/9</span><span>originaldate</span><span>
+						1/1/0001 6:00:00 AM</span><span>width</span><span> 1097</span><span>height</span><span>
+						485</span><span>originaldate</span><span> 1/1/0001 6:00:00 AM</span><span>width</span><span>
+						1102</span><span>height</span><span> 482</span><span>originaldate</span><span>
+						1/1/0001 6:00:00 AM</span><span>width</span><span> 1099</span><span>height</span><span>
+						484</span><span>originaldate</span><span> 1/1/0001 6:00:00 AM</span><span>width</span><span>
+						1099</span><span>height</span><span> 487</span><span>originaldate</span><span>
+						1/1/0001 6:00:00 AM</span><span>width</span><span> 1099</span><span>height</span><span>
+						484</span>
 				</noscript>
 			</div>
 		</div>
@@ -181,7 +185,7 @@
 								<b>지점안내<br /></b><b>바로가기</b>
 							</div>
 						</div>
-						<div class="spot_m"></div>
+						<div class="spot_m"><img style="width:100%; height:100%;" src="${root}/resources/images/index/index_map.PNG"></div>
 						<div class="spot_r">
 							<div class="spot_r_inside">
 								<ul class="spot_list">

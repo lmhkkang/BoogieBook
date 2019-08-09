@@ -11,6 +11,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Maven+Pro|Play&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Gothic+A1|Lacquer|Noto+Sans+KR&display=swap" rel="stylesheet">
 		
 	<link rel="styleSheet" type="text/css" href="${root}/resources/css/recommend/recommend_content.css" />
 	<script type="text/javascript" src="${root}/resources/javascript/book/bookInfo.js"></script>

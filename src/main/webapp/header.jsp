@@ -114,8 +114,7 @@
 		<div class="center">
 			<div class="middleHeader">
 				<div class="logo">
-					<img src="${root}/resources/images/BoogieBook_Logo.png"><a
-						href="${root}/index.do"></a>
+					<a href="${root}/index.do"><img src="${root}/resources/images/BoogieBook_Logo.png"></a>
 				</div>
 				<div class="search_form">
 					<div class="search_top">

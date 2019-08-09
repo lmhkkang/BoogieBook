@@ -33,6 +33,8 @@ header >.gnb li{
 	margin-left: 10px; font-size: 0.8em;
 }
 
+
+
 .topHeader_l{
     float: left;
 }
@@ -42,14 +44,14 @@ header >.gnb li{
 }
 
 header > .middleHeader{
-    width: 1000px; height: 100px;
+    width: 1000px; height: 110px;
     
 }
 
 .logo img{
 	width: 98%;
-	height: 98%;
-	margin: auto;
+	height: 95%;
+	margin: 0px auto;
 }
 .topHeader_r span{
 	color:white;background-color: red; border-radius: 25px; 

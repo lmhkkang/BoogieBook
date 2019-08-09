@@ -48,6 +48,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 
 import com.boogie.email.Email;
 import com.boogie.email.EmailSender;
+import com.boogie.index.service.IndexService;
 import com.boogie.member.service.MemberService;
 
 import com.boogie.recommend.service.RecommendService;
@@ -84,6 +85,8 @@ public class BookController {
 	private CustomerCenterService customerCenterService;
 	@Autowired
 	private ReviewService reviewService;
+	@Autowired
+	private IndexService indexService;
 	
 
 
@@ -597,6 +600,14 @@ public class BookController {
 		mav.addObject("response",response);
 			
 		reviewService.reviewWrite(mav);		
+	}
+	
+	@RequestMapping(value = "/index/index.do", method = RequestMethod.GET)
+	public void IndexStart(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+			
+		indexService.indexGetInfo(mav);		
 	}
 
 }

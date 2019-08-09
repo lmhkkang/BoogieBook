@@ -8,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,7 @@ import org.springframework.web.servlet.view.InternalResourceView;
 
 import com.boogie.aop.BookAspect;
 import com.boogie.bookInfo.service.BookInfoService;
+import com.boogie.customerCenter.dto.FaqBoardDto;
 import com.boogie.customerCenter.dto.StoreMapDto;
 import com.boogie.customerCenter.service.CustomerCenterService;
 import com.boogie.order.dto.OrderDto;
@@ -521,8 +523,49 @@ public class BookController {
 			System.out.println("storeMap에서 아무것도 가져오지 못함.");
 		}
 	}
-
-
+	
+	@RequestMapping(value="/customerCenter/questionCode.do",method=RequestMethod.GET, produces = "application/text; charset=utf8")
+	public void getFaq(HttpServletRequest request, HttpServletResponse response) {
+		int question_code = Integer.parseInt(request.getParameter("question_code"));
+		System.out.println(question_code);
+		List<FaqBoardDto> faqList = customerCenterService.getFaq(question_code);
+		if(faqList.size() != 0) {
+			try {
+				response.setContentType("text/html; charset=UTF-8");
+				FaqBoardDto fb = null;
+				for(int i=0;i<faqList.size();i++) {
+					fb = new FaqBoardDto();
+					fb = faqList.get(i);
+					response.getWriter().print(fb.getBoard_number()+"|");
+					response.getWriter().print(fb.getQuestion()+"|");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println("faqBoardDto에서 아무것도 가져오지 못함.");
+		}
+	}
+	
+	
+	@RequestMapping(value="/customerCenter/getAnswer.do",method=RequestMethod.GET, produces = "application/text; charset=utf8")
+	public void getAnswer(HttpServletRequest request, HttpServletResponse response) {
+		int board_number = Integer.parseInt(request.getParameter("board_number"));
+		System.out.println(board_number);
+		String answer = customerCenterService.getAnswer(board_number);
+		if(answer != null) {
+			try {
+				response.setContentType("text/html; charset=UTF-8");
+				response.getWriter().print(answer);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println("answer을 가져오지 못함.");
+		}
+	}
+	
+	
 	@ResponseBody
 	@RequestMapping(value="/search/autocomplet.do", method=RequestMethod.GET)
 	public String[] autocomplete(HttpServletRequest request, HttpServletResponse response) throws Exception {

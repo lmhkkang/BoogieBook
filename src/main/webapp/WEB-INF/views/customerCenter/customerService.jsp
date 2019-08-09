@@ -9,11 +9,13 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
 	<link rel="stylesheet" href="${root}/resources/css/customerCenter/theme.css" type="text/css">
 	<link rel="stylesheet" href="${root}/resources/css/customerCenter/customerService.css" type="text/css">
+	<script type="text/javascript" src="${root}/resources/javascript/jquery.js"></script>
+	<script type="text/javascript" src="${root}/resources/javascript/customerCenter/customerService.js"></script>
 	<title>고객 서비스</title>
 </head>
-<body style="border-bottom-width: 0px;">
+<body style="border-bottom-width: 0px;" onload="getQuestionCode(1,'${root}')">
 	<div style="float: left;">
-		<a href="${root}/index.jsp"><img src="${root}/resources/images/BoogieBook_Logo.png" style="padding-top:40px;"/></a>
+		<a href="${root}/index.jsp"><img src="${root}/resources/images/cutomerCenter/cutomerCenterLogo.png" style="padding-top:40px;"/></a>
 	</div>
 	<div style="height: 200px;">
 		<nav class="navbar navbar-expand-md navbar-light"
@@ -71,11 +73,11 @@
 					<div class="list-group">
 						<a href="#" class="list-group-item list-group-item-action"
 							style="background-color: #1E3269; color: white; font-weight: bold;">FAQ</a>
-						<a href="#" class="list-group-item list-group-item-action">반품/교환/환불</a>
-						<a href="#" class="list-group-item list-group-item-action">주문/결제</a>
-						<a href="#" class="list-group-item list-group-item-action">회원</a>
-						<a href="#" class="list-group-item list-group-item-action">도서/상품정보</a>
-						<a href="#" class="list-group-item list-group-item-action">배송/수령일안내</a>
+						<a href="javascript:getQuestionCode(1,'${root}');" class="list-group-item list-group-item-action">반품/교환/환불</a>
+						<a href="javascript:getQuestionCode(2,'${root}');" class="list-group-item list-group-item-action">주문/결제</a>
+						<a href="javascript:getQuestionCode(3,'${root}');" class="list-group-item list-group-item-action">회원</a>
+						<a href="javascript:getQuestionCode(4,'${root}');" class="list-group-item list-group-item-action">도서/상품정보</a>
+						<a href="javascript:getQuestionCode(5,'${root}');" class="list-group-item list-group-item-action">배송/수령일안내</a>
 					</div>
 				</div>
 				<div class="col-md-9 w-75" style="">
@@ -90,42 +92,32 @@
 										<button class="btn btn dropdown-toggle" data-toggle="dropdown"style="background-color: #1E3269; color: white; font-weight: bold;">FAQ 분류 선택<br>
 										</button>
 										<div class="dropdown-menu">
-											<a class="dropdown-item" href="#">반품/교환/환불</a> 
-											<a class="dropdown-item" href="#">주문/결제</a>
-											<a class="dropdown-item" href="#">회원</a>
-											<a class="dropdown-item" href="#">도서/상품정보</a>
-											<a class="dropdown-item" href="#">배송/수령일안내</a>
+											<a class="dropdown-item" href="javascript:getQuestionCode(1,'${root}');">반품/교환/환불</a> 
+											<a class="dropdown-item" href="javascript:getQuestionCode(2,'${root}');">주문/결제</a>
+											<a class="dropdown-item" href="javascript:getQuestionCode(3,'${root}');">회원</a>
+											<a class="dropdown-item" href="javascript:getQuestionCode(4,'${root}');">도서/상품정보</a>
+											<a class="dropdown-item" href="javascript:getQuestionCode(5,'${root}');">배송/수령일안내</a>
 										</div>
 									</div>
 								</div>
 								<div class="col-md-7" style="padding-left: 50px;">
 									<form class="form-inline">
 										<div class="input-group mt-2" style="float:right;">
-											<input type="text" class="form-control"
-												id="inlineFormInputGroup" placeholder="Search"
-												style="width: 250px; height: 35px;float:right;">
+<!-- 											<input type="text" class="form-control" -->
+<!-- 												id="inlineFormInputGroup" placeholder="Search" -->
+<!-- 												style="width: 250px; height: 35px;float:right;"> -->
 											<div class="input-group-append">
-												<button class="btn btn-primary" type="button"
-													style="background-color: #1E3269; border: 0px; float:right;">
-													<i class="fa fa-search" style="background-color: #1E3269"></i>
-												</button>
+<!-- 												<button class="btn btn-primary" type="button" -->
+<!-- 													style="background-color: #1E3269; border: 0px; float:right;"> -->
+<!-- 													<i class="fa fa-search" style="background-color: #1E3269"></i> -->
+<!-- 												</button> -->
 											</div>
 										</div>
 									</form>
 								</div>
 							</div>
-							<ol class="border-right border-top border-bottom border-left"
-								style="border-style: 1pxsolid;">
-								<li>회원가입은 어떻게 하나요?</li>
-								<li>실명 인증은 어떻게 하나요?</li>
-								<li>회원정보는 어디서 확인하나요?</li>
-								<li>로그인 아이디(ID), 비밀번호를 잊어버렸는데 어떻게 해야하나요?</li>
-								<li>개명한 경우 이름은 어떻게 변경하나요?</li>
-								<li>회원탈퇴는 어떻게 하면 되나요?<br></li>
-								<li>회원정보는 어디서 확인하나요?<br></li>
-								<li>14세 미만 아동 회원 가입 안내<br></li>
-								<li>부기앤북 온라인 멤버십이란 무엇인가요?</li>
-								<li>부기앤북 온라인 멤버십에는 어떤 혜택이 있나요?<br></li>
+							<ol id="faqBoard" class="border-right border-top border-bottom border-left" style="border-style: 1pxsolid;">
+
 							</ol>
 						</div>
 					</div>
@@ -151,12 +143,17 @@
 		</div>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12 d-flex justify-content-end">
-					<a class="btn btn-light" href="#">글쓰기</a>
-				</div>
+				<c:set var="member_id" value="${member_id}"/>
+				<c:if test="${member_id==admin}">
+					<div class="col-md-12 d-flex justify-content-end">
+						<a class="btn btn-light" href="#">글쓰기</a>
+					</div>
+				</c:if>
 			</div>
 		</div>
 	</div>
 	<jsp:include page="../../../footer.jsp"></jsp:include>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>

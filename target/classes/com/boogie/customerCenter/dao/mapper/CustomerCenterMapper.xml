@@ -9,4 +9,16 @@
 		where s.location_code = l.location_code
 		and l.location_code = #{location_code}
 	</select>
-</mapper>
+	
+	<select id="selectFaqList" parameterType="int" resultType="com.boogie.customerCenter.dto.FaqBoardDto">
+		select board_number, question
+		from faq_board
+		where question_code = #{question_code}
+	</select>
+	
+	<select id="selectAnswer" parameterType="int" resultType="String">
+		select answer
+		from faq_board
+		where board_number = #{board_number}
+	</select>
+</mapper> 

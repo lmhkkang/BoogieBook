@@ -26,6 +26,7 @@
    		from book_order
    		where member_id=#{member_id}
    </select>
+
    
    <insert id="orderDetailInsert" parameterType="java.util.HashMap">
    		insert into order_detail
@@ -69,8 +70,59 @@
    </select>
    
    <insert id="insertToCart" parameterType="java.util.Map">
-   		insert into cart
-   		values(#{member_id},#{book_id},1,sysdate)
+   		<![CDATA[
+	   		insert into cart
+	   		values(#{member_id},#{book_id},#{quantity},sysdate)
+   		]]>
+   </insert>
+   
+   <select id="selectSameBook" parameterType="java.util.Map" resultType="int">
+   		<![CDATA[
+	   		select count(book_id)
+	   		from cart
+	   		where book_id = ${book_id}
+	   		and member_id = '${member_id}'
+   		]]>
+   </select>
+   
+   <update id="updateQuantity" parameterType="java.util.Map" >
+   		update cart
+   		set quantity = quantity + #{quantity}
+   		where member_id = #{member_id}
+   		and book_id = #{book_id}
+   </update>
+   
+   <insert id="insertOrder" parameterType="java.util.Map">
+   		insert into book_order
+   		values(order_id_seq.nextval, #{member_id}, 1, sysdate, #{total_price})
    </insert>
     
+   <select id="selectBookPrice" parameterType="int" resultType="int">
+   		select price
+   		from book
+   		where book_id = #{book_id}
+   </select>
+   
+   <select id="selectOrderCheckForm" parameterType="java.util.HashMap" resultType="com.boogie.order.dto.OrderDto">
+   		<![CDATA[
+	   		select b.order_id, b.order_date, m.name, m.addr1, m.addr2,b.total_price
+			from book_order b, member m
+			where b.member_id = b.member_id
+			and m.member_id = #{member_id}
+			and b.order_id = #{order_id}
+		]]>
+   </select>
+   
+   <select id="selectBookId" parameterType="int" resultType="int">
+   		select book_id
+   		from order_detail
+   		where order_id = #{orderNumber} 
+   </select>
+   
+   <select id="selectBookName" parameterType="int" resultType="String">
+   		select b.book_name
+   		from book b, order_detail o
+   		where b.book_id = o.book_id
+   		and b.book_id = #{book_id} 
+   </select>
 </mapper>

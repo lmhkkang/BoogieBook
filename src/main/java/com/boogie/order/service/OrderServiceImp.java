@@ -98,55 +98,80 @@ public class OrderServiceImp implements OrderService {
 		String total = request.getParameter("total");
 		BookAspect.logger.info(BookAspect.logMsg + "주문정보 member_id : "+ member_id + "total:" + total);
 		
-		//기존 주문정보를 cart에서 가져옴 list로
-		List<OrderDto> cartList = new ArrayList<OrderDto>();
-		cartList = orderDao.getCartInfo(member_id);
-		BookAspect.logger.info(BookAspect.logMsg+cartList.size());
 		
-		//주문정보 DB(book_order)에 insert
-		int checkBookOrder = orderDao.insertOrderInfo(member_id, total);
-		BookAspect.logger.info(BookAspect.logMsg +"checkBookOrder: " +checkBookOrder);
-		
-		int orderNumber = orderDao.selectMyOrderNum(member_id);
-		BookAspect.logger.info(BookAspect.logMsg +"orderNumber: " +orderNumber);
-		
-		//주문정보 DB(order_detail)에 insert
-		
-		for(int i=0; i<cartList.size(); i++) {
-			orderDto = (OrderDto) cartList.get(i);
-			int checkOrderDetail = orderDao.insertOrderDetail(orderNumber,orderDto.getBook_id(),orderDto.getQuantity(),orderDto.getPrice());
-			BookAspect.logger.info(BookAspect.logMsg +"checkOrderDetail: " +checkOrderDetail);
-		}
+		if(total == "") {
+			int orderNumber = orderDao.selectMyOrderNum(member_id);
+			BookAspect.logger.info(BookAspect.logMsg +"orderNumber: " +orderNumber);
 			
-		//주문정보를 가지고 주문확인 page에 뿌리기 orderDto
-		OrderDto oDto = new OrderDto();
-		oDto = orderDao.getPaymentInfo(member_id);
-		BookAspect.logger.info(BookAspect.logMsg +"oDto.toString()" +oDto.toString());
-		
-		//해당 Order_id 로 book_id 들을 가져옴
-		List<Integer> bookIdArray = new ArrayList<Integer>();
-		bookIdArray = orderDao.getBookIdArray(orderNumber);
-		BookAspect.logger.info(BookAspect.logMsg +"bookIdArray.size : " +bookIdArray.size());
-		
-		//book_id 로 book_name & quantity -> bookList에 저장
-		for(int i=0; i<bookIdArray.size(); i++) {
-			int book_id = (int)bookIdArray.get(i);
-			System.out.println("book_id값 : " + book_id);
-			orderDto = new OrderDto();
-			orderDto = orderDao.getPayInfoByBookId(book_id);
-			bookList.add(orderDto);
-		}
-		BookAspect.logger.info(BookAspect.logMsg + "bookList.size() : " +bookList.size());
+			orderDto = orderDao.getOrderCheckForm(orderNumber,member_id);
+			orderDto.setBook_id(getBookId(orderNumber));
+			orderDto.setBook_name(getBookName(orderDto.getBook_id()));
+			
+			mav.addObject("orderDto", orderDto);
+		}else {
+			//기존 주문정보를 cart에서 가져옴 list로
+			List<OrderDto> cartList = new ArrayList<OrderDto>();
+			cartList = orderDao.getCartInfo(member_id);
+			BookAspect.logger.info(BookAspect.logMsg+cartList.size());
+			
+			//주문정보 DB(book_order)에 insert
+			int checkBookOrder = orderDao.insertOrderInfo(member_id, total);
+			BookAspect.logger.info(BookAspect.logMsg +"checkBookOrder: " +checkBookOrder);
+			
+			int orderNumber = orderDao.selectMyOrderNum(member_id);
+			BookAspect.logger.info(BookAspect.logMsg +"orderNumber: " +orderNumber);
+			
+			//주문정보 DB(order_detail)에 insert
+			
+			for(int i=0; i<cartList.size(); i++) {
+				orderDto = (OrderDto) cartList.get(i);
+				int checkOrderDetail = orderDao.insertOrderDetail(orderNumber,orderDto.getBook_id(),orderDto.getQuantity(),orderDto.getPrice());
+				BookAspect.logger.info(BookAspect.logMsg +"checkOrderDetail: " +checkOrderDetail);
+			}
+				
+			//주문정보를 가지고 주문확인 page에 뿌리기 orderDto
+			OrderDto oDto = new OrderDto();
+			oDto = orderDao.getPaymentInfo(member_id);
+			BookAspect.logger.info(BookAspect.logMsg +"oDto.toString()" +oDto.toString());
+			
+			//해당 Order_id 로 book_id 들을 가져옴
+			List<Integer> bookIdArray = new ArrayList<Integer>();
+			bookIdArray = orderDao.getBookIdArray(orderNumber);
+			BookAspect.logger.info(BookAspect.logMsg +"bookIdArray.size : " +bookIdArray.size());
+			
+			//book_id 로 book_name & quantity -> bookList에 저장
+			for(int i=0; i<bookIdArray.size(); i++) {
+				int book_id = (int)bookIdArray.get(i);
+				System.out.println("book_id값 : " + book_id);
+				orderDto = new OrderDto();
+				orderDto = orderDao.getPayInfoByBookId(book_id);
+				bookList.add(orderDto);
+			}
+			BookAspect.logger.info(BookAspect.logMsg + "bookList.size() : " +bookList.size());
 
-		orderInfoSendEmail(member_id, oDto, bookList);
+			orderInfoSendEmail(member_id, oDto, bookList);
+			
+			mav.addObject("orderDto", oDto);
+			mav.addObject("bookList", bookList);
+			mav.setViewName("order/paymentComplete");
+			
+			//주문이 완료되면 DB에서 장바구상품을 삭제시킨다.
+			int check = orderDao.deleteFromCart(member_id);
+			BookAspect.logger.info(BookAspect.logMsg + "check : " +check);
+		}
 		
-		mav.addObject("orderDto", oDto);
-		mav.addObject("bookList", bookList);
-		mav.setViewName("order/paymentComplete");
-		
-		//주문이 완료되면 DB에서 장바구상품을 삭제시킨다.
-		int check = orderDao.deleteFromCart(member_id);
-		BookAspect.logger.info(BookAspect.logMsg + "check : " +check);
+	}
+
+	private String getBookName(int book_id) {
+		String book_name;
+		book_name = orderDao.getBookName(book_id);
+		return book_name;
+	}
+
+	private int getBookId(int orderNumber) {
+		int book_id = 0;
+		book_id = orderDao.getBookId(orderNumber);
+		return book_id;
 	}
 
 	public void orderInfoSendEmail(String member_id, OrderDto oDto, List<OrderDto> bookList) {
@@ -255,15 +280,40 @@ public class OrderServiceImp implements OrderService {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		HttpSession  session = request.getSession();
+		int check=999;
 		
 		String member_id = (String) session.getAttribute("id");
 		int book_id = Integer.parseInt(request.getParameter("book_id"));
-		BookAspect.logger.info(BookAspect.logMsg + "book_id: "+book_id + " " +"member_id :" +member_id);
+		int amount = Integer.parseInt(request.getParameter("amount"));
+		BookAspect.logger.info(BookAspect.logMsg + "book_id: "+book_id + " " +"member_id :" +member_id +" amount:" + amount);
 		
-		int check = orderDao.addToCart(book_id, member_id);
-		BookAspect.logger.info(BookAspect.logMsg + check);
-				
+		int countSameBook = orderDao.countSameBook(book_id, member_id);
+		if(countSameBook==0) {
+			check = orderDao.addToCart(book_id, member_id,amount);
+		}else {
+			check = orderDao.addQuantity(book_id, member_id,amount);
+		}		
+		BookAspect.logger.info(BookAspect.logMsg + check);		
 	}
+
+	@Override
+	public void addOrder(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		HttpSession  session = request.getSession();
+		
+		String member_id = (String) session.getAttribute("id");
+		int book_id = Integer.parseInt(request.getParameter("book_id"));
+		int amount = Integer.parseInt(request.getParameter("amount"));
+		BookAspect.logger.info(BookAspect.logMsg + "book_id: "+book_id + " " +"member_id :" +member_id +" amount:" + amount);
+		
+		int price = orderDao.getBookPrice(book_id);
+		int addOrderCheck = orderDao.addOrder(member_id, book_id, (price*amount));
+		int orderNumber = orderDao.selectMyOrderNum(member_id);
+		int addOrderDetailCheck = orderDao.insertOrderDetail(orderNumber,book_id,amount,price);
+		BookAspect.logger.info(BookAspect.logMsg + addOrderCheck + "," +orderNumber+"," +addOrderDetailCheck);
+	}
+
 
 	
 	

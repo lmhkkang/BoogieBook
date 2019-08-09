@@ -424,23 +424,24 @@ public class BookController {
 		mav.addObject("request", request);
 		
 		String book_id  = request.getParameter("book_id");
-		
+		System.out.println(book_id);
 		if(book_id != null) {
 			orderService.addToCart(mav);
 		}
 		orderService.getCartInfo(mav);
-		
+
 		return mav;
 	}
 	
-	@RequestMapping(value="/order/orderForm.do", method=RequestMethod.POST)
+	@RequestMapping(value="/order/orderForm.do", method=RequestMethod.GET)
 	public ModelAndView orderFormWrite(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
 		
 		String book_id  = request.getParameter("book_id");
+		
 		if(book_id != null) {
-			orderService.addToCart(mav);
+			orderService.addOrder(mav);
 		}
 		orderService.getOrderForm(mav);
 		

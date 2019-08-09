@@ -4,7 +4,7 @@
  */
 
 function moveToCart(root, book_id){
-	   alert(book_id);
+	   //alert(book_id);
 	   var quantity = document.form.amount.value;
 	   quantity = encodeURI(quantity);
 	   if(quantity == null){
@@ -14,7 +14,7 @@ function moveToCart(root, book_id){
 }
 
 function moveToOrderForm(root, book_id){
-	   alert(book_id);
+	   //alert(book_id);
 	   var quantity = document.form.amount.value;
 	   quantity = encodeURI(quantity);
 	   if(quantity == null){

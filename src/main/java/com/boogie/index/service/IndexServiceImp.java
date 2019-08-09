@@ -24,15 +24,17 @@ public class IndexServiceImp implements IndexService {
 	{
 		Map<String, Object> map = mav.getModelMap();
 
-		IndexDto indexDto = new IndexDto();
+		IndexDto todayDto = new IndexDto();
 
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 
 
-		indexDto = indexDao.getTodayBook();
-		BookAspect.logger.info(BookAspect.logMsg + indexDto.toString());
-
-
+		todayDto = indexDao.getTodayBook();
+		BookAspect.logger.info(BookAspect.logMsg + todayDto.toString());
 		
+		mav.addObject("todayDto", todayDto);
+		
+		mav.setViewName("forward:/index.jsp");
+
 	}
 }

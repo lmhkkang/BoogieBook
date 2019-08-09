@@ -3,5 +3,8 @@
  */
 
 function indexStart(root){
-	//location.href=root+"/index/index.do";
+	//alert(root);
+	location.href=root+"/index/index.do";
+
 }
+

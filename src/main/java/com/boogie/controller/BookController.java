@@ -596,11 +596,13 @@ public class BookController {
 	}
 	
 	@RequestMapping(value = "/index/index.do", method = RequestMethod.GET)
-	public void IndexStart(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView IndexStart(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("request", request);
-			
-		indexService.indexGetInfo(mav);		
+		System.out.println("controller");
+		
+		indexService.indexGetInfo(mav);	
+		
+		return mav;
 	}
 
 }

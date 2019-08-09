@@ -29,6 +29,8 @@ import org.springframework.web.servlet.view.InternalResourceView;
 
 import com.boogie.aop.BookAspect;
 import com.boogie.bookInfo.service.BookInfoService;
+import com.boogie.customerCenter.dto.StoreMapDto;
+import com.boogie.customerCenter.service.CustomerCenterService;
 import com.boogie.order.dto.OrderDto;
 import com.boogie.order.service.OrderService;
 
@@ -77,8 +79,11 @@ public class BookController {
 	@Autowired
 	private Email email;
 	@Autowired
+	private CustomerCenterService customerCenterService;
+	@Autowired
 	private ReviewService reviewService;
 	
+
 
 	@RequestMapping(value = "/recommend/recommendMain.do", method = RequestMethod.GET)
 	public ModelAndView recommendMain(HttpServletRequest request, HttpServletResponse response) {
@@ -416,6 +421,10 @@ public class BookController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
 		
+		String book_id  = request.getParameter("book_id");
+		if(book_id != null) {
+			orderService.addToCart(mav);
+		}
 		orderService.getCartInfo(mav);
 		
 		return mav;
@@ -425,7 +434,11 @@ public class BookController {
 	public ModelAndView orderFormWrite(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
-				
+		
+		String book_id  = request.getParameter("book_id");
+		if(book_id != null) {
+			orderService.addToCart(mav);
+		}
 		orderService.getOrderForm(mav);
 		
 		mav.setViewName("order/orderForm");
@@ -444,7 +457,7 @@ public class BookController {
 		mav.addObject("request", request);
 			
 		orderService.writeOrderInfo(mav);
-		
+				
 		return mav;
 	}
 	
@@ -459,6 +472,56 @@ public class BookController {
 	}
 	
 
+	@RequestMapping(value="/customerCenter/storeMap.do", method=RequestMethod.GET)
+	public ModelAndView storeMap(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+			
+		mav.setViewName("customerCenter/storeMap");		
+		return mav;
+	}
+	
+	@RequestMapping(value="/customerCenter/customerService.do", method=RequestMethod.GET)
+	public ModelAndView customerService(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+			
+		mav.setViewName("customerCenter/customerService");		
+		return mav;
+	}
+	
+	@RequestMapping(value="/customerCenter/testPage.do", method=RequestMethod.GET)
+	public ModelAndView customerTesting(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+			
+		mav.setViewName("customerCenter/testPage");		
+		return mav;
+	}
+	
+	@RequestMapping(value="/customerCenter/storeMapChange.do",method=RequestMethod.GET, produces = "application/text; charset=utf8")
+	public void storeMapChange(HttpServletRequest request, HttpServletResponse response) {
+
+		System.out.println(request.getParameter("location_code"));
+		int location_code = Integer.parseInt(request.getParameter("location_code"));
+		StoreMapDto storeMapDto = customerCenterService.getLatAndLongt(location_code);
+		if(storeMapDto != null) {
+			try {
+				response.setContentType("text/html; charset=UTF-8");
+				response.getWriter().print(storeMapDto.getLat()+"/");
+				response.getWriter().print(storeMapDto.getLongt()+"/");
+				response.getWriter().print(storeMapDto.getStore_addr()+"/");
+				response.getWriter().print(storeMapDto.getStore_name()+"/");
+				response.getWriter().print(storeMapDto.getStore_phone());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println("storeMap에서 아무것도 가져오지 못함.");
+		}
+	}
+
+
 	@ResponseBody
 	@RequestMapping(value="/search/autocomplet.do", method=RequestMethod.GET)
 	public String[] autocomplete(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -472,9 +535,9 @@ public class BookController {
 		acc[i]=a.get(i).getBook_name();		
 		}
 		
-		 
 		return acc;
 	}
+	
 	@RequestMapping(value = "/review/reviewWrite.do", method = RequestMethod.GET)
 	public void reviewWrite(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();

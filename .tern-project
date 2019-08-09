@@ -1,12 +1,14 @@
 {
-  "libs": [
-    "browser",
-    "jquery"
-  ],
-  "plugins": {
-    "jquery-ui1-12": {
+    "plugins": {
+        "jquery-ui1-12": {
       
     }
-  },
-  "ecmaVersion": 6
+    },
+    "libs": [
+        "ecma5",
+        "ecma6",
+	"browser",
+    	"jquery"
+    ],
+    "ecmaVersion": 6
 }

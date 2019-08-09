@@ -1,0 +1,17 @@
+div{
+    border: 0px solid black;
+}
+
+hr{
+    border: 1px solid black;
+    
+}
+
+#pageNumber > li > a:hover{
+    background-color: #1E3269;
+    color : white;
+}
+
+#pageNumber > li > a{
+    color : black;
+}

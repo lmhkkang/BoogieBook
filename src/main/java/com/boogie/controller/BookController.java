@@ -382,8 +382,16 @@ public class BookController {
 		return mav;
 	}	
 	
-	
+	@RequestMapping(value = "/bestSeller/bestSellerMain.do", method = RequestMethod.GET)
+	public ModelAndView bestSellerMain(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
 		
+		bookInfoService.bestSellerMain(mav);
+		return mav;
+	}	
+	
+			
 	@RequestMapping(value = "/search/detailSearch.do", method = RequestMethod.GET)
 	public ModelAndView detailSearchMain(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();

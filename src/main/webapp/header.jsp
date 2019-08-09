@@ -157,7 +157,7 @@
 			<div id="center">
 				<ul class="center">
 					<li><a href="#">국내도서</a></li>
-					<li><a href="#">베스트셀러</a></li>
+					<li><a href="${root}/bestSeller/bestSellerMain.do">베스트셀러</a></li>
 					<li><a href="#">신간도서</a></li>
 					<li><a href="${root}/search/detailSearch.do">상세검색</a></li>
 					<li><a href="${root}/recommend/recommendMain.do?id=${id}">추천도서</a></li>

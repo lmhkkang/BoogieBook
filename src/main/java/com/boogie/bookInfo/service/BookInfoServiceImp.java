@@ -63,4 +63,28 @@ public class BookInfoServiceImp implements BookInfoService {
 		//mav.setViewName("book/bookInfo");
 	}
 
+	@Override
+	public void bestSellerMain(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		
+		List<BookInfoDto> bestSellerList = new ArrayList<BookInfoDto>();
+		
+		String bookType = request.getParameter("bookType");
+		if(bookType==null) {
+			bookType = "%";
+		}
+		BookAspect.logger.info(BookAspect.logMsg+"bookType : "+ bookType);
+		bestSellerList = bookInfoDao.getBestSeller(bookType);
+		
+		if(bookType.equals("%")) {
+			bookType = "종합";
+		}
+		
+		mav.addObject("bestSellerList",bestSellerList);
+		mav.addObject("bookType", bookType);
+		mav.setViewName("bestSeller/bestSellerMain");
+		
+	}
+
 }

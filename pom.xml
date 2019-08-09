@@ -266,30 +266,16 @@
       </dependency>
 
       <!-- JSON -->
-
-<<<<<<< HEAD
       <!-- JSON View -->
        <!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
-<dependency>
-    <groupId>com.googlecode.json-simple</groupId>
-    <artifactId>json-simple</artifactId>
-    <version>1.1</version>
-</dependency>
-       
+	<dependency>
+	    <groupId>com.googlecode.json-simple</groupId>
+	    <artifactId>json-simple</artifactId>
+	    <version>1.1</version>
+	</dependency>
+	       
    </dependencies>
-=======
-		<!-- JSON View -->
- 		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
-		<dependency>
-		    <groupId>com.googlecode.json-simple</groupId>
-		    <artifactId>json-simple</artifactId>
-		    <version>1.1</version>
-		</dependency>
- 		
-	</dependencies>
->>>>>>> 820d156772384f5836b8940cffb98d4b028ca680
 
-   
     <build>
         <plugins>
             <plugin>
@@ -328,9 +314,7 @@
             </plugin>
         </plugins>
     </build>
-<<<<<<< HEAD
-</project>
-=======
 </project>
 
->>>>>>> 820d156772384f5836b8940cffb98d4b028ca680
+
+

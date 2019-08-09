@@ -114,7 +114,7 @@
 		<div class="center">
 			<div class="middleHeader">
 				<div class="logo">
-					<a href="${root}/index.do"><img src="${root}/resources/images/BoogieBook_Logo.png"></a>
+					<a href="${root}/index.jsp"><img src="${root}/resources/images/BoogieBook_Logo.png"></a>
 				</div>
 				<div class="search_form">
 					<div class="search_top">
@@ -160,7 +160,12 @@
 					<li><a href="#">베스트셀러</a></li>
 					<li><a href="#">신간도서</a></li>
 					<li><a href="${root}/search/detailSearch.do">상세검색</a></li>
-					<li><a href="${root}/recommend/recommendMain.do?id=${id}">추천도서</a></li>
+					<c:if test="${id != null}">
+						<li><a href="${root}/recommend/recommendMain.do?id=${id}">추천도서</a></li>
+					</c:if>
+					<c:if test="${id == null}">
+						<li><a href="${root}/recommend/recommendMain.do">추천도서</a></li>
+					</c:if>
 					<li><a href="${root}/customerCenter/storeMap.do">매장안내</a></li>
 				</ul>
 			</div>

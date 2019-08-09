@@ -48,7 +48,7 @@
 	
 </script>
 </head>
-<body onload="toServer('${root}','${interestDto.book_name}')">
+<body>
 	<jsp:include page="../../../header.jsp"></jsp:include>
 	<div class="center">
 		<div class="section1_l">
@@ -70,8 +70,11 @@
 				<li><a>컴퓨터/IT</a></li>
 			</ul>
 		</div>
+		
 		<div class="section1_r">
+		<c:if test="${interestDto.book_name != null}">
 			<div class="section2">
+				<body onload="toServer('${root}','${interestDto.book_name}')">
 				<div class="interest">
 					<div class="interest_top">
 						<div class="interest_top_l">${name} 님의 관심분야책</div>
@@ -107,7 +110,9 @@
 						</div>
 					</div>
 				</div>
+				</body>
 			</div>
+			</c:if>
 
 			<div class="section3">
 				<div class="mark_form">
@@ -188,23 +193,44 @@
 				</div>
 			</div>
 			<div class="section4">
-				<div class="recommend_form">
-					<div class="recommend_top">${name} 님이 좋아할만한 책</div>
-					<div class="recommend_body" style="background-image: url('${root}/resources/images/background.jpg');">
-						<c:if test="${recommend_imgs[0]!=null}">
-							<div class="rocommend_left"><a href="${root}/book/bookInfo.do?book_id=${recommend_imgs_book_id[0]}"><img width="100%" height="100%" src='${recommend_imgs[0]}'></a></div>
-						</c:if>
-						<c:if test="${recommend_imgs[0]==null}">
-							<div class="rocommend_left" style="text-align: center; line-height: 2">더 많은 리뷰를 입력하시면 <br/>도서를 추천받으실 수 있습니다.</div>
-						</c:if>
-						<c:if test="${recommend_imgs[1]!=null}">
-							<div class="rocommend_right"><a href="${root}/book/bookInfo.do?book_id=${recommend_imgs_book_id[1]}"><img width="100%" height="100%" src='${recommend_imgs[1]}'></a></div>
-						</c:if>
-						<c:if test="${recommend_imgs[1]==null}">
-							<div class="rocommend_right" style="text-align: center; line-height: 2">더 많은 리뷰를 입력하시면 <br/>도서를 추천받으실 수 있습니다.</div>
-						</c:if>
+				<c:if test="${name != null}">
+					<div class="recommend_form">
+						<div class="recommend_top">${name} 님이 좋아할만한 책</div>
+						<div class="recommend_body" style="background-image: url('${root}/resources/images/background.jpg');">
+							<c:if test="${recommend_imgs[0]!=null}">
+								<div class="rocommend_left"><a href="${root}/book/bookInfo.do?book_id=${recommend_imgs_book_id[0]}"><img width="100%" height="100%" src='${recommend_imgs[0]}'></a></div>
+							</c:if>
+							<c:if test="${recommend_imgs[0]==null}">
+								<div class="rocommend_left" style="text-align: center; line-height: 2"><br/><br/>더 많은 리뷰를 입력하시면 <br/>도서를 추천받으실 수 있습니다.</div>
+							</c:if>
+							<c:if test="${recommend_imgs[1]!=null}">
+								<div class="rocommend_right"><a href="${root}/book/bookInfo.do?book_id=${recommend_imgs_book_id[1]}"><img width="100%" height="100%" src='${recommend_imgs[1]}'></a></div>
+							</c:if>
+							<c:if test="${recommend_imgs[1]==null}">
+								<div class="rocommend_right" style="text-align: center; line-height: 2"><br/><br/>더 많은 리뷰를 입력하시면 <br/>도서를 추천받으실 수 있습니다.</div>
+							</c:if>
+						</div>
 					</div>
-				</div>
+				</c:if>
+				<c:if test="${name == null}">
+					<div class="recommend_form">
+						<div class="recommend_top"></div>
+						<div class="recommend_body" style="background-image: url('${root}/resources/images/background.jpg');">
+							<c:if test="${recommend_imgs[0]!=null}">
+								<div class="rocommend_left"><a href="${root}/book/bookInfo.do?book_id=${recommend_imgs_book_id[0]}"><img width="100%" height="100%" src='${recommend_imgs[0]}'></a></div>
+							</c:if>
+							<c:if test="${recommend_imgs[0]==null}">
+								<div class="rocommend_left" style="text-align: center; line-height: 2"><br/><br/>로그인을 하시면 <br/>도서를 추천받으실 수 있습니다.</div>
+							</c:if>
+							<c:if test="${recommend_imgs[1]!=null}">
+								<div class="rocommend_right"><a href="${root}/book/bookInfo.do?book_id=${recommend_imgs_book_id[1]}"><img width="100%" height="100%" src='${recommend_imgs[1]}'></a></div>
+							</c:if>
+							<c:if test="${recommend_imgs[1]==null}">
+								<div class="rocommend_right" style="text-align: center; line-height: 2"><br/><br/>로그인을 하시면<br/>도서를 추천받으실 수 있습니다.</div>
+							</c:if>
+						</div>
+					</div>
+				</c:if>
 			</div>
 		</div>
 	</div>

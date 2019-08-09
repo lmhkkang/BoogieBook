@@ -16,6 +16,7 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+	<script type="text/javascript" src="${root}/resources/javascript/index/index_js.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 	var slideIndex = 0;
@@ -42,7 +43,7 @@
 	}
 </script>
 </head>
-<body>
+<body onload="indexStart(${root});">
 	<jsp:include page="./header.jsp"></jsp:include>
 
 	<div id="content">
@@ -185,7 +186,7 @@
 								<b>지점안내<br /></b><b>바로가기</b>
 							</div>
 						</div>
-						<div class="spot_m"><img style="width:100%; height:100%;" src="${root}/resources/images/index/index_map.PNG"></div>
+						<div class="spot_m"><img id="spot_img" style="width:100%; height:100%;" src="${root}/resources/images/index/index_map.PNG"></div>
 						<div class="spot_r">
 							<div class="spot_r_inside">
 								<ul class="spot_list">

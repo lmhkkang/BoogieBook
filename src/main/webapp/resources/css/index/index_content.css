@@ -255,7 +255,7 @@ a:hover{
 .spot_form{
     width: 95%;
     height: 150px;
-    border: 1px solid red;
+    border: 0px solid #CCCCCC;
     margin: 0px auto;
     
 }
@@ -263,35 +263,39 @@ a:hover{
 .spot_l{
     width: 10%;
     height: 145px;
-    border: 1px solid red;
+    border: 0px solid red;
     float: left;
 }
 
 .spot_inside{
     width: 100%;
     height: 70px;
-    border: 1px solid blue;
+    border: 0px solid blue;
     line-height:1.5;
     margin-top: 30px;
     font-size: 1.2em;
 }
 
+#spot_img{
+	vertical-align: top !important;
+}
+
 .spot_m{
-    width: 10%;
+    width: 12%;
     height: 145px;
-    border: 1px solid black;
+    border: 0px solid black;
     float: left;
     margin-left: 7px;
-    padding-top: 0px;
+    margin-top: 0px !important;
+    
 }
 .spot_m img{
-
+	padding-top: 0px !important;
 }
 
 .spot_r{
     width: 70%;
     height: 145px;
-    border: 1px solid #CCCCCC;
     float: left;
 }
 
@@ -311,12 +315,16 @@ a:hover{
 .spot_list li{
     padding-right: 15px;
     line-height: 1;
-    font-size: 0.8em;
+    font-size: 1.0em;
     float: left;
     height: 14px;
     margin-right: 9px;
     margin-bottom: 13px;
     border-right: 1px solid black;
+}
+
+.spot_list li:last-child{
+	border-right: 0px solid black;
 }
 
 .spot_list a:hover{

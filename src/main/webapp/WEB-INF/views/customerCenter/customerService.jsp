@@ -13,7 +13,7 @@
 </head>
 <body style="border-bottom-width: 0px;">
 	<div style="float: left;">
-		<a href="${root}/index.jsp"><img src="${root}/resources/images/cutomerCenter/cutomerCenterLogo.png" style="padding-top:40px;"/></a>
+		<a href="${root}/index.jsp"><img src="${root}/resources/images/BoogieBook_Logo.png" style="padding-top:40px;"/></a>
 	</div>
 	<div style="height: 200px;">
 		<nav class="navbar navbar-expand-md navbar-light"

@@ -13,6 +13,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
 		
 	<link rel="styleSheet" type="text/css" href="${root}/resources/css/recommend/recommend_content.css" />
+	<script type="text/javascript" src="${root}/resources/javascript/book/bookInfo.js"></script>
 	<script type="text/javascript" src="${root}/resources/javascript/xhr/xhr.js"></script>
 
 <script type="text/javascript">
@@ -74,7 +75,7 @@
 					<div class="interest_top">
 						<div class="interest_top_l">${name} 님의 관심분야책</div>
 						<div class="interest_top_r">
-							<button>다른 관심분야 선택하러가기</button>
+							<a href="${root}/member/memberEdit.do?id=${id}"><button>다른 관심분야 선택하러가기</button></a>
 						</div>
 					</div>
 					<div class="interest_body">
@@ -99,8 +100,8 @@
 							</div>
 							<div class="interest_des" id="interest_des"></div>
 							<div class="interest_btn">
-								<button>바로 구매하기</button>
-								<button>장바구니 담기</button>
+								<button type="button" class="btn" style="border: 1px solid #5e6b9e;" onclick="javascript:moveToCart('${root}','${interestDto.book_id}','1')">장바구니담기</button>
+								<button type="button" class="btn" style="border: 1px solid #5e6b9e;" onclick="javascript:moveToOrderForm('${root}','${interestDto.book_id}','1')">바로구매</button>
 							</div>
 						</div>
 					</div>

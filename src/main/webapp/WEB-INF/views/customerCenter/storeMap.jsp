@@ -62,7 +62,7 @@
 <body onload="sendLocationCode(1,'${root}')">
 	<div>
 		<div style="float: left;">
-			<a href="${root}/index.jsp"><img src="${root}/resources/images/cutomerCenter/cutomerCenterLogo.png" style="padding-top:40px;"/></a>
+			<a href="${root}/index.jsp"><img src="${root}/resources/images/BoogieBook_Logo.png" style="padding-top:40px;"/></a>
 		</div>
 		<nav class="navbar navbar-expand-md navbar-light"
 			style="width: 50%; float: right;">

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.boogie.aop.BookAspect;
 import com.boogie.bookInfo.dao.BookInfoDao;
 import com.boogie.bookInfo.dto.BookInfoDto;
+import com.boogie.recommend.dto.RecommendMarkDto;
 import com.boogie.review.dto.ReviewDto;
 
 @Component
@@ -52,6 +53,7 @@ public class BookInfoServiceImp implements BookInfoService {
 			float rate_average = bookInfoDao.getRateAverage(book_id);
 			mav.addObject("rate_average",rate_average);
 		}
+			
 		
 		mav.addObject("idList",idList);
 		mav.addObject("book_id",book_id);

@@ -9,8 +9,7 @@
 <meta charset="UTF-8">
 <title>shop</title>
 	<link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Maven+Pro|Play&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Gothic+A1|Lacquer|Noto+Sans+KR&display=swap" rel="stylesheet">
 	
 	<script type="text/javascript" src="${root}/resources/javascript/book/bookInfo.js"></script>
 	<script type="text/javascript" src="${root}/resources/javascript/review/reviewWrite.js"></script>
@@ -86,7 +85,7 @@
 			<div class="section2">
 				<div class="interest">
 					<div class="interest_top">
-						<div class="interest_top_l">${bookInfoDto.type01}&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;${bookInfoDto.type02}&nbsp;&nbsp;>&nbsp;&nbsp;${bookInfoDto.type03}</div>
+						<div class="interest_top_l" style="font-family: 'Do Hyeon', sans-serif;">${bookInfoDto.type01}&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;${bookInfoDto.type02}&nbsp;&nbsp;>&nbsp;&nbsp;${bookInfoDto.type03}</div>
 						<div class="interest_top_r">
 						</div>
 					</div>
@@ -112,7 +111,7 @@
 									<div class="book_volume">
 										<form name="form" method="get">
 											수량 : <input type=hidden name="sell_price" value="${bookInfoDto.price}">
-											<input type="text" name="amount" value="1" size="3" onchange="change();">
+											<input type="text" name="amount" id="amount" value="1" size="3" onchange="change();">
 											<input type="button" value="－" onclick="del();"><input type="button" value="＋" onclick="add();"><br>
 											
 											금액 : <input type="text" class="sell_price" name="sum" size="11" readonly>원
@@ -122,18 +121,14 @@
 								</div>
 							</div>
 							<div class="interest_btn">
-									<button type="submit" class="btn" onclick="javascript:moveToCart('${root}','${bookInfoDto.book_id}')">장바구니담기</button>
-									<button type="submit" class="btn" onclick="javascript:moveToOrderForm('${root}',${bootInfoDto.book_id}')">바로구매</button>
+									<button type="submit" class="btn" style="border: 1px solid #5e6b9e;" onclick="javascript:moveToCart('${root}','${bookInfoDto.book_id}','0')">장바구니담기</button>
+									<button type="submit" class="btn" style="border: 1px solid #5e6b9e;" onclick="javascript:moveToOrderForm('${root}','${bootInfoDto.book_id}','0')">바로구매</button>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="section3">
-				
-			</div>
-			
 			<div class="section4">
 				<div class="review_rate_form">
 					<div class="review_rate_l">
@@ -167,7 +162,7 @@
 							<div class="review_list_form">
 								<div class="review_list_top">
 									<div class="reviw_list_id" style="font-size: 1.1em;">${ReviewDto.member_id}</div>
-									<div class="reviw_list_date" style="color:#CCCCCC;font-size: 0.9em;"><fmt:formatDate value="${ReviewDto.review_date}" pattern="yyyy-MM-dd HH:mm:ss" /></div>
+									<div class="reviw_list_date" style="color:#B1B1B1;font-size: 0.9em;"><fmt:formatDate value="${ReviewDto.review_date}" pattern="yyyy-MM-dd HH:mm:ss" /></div>
 									<div class="reviw_list_rate"><img src="${root}/resources/images/mark/${ReviewDto.rate}.PNG">${ReviewDto.rate}</div>
 								</div>
 								<div class="review_list_bottom">

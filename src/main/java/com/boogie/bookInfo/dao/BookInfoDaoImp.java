@@ -36,4 +36,9 @@ public class BookInfoDaoImp implements BookInfoDao {
 		return sqlSessionTemplate.selectOne("selectRateAverate",book_id);
 	}
 
+	@Override
+	public List<BookInfoDto> getBestSeller(String bookType) {
+		return sqlSessionTemplate.selectList("selectBestSeller", bookType);
+	}
+
 }

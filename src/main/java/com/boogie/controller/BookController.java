@@ -385,8 +385,16 @@ public class BookController {
 		return mav;
 	}	
 	
-	
+	@RequestMapping(value = "/bestSeller/bestSellerMain.do", method = RequestMethod.GET)
+	public ModelAndView bestSellerMain(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
 		
+		bookInfoService.bestSellerMain(mav);
+		return mav;
+	}	
+	
+			
 	@RequestMapping(value = "/search/detailSearch.do", method = RequestMethod.GET)
 	public ModelAndView detailSearchMain(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
@@ -427,23 +435,24 @@ public class BookController {
 		mav.addObject("request", request);
 		
 		String book_id  = request.getParameter("book_id");
-		
+		System.out.println(book_id);
 		if(book_id != null) {
 			orderService.addToCart(mav);
 		}
 		orderService.getCartInfo(mav);
-		
+
 		return mav;
 	}
 	
-	@RequestMapping(value="/order/orderForm.do", method=RequestMethod.POST)
+	@RequestMapping(value="/order/orderForm.do", method=RequestMethod.GET)
 	public ModelAndView orderFormWrite(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
 		
 		String book_id  = request.getParameter("book_id");
+		
 		if(book_id != null) {
-			orderService.addToCart(mav);
+			orderService.addOrder(mav);
 		}
 		orderService.getOrderForm(mav);
 		
@@ -582,7 +591,6 @@ public class BookController {
 		acc[i]=a.get(i).getBook_name();		
 		}
 		
-		 
 		return acc;
 	}
 	

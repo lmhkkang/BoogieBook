@@ -21,7 +21,8 @@
 	
 	<c:if test="${check == 0}">
 		<script type="text/javascript">
-			alert("회원탈퇴 실패");
+			alert("회원탈퇴 실패. 비밀번호를 확인하세요.");
+			location.href="${root}/member/withdrawal.do?id=${id}";
 		</script>
 	</c:if>
 </body>

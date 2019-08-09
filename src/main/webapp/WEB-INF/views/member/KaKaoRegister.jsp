@@ -88,7 +88,7 @@
     </div>
 </div>
 </div>
-	<div class="container" style="border: 0px solid red; margin: 0px auto; height: 700px; margin-left: 105px; margin-bottom: 250px;">
+	<div class="container" style="border: 0px solid red; margin: 0px auto; height: 500px; margin-left: 105px; margin-bottom: 250px;">
 	<div class="row" style="margin: 0px auto; border: 0px solid red;">
     <div class="col-md-8" style="width: 1000px; height: 700px; margin: 0px auto;">  
         <h1 class="entry-title" style="border-bottom: 3px solid black; padding-bottom: 10px;"><span>회원가입</span> </h1>

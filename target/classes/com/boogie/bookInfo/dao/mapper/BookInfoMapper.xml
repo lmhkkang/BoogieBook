@@ -18,4 +18,11 @@
    <select id="selectRateAverate" parameterType="int" resultType="float">
    		select avg(rate) from review where book_id=#{book_id}
    </select>
+   
+   <select id="selectBestSeller" parameterType="String" resultType="com.boogie.bookInfo.dto.BookInfoDto">
+   <![CDATA[
+   		select * from book 
+   		where type02 like #{bookType} and rownum <= 10 order by sales_volume desc
+   	]]>
+   </select>
 </mapper>

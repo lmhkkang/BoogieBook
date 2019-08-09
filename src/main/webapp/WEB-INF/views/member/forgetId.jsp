@@ -19,15 +19,14 @@
 <title>아이디찾기</title>
 </head>
 <body>
-	<div class="container" style="border: 0px solid red; margin: 0px auto; height: 700px; margin-left: 0px; margin-bottom: 0px;">
+	<div class="container" style="border: 0px solid red; margin: 0px auto; height: 250px; margin-left: 0px; margin-bottom: 0px;">
 	<div class="row" style="margin: 0px auto; border: 0px solid red;">
-    <div class="col-md-8" style="width: 3000px; height: 700px; margin: 0px auto;">  
+    <div class="col-md-8" style="width: 350px; height: 80px; margin: 0px auto; margin-top:10px;">  
         <h2 class="entry-title" style="border-bottom: 3px solid black; padding-bottom: 10px; width: 300px;"><span>아이디찾기</span> </h2>
-        <hr>
         <form class="form-horizontal" action="${root}/member/findId.do" method="get" name="signup" id="signup" enctype="multipart/form-data"
         	onsubmit="return forgetIdForm(this)">       
         <div class="form-group">
-          <label class="control-label col-sm-3">이름</label>
+          <label class="control-label col-sm-3" style="margin-top: 20px;">이름</label>
           <div class="col-md-8 col-sm-9">
               <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>

@@ -23,11 +23,10 @@
 <title>회원 탈퇴</title>
 </head>
 <body>
-	<div class="container" style="border: 0px solid red; margin: 0px auto; height: 700px; margin-left: 0px; margin-bottom: 0px;">
+	<div class="container" style="border: 0px solid red; margin: 0px auto; height: 150px; margin-left: 0px; margin-bottom: 0px;">
 	<div class="row" style="margin: 0px auto; border: 0px solid red;">
-    <div class="col-md-8" style="width: 3000px; height: 700px; margin: 0px auto;">  
-        <h3 class="entry-title" style="border-bottom: 3px solid black; padding-bottom: 10px; width: 300px;"><span>회원탈퇴</span> </h3>
-     
+    <div class="col-md-8" style="width: 300px; height: 100px; margin: 0px auto; margin-top:20px">  
+        <h3 class="entry-title" style="border-bottom: 3px solid black; padding-bottom: 10px; width: 300px;"><span>회원탈퇴</span> </h3>   
         <form class="form-horizontal" style="margin: 0px auto;"action="${root}/member/KaKaoWithdrawalOk.do" method="get" name="signup" id="signup" enctype="multipart/form-data">       
         <input type="hidden" name="id" value="${id}"/>
         <div class="form-group">

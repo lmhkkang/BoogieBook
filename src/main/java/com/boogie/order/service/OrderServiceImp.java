@@ -45,7 +45,7 @@ public class OrderServiceImp implements OrderService {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		
-		HttpSession  session = request.getSession();
+		HttpSession session = request.getSession();
 		String member_id = (String) session.getAttribute("id");
 		BookAspect.logger.info(BookAspect.logMsg + "member_id:" + member_id);
 		
@@ -258,7 +258,7 @@ public class OrderServiceImp implements OrderService {
 		
 		String member_id = (String) session.getAttribute("id");
 		int book_id = Integer.parseInt(request.getParameter("book_id"));
-		BookAspect.logger.info(BookAspect.logMsg + book_id + " " + member_id);
+		BookAspect.logger.info(BookAspect.logMsg + "book_id: "+book_id + " " +"member_id :" +member_id);
 		
 		int check = orderDao.addToCart(book_id, member_id);
 		BookAspect.logger.info(BookAspect.logMsg + check);

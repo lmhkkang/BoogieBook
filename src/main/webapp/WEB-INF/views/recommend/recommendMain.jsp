@@ -72,7 +72,7 @@
 			<div class="section2">
 				<div class="interest">
 					<div class="interest_top">
-						<div class="interest_top_l">${id} 님의 관심분야책</div>
+						<div class="interest_top_l">${name} 님의 관심분야책</div>
 						<div class="interest_top_r">
 							<button>다른 관심분야 선택하러가기</button>
 						</div>
@@ -112,6 +112,7 @@
 					<div class="mark_top">평점 좋은 책</div>
 					<div class="mark_body">
 						<div class="mark_content_form">
+							<a href="${root}/book/bookInfo.do?book_id=${markBookList.get(0).book_id}">
 							<div class="mark_content" style="border: 5px solid #e3e3e4;">
 								<div class="mark_content_top">오늘의 발견</div>
 								<div class="mark_content_img_form">
@@ -126,8 +127,9 @@
 									</div>
 									<div class="mark_number"><fmt:formatNumber value="${markList.get(0)}" pattern="#.#" /></div>
 								</div>
-							</div>
+							</div></a>
 							<div class="mark_content_r">
+							<a href="${root}/book/bookInfo.do?book_id=${markBookList.get(1).book_id}">
 								<div class="mark_content">
 									<div class="mark_content_top" style="color: white">오늘의 발견</div>
 									<div class="mark_content_img_form">
@@ -143,7 +145,8 @@
 										</div>
 										<div class="mark_number"><fmt:formatNumber value="${markList.get(1)}" pattern="#.#" /></div>
 									</div>
-								</div>
+								</div></a>
+								<a href="${root}/book/bookInfo.do?book_id=${markBookList.get(2).book_id}">
 								<div class="mark_content">
 									<div class="mark_content_top" style="color: white">오늘의 발견</div>
 									<div class="mark_content_img_form">
@@ -159,7 +162,8 @@
 										</div>
 										<div class="mark_number"><fmt:formatNumber value="${markList.get(2)}" pattern="#.#" /></div>
 									</div>
-								</div>
+								</div></a>
+								<a href="${root}/book/bookInfo.do?book_id=${markBookList.get(3).book_id}">
 								<div class="mark_content">
 									<div class="mark_content_top" style="color: white">오늘의 발견</div>
 									<div class="mark_content_img_form">
@@ -175,7 +179,7 @@
 										</div>
 										<div class="mark_number"><fmt:formatNumber value="${markList.get(3)}" pattern="#.#" /></div>
 									</div>
-								</div>
+								</div></a>
 							</div>
 						</div>
 					</div>
@@ -183,7 +187,7 @@
 			</div>
 			<div class="section4">
 				<div class="recommend_form">
-					<div class="recommend_top">${id} 님이 좋아할만한 책</div>
+					<div class="recommend_top">${name} 님이 좋아할만한 책</div>
 					<div class="recommend_body" style="background-image: url('${root}/resources/images/background.jpg');">
 						<c:if test="${recommend_imgs[0]!=null}">
 							<div class="rocommend_left"><a href="${root}/book/bookInfo.do?book_id=${recommend_imgs_book_id[0]}"><img width="100%" height="100%" src='${recommend_imgs[0]}'></a></div>

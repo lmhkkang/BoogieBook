@@ -51,7 +51,7 @@ a:hover{
 
 
 button{
-    border: 1px solid #5e6b9e;
+    border: 1px solid #5e6b9e !important;
     background-color: rgba(0,0,0,0);
     color: #5e6b9e;
     padding: 5px;

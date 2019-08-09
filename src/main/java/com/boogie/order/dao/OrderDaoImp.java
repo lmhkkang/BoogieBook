@@ -75,10 +75,64 @@ public class OrderDaoImp implements OrderDao {
 	}
 
 	@Override
-	public int addToCart(int book_id, String member_id) {
+	public int addToCart(int book_id, String member_id, int quantity) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("book_id",book_id);
+		map.put("member_id",member_id);
+		map.put("quantity",quantity);
+		return sqlSessionTemplate.insert("insertToCart",map);
+	}
+
+	@Override
+	public int countSameBook(int book_id, String member_id) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("book_id",(Integer)book_id);
 		map.put("member_id",(String)member_id);
-		return sqlSessionTemplate.selectOne("insertToCart",map);
+		return sqlSessionTemplate.selectOne("selectSameBook",map);
 	}
+
+	@Override
+	public int addQuantity(int book_id, String member_id, int amount) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("book_id",(Integer)book_id);
+		map.put("member_id",(String)member_id);
+		map.put("quantity",(Integer)amount);
+		return sqlSessionTemplate.update("updateQuantity",map);
+	}
+
+	@Override
+	public int addOrder(String member_id, int book_id, int total_price) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("book_id",(Integer)book_id);
+		map.put("member_id",(String)member_id);
+		map.put("total_price",(Integer)total_price);
+		return sqlSessionTemplate.insert("insertOrder",map);
+	}
+
+	@Override
+	public int getBookPrice(int book_id) {
+		return sqlSessionTemplate.selectOne("selectBookPrice",book_id);
+	}
+
+	@Override
+	public OrderDto getOrderCheckForm(int order_id, String member_id) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("order_id",(Integer)order_id);
+		map.put("member_id",(String)member_id);
+		return sqlSessionTemplate.selectOne("selectOrderCheckForm", map);
+	}
+
+	@Override
+	public int getBookId(int orderNumber) {
+		return sqlSessionTemplate.selectOne("selectBookId",orderNumber);
+	}
+
+	@Override
+	public String getBookName(int book_id) {
+		return sqlSessionTemplate.selectOne("selectBookName",book_id);
+	}
+	
+	
+
+
 }

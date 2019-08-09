@@ -40,10 +40,7 @@
 	
 	<script
 		src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-	
-	
-	<script type="text/javascript" src="${root}/resources/jquery/jquery.js"></script>
-	
+
 	<link
 		href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"
 		rel="stylesheet" type="text/css" />
@@ -52,9 +49,7 @@
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<!-- jQuery ui library -->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	
-	<script type="text/javascript">
-	      
+	<script type="text/javascript">    
 	       $(function() {
 	          var bookList = new Array();
 	          $.ajax({

@@ -17,10 +17,12 @@
 	<c:set var="cartList" value="${cartList}"/>
 	<jsp:include page="../../../header.jsp"></jsp:include>
   	<div style="height: 100px; width: 800px;"></div>
+  	<form action="${root}/order/orderForm.do" method="get">
     <div class="container mb-4">
         <div class="row">
             <div class="col-12">
                 <div class="table-responsive">
+                
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -29,10 +31,10 @@
                                 <th scope="col">재고</th>
                                 <th scope="col" class="text-center">수량</th>
                                 <th scope="col" class="text-right">가격</th>
-                                <th scope="col" class="text-right"><input type="checkbox" class="checkBoxes" checked/></th>
+                                <th scope="col" class="text-right"><button type="button" class="btn btn-danger">선택삭제</button></th>
                             </tr>
                         </thead>
-                      <form action="${root}/order/orderForm.do" method="post">
+                      
                         <tbody>
                         	<c:if test="${cartList.size()==0}">
                         		<tr>
@@ -82,10 +84,10 @@
                         <input type="submit" class="btn btn-primary btn-lg btn-block" value="구매"></button>
                     </div>
                 </div>
-            </div>
-          </form>
+            </div>  
         </div>
     </div>
+    </form>
     <div style="height: 100px; width: 800px;"></div>
 	<jsp:include page="../../../footer.jsp"></jsp:include>
 </body>

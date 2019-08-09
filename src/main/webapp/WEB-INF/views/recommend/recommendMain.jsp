@@ -104,8 +104,11 @@
 							</div>
 							<div class="interest_des" id="interest_des"></div>
 							<div class="interest_btn">
-								<button type="button" class="btn" style="border: 1px solid #5e6b9e;" onclick="javascript:moveToCart('${root}','${interestDto.book_id}','1')">장바구니담기</button>
-								<button type="button" class="btn" style="border: 1px solid #5e6b9e;" onclick="javascript:moveToOrderForm('${root}','${interestDto.book_id}','1')">바로구매</button>
+								<form name="form" method="get">
+									<input type="hidden" name="amount" id="amount" value="1"> 
+								</form>
+								<button type="button" class="btn" style="border: 1px solid #5e6b9e;" onclick="javascript:moveToCart('${root}','${interestDto.book_id}')">장바구니담기</button>
+								<button type="button" class="btn" style="border: 1px solid #5e6b9e;" onclick="javascript:moveToOrderForm('${root}','${interestDto.book_id}')">바로구매</button>
 							</div>
 						</div>
 					</div>

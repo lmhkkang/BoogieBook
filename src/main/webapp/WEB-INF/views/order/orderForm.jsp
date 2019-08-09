@@ -17,6 +17,7 @@
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 </head>
 <body>
+<c:set var="book_id" value="${book_id}"/>
 <c:set var="member_id" value="${member_id}"/>
 <c:set var="memberDto" value="${memberDto}"/>
 <jsp:include page="../../../header.jsp"></jsp:include>

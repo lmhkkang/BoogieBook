@@ -14,14 +14,17 @@
 		<c:remove var="name" scope="session"/>
 		<c:remove var="snsNum" scope="session"/>
 		<script type="text/javascript">
-			alert("회원탈퇴 완료");
+			
 			self.close();
 			opener.location.href="${root}/index.jsp";
+			alert("회원탈퇴 완료");
 		</script>
 	</c:if>
 	
 	<c:if test="${check == 0}">
 		<script type="text/javascript">
+			
+			self.close();
 			alert("회원탈퇴 실패");
 		</script>
 	</c:if>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath }"/>
 <!doctype html>
 <html>
 <head>
@@ -31,7 +32,6 @@
                                 <th scope="col"><h3>주문정보</h3></th>
                             </tr>
                         </thead>
-
                         <tbody>
                             <tr>
                                 <td style="padding-left:60px;"><label>주문번호</label> </td>
@@ -69,11 +69,18 @@
                             <tr>
                                 <td style="padding-left:60px;"><label>제목(수량)</label></td>
                                 <td></td>
-                                <c:forEach var="orderDetail" items="${bookList}">
+                                <c:if test="${bookList.size()==0}">
+                                	<c:forEach var="orderDetail" items="${bookList}">
+	                                	<td>
+	                          				${orderDetail.book_name}(${orderDetail.quantity}권) <br/> 
+	                          			</td>
+                               		</c:forEach> 
+                                </c:if>
+                                <c:if test="${bookList.size()!=0}">
                                 	<td>
-                          				${orderDetail.book_name}(${orderDetail.quantity}권) <br/> 
-                          			</td>
-                               	</c:forEach>            
+                                		${orderDto.book_name}(${orderDto.quantity}권)
+                                	</td>
+                                </c:if>         
                                 <td></td>
                                 <td><strong></strong></td>
                                 <td class="text-right"><strong></strong></td>
@@ -96,7 +103,7 @@
                        
                     </div>
                     <div class="col-sm-12 col-md-6 text-right">
-                        <button type="button" class="btn btn-primary btn-lg">확인</button>
+                        <button type="button" class="btn btn-primary btn-lg" onclick="location.href='${root}/index.jsp'">확인</button>
                     </div>
                 </div>
             </div>

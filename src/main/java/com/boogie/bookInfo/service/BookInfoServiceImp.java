@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.boogie.aop.BookAspect;
 import com.boogie.bookInfo.dao.BookInfoDao;
 import com.boogie.bookInfo.dto.BookInfoDto;
+import com.boogie.recommend.dto.RecommendMarkDto;
 import com.boogie.review.dto.ReviewDto;
 
 @Component
@@ -48,15 +49,42 @@ public class BookInfoServiceImp implements BookInfoService {
 			reviewList.get(i).setMember_id((bookInfoDao.getIdList(reviewList.get(i).getMember_num())));
 		}
 		
-		float rate_average = bookInfoDao.getRateAverage(book_id);
+		if(reviewList.size()!=0) {
+			float rate_average = bookInfoDao.getRateAverage(book_id);
+			mav.addObject("rate_average",rate_average);
+		}
+			
 		
-		mav.addObject("rate_average",rate_average);
 		mav.addObject("idList",idList);
 		mav.addObject("book_id",book_id);
 		mav.addObject("reviewList_size",reviewList.size());
 		mav.addObject("reviewList",reviewList);
 		mav.addObject("bookInfoDto", bookInfoDto);
 		//mav.setViewName("book/bookInfo");
+	}
+
+	@Override
+	public void bestSellerMain(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		
+		List<BookInfoDto> bestSellerList = new ArrayList<BookInfoDto>();
+		
+		String bookType = request.getParameter("bookType");
+		if(bookType==null) {
+			bookType = "%";
+		}
+		BookAspect.logger.info(BookAspect.logMsg+"bookType : "+ bookType);
+		bestSellerList = bookInfoDao.getBestSeller(bookType);
+		
+		if(bookType.equals("%")) {
+			bookType = "종합";
+		}
+		
+		mav.addObject("bestSellerList",bestSellerList);
+		mav.addObject("bookType", bookType);
+		mav.setViewName("bestSeller/bestSellerMain");
+		
 	}
 
 }

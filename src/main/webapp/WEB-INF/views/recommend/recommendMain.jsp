@@ -11,8 +11,10 @@
 	<link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Maven+Pro|Play&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Gothic+A1|Lacquer|Noto+Sans+KR&display=swap" rel="stylesheet">
 		
 	<link rel="styleSheet" type="text/css" href="${root}/resources/css/recommend/recommend_content.css" />
+	<script type="text/javascript" src="${root}/resources/javascript/book/bookInfo.js"></script>
 	<script type="text/javascript" src="${root}/resources/javascript/xhr/xhr.js"></script>
 
 <script type="text/javascript">
@@ -46,7 +48,7 @@
 	
 </script>
 </head>
-<body onload="toServer('${root}','${interestDto.book_name}')">
+<body>
 	<jsp:include page="../../../header.jsp"></jsp:include>
 	<div class="center">
 		<div class="section1_l">
@@ -68,18 +70,21 @@
 				<li><a>컴퓨터/IT</a></li>
 			</ul>
 		</div>
+		
 		<div class="section1_r">
+		<c:if test="${interestDto.book_name != null}">
 			<div class="section2">
+				<body onload="toServer('${root}','${interestDto.book_name}')">
 				<div class="interest">
 					<div class="interest_top">
-						<div class="interest_top_l">${id} 님의 관심분야책</div>
+						<div class="interest_top_l">${name} 님의 관심분야책</div>
 						<div class="interest_top_r">
-							<button>다른 관심분야 선택하러가기</button>
+							<a href="${root}/member/memberEdit.do?id=${id}"><button>다른 관심분야 선택하러가기</button></a>
 						</div>
 					</div>
 					<div class="interest_body">
 						<div class="interest_img">
-							<img src="${interestDto.img_path}" width="100%" height="100%">
+							<a href="${root}/book/bookInfo.do?book_id=${interestDto.book_id}"><img src="${interestDto.img_path}" width="100%" height="100%"></a>
 						</div>
 						<div class="interest_subject_form">
 							<div class="interest_sub">
@@ -89,7 +94,7 @@
 											pattern="yyyy-MM-dd" />
 									</div>
 									<div class="interest_subject2">
-										<a href="#"><b>${interestDto.book_name}</b></a>
+										<a href="${root}/book/bookInfo.do?book_id=${interestDto.book_id}"><b>${interestDto.book_name}</b></a>
 									</div>
 									<div class="interest_subject3">
 										인터넷 판매가: <b style="color: red"><fmt:formatNumber value="${interestDto.price}" pattern="#,###" />원</b>
@@ -99,19 +104,25 @@
 							</div>
 							<div class="interest_des" id="interest_des"></div>
 							<div class="interest_btn">
-								<button>바로 구매하기</button>
-								<button>장바구니 담기</button>
+								<form name="form" method="get">
+									<input type="hidden" name="amount" id="amount" value="1"> 
+								</form>
+								<button type="button" class="btn" style="border: 1px solid #5e6b9e;" onclick="javascript:moveToCart('${root}','${interestDto.book_id}')">장바구니담기</button>
+								<button type="button" class="btn" style="border: 1px solid #5e6b9e;" onclick="javascript:moveToOrderForm('${root}','${interestDto.book_id}')">바로구매</button>
 							</div>
 						</div>
 					</div>
 				</div>
+				</body>
 			</div>
+			</c:if>
 
 			<div class="section3">
 				<div class="mark_form">
 					<div class="mark_top">평점 좋은 책</div>
 					<div class="mark_body">
 						<div class="mark_content_form">
+							<a href="${root}/book/bookInfo.do?book_id=${markBookList.get(0).book_id}">
 							<div class="mark_content" style="border: 5px solid #e3e3e4;">
 								<div class="mark_content_top">오늘의 발견</div>
 								<div class="mark_content_img_form">
@@ -126,8 +137,9 @@
 									</div>
 									<div class="mark_number"><fmt:formatNumber value="${markList.get(0)}" pattern="#.#" /></div>
 								</div>
-							</div>
+							</div></a>
 							<div class="mark_content_r">
+							<a href="${root}/book/bookInfo.do?book_id=${markBookList.get(1).book_id}">
 								<div class="mark_content">
 									<div class="mark_content_top" style="color: white">오늘의 발견</div>
 									<div class="mark_content_img_form">
@@ -143,7 +155,8 @@
 										</div>
 										<div class="mark_number"><fmt:formatNumber value="${markList.get(1)}" pattern="#.#" /></div>
 									</div>
-								</div>
+								</div></a>
+								<a href="${root}/book/bookInfo.do?book_id=${markBookList.get(2).book_id}">
 								<div class="mark_content">
 									<div class="mark_content_top" style="color: white">오늘의 발견</div>
 									<div class="mark_content_img_form">
@@ -159,7 +172,8 @@
 										</div>
 										<div class="mark_number"><fmt:formatNumber value="${markList.get(2)}" pattern="#.#" /></div>
 									</div>
-								</div>
+								</div></a>
+								<a href="${root}/book/bookInfo.do?book_id=${markBookList.get(3).book_id}">
 								<div class="mark_content">
 									<div class="mark_content_top" style="color: white">오늘의 발견</div>
 									<div class="mark_content_img_form">
@@ -175,30 +189,51 @@
 										</div>
 										<div class="mark_number"><fmt:formatNumber value="${markList.get(3)}" pattern="#.#" /></div>
 									</div>
-								</div>
+								</div></a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="section4">
-				<div class="recommend_form">
-					<div class="recommend_top">${id} 님이 좋아할만한 책</div>
-					<div class="recommend_body" style="background-image: url('${root}/resources/images/background.jpg');">
-						<c:if test="${recommend_imgs[0]!=null}">
-							<div class="rocommend_left"><a href="${root}/book/bookInfo.do?book_id=${recommend_imgs_book_id[0]}"><img width="100%" height="100%" src='${recommend_imgs[0]}'></a></div>
-						</c:if>
-						<c:if test="${recommend_imgs[0]==null}">
-							<div class="rocommend_left" style="text-align: center; line-height: 2">더 많은 리뷰를 입력하시면 <br/>도서를 추천받으실 수 있습니다.</div>
-						</c:if>
-						<c:if test="${recommend_imgs[1]!=null}">
-							<div class="rocommend_right"><a href="${root}/book/bookInfo.do?book_id=${recommend_imgs_book_id[1]}"><img width="100%" height="100%" src='${recommend_imgs[1]}'></a></div>
-						</c:if>
-						<c:if test="${recommend_imgs[1]==null}">
-							<div class="rocommend_right" style="text-align: center; line-height: 2">더 많은 리뷰를 입력하시면 <br/>도서를 추천받으실 수 있습니다.</div>
-						</c:if>
+				<c:if test="${name != null}">
+					<div class="recommend_form">
+						<div class="recommend_top">${name} 님이 좋아할만한 책</div>
+						<div class="recommend_body" style="background-image: url('${root}/resources/images/background.jpg');">
+							<c:if test="${recommend_imgs[0]!=null}">
+								<div class="rocommend_left"><a href="${root}/book/bookInfo.do?book_id=${recommend_imgs_book_id[0]}"><img width="100%" height="100%" src='${recommend_imgs[0]}'></a></div>
+							</c:if>
+							<c:if test="${recommend_imgs[0]==null}">
+								<div class="rocommend_left" style="text-align: center; line-height: 2"><br/><br/>더 많은 리뷰를 입력하시면 <br/>도서를 추천받으실 수 있습니다.</div>
+							</c:if>
+							<c:if test="${recommend_imgs[1]!=null}">
+								<div class="rocommend_right"><a href="${root}/book/bookInfo.do?book_id=${recommend_imgs_book_id[1]}"><img width="100%" height="100%" src='${recommend_imgs[1]}'></a></div>
+							</c:if>
+							<c:if test="${recommend_imgs[1]==null}">
+								<div class="rocommend_right" style="text-align: center; line-height: 2"><br/><br/>더 많은 리뷰를 입력하시면 <br/>도서를 추천받으실 수 있습니다.</div>
+							</c:if>
+						</div>
 					</div>
-				</div>
+				</c:if>
+				<c:if test="${name == null}">
+					<div class="recommend_form">
+						<div class="recommend_top"></div>
+						<div class="recommend_body" style="background-image: url('${root}/resources/images/background.jpg');">
+							<c:if test="${recommend_imgs[0]!=null}">
+								<div class="rocommend_left"><a href="${root}/book/bookInfo.do?book_id=${recommend_imgs_book_id[0]}"><img width="100%" height="100%" src='${recommend_imgs[0]}'></a></div>
+							</c:if>
+							<c:if test="${recommend_imgs[0]==null}">
+								<div class="rocommend_left" style="text-align: center; line-height: 2"><br/><br/>로그인을 하시면 <br/>도서를 추천받으실 수 있습니다.</div>
+							</c:if>
+							<c:if test="${recommend_imgs[1]!=null}">
+								<div class="rocommend_right"><a href="${root}/book/bookInfo.do?book_id=${recommend_imgs_book_id[1]}"><img width="100%" height="100%" src='${recommend_imgs[1]}'></a></div>
+							</c:if>
+							<c:if test="${recommend_imgs[1]==null}">
+								<div class="rocommend_right" style="text-align: center; line-height: 2"><br/><br/>로그인을 하시면<br/>도서를 추천받으실 수 있습니다.</div>
+							</c:if>
+						</div>
+					</div>
+				</c:if>
 			</div>
 		</div>
 	</div>

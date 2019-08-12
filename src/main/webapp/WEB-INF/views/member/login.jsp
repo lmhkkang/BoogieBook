@@ -14,6 +14,7 @@
 <script src="${root}/resources/javascript/member/login_js.js"></script>
 <script src="http://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
+<title>로그인</title>
 	<div class="container" style="border: 0px solid blue; width: 670px; margin: 0px auto; height:400px; margin-top:30px;">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3"
@@ -49,24 +50,11 @@
 									</div>
 									<div class="form-group">
 										<div class="row">
-											<div class="col-sm-6 col-sm-offset-3"
-												style="width: 520px; margin: 0px auto; padding-left: 15px;">
-												<input type="submit" name="login-submit" id="login-submit"
+
+												<input type="submit" name="login-submit" id="login-submit" style="width:230px; float: left; margin-left: 55px; background-color: #5e6b9e;"
 													tabindex="4" class="form-control btn btn-login" value="로그인" >
-											</div>
-										</div>
+												<a id="kakao-login-btn" style="float: left; margin-left: 10px;"></a>
 
-										<div class="row"  style="border: 1px solid red;">
-											<div class="col-sm-6 col-sm-offset-3"
-												style="width: 230px; float:left; margin: 0px auto; border: 1px solid red; margin-left:25px; margin-right: 0px;">
-												<a id="kakao-login-btn"></a>
-											</div>
-
-											<div class="col-sm-6 col-sm-offset-3"
-												style="width: 230px; margin: 0px auto; float: left; border: 1px solid red; margin-left:0px;">
-												<input type="submit" name="login-submit" id="login-submit"
-													tabindex="3" class="form-control btn btn-login" value="로그인">
-											</div>
 										</div>
 									</div>
 									<div class="form-group">
@@ -104,7 +92,6 @@
 										<div class="form-group-p">
 											<p>- 비회원으로 주문하신 내역이 있는 분만 이용이 가능합니다.</p>
 											<p>- 비회원 주문 시 입력한 이름과 이메일, 비밀번호로 로그인해주세요.</p>
-											<p>- 비회원으로 로그인 시 일부 서비스 제한이 있을 수 있습니다.</p>
 										</div>
 									</div>
 									<div style="font-size: 12px;">

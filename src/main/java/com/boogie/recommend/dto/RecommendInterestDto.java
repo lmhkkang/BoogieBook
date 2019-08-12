@@ -23,7 +23,7 @@ public class RecommendInterestDto
 	
 	private int price;
 	
-	private String book_id;
+	private int book_id;
 	private String story;
 	
 	private int sales_volume;
@@ -33,7 +33,7 @@ public class RecommendInterestDto
 	public RecommendInterestDto() {}
 
 	public RecommendInterestDto(String type01, String type02, String type03, String img_path, String book_name,
-			String author, String publisher, Date publish_date, int price, String book_id, String story,
+			String author, String publisher, Date publish_date, int price, int book_id, String story,
 			int sales_volume, Date enrolled_date) {
 		super();
 		this.type01 = type01;
@@ -123,11 +123,11 @@ public class RecommendInterestDto
 		this.price = price;
 	}
 
-	public String getBook_id() {
+	public int getBook_id() {
 		return book_id;
 	}
 
-	public void setBook_id(String book_id) {
+	public void setBook_id(int book_id) {
 		this.book_id = book_id;
 	}
 

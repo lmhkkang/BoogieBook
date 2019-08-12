@@ -26,4 +26,25 @@ public interface OrderDao {
 
 	int deleteFromCart(String member_id);
 
+	String getUserEmail(String member_id);
+
+	int countSameBook(int book_id, String member_id);
+
+	int addToCart(int book_id, String member_id, int amount);
+
+	int addQuantity(int book_id, String member_id, int amount);
+
+	int getBookPrice(int book_id);
+
+	int addOrder(String member_id, int book_id, int total_price);
+
+	OrderDto getOrderCheckForm(int orderNumber,String member_id);
+
+	int getBookId(int orderNumber);
+
+	String getBookName(int book_id);
+
+	
+
+
 }

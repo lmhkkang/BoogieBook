@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+.popUpContent{
+  border: 0px solid pink;
+  width: 70%;
+  height: 200px;
+  margin: 0px auto;
+  margin-top: 50px;
+}
+
+.popUpMessageDiv{
+  border: 0px solid blue;
+  width: 70%;
+  margin: 0px auto;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.popUpInputTextDiv{
+  border:0px solid pink;
+  width: 80%;
+  margin: 0px auto;
+}
+
+.passwordCheck{
+  width: 80%;
+  margin: 0px auto;
+  text-align: center;
+  margin-bottom: 30px;
+}
+.popUpMessageDiv b{
+  font-size: 25px;
+}
+
+.popUpMessageDiv2{
+  border: 0px dotted green;
+  width: 80%;
+  margin: 0px auto;
+  margin-bottom:15px;
+  text-align: center;
+}
+
+.popUpButtonDiv{
+  border: 0px dotted purple;
+  width: 70%;
+  margin: 0px auto;
+  text-align: center;
+}

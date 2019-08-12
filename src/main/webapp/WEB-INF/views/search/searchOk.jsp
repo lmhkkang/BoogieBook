@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>searchOk</title>
+<script type="text/javascript" src="${root}/resources/javascript/book/bookInfo.js"></script>
 <link rel="styleSheet" type="text/css"
 	href="${root}/resources/css/search/search_result.css" />
 	<link rel="styleSheet" type="text/css"
@@ -42,8 +43,12 @@
                                  
                                 </div>
                                 <div class="interest_btn">
-                                    <button onclick="">바로 구매하기</button>
-                                    <button>장바구니 담기</button>
+                                <c:set var="book_id" value="${searchDto.book_id}"/>
+                                	<form name="form" method="get">
+										<input type="hidden" name="amount" id="amount" value="1"> 
+									</form>
+                                    <button onclick="javascript:moveToCart('${root}','${book_id}')">장바구니 담기</button>
+                                    <button onclick="javascript:moveToOrderForm('${root}','${book_id}')">바로 구매하기</button>
                                 </div>
                             </div>
                         </div>

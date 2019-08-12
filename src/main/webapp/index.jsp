@@ -8,14 +8,18 @@
 <head>
 <meta charset="UTF-8">
 <title>shop</title>
+	<link href="https://fonts.googleapis.com/css?family=Gothic+A1|Lacquer|Noto+Sans+KR&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Maven+Pro|Play&display=swap" rel="stylesheet">
 	<link rel="styleSheet" type="text/css" href="${root}/resources/css/index/index_content.css" />
 	<link rel="styleSheet" type="text/css" href="${root}/resources/css/index/index_footer.css" />
 
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+	<script type="text/javascript" src="${root}/resources/javascript/index/index_js.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="${root}/resources/javascript/xhr/xhr.js"></script>
+	
 <script type="text/javascript">
 	var slideIndex = 0;
 	showSlides();
@@ -39,19 +43,53 @@
 		});
 		setTimeout(showSlides, 2000); // Change image every 2 seconds
 	}
+	
+	function toServer(root, book_name) {
+		var url = root + "/recommend/recommendProcxy.do?bookName=" + book_name;
+
+		//alert(url);
+		sendRequest("GET", url, fromServer, null);
+	}
+
+	function fromServer() {
+		//alert(xhr.readyState+","+xhr.status);
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			//alert(xhr.responseXML);
+			console.log(xhr.responseXML)
+			processXML();
+		}
+	}
+
+	function processXML() {
+		var xmlDoc = xhr.responseXML;
+
+		var discription = xmlDoc.getElementsByTagName("description");
+		if (discription.length > 1) {
+			//alert(discription[1].childNodes[0].nodeValue);
+			document.getElementById("todayBook_des").innerHTML = discription[1].childNodes[0].nodeValue;
+		} else {
+			document.getElementById("todayBook_des").innerHTML = "미리보기내역이 존재하지 않습니다.";
+		}
+	}
+	
 </script>
 </head>
+<c:if test="${todayDto.book_id == null}">
+<body onload="indexStart('${root}');">
+</c:if>
+<c:if test="${todayDto.book_id != null}">
 <body>
-	<jsp:include page="./header.jsp"></jsp:include>
+</c:if>
 
+	<jsp:include page="./header.jsp"></jsp:include>
 	<div id="content">
 		<div class="section1">
 			<div class="center" id="center">
-				<div id="cp_widget_8c00dbf7-5662-4233-bc5e-098546cf5f5a">...</div>
+				<div id="cp_widget_47e7b676-c357-476a-9d90-b765f88ec166">...</div>
 				<script type="text/javascript">
 					var cpo = [];
-					cpo["_object"] = "cp_widget_8c00dbf7-5662-4233-bc5e-098546cf5f5a";
-					cpo["_fid"] = "AoEADhOEO_Ty";
+					cpo["_object"] = "cp_widget_47e7b676-c357-476a-9d90-b765f88ec166";
+					cpo["_fid"] = "AgJAcjuKZDUJ";
 					var _cpmp = _cpmp || [];
 					_cpmp.push(cpo);
 					(function() {
@@ -64,12 +102,15 @@
 					})();
 				</script>
 				<noscript>
-					<span>New Gallery 2019/8/5</span><span>originaldate</span><span>
-						1/1/0001 6:00:00 AM</span><span>width</span><span> 1266</span><span>height</span><span>
-						503</span><span>originaldate</span><span> 1/1/0001 6:00:00 AM</span><span>width</span><span>
-						1261</span><span>height</span><span> 504</span><span>originaldate</span><span>
-						1/1/0001 6:00:00 AM</span><span>width</span><span> 1264</span><span>height</span><span>
-						506</span>
+					<span>New Gallery 2019/8/9</span><span>originaldate</span><span>
+						1/1/0001 6:00:00 AM</span><span>width</span><span> 1097</span><span>height</span><span>
+						485</span><span>originaldate</span><span> 1/1/0001 6:00:00 AM</span><span>width</span><span>
+						1102</span><span>height</span><span> 482</span><span>originaldate</span><span>
+						1/1/0001 6:00:00 AM</span><span>width</span><span> 1099</span><span>height</span><span>
+						484</span><span>originaldate</span><span> 1/1/0001 6:00:00 AM</span><span>width</span><span>
+						1099</span><span>height</span><span> 487</span><span>originaldate</span><span>
+						1/1/0001 6:00:00 AM</span><span>width</span><span> 1099</span><span>height</span><span>
+						484</span>
 				</noscript>
 			</div>
 		</div>
@@ -77,27 +118,29 @@
 		<div class="section2">
 			<div class="center" id="center">
 				<div class="tmp1">
+				<a href="${root}/book/bookInfo.do?book_id=${todayDto.book_id}">
+				<body onload="toServer('${root}','${todayDto.book_name}')">
 					<div class="todayBook_form">
-						<div class="todayBook_img"></div>
+						<div class="todayBook_img"><img src="${todayDto.img_path}" width="100%" height="95%"></div>
 						<div class="todayBook_subject_form">
 							<div class="todayBook_sub">
 								<div class="todayBook_subject">
-									<div class="todayBook_subject1">책 소제목</div>
+									<div class="todayBook_subject1"><fmt:formatDate value="${todayDto.publish_date}"
+											pattern="yyyy-MM-dd" /></div>
 									<div class="todayBook_subject2">
-										<b>책 제목</b>
+										<b>${todayDto.book_name}</b>
 									</div>
 									<div class="todayBook_subject3">
-										인터넷 판매가: <b style="color: red">19,800원</b> (출판사 | 지은이)
+										인터넷 판매가: <b style="color: red"><fmt:formatNumber value="${todayDto.price}" pattern="#,###" /></b> (${todayDto.publisher} | ${todayDto.author})
 									</div>
 								</div>
-								<div class="todayBook_subject_img"></div>
+								<div class="todayBook_subject_img"><img style="width:100%; height:100%;" src="${root}/resources/images/index/todayBook.PNG"></div>
 							</div>
-							<div class="todayBook_des">책 내용 미리보기 책 내용 미리보기 책 내용 미리보기 책
-								내용 미리보기 책 내용 미리보기 책 내용 미리보기 책 내용 미리보기 책 내용 미리보기 책 내용 미리보기 책 내용
-								미리보기 책 내용 미리보기 책 내용 미리보기 책 내용 미리보기 책 내용 미리보기 책 내용 미리보기 책 내용 미리보기
-								책 내용 미리보기 책 내용 미리보기 책 내용 미리보기 책 내용 미리보기 책 내용 미리보기</div>
+							<div class="todayBook_des" id="todayBook_des"></div>
 						</div>
 					</div>
+					</body>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -181,21 +224,19 @@
 								<b>지점안내<br /></b><b>바로가기</b>
 							</div>
 						</div>
-						<div class="spot_m"></div>
+						<div class="spot_m"><img id="spot_img" style="width:100%; height:100%;" src="${root}/resources/images/index/index_map.PNG"></div>
 						<div class="spot_r">
 							<div class="spot_r_inside">
 								<ul class="spot_list">
-									<li><a>종각 종로본점</a></li>
-									<li><a>스타필드 코엑스몰점</a></li>
-									<li><a>강남역점</a></li>
-									<li><a>서초역점</a></li>
-									<li><a>여의도 IFC몰점</a></li>
-									<li><a>김포공항 롯데점</a></li>
+									<li><a>강남점</a></li>
+									<li><a>천호점</a></li>
+									<li><a>군자역점</a></li>
+									<li><a>발산점</a></li>
+									<li><a>목동점</a></li>
+									<li><a>상봉점</a></li>
 									<li><a>홍대점</a></li>
-									<li><a>가산 마리오점</a></li>
-									<li><a>강남 포스코점</a></li>
-									<li><a>동대문점</a></li>
-									<li><a>신촌역점</a></li>
+									<li><a>신촌점</a></li>
+									<li><a>코엑스점</a></li>
 								</ul>
 							</div>
 						</div>

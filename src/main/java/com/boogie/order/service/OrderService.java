@@ -10,5 +10,8 @@ public interface OrderService {
 
 	void writeOrderInfo(ModelAndView mav);
 
+	void addToCart(ModelAndView mav);
+
+	void addOrder(ModelAndView mav);
 
 }

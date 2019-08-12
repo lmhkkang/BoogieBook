@@ -2,6 +2,16 @@
 
 a:hover{
 	cursor: pointer;
+	text-decoration: none;
+	color:black;
+}
+
+body a{
+	color:black;
+}
+
+.center div{
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 .interest_subject2 a{
@@ -59,9 +69,14 @@ button{
 	color: black !important;
 }
 
+.book_list a:hover{
+	text-decoration: none;
+}
+
 .book_list li:hover{
     font-weight: bold;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .center > .section1_r{

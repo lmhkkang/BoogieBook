@@ -8,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,9 @@ import org.springframework.web.servlet.view.InternalResourceView;
 
 import com.boogie.aop.BookAspect;
 import com.boogie.bookInfo.service.BookInfoService;
+import com.boogie.customerCenter.dto.FaqBoardDto;
+import com.boogie.customerCenter.dto.StoreMapDto;
+import com.boogie.customerCenter.service.CustomerCenterService;
 import com.boogie.order.dto.OrderDto;
 import com.boogie.order.service.OrderService;
 
@@ -44,6 +48,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 
 import com.boogie.email.Email;
 import com.boogie.email.EmailSender;
+import com.boogie.index.service.IndexService;
 import com.boogie.member.service.MemberService;
 
 import com.boogie.recommend.service.RecommendService;
@@ -77,8 +82,13 @@ public class BookController {
 	@Autowired
 	private Email email;
 	@Autowired
+	private CustomerCenterService customerCenterService;
+	@Autowired
 	private ReviewService reviewService;
+	@Autowired
+	private IndexService indexService;
 	
+
 
 	@RequestMapping(value = "/recommend/recommendMain.do", method = RequestMethod.GET)
 	public ModelAndView recommendMain(HttpServletRequest request, HttpServletResponse response) {
@@ -375,8 +385,16 @@ public class BookController {
 		return mav;
 	}	
 	
-	
+	@RequestMapping(value = "/bestSeller/bestSellerMain.do", method = RequestMethod.GET)
+	public ModelAndView bestSellerMain(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
 		
+		bookInfoService.bestSellerMain(mav);
+		return mav;
+	}	
+	
+			
 	@RequestMapping(value = "/search/detailSearch.do", method = RequestMethod.GET)
 	public ModelAndView detailSearchMain(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
@@ -416,16 +434,26 @@ public class BookController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
 		
+		String book_id  = request.getParameter("book_id");
+		System.out.println(book_id);
+		if(book_id != null) {
+			orderService.addToCart(mav);
+		}
 		orderService.getCartInfo(mav);
-		
+
 		return mav;
 	}
 	
-	@RequestMapping(value="/order/orderForm.do", method=RequestMethod.POST)
+	@RequestMapping(value="/order/orderForm.do", method=RequestMethod.GET)
 	public ModelAndView orderFormWrite(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
-				
+		
+		String book_id  = request.getParameter("book_id");
+		
+		if(book_id != null) {
+			orderService.addOrder(mav);
+		}
 		orderService.getOrderForm(mav);
 		
 		mav.setViewName("order/orderForm");
@@ -444,7 +472,7 @@ public class BookController {
 		mav.addObject("request", request);
 			
 		orderService.writeOrderInfo(mav);
-		
+				
 		return mav;
 	}
 	
@@ -459,6 +487,97 @@ public class BookController {
 	}
 	
 
+	@RequestMapping(value="/customerCenter/storeMap.do", method=RequestMethod.GET)
+	public ModelAndView storeMap(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+			
+		mav.setViewName("customerCenter/storeMap");		
+		return mav;
+	}
+	
+	@RequestMapping(value="/customerCenter/customerService.do", method=RequestMethod.GET)
+	public ModelAndView customerService(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+			
+		mav.setViewName("customerCenter/customerService");		
+		return mav;
+	}
+	
+	@RequestMapping(value="/customerCenter/testPage.do", method=RequestMethod.GET)
+	public ModelAndView customerTesting(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+			
+		mav.setViewName("customerCenter/testPage");		
+		return mav;
+	}
+	
+	@RequestMapping(value="/customerCenter/storeMapChange.do",method=RequestMethod.GET, produces = "application/text; charset=utf8")
+	public void storeMapChange(HttpServletRequest request, HttpServletResponse response) {
+
+		System.out.println(request.getParameter("location_code"));
+		int location_code = Integer.parseInt(request.getParameter("location_code"));
+		StoreMapDto storeMapDto = customerCenterService.getLatAndLongt(location_code);
+		if(storeMapDto != null) {
+			try {
+				response.setContentType("text/html; charset=UTF-8");
+				response.getWriter().print(storeMapDto.getLat()+"/");
+				response.getWriter().print(storeMapDto.getLongt()+"/");
+				response.getWriter().print(storeMapDto.getStore_addr()+"/");
+				response.getWriter().print(storeMapDto.getStore_name()+"/");
+				response.getWriter().print(storeMapDto.getStore_phone());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println("storeMap에서 아무것도 가져오지 못함.");
+		}
+	}
+	
+	@RequestMapping(value="/customerCenter/questionCode.do",method=RequestMethod.GET, produces = "application/text; charset=utf8")
+	public void getFaq(HttpServletRequest request, HttpServletResponse response) {
+		int question_code = Integer.parseInt(request.getParameter("question_code"));
+		System.out.println(question_code);
+		List<FaqBoardDto> faqList = customerCenterService.getFaq(question_code);
+		if(faqList.size() != 0) {
+			try {
+				response.setContentType("text/html; charset=UTF-8");
+				FaqBoardDto fb = null;
+				for(int i=0;i<faqList.size();i++) {
+					fb = new FaqBoardDto();
+					fb = faqList.get(i);
+					response.getWriter().print(fb.getBoard_number()+"|");
+					response.getWriter().print(fb.getQuestion()+"|");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println("faqBoardDto에서 아무것도 가져오지 못함.");
+		}
+	}
+	
+	
+	@RequestMapping(value="/customerCenter/getAnswer.do",method=RequestMethod.GET, produces = "application/text; charset=utf8")
+	public void getAnswer(HttpServletRequest request, HttpServletResponse response) {
+		int board_number = Integer.parseInt(request.getParameter("board_number"));
+		System.out.println(board_number);
+		String answer = customerCenterService.getAnswer(board_number);
+		if(answer != null) {
+			try {
+				response.setContentType("text/html; charset=UTF-8");
+				response.getWriter().print(answer);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println("answer을 가져오지 못함.");
+		}
+	}
+	
+	
 	@ResponseBody
 	@RequestMapping(value="/search/autocomplet.do", method=RequestMethod.GET)
 	public String[] autocomplete(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -472,9 +591,9 @@ public class BookController {
 		acc[i]=a.get(i).getBook_name();		
 		}
 		
-		 
 		return acc;
 	}
+	
 	@RequestMapping(value = "/review/reviewWrite.do", method = RequestMethod.GET)
 	public void reviewWrite(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
@@ -484,6 +603,7 @@ public class BookController {
 		reviewService.reviewWrite(mav);		
 	}
 	
+
 		@RequestMapping(value = "/search/Several.do", method = RequestMethod.POST)
 	public ModelAndView severalSearch(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
@@ -492,4 +612,15 @@ public class BookController {
 		searchService.severalSearch(mav);
 		return mav;
 	}
+
+	@RequestMapping(value = "/index/index.do", method = RequestMethod.GET)
+	public ModelAndView IndexStart(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("controller");
+		
+		indexService.indexGetInfo(mav);	
+		
+		return mav;
+	}
+
 }

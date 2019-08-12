@@ -8,54 +8,41 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.ParseException;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import org.springframework.web.servlet.view.InternalResourceView;
-
-import com.boogie.aop.BookAspect;
+import com.boogie.admin.service.AdminService;
+import com.boogie.bookInfo.dto.BookInfoDto;
 import com.boogie.bookInfo.service.BookInfoService;
 import com.boogie.customerCenter.dto.FaqBoardDto;
 import com.boogie.customerCenter.dto.StoreMapDto;
 import com.boogie.customerCenter.service.CustomerCenterService;
-import com.boogie.order.dto.OrderDto;
-import com.boogie.order.service.OrderService;
-
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
-import org.json.simple.JSONArray;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailException;
-import org.springframework.mail.javamail.JavaMailSender;
-
 import com.boogie.email.Email;
 import com.boogie.email.EmailSender;
 import com.boogie.index.service.IndexService;
+import com.boogie.member.dto.MemberDto;
 import com.boogie.member.service.MemberService;
-
+import com.boogie.order.dto.OrderDto;
+import com.boogie.order.service.OrderService;
 import com.boogie.recommend.service.RecommendService;
-import com.boogie.search.dto.SearchDto;
 import com.boogie.review.service.ReviewService;
+import com.boogie.search.dto.SearchDto;
 import com.boogie.search.service.SearchService;
-import com.fasterxml.jackson.core.JsonParser;
 
 
 /**
@@ -87,8 +74,16 @@ public class BookController {
 	private ReviewService reviewService;
 	@Autowired
 	private IndexService indexService;
-	
+	@Autowired
+	private AdminService adminService;
 
+	//관리자페이지-도서등록 에서 입력한 날짜를 받아올때 필요
+		@InitBinder
+		protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
+		    SimpleDateFormat dateFormat = new SimpleDateFormat("yy-MM-dd");   
+		    dateFormat.setLenient(false);
+		    binder.registerCustomEditor(Date.class, null,  new CustomDateEditor(dateFormat, true));
+		}
 
 	@RequestMapping(value = "/recommend/recommendMain.do", method = RequestMethod.GET)
 	public ModelAndView recommendMain(HttpServletRequest request, HttpServletResponse response) {
@@ -622,5 +617,115 @@ public class BookController {
 		
 		return mav;
 	}
+	
+	@RequestMapping(value="/admin/admin.do", method=RequestMethod.GET)
+	   public ModelAndView admin(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		
+		adminService.adminMain(mav);
+
+	    return mav;
+	   }
+
+	 @RequestMapping(value="/admin/adminMemMng.do", method=RequestMethod.GET)
+	   public ModelAndView adminMemMng(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto){
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("request", request);
+	      mav.addObject("MemberDto", memberDto);
+		 
+	      adminService.adminMemMng(mav);
+	      
+	      return mav;
+	   }
+	  
+	 @RequestMapping(value="/admin/adminMemMngEdit.do", method=RequestMethod.GET)
+	   public ModelAndView adminMemMngEdit(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto){
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("request", request);
+	      mav.addObject("memberDto", memberDto);
+
+	      adminService.adminMemMngEdit(mav);
+	      
+	      return mav;
+	   }
+	 //아직 안만듬 ajax쓸예정이고 안된다면 지워야함.
+	 @RequestMapping(value="/admin/adminMemMngEditOk.do", method=RequestMethod.GET)
+	   public ModelAndView adminMemMngEditOk(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto){
+		 System.out.println("controller");
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("request", request);
+	      mav.addObject("memberDto", memberDto);
+
+	      adminService.adminMemMngEditOk(mav);
+	      
+	      return mav;
+	   }
+	 
+	 @RequestMapping(value="/admin/adminMemMngDel.do", method=RequestMethod.GET)
+	   public ModelAndView adminMemMngDel(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto){
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("request", request);
+	      mav.addObject("memberDto", memberDto);
+
+	      adminService.adminMemMngDel(mav);
+	      
+	      return mav;
+	   }
+	 
+	 	 
+	 @RequestMapping(value="/admin/adminBookMng.do", method=RequestMethod.GET)
+	   public ModelAndView adminBookMng(HttpServletRequest request, HttpServletResponse response, BookInfoDto bookInfoDto){
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("request",request);
+	      mav.addObject("bookInfoDto",bookInfoDto);
+	      
+	      adminService.adminBookMng(mav);
+	      
+	      return mav;
+	   }
+	 
+	 @RequestMapping(value="/admin/adminBookMngInsert.do", method=RequestMethod.GET)
+	   public ModelAndView adminBookMngInsert(HttpServletRequest request, HttpServletResponse response, BookInfoDto bookInfoDto){
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("request",request);
+	      mav.addObject("bookInfoDto",bookInfoDto);
+	      
+	      adminService.adminBookMngInsert(mav);
+	      
+	      return mav;
+	   }
+	 
+	 @RequestMapping(value="/admin/adminFAQMng.do", method=RequestMethod.GET)
+	   public ModelAndView adminFAQMng(HttpServletRequest request, HttpServletResponse response){
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("request", request);
+	      
+	      adminService.adminFAQMng(mav);
+	      
+	      return mav;
+	   }
+	 
+	 @RequestMapping(value="/admin/adminOrdMng.do", method=RequestMethod.GET)
+	   public ModelAndView adminOrdMng(HttpServletRequest request, HttpServletResponse response, OrderDto orderDto){
+		  ModelAndView mav = new ModelAndView();
+		  mav.addObject("request", request);
+		  mav.addObject("orderDto", orderDto);
+		  
+		  adminService.adminOrdMng(mav);
+	      
+	      return mav;
+	   }
+	
+	 @RequestMapping(value="/admin/adminBookRegMng.do", method=RequestMethod.GET)
+	   public ModelAndView adminBookRegMng(HttpServletRequest request, HttpServletResponse response, BookInfoDto bookInfoDto){
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("request",request);
+	      mav.addObject("bookInfoDto",bookInfoDto);
+	      
+	      adminService.adminBookMngInsert(mav);
+	      
+	      return mav;
+	   }
 
 }

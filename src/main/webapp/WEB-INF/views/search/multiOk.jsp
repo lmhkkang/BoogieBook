@@ -75,15 +75,15 @@
 			 </c:if>
 			 
 			 <c:if test="${startPage > pageBlock}">
-			 	<a href="${root}/search/searchOk.do?pageNumber=${startPage-pageBlock}&keyword=${keyword}">[이전]</a>
+			 	<a href="${root}/search/multiOk.do?pageNumber=${startPage-pageBlock}&type=${type}&book_name=${book_name}&author=${author}&publisher=${publisher}&year01=${year01}&month01=${month01}&year02=${year02}&month02=${month02}&price01=${price01}&price02=${price02}&detailtype=detailtype">[이전]</a>
 			 </c:if>
 			 
 			 <c:forEach var="i" begin="${startPage}" end="${endPage}">
-			 	<a href="${root}/search/searchOk.do?pageNumber=${i}&keyword=${keyword}">[${i}]</a>
+			 	<a href="${root}/search/multiOk.do?pageNumber=${i}&type=${type}&book_name=${book_name}&author=${author}&publisher=${publisher}&year01=${year01}&month01=${month01}&year02=${year02}&month02=${month02}&price01=${price01}&price02=${price02}&detailtype=detailtype">[${i}]</a>
 			 </c:forEach>
 			 
 			 <c:if test="${endPage < pageCount}">
-			 	<a href="${root}/search/searchOk.do?pageNumber=${startPage+pageBlock}&keyword=${keyword}">[다음]</a>
+			 	<a href="${root}/search/multiOk.do?pageNumber=${startPage+pageBlock}&type=${type}&book_name=${book_name}&author=${author}&publisher=${publisher}&year01=${year01}&month01=${month01}&year02=${year02}&month02=${month02}&price01=${price01}&price02=${price02}&detailtype=detailtype">[다음]</a>
 			 </c:if>
 		</c:if>
 	</div>

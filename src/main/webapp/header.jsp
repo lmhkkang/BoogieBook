@@ -57,7 +57,7 @@
                 	
                 	bookList = data.split(",");
                 	for(var i=0; i<bookList.length; i++){
-                		bookList[i].replace("\"", "");
+                		bookList[i] = bookList[i].replace(/"/gi, "");  
                 	}
                 	$("#term").autocomplete({	        	
         	            source : bookList

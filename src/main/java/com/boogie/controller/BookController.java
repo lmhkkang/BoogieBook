@@ -480,8 +480,16 @@ public class BookController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
 		mav.addObject("response",response);
-			
+		
 		reviewService.reviewWrite(mav);		
 	}
-
+	
+		@RequestMapping(value = "/search/Several.do", method = RequestMethod.POST)
+	public ModelAndView severalSearch(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+			
+		searchService.severalSearch(mav);
+		return mav;
+	}
 }

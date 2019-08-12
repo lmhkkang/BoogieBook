@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="dao.adminMapper">
+	<select id="AdminSelectDw" resultType="int">
+		select distinct to_char(sysdate, 'D') from manager
+	</select>
+	
+	<select id="AdminCountDw" resultType="int">
+		select count(visit_date) from manager where visit_date like sysdate
+	</select>
+	
+	<select id="AdminCountSunDw" resultType="int">
+		select nvl(sun_count,0) from dw_count
+	</select>
+	
+	<select id="AdminCountMonDw" resultType="int">
+		select nvl(mon_count,0) from dw_count
+	</select>
+	
+	<select id="AdminCountTueDw" resultType="int">
+		select nvl(tue_count,0) from dw_count
+	</select>
+	
+	<select id="AdminCountWedDw" resultType="int">
+		select nvl(wed_count,0) from dw_count
+	</select>
+	
+	<select id="AdminCountThuDw" resultType="int">
+		select nvl(thu_count,0) from dw_count
+	</select>
+	
+	<select id="AdminCountFriDw" resultType="int">
+		select nvl(fri_count,0) from dw_count
+	</select>
+	
+	<select id="AdminCountSatDw" resultType="int">
+		select nvl(sat_count,0) from dw_count
+	</select>
+	
+	<select id="AdminGetMemberDto" resultType="com.boogie.member.dto.MemberDto">
+		<![CDATA[
+			select * from member
+		]]>
+	</select>
+	
+	<select id="AdminCount" resultType="int">
+		select count(*) from member
+	</select>
+	
+	<update id="AdminMemberEdit" parameterType="java.util.HashMap">
+		update member set name=#{name}, phone=#{phone}, email=#{email} where member_num=#{num}
+	</update>
+	
+	<delete id="AdminMemberDelete" parameterType="int">
+		delete member where member_num = #{num}
+	</delete>
+	
+	<select id="AdminGetBookList" resultType="com.boogie.bookInfo.dto.BookInfoDto" parameterType="java.util.HashMap">
+		<![CDATA[
+			select * from (select rownum rnum, a.* from(select * from book)a)b where b.rnum >= #{startRow} and b.rnum <=#{endRow}
+		]]>
+	</select>
+	
+	<insert id="AdminBookInsert">
+		insert into book values(#{type01},#{type02},#{type03},#{img_path},#{book_name},#{author},#{publisher},to_date(#{publish_date}),#{price},#{book_id},#{stock},0,#{story},(sysdate))
+	</insert>
+	
+	<select id="AdminCountBook" resultType="int">
+		select count(*) from book
+	</select>
+	
+	<insert id="AdminFAQInsert">
+		insert into faq_board values(board_number_seq.nextval,#{question_code},#{question},#{answer})
+	</insert>
+	
+	<select id="AdminGetOrderList" resultType="com.boogie.order.dto.OrderDto">
+		select c.*, d.book_name from
+		(select a.*, b.book_id, b.quantity from 
+		(select o.order_id,o.member_id,o.order_date,o.total_price,s.status 
+		  from book_order o inner join order_status s on (o.order_status = s.order_status))a inner join order_detail b on(a.order_id = b.order_id))c 
+		  inner join book d on (c.book_id = d.book_id)
+	</select>
+	
+	<update id="AdminDwInit">
+		update dw_count set sun_count=0, mon_count=0, tue_count=0, wed_count=0, thu_count=0, fri_count=0, sat_count=0
+	</update>
+</mapper>

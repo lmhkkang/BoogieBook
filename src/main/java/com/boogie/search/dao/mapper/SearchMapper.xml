@@ -28,9 +28,14 @@ order by book_name desc) a)b where b.rnum >=#{startRow} and rnum <=#{endRow}
   	
   	select count(*) from book 
   	<where>
+  	<if test="#{startDay}!=null or #{startDay}!='' or #{endDay}!=null or #{endDay}!=''">
+  		<![CDATA[
+  		publish_date between to_date(#{startDay}) and to_date(#{endDay})
+  		]]>
+  		</if>
   		<if test="#{book_name}!=null or #{book_name}!=''">
   		<![CDATA[
-  		 book_name like '%'||#{book_name}||'%'
+  		and book_name like '%'||#{book_name}||'%'
   		]]>
   		</if>
   		
@@ -57,6 +62,13 @@ order by book_name desc) a)b where b.rnum >=#{startRow} and rnum <=#{endRow}
   		and type02 like '%'||#{type}||'%'
   		]]>
   		</if>
+  		
+  		<if test="#{price01}!=null or #{price01}!='' or #{price02}!=null or #{price02}!=''">
+  		<![CDATA[
+  		and price between #{price01} and #{price02}
+  		]]>
+  		</if>
+  		
   </where>
 	</select>
 	
@@ -65,9 +77,21 @@ order by book_name desc) a)b where b.rnum >=#{startRow} and rnum <=#{endRow}
 	select * from (select rownum rnum, a.* from (select * from book
 	]]>
 	<where>
+		<if test="#{startDay}!=null or #{startDay}!='' or #{endDay}!=null or #{endDay}!=''">
+  		<![CDATA[
+  		publish_date between to_date(#{startDay}) and to_date(#{endDay})
+  		]]>
+  		</if>
+  		
+  		<if test="#{price01}!=null or #{price01}!='' or #{price02}!=null or #{price02}!=''">
+  		<![CDATA[
+  		and price between #{price01} and #{price02}
+  		]]>
+  		</if>
+  		
   		<if test="#{book_name}!=null or #{book_name}!=''">
   		<![CDATA[
-  		 book_name like '%'||#{book_name}||'%'
+  		and book_name like '%'||#{book_name}||'%'
   		]]>
   		</if>
   		
@@ -94,6 +118,7 @@ order by book_name desc) a)b where b.rnum >=#{startRow} and rnum <=#{endRow}
   		and type02 like '%'||#{type}||'%'
   		]]>
   		</if>
+  		
   </where>
 	<![CDATA[ )a)b where b.rnum >=#{startRow} and rnum <=#{endRow}]]>
 

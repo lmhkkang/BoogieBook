@@ -55,6 +55,7 @@
                <value>classpath:com/boogie/member/dao/mapper/MemberMapper.xml</value>
                <value>classpath:com/boogie/customerCenter/dao/mapper/CustomerCenterMapper.xml</value>
                <value>classpath:com/boogie/index/dao/mapper/IndexMapper.xml</value>
+               <value>classpath:com/boogie/admin/dao/mapper/AdminMapper.xml</value>
             </list>
          </property>
       </bean>

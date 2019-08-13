@@ -20,7 +20,7 @@
 <body>
 
 <jsp:include page="../../../header.jsp"></jsp:include>
-<div class="container" style="border: 0px solid red; margin: 0px auto; height: 700px; margin-left: 105px; margin-bottom: 250px;">
+<div class="container" style="border: 0px solid red; margin: 0px auto; height: 500px; margin-left: 105px; margin-bottom: 250px;">
 	<div class="row" style="margin: 0px auto; border: 0px solid red;">
     <div class="col-md-8" style="width: 1000px; height: 700px; margin: 0px auto;">  
         <h1 class="entry-title" style="border-bottom: 3px solid black; padding-bottom: 10px;"><span>회원탈퇴</span> </h1>
@@ -64,7 +64,7 @@
           <div class="col-md-5 col-sm-8">
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-              <input type="password" style="width: 350px" class="form-control" name="password" id="password" placeholder="비밀번호를 입력하세요." oninput="checkPassword()" value="${memberDto.password}">
+              <input type="password" style="width: 350px" class="form-control" name="password" id="password" placeholder="비밀번호를 입력하세요." value="${memberDto.password}">
            </div>   
           </div>
         </div>

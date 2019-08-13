@@ -18,6 +18,8 @@
 
 	<script type="text/javascript" src="${root}/resources/javascript/index/index_js.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="${root}/resources/javascript/xhr/xhr.js"></script>
+	
 <script type="text/javascript">
 	var slideIndex = 0;
 	showSlides();
@@ -41,11 +43,45 @@
 		});
 		setTimeout(showSlides, 2000); // Change image every 2 seconds
 	}
+	
+	function toServer(root, book_name) {
+		var url = root + "/recommend/recommendProcxy.do?bookName=" + book_name;
+
+		//alert(url);
+		sendRequest("GET", url, fromServer, null);
+	}
+
+	function fromServer() {
+		//alert(xhr.readyState+","+xhr.status);
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			//alert(xhr.responseXML);
+			console.log(xhr.responseXML)
+			processXML();
+		}
+	}
+
+	function processXML() {
+		var xmlDoc = xhr.responseXML;
+
+		var discription = xmlDoc.getElementsByTagName("description");
+		if (discription.length > 1) {
+			//alert(discription[1].childNodes[0].nodeValue);
+			document.getElementById("todayBook_des").innerHTML = discription[1].childNodes[0].nodeValue;
+		} else {
+			document.getElementById("todayBook_des").innerHTML = "미리보기내역이 존재하지 않습니다.";
+		}
+	}
+	
 </script>
 </head>
-<body onload="indexStart(${root});">
-	<jsp:include page="./header.jsp"></jsp:include>
+<c:if test="${todayDto.book_id == null}">
+<body onload="indexStart('${root}');">
+</c:if>
+<c:if test="${todayDto.book_id != null}">
+<body>
+</c:if>
 
+	<jsp:include page="./header.jsp"></jsp:include>
 	<div id="content">
 		<div class="section1">
 			<div class="center" id="center">
@@ -82,27 +118,29 @@
 		<div class="section2">
 			<div class="center" id="center">
 				<div class="tmp1">
+				<a href="${root}/book/bookInfo.do?book_id=${todayDto.book_id}">
+				<body onload="toServer('${root}','${todayDto.book_name}')">
 					<div class="todayBook_form">
-						<div class="todayBook_img"></div>
+						<div class="todayBook_img"><img src="${todayDto.img_path}" width="100%" height="95%"></div>
 						<div class="todayBook_subject_form">
 							<div class="todayBook_sub">
 								<div class="todayBook_subject">
-									<div class="todayBook_subject1">책 소제목</div>
+									<div class="todayBook_subject1"><fmt:formatDate value="${todayDto.publish_date}"
+											pattern="yyyy-MM-dd" /></div>
 									<div class="todayBook_subject2">
-										<b>책 제목</b>
+										<b>${todayDto.book_name}</b>
 									</div>
 									<div class="todayBook_subject3">
-										인터넷 판매가: <b style="color: red">19,800원</b> (출판사 | 지은이)
+										인터넷 판매가: <b style="color: red"><fmt:formatNumber value="${todayDto.price}" pattern="#,###" /></b> (${todayDto.publisher} | ${todayDto.author})
 									</div>
 								</div>
-								<div class="todayBook_subject_img"></div>
+								<div class="todayBook_subject_img"><img style="width:100%; height:100%;" src="${root}/resources/images/index/todayBook.PNG"></div>
 							</div>
-							<div class="todayBook_des">책 내용 미리보기 책 내용 미리보기 책 내용 미리보기 책
-								내용 미리보기 책 내용 미리보기 책 내용 미리보기 책 내용 미리보기 책 내용 미리보기 책 내용 미리보기 책 내용
-								미리보기 책 내용 미리보기 책 내용 미리보기 책 내용 미리보기 책 내용 미리보기 책 내용 미리보기 책 내용 미리보기
-								책 내용 미리보기 책 내용 미리보기 책 내용 미리보기 책 내용 미리보기 책 내용 미리보기</div>
+							<div class="todayBook_des" id="todayBook_des"></div>
 						</div>
 					</div>
+					</body>
+					</a>
 				</div>
 			</div>
 		</div>

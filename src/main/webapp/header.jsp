@@ -57,10 +57,9 @@
 	                url : "${root}/search/autocomplet.do",
 	                dataType : "text",
 	                success : function(data) {
-	                   
 	                   bookList = data.split(",");
 	                   for(var i=0; i<bookList.length; i++){
-	                      bookList[i].replace("\"", "");
+	                      bookList[i] = bookList[i].replace(/"/gi, "");	                      
 	                   }
 	                   $("#term").autocomplete({              
 	                       source : bookList
@@ -152,7 +151,7 @@
 			<div id="center">
 				<ul class="center">
 					<li><a href="#">국내도서</a></li>
-					<li><a href="#">베스트셀러</a></li>
+					<li><a href="${root}/bestSeller/bestSellerMain.do">베스트셀러</a></li>
 					<li><a href="#">신간도서</a></li>
 					<li><a href="${root}/search/detailSearch.do">상세검색</a></li>
 					<c:if test="${id != null}">

@@ -385,8 +385,16 @@ public class BookController {
 		return mav;
 	}	
 	
-	
+	@RequestMapping(value = "/bestSeller/bestSellerMain.do", method = RequestMethod.GET)
+	public ModelAndView bestSellerMain(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
 		
+		bookInfoService.bestSellerMain(mav);
+		return mav;
+	}	
+	
+			
 	@RequestMapping(value = "/search/detailSearch.do", method = RequestMethod.GET)
 	public ModelAndView detailSearchMain(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
@@ -583,7 +591,6 @@ public class BookController {
 		acc[i]=a.get(i).getBook_name();		
 		}
 		
-		 
 		return acc;
 	}
 	
@@ -597,11 +604,13 @@ public class BookController {
 	}
 	
 	@RequestMapping(value = "/index/index.do", method = RequestMethod.GET)
-	public void IndexStart(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView IndexStart(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("request", request);
-			
-		indexService.indexGetInfo(mav);		
+		System.out.println("controller");
+		
+		indexService.indexGetInfo(mav);	
+		
+		return mav;
 	}
 
 }

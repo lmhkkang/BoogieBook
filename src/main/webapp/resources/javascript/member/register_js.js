@@ -135,7 +135,7 @@ function selectAllCheck(){
 
 function checkId(){
     var id = $('#id').val();
-    
+
     var path = "/homepage/member/idCheck.do";
     var idReg = /^[a-z]+[a-zA-Z0-9]{5,19}$/g;
 

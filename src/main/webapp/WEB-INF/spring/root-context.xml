@@ -1,82 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
-	
-	<!-- Root Context: defines shared resources visible to all other web components -->
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:tx="http://www.springframework.org/schema/tx"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+   
+   <!-- Root Context: defines shared resources visible to all other web components -->
 
 
-<!-- 		DB -->
-<!-- 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
-<!-- 	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property> -->
-<!-- 	<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property> -->
-<!-- 	<property name="username" value="mvc"></property> -->
-<!-- 	<property na me="password" value="1234"></property> -->
-<!-- 	</bean> -->
+<!--       DB -->
+<!--    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
+<!--    <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property> -->
+<!--    <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property> -->
+<!--    <property name="username" value="mvc"></property> -->
+<!--    <property na me="password" value="1234"></property> -->
+<!--    </bean> -->
 
 
- 		<!-- POOL  -->
-		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-			<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
-			<property name="url" value="jdbc:oracle:thin:@192.168.12.42:1521:xe"></property>
-			<property name="username" value="boogie"></property>
-			<property name="password" value="1234"></property>
-	
-			<property name="maxActive" value="50"></property>
-			<property name="maxIdle" value="10"></property>
-		</bean>
-	
-		<!-- 내가 만든 데이터베이스 -->
-<!-- 		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> -->
-<!-- 			<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property> -->
-<!-- 			<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property> -->
-<!-- 			<property name="username" value="boogiebooktest"></property> -->
-<!-- 			<property name="password" value="1234"></property> -->
-	
-<!-- 			<property name="maxActive" value="50"></property> -->
-<!-- 			<property name="maxIdle" value="10"></property> -->
-<!-- 		</bean> -->
+       <!-- POOL  -->
+      <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+         <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+         <property name="url" value="jdbc:oracle:thin:@192.168.12.42:1521:xe"></property>
+         <property name="username" value="boogie"></property>
+         <property name="password" value="1234"></property>
+   
+         <property name="maxActive" value="50"></property>
+         <property name="maxIdle" value="10"></property>
+      </bean>
+   
+      <!-- 내가 만든 데이터베이스 -->
+<!--       <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> -->
+<!--          <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property> -->
+<!--          <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property> -->
+<!--          <property name="username" value="boogiebooktest"></property> -->
+<!--          <property name="password" value="1234"></property> -->
+   
+<!--          <property name="maxActive" value="50"></property> -->
+<!--          <property name="maxIdle" value="10"></property> -->
+<!--       </bean> -->
 
 
- 		<!-- MyBatis : sqlSessionFactoryBean  -->
-		<bean id="sqlSessionFactoryBean"
-			class="org.mybatis.spring.SqlSessionFactoryBean">
-			<property name="dataSource" ref="dataSource"></property>
-			<property name="configLocation" value="classpath:com/boogie/search/dao/mapper/sqlMapconfig.xml"></property>
-			<property name="mapperLocations">			
-				<list>
-					<value>classpath:com/boogie/review/dao/mapper/ReviewMapper.xml</value>
-					<value>classpath:com/boogie/recommend/dao/mapper/RecommendMapper.xml</value>
-					<value>classpath:com/boogie/order/dao/mapper/orderMapper.xml</value>
-					<value>classpath:com/boogie/bookInfo/dao/mapper/BookInfoMapper.xml</value>
-					<value>classpath:com/boogie/search/dao/mapper/SearchMapper.xml</value>
-					<value>classpath:com/boogie/member/dao/mapper/MemberMapper.xml</value>
-					<value>classpath:com/boogie/customerCenter/dao/mapper/CustomerCenterMapper.xml</value>
-					<value>classpath:com/boogie/index/dao/mapper/IndexMapper.xml</value>
-				</list>
-			</property>
-		</bean>
+       <!-- MyBatis : sqlSessionFactoryBean  -->
+      <bean id="sqlSessionFactoryBean"
+         class="org.mybatis.spring.SqlSessionFactoryBean">
+         <property name="dataSource" ref="dataSource"></property>
+         <property name="configLocation" value="classpath:com/boogie/search/dao/mapper/sqlMapconfig.xml"></property>
+         <property name="mapperLocations">         
+            <list>
+               <value>classpath:com/boogie/review/dao/mapper/ReviewMapper.xml</value>
+               <value>classpath:com/boogie/recommend/dao/mapper/RecommendMapper.xml</value>
+               <value>classpath:com/boogie/order/dao/mapper/orderMapper.xml</value>
+               <value>classpath:com/boogie/bookInfo/dao/mapper/BookInfoMapper.xml</value>
+               <value>classpath:com/boogie/search/dao/mapper/SearchMapper.xml</value>
+               <value>classpath:com/boogie/member/dao/mapper/MemberMapper.xml</value>
+               <value>classpath:com/boogie/customerCenter/dao/mapper/CustomerCenterMapper.xml</value>
+               <value>classpath:com/boogie/index/dao/mapper/IndexMapper.xml</value>
+            </list>
+         </property>
+      </bean>
 
-	 	<!-- MyBatis : sqlSessionTemplate  -->
-		<bean id="sqlSessionTemplate"
-			class="org.mybatis.spring.SqlSessionTemplate">
-			<constructor-arg ref="sqlSessionFactoryBean"></constructor-arg>
-		</bean>
+       <!-- MyBatis : sqlSessionTemplate  -->
+      <bean id="sqlSessionTemplate"
+         class="org.mybatis.spring.SqlSessionTemplate">
+         <constructor-arg ref="sqlSessionFactoryBean"></constructor-arg>
+      </bean>
 
- 		<!-- Transaction  -->
-<!-- 		<bean id="transactionManager" -->
-<!-- 			class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> -->
-<!-- 			<property name="dataSource" ref="dataSource"></property> -->
-<!-- 		</bean> -->
+       <!-- Transaction  -->
+<!--       <bean id="transactionManager" -->
+<!--          class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> -->
+<!--          <property name="dataSource" ref="dataSource"></property> -->
+<!--       </bean> -->
 
-		<tx:annotation-driven
-			transaction-manager="transactionManager" />	
-	
-	<bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+      <tx:annotation-driven
+         transaction-manager="transactionManager" />   
+   
+   <bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
 
-	<!-- gmail -->
+   <!-- gmail -->
     <bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl" >
         <property name="host" value="smtp.gmail.com" />
         <property name="port" value="587" />
@@ -88,7 +88,7 @@
                 <prop key="mail.smtp.starttls.enable">true</prop>
                 <prop key="mail.smtp.auth">true</prop>  
                 <prop key="mail.smtp.starttls.enable">true</prop>
-              	<prop key="mail.debug">true</prop>       
+                 <prop key="mail.debug">true</prop>       
             </props>
         </property>
     </bean>

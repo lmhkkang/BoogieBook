@@ -84,6 +84,10 @@ a:hover{
 }
 
 /* Fading animation */
+
+a:hover{
+	color:black;
+}
 .fade {
   -webkit-animation-name: fade;
   -webkit-animation-duration: 1.5s;
@@ -139,17 +143,19 @@ a:hover{
 .todayBook_form{
     border: 1px solid #CCCCCC;
     width: 80%;
-    height: 200px;
+    height: 220px;
     margin: 10px auto;
     padding-left: 50px;
     padding-right: 50px;
 }
 
 .todayBook_img{
-    border: 1px solid black;
+	margin-top: 5px;
+	margin-bottom:5px;
+    border: 1px solid #CCCCCC;
     float: left;
     width: 20%;
-    height: 100%;
+    height: 95%;
 }
 
 .todayBook_subject_form{
@@ -168,13 +174,11 @@ a:hover{
 
 .todayBook_subject{
     width: 75%;
-    height: 100%;
     border: 0px solid black;
     float: left;
 }
 .todayBook_subject1{
     width: 100%;
-    height: 30%;
     border: 0px solid red;
     font-size: 0.8em;
     text-align: left;
@@ -185,7 +189,6 @@ a:hover{
 }
 .todayBook_subject2{
     width: 100%;
-    height: 30%;
     border: 0px solid red;
     text-align: left;
     line-height: 1.3;
@@ -193,7 +196,6 @@ a:hover{
 }
 .todayBook_subject3{
     width: 100%;
-    height: 30%;
     border: 0px solid red;
     text-align: left;
     line-height: 2;
@@ -203,14 +205,13 @@ a:hover{
 .todayBook_subject_img{
     width: 20%;
     height: 100%;
-    border: 1px solid black;
+    border: 0px solid black;
     float: right;
 }
 
 .todayBook_des{
     border: 0px dotted green;
     width: 100%;
-    height: 45%;
     text-align: left;
     line-height: 1.3;
     font-size: 0.9em;
@@ -291,6 +292,11 @@ a:hover{
 }
 .spot_m img{
 	padding-top: 0px !important;
+}
+
+.todayBook_subject_img img{
+	padding-top: 0px !important;
+	vertical-align: top !important;
 }
 
 .spot_r{

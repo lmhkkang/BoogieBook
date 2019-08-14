@@ -42,7 +42,6 @@ public class SearchServiceImp implements SearchService {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 
-		
 		String keyword = request.getParameter("keyword");
 
 		BookAspect.logger.info(BookAspect.logMsg + "keyword: " + keyword);
@@ -62,7 +61,6 @@ public class SearchServiceImp implements SearchService {
 		List<SearchDto> searchResult = null;
 		List<SearchDto> searchPageResult = null;
 
-		
 		searchResult = searchDao.keywordSearch(keyword);
 		count = searchResult.size();
 		searchPageResult = searchDao.pageList(keyword, startRow, endRow);
@@ -81,6 +79,7 @@ public class SearchServiceImp implements SearchService {
 
 		mav.setViewName("search/searchOk");
 	}
+
 	@Override
 	public void multiOk(ModelAndView mav) throws ParseException {
 		Map<String, Object> map = mav.getModelMap();
@@ -90,19 +89,28 @@ public class SearchServiceImp implements SearchService {
 		String author = request.getParameter("author");
 		String publisher = request.getParameter("publisher");
 		String pageNumber = request.getParameter("pageNumber");
-		
+
 		String year01 = request.getParameter("year01");
 		String month01 = request.getParameter("month01");
-		String day1=year01+"-"+month01+"-"+"01";
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-mm-dd");
-		Date startDay = sdf.parse(day1);
-		
-		
-		String year02 = request.getParameter("year01");
-		String month02 = request.getParameter("month01");
-		String day2=year02+"-"+month02+"-"+"01";
-		Date endDay = sdf.parse(day2);
-		
+		String day1 = year01 + "-" + month01 + "-" + "01";
+
+		String year02 = request.getParameter("year02");
+		String month02 = request.getParameter("month02");
+		String day2 = year02 + "-" + month02 + "-" + "01";
+		BookAspect.logger.info(BookAspect.logMsg + "day1: " + day1 + "\t day2" + day2);
+
+		String price01 = request.getParameter("price01");
+		String price02 = request.getParameter("price02");
+
+		if (price01 == null || price01 == "") {
+			price01 = "0";
+		}
+		if (price02 == null || price02 == "") {
+			price02 = "999999";
+		}
+		int startprice = Integer.parseInt(price01);
+		int endprice = Integer.parseInt(price02);
+
 		int boardSize = 5;
 
 		if (pageNumber == null || pageNumber == "")
@@ -113,32 +121,69 @@ public class SearchServiceImp implements SearchService {
 		int endRow = currentPage * boardSize;// 1*10=10
 
 		int count = 0;
-		
-		count=searchDao.searchCount(type, book_name, author, publisher);
+
+		count = searchDao.searchCount(type, book_name, author, publisher, day1, day2, startprice, endprice);
 		BookAspect.logger.info(BookAspect.logMsg + "count: " + count);
 		List<SearchDto> searchPageResult = null;
-		searchPageResult = searchDao.multiPageList(type,book_name,author,publisher, startRow, endRow);
-		
+		searchPageResult = searchDao.multiPageList(type, book_name, author, publisher, startRow, endRow, day1, day2,
+				startprice, endprice);
+
 		mav.addObject("searchPageResult", searchPageResult);
 		mav.addObject("count", count);
 		mav.addObject("currentPage", currentPage);
-		
+
 		mav.addObject("boardSize", boardSize);
 		mav.addObject("type", type);
 		mav.addObject("book_name", book_name);
 		mav.addObject("author", author);
 		mav.addObject("publisher", publisher);
 		
+
+		mav.addObject("year01", year01);
+		mav.addObject("month01", month01);
+		mav.addObject("year02", year02);
+		mav.addObject("month02", month02);
+		mav.addObject("price02", price02);
+		mav.addObject("price01", price01);
+		
 		mav.setViewName("search/multiOk");
 	}
-	@Override	
+
+	@Override
 	public List<SearchDto> autocomplete(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		HttpServletResponse response = (HttpServletResponse) map.get("response");
+
+		List<SearchDto> list = searchDao.listAll2(); // result값이 포함되어 있는 emp테이블의 네임을 리턴
+
+		return list;
+	}
+
+	@Override
+	public void severalSearch(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		String content = request.getParameter("content");
+		BookAspect.logger.info(BookAspect.logMsg + "content: " + content);
+		content = content.trim();
+		String[] keyword = content.split("\n");
+
+		for (int i = 0; i < keyword.length; i++) {
+			keyword[i] = keyword[i].trim();
+		}
+
+		BookAspect.logger.info(BookAspect.logMsg + "keywords: " + keyword.length);
+		HashMap<Integer, List<SearchDto>> listMap = new HashMap<Integer, List<SearchDto>>();
 		
-		 List<SearchDto> list = searchDao.listAll2(); //result값이 포함되어 있는 emp테이블의 네임을 리턴
-		 
-		 return list;
+				
+		for(int i=0; i<keyword.length; i++) {
+			 listMap.put(i, searchDao.keywordSearch(keyword[i]));
+			 mav.addObject("searchResult"+i, listMap.get(i));
+			 mav.addObject("count"+i, listMap.get(i).size());
+			 mav.addObject("keyword"+i, keyword[i]);
+		}				
+		mav.addObject("content", content);
+		mav.setViewName("search/severalSearchOk");
 	}
 }

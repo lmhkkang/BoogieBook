@@ -218,15 +218,7 @@ Kakao.Auth.createLoginButton({
     }
 });
  
-// 로그아웃 처리
-function logoutWithKakao(){
-    Kakao.Auth.logout();
-    alert('카카오 로그아웃 완료!');
-    setCookie("kakao_login","",-1);  // 쿠키삭제 (로그아웃)
-    //deleteCookie( "kakao_login" ); 쿠키삭제 다른 방법
-    createLoginKakao();
-    window.location.href="/homepage/index.jsp";
-}
+
  
  
  

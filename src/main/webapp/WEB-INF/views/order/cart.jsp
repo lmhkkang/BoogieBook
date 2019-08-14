@@ -29,7 +29,7 @@
                                 <th scope="col"> </th>
                                 <th scope="col">도서</th>
                                 <th scope="col">재고</th>
-                                <th scope="col" class="text-center">수량</th>
+								<th scope="col" class="text-center">수량</th>
                                 <th scope="col" class="text-right">가격</th>
                                 <th scope="col" class="text-right"><button type="button" class="btn btn-danger">선택삭제</button></th>
                             </tr>

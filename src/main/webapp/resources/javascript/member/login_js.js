@@ -39,13 +39,13 @@ function registerFun(){
 
 function forgetIdFun(){
 	var url="/homepage/member/forgetId.do"; 
-	window.open(url, "", "width=380, height=350, left=450, top=250, scrollbars=0, menubar=no, toolbar=0");
+	window.open(url, "", "width=450, height=350, left=450, top=250, scrollbars=0, menubar=no, toolbar=0");
 
 }
 
 function forgetPasswordFun(){
 	var url="/homepage/member/forgetPassword.do";
-	window.open(url, "", "width=380, height=350, left=450, top=250, scrollbars=0, menubar=no, toolbar=0");
+	window.open(url, "", "width=450, height=350, left=450, top=250, scrollbars=0, menubar=no, toolbar=0");
 }
 
 $(document).ready(function(){

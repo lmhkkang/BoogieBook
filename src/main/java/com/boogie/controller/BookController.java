@@ -29,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.InternalResourceView;
 
 import com.boogie.aop.BookAspect;
+import com.boogie.bookInfo.dto.BookInfoDto;
 import com.boogie.bookInfo.service.BookInfoService;
 import com.boogie.customerCenter.dto.FaqBoardDto;
 import com.boogie.customerCenter.dto.StoreMapDto;
@@ -394,7 +395,33 @@ public class BookController {
 		return mav;
 	}	
 	
-			
+	@RequestMapping(value = "/bestSeller/indexBestSeller.do", method = RequestMethod.GET)
+	public @ResponseBody List<BookInfoDto> indexBestSeller(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+
+		return bookInfoService.indexBestSeller(mav);
+	}
+	
+	@RequestMapping(value = "/newBook/newBookMain.do", method = RequestMethod.GET)
+	public ModelAndView newBookMain(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		
+		bookInfoService.newBookMain(mav);
+		return mav;
+	}	
+	
+	@RequestMapping(value = "/koreanBook/koreanBookMain.do", method = RequestMethod.GET)
+	public ModelAndView koreanBookMain(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		
+		bookInfoService.koreanBookMain(mav);
+		return mav;
+	}	
+	
+	
+				
 	@RequestMapping(value = "/search/detailSearch.do", method = RequestMethod.GET)
 	public ModelAndView detailSearchMain(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
@@ -599,10 +626,20 @@ public class BookController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
 		mav.addObject("response",response);
-			
+		
 		reviewService.reviewWrite(mav);		
 	}
 	
+
+		@RequestMapping(value = "/search/Several.do", method = RequestMethod.POST)
+	public ModelAndView severalSearch(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+			
+		searchService.severalSearch(mav);
+		return mav;
+	}
+
 	@RequestMapping(value = "/index/index.do", method = RequestMethod.GET)
 	public ModelAndView IndexStart(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();

@@ -277,7 +277,7 @@ function checkContactNum(){
 
 function readContent(obj){
 	var url="/homepage/member/content.do?" + "check=" + obj ;
-	window.open(url, "", "width=400, height=400, scrollbars=yes");
+	window.open(url, "", "width=1100, height=800, scrollbars=no");
 }
 
 function zipcodeRead(){

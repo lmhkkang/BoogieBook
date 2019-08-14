@@ -17,12 +17,15 @@
 	<link rel="styleSheet" type="text/css" href="${root}/resources/css/recommend/recommend_content.css" />
 	<script type="text/javascript" src="${root}/resources/javascript/book/bookInfo.js"></script>
 	<script type="text/javascript" src="${root}/resources/javascript/xhr/xhr.js"></script>
+	<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+	<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
 </head>
+
 <body>
 	<jsp:include page="../../../header.jsp"></jsp:include>
 	<div class="center">
 		<div class="section1_l">
-			<ul class="book_list">
+			<ul class="book_list" id="book_menu">
 				<li><a href="${root}/bestSeller/bestSellerMain.do">종합</a></li>
 				<li><a href="${root}/bestSeller/bestSellerMain.do?bookType=소설">소설</a></li>
 				<li><a href="${root}/bestSeller/bestSellerMain.do?bookType=시/에세이">시/에세이</a></li>

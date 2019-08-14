@@ -21,8 +21,30 @@
    
    <select id="selectBestSeller" parameterType="String" resultType="com.boogie.bookInfo.dto.BookInfoDto">
    <![CDATA[
-   		select * from book 
-   		where type02 like #{bookType} and rownum <= 10 order by sales_volume desc
+   		select * from (select rownum rnum, a.* from (select * from book 
+   		where type02 like #{bookType} order by sales_volume desc)a)b where rnum <= 10
    	]]>
    </select>
+   
+   <select id="selectNewBook" parameterType="String" resultType="com.boogie.bookInfo.dto.BookInfoDto">
+   <![CDATA[
+   		select * from (select rownum rnum, a.* from (select * from book 
+   		where type02 like #{bookType} and publish_date < sysdate order by publish_date desc)a)b where rnum <= 10
+   	]]>
+   </select>
+    
+   <select id="bookCount" resultType="int">
+  	<![CDATA[
+   		select count(*) from book
+   	]]>
+   </select>
+   
+   <select id="selectKoreanBook" parameterType="java.util.HashMap" resultType="com.boogie.bookInfo.dto.BookInfoDto">
+  	<![CDATA[
+   		select b.* from 
+   		(select rownum rnum, a.* from (select * from book where type02 like #{bookType})a)b 
+   		where rnum>=#{startRow} and rnum<=#{endRow} 
+   	]]>
+   </select>
+
 </mapper>

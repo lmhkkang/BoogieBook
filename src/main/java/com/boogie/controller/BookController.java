@@ -31,6 +31,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.boogie.admin.service.AdminService;
 import com.boogie.aop.BookAspect;
+
 import com.boogie.bookInfo.dto.BookInfoDto;
 import com.boogie.bookInfo.service.BookInfoService;
 import com.boogie.customerCenter.dto.FaqBoardDto;
@@ -393,7 +394,33 @@ public class BookController {
 		return mav;
 	}	
 	
-			
+	@RequestMapping(value = "/bestSeller/indexBestSeller.do", method = RequestMethod.GET)
+	public @ResponseBody List<BookInfoDto> indexBestSeller(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+
+		return bookInfoService.indexBestSeller(mav);
+	}
+	
+	@RequestMapping(value = "/newBook/newBookMain.do", method = RequestMethod.GET)
+	public ModelAndView newBookMain(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		
+		bookInfoService.newBookMain(mav);
+		return mav;
+	}	
+	
+	@RequestMapping(value = "/koreanBook/koreanBookMain.do", method = RequestMethod.GET)
+	public ModelAndView koreanBookMain(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		
+		bookInfoService.koreanBookMain(mav);
+		return mav;
+	}	
+	
+	
+				
 	@RequestMapping(value = "/search/detailSearch.do", method = RequestMethod.GET)
 	public ModelAndView detailSearchMain(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();

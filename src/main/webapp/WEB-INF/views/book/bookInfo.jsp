@@ -121,14 +121,14 @@
                         </div>
                      </div>
                      <div class="interest_btn">
-							<c:set var="book_id" value="${bookInfoDto.book_id}"/>
-								<button type="submit" class="btn"
-									style="border: 1px solid #5e6b9e;"
-									onclick="javascript:moveToCart('${root}','${book_id}')">장바구니담기</button>
-								<button type="submit" class="btn"
-									style="border: 1px solid #5e6b9e;"
-									onclick="javascript:moveToOrderForm('${root}','${book_id}')">바로구매</button>
-							</div>
+                     <c:set var="book_id" value="${bookInfoDto.book_id}"/>
+                        <button type="submit" class="btn"
+                           style="border: 1px solid #5e6b9e;"
+                           onclick="javascript:moveToCart('${root}','${book_id}')">장바구니담기</button>
+                        <button type="submit" class="btn"
+                           style="border: 1px solid #5e6b9e;"
+                           onclick="javascript:moveToOrderForm('${root}','${book_id}')">바로구매</button>
+                     </div>
                   </div>
                </div>
             </div>

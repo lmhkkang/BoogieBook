@@ -125,4 +125,39 @@
    		where b.book_id = o.book_id
    		and b.book_id = #{book_id} 
    </select>
+   
+   <delete id="dao.orderMapper.cartDeleteButton" parameterType="java.util.HashMap">
+	   	delete from cart 
+	   	where book_id=#{book_id}
+	   	and member_id=#{member_id}
+   </delete>
+   
+   <select id="cartCount" parameterType="String" resultType="int">
+   		select count(*) 
+   		from cart
+   		where member_id=#{member_id}
+   </select>
+   
+   <select id="NonMemberAddCart" parameterType="int" resultType="com.boogie.order.dto.OrderDto">
+   		select img_path, stock, price, book_id, book_name
+   		from book
+   		where book_id = #{book_id}
+   </select>
+   
+   <insert id="NonMemberAddOrder" parameterType="java.util.HashMap">
+   		insert into book_order
+   		values(order_id_seq.nextval, #{member_id}, 1, sysdate, #{total})
+   </insert>
+   
+   <insert id="NonMemberAddOrderDetail" parameterType="java.util.HashMap">
+   		insert into order_detail
+   		values(#{order_id},#{book_id},#{quantity},#{price})
+   </insert>
+   
+   <select id="NonMemberGetOrderInfo" parameterType="int" resultType="com.boogie.order.dto.OrderDto">
+   		select * 
+		from book_order b, order_detail o
+		where b.order_id = o.order_id
+		and b.order_id = #{order_id}
+   </select>
 </mapper>

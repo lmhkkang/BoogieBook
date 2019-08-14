@@ -71,6 +71,21 @@
                });
               
           });
+          
+          $(function(){
+        	 var count = 0;
+        	 $.ajax({
+                 type : "get",
+                 url : "${root}/order/cartCount.do",
+                 dataType : "text",
+                 success : function(data) { 
+                    	$("#cartCount").text(data);
+                    }
+                 ,error : function(){
+                	 alert("failed ");
+                 }                
+             });
+          });
       </script>
 </head>
 <body>
@@ -78,11 +93,11 @@
       <div id="result"></div>
       <div class="gnb">
          <ul class="center">
-            <li class="topHeader_l"><a href="${root}/customerCenter/storeMap.do">매장안내</a><span>∨</span></li>
+            <li class="topHeader_l"><a href="${root}/customerCenter/storeMap.do">매장안내</a><span></span></li>
             <li class="topHeader_l"><a href="#">회원혜택</a><span>∨</span></li>
             <li></li>
             <li class="topHeader_r"><a href="#"></a></li>
-            <li class="topHeader_r"><a href="${root}/order/cart.do"><img width="13px" height="13px" src="${root}/resources/images/keep.jpg"><span>0</span></a></li>
+            <li class="topHeader_r"><a href="${root}/order/cart.do"><img width="13px" height="13px" src="${root}/resources/images/keep.jpg"><span id="cartCount">0</span></a></li>
             <li class="topHeader_r"><a href="${root}/customerCenter/customerService.do">고객센터</a></li>
             <li class="topHeader_r"><a href="#">주문배송</a></li>
 
@@ -153,9 +168,9 @@
       <div class="lnb">
          <div id="center">
             <ul class="center">
-               <li><a href="#">국내도서</a></li>
+               <li><a href="${root}/koreanBook/koreanBookMain.do">국내도서</a></li>
                <li><a href="${root}/bestSeller/bestSellerMain.do">베스트셀러</a></li>
-               <li><a href="#">신간도서</a></li>
+               <li><a href="${root}/newBook/newBookMain.do">신간도서</a></li>
                <li><a href="${root}/search/detailSearch.do">상세검색</a></li>
                <c:if test="${id != null}">
                   <li><a href="${root}/recommend/recommendMain.do?id=${id}">추천도서</a></li>

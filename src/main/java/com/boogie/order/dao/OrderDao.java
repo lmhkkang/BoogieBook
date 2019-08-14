@@ -44,7 +44,16 @@ public interface OrderDao {
 
 	String getBookName(int book_id);
 
-	
+	int cartDeleteButton(String[] book_id, String member_id);
 
+	int cartCount(String member_id);
+
+	OrderDto NonMemberAddCart(int book_id);
+
+	int NonMemberAddOrder(int total, String member_id);
+
+	int NonMemberAddOrderDetail(int order_id, String book_id, int quantity, int price);
+
+	OrderDto NonMemberGetOrderInfo(int order_id);
 
 }

@@ -10,12 +10,14 @@ import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -29,6 +31,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.boogie.admin.service.AdminService;
+import com.boogie.aop.BookAspect;
+
 import com.boogie.bookInfo.dto.BookInfoDto;
 import com.boogie.bookInfo.service.BookInfoService;
 import com.boogie.customerCenter.dto.FaqBoardDto;
@@ -387,7 +391,37 @@ public class BookController {
 
 		bookInfoService.bestSellerMain(mav);
 		return mav;
+
+	
+	}	
+	
+	@RequestMapping(value = "/bestSeller/indexBestSeller.do", method = RequestMethod.GET)
+	public @ResponseBody List<BookInfoDto> indexBestSeller(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+
+		return bookInfoService.indexBestSeller(mav);
 	}
+	
+	@RequestMapping(value = "/newBook/newBookMain.do", method = RequestMethod.GET)
+	public ModelAndView newBookMain(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		
+		bookInfoService.newBookMain(mav);
+		return mav;
+	}	
+	
+	@RequestMapping(value = "/koreanBook/koreanBookMain.do", method = RequestMethod.GET)
+	public ModelAndView koreanBookMain(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		
+		bookInfoService.koreanBookMain(mav);
+		return mav;
+	}	
+	
+	
+				
 
 	@RequestMapping(value = "/search/detailSearch.do", method = RequestMethod.GET)
 	public ModelAndView detailSearchMain(HttpServletRequest request, HttpServletResponse response) {
@@ -413,43 +447,57 @@ public class BookController {
 	public ModelAndView multiResult(HttpServletRequest request, HttpServletResponse response) throws ParseException {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
-
 		searchService.multiOk(mav);
 
 		return mav;
 	}
 
+
 	@RequestMapping(value = "/order/cart.do", method = RequestMethod.GET)
-	public ModelAndView cartWrite(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("request", request);
+	   public ModelAndView cartWrite(HttpServletRequest request, HttpServletResponse response) {
+	      HttpSession  session = request.getSession();
+	      String member_id = (String) session.getAttribute("id");
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("request", request);
+	      mav.addObject("response",response);
+	      
+	      Cookie[] getCookie = request.getCookies();
+	      
+	      String book_id  = request.getParameter("book_id");
+	      System.out.println(book_id);
+	      
+	      if(book_id != null && member_id != null) {
+	         orderService.addToCart(mav);
+	      }else if(book_id != null && getCookie != null) {   //비회원
+	         orderService.NonMemberAddCart(mav);
+	      }else if(book_id == null){
+	         orderService.getCartInfo(mav);
+	      }
 
-		String book_id = request.getParameter("book_id");
-		System.out.println(book_id);
-		if (book_id != null) {
-			orderService.addToCart(mav);
-		}
-		orderService.getCartInfo(mav);
+	      return mav;
+	   }
 
-		return mav;
-	}
-
-	@RequestMapping(value = "/order/orderForm.do", method = RequestMethod.GET)
-	public ModelAndView orderFormWrite(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("request", request);
-
-		String book_id = request.getParameter("book_id");
-
-		if (book_id != null) {
-			orderService.addOrder(mav);
-		}
-		orderService.getOrderForm(mav);
-
-		mav.setViewName("order/orderForm");
-
-		return mav;
-	}
+	@RequestMapping(value="/order/orderForm.do", method=RequestMethod.GET)
+	   public ModelAndView orderFormWrite(HttpServletRequest request, HttpServletResponse response) {
+	      HttpSession  session = request.getSession();
+	      String member_id = (String) session.getAttribute("id");
+	      
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("request", request);
+	      
+	      String book_id  = request.getParameter("book_id");
+	      
+	      if(book_id != null && member_id != null) {   //회원아이디가잇고 바로구매 버튼클릭시
+	         orderService.addOrder(mav);
+	      }else if(book_id == null && member_id != null){
+	         
+	      }
+	      orderService.getOrderForm(mav); //회원아이디 있고 장바구니에서 넘어올때
+	      
+	      mav.setViewName("order/orderForm");
+	      
+	      return mav;
+	   }
 
 	@RequestMapping(value = "/order/payProgress.do", method = RequestMethod.GET)
 	public ModelAndView payProgress(HttpServletRequest request, HttpServletResponse response) {
@@ -458,6 +506,9 @@ public class BookController {
 
 	@RequestMapping(value = "/order/paymentComplete.do", method = RequestMethod.POST)
 	public ModelAndView writeOrderInfo(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession  session = request.getSession();
+		String member_id = (String) session.getAttribute("id");
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
 
@@ -466,7 +517,64 @@ public class BookController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/book/bookInfo.do", method = RequestMethod.GET)
+	
+	@RequestMapping(value="/order/cartDelete.do", method=RequestMethod.POST)
+	public void cartDeleteButton(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession  session = request.getSession();
+		String member_id = (String) session.getAttribute("id");
+		int check = 0;
+		String[] deleteList = null;
+		
+		Enumeration em = request.getParameterNames();
+		while(em.hasMoreElements()){
+		    String parameterName = (String)em.nextElement();
+		    String parameterValue = request.getParameter(parameterName);
+		    deleteList = request.getParameterValues(parameterName);
+		    if(deleteList != null){
+		         for(int i=0; i< deleteList.length; i++){
+		             System.out.println("array_" + parameterName + "=" + deleteList[i]);	             
+		         }
+		         BookAspect.logger.info(BookAspect.logMsg + deleteList.length);
+		    } else {
+		         System.out.println("매개변수로 아무것도 넘어오지 않았습니다.");
+		}
+		    
+		
+		check = orderService.cartDeleteButton(deleteList, member_id);
+		
+		if(check != 0) {
+			try {
+				response.setContentType("text/html; charset=UTF-8");
+				response.getWriter().print(check);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println("cart delete failed.");
+			}
+		}
+	}
+	@RequestMapping(value="/order/cartCount.do",method=RequestMethod.GET, produces = "application/text; charset=utf8")
+	public void cartCount(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession  session = request.getSession();
+		String member_id = (String) session.getAttribute("id");
+		
+		int count = orderService.cartCount(member_id);
+		if(count >= 0) {
+			try {
+				response.setContentType("text/html; charset=UTF-8");
+				response.getWriter().print(count);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println("cartCount에 문제생김");
+		}
+	}
+	
+	@RequestMapping(value="/book/bookInfo.do", method=RequestMethod.GET)
+
 	public ModelAndView writeBookInfo(HttpServletRequest request, HttpServletResponse response) {
 		// 쿠키생성
 				String book_id = request.getParameter("book_id");
@@ -559,7 +667,8 @@ public class BookController {
 		}
 	}
 
-	@RequestMapping(value = "/customerCenter/getAnswer.do", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	
+	@RequestMapping(value="/customerCenter/getAnswer.do",method=RequestMethod.GET, produces = "application/text; charset=utf8")
 	public void getAnswer(HttpServletRequest request, HttpServletResponse response) {
 		int board_number = Integer.parseInt(request.getParameter("board_number"));
 		System.out.println(board_number);

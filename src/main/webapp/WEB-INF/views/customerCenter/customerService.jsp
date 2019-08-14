@@ -146,7 +146,7 @@
 				<c:set var="member_id" value="${member_id}"/>
 				<c:if test="${member_id==admin}">
 					<div class="col-md-12 d-flex justify-content-end">
-						<a class="btn btn-light" href="#">글쓰기</a>
+						<a class="btn btn-light" href="#">위로</a>
 					</div>
 				</c:if>
 			</div>

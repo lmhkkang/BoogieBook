@@ -63,6 +63,7 @@
    function processXML() {
       var xmlDoc = xhr.responseXML;
 
+
       var discription = xmlDoc.getElementsByTagName("description");
       if (discription.length > 1) {
          //alert(discription[1].childNodes[0].nodeValue);
@@ -74,17 +75,18 @@
    
       var bestSellerList;
 
-   
 </script>
 </head>
 <c:if test="${todayDto.book_id == null}">
 <body onload="indexStart('${root}');">
+  
 </c:if>
 <c:if test="${todayDto.book_id != null}">
 <body>
 </c:if>
 
    <jsp:include page="./header.jsp"></jsp:include>
+   <jsp:include page="./recent_product.jsp"></jsp:include>
    <div id="content">
       <div class="section1">
          <div class="center" id="center">
@@ -239,6 +241,7 @@
             </div>
          </div>
       </div>
+
 
       <div class="section4">
          <div class="center" id="center">

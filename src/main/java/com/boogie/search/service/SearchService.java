@@ -13,4 +13,5 @@ public interface SearchService {
 	public void multiOk(ModelAndView mav) throws ParseException;
 	public List<SearchDto> autocomplete(ModelAndView mav);
 	public void severalSearch(ModelAndView mav);
+	public List<SearchDto> getCookies(ModelAndView mav);
 }

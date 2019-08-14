@@ -5,6 +5,12 @@
 
 <mapper namespace="dao.searchMapper">
 
+	<select id="searchOneBook" parameterType="int" resultType="com.boogie.search.dto.SearchDto">  	
+  		<![CDATA[
+  		select * from book where book_id = #{ids}
+  		]]>
+	</select>
+
 	<select id="searchList" parameterType="String"	resultType="com.boogie.search.dto.SearchDto">
   	<![CDATA[
   	select * from book where book_name like '%'||#{keyword}||'%'
@@ -128,6 +134,5 @@ order by book_name desc) a)b where b.rnum >=#{startRow} and rnum <=#{endRow}
 		<![CDATA[
 		select book_name from book
 		]]>
-	</select>
-	
+	</select>			
 </mapper>

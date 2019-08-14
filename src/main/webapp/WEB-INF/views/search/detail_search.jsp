@@ -69,30 +69,25 @@
 		appendYear();
 	}
 	
+	
 	$(function(){
 		
 		$("#1mbtn").click(function(){
-			 var num = $("#month2 option:selected").val()-2;
+			var num = $("#month2 option:selected").val()-2;
 			$("#month option:eq("+num+")").attr("selected","selecetd");
 			
-			 var year = $("#year2 option").index()-1;
-				$("#year option:eq("+year+")").attr("selected","selecetd");
 		});
 		
 		$("#3mbtn").click(function(){
 			 var num = $("#month2 option:selected").val()-4;
 			$("#month option:eq("+num+")").attr("selected","selecetd");
 			
-			 var year = $("#year2 option").index()-1;
-				$("#year option:eq("+year+")").attr("selected","selecetd");
 		});
 		
 		$("#6mbtn").click(function(){
 			 var num = $("#month2 option:selected").val()-7;
 			$("#month option:eq("+num+")").attr("selected","selecetd");
 			
-			 var year = $("#year2 option").index()-1;
-				$("#year option:eq("+year+")").attr("selected","selecetd");
 		});
 		
 		$("#1ybtn").click(function(){
@@ -126,6 +121,7 @@
 </head>
 <body onload="a()">
 <jsp:include page="../../../header.jsp"></jsp:include>
+
 	<div class="all">
 		<div class="tap">
 			<ul>

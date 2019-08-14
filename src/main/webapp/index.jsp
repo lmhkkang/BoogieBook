@@ -12,14 +12,14 @@
 	<link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Maven+Pro|Play&display=swap" rel="stylesheet">
 	<link rel="styleSheet" type="text/css" href="${root}/resources/css/index/index_content.css" />
 	<link rel="styleSheet" type="text/css" href="${root}/resources/css/index/index_footer.css" />
-
+	
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 	<script type="text/javascript" src="${root}/resources/javascript/index/index_js.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script type="text/javascript" src="${root}/resources/javascript/xhr/xhr.js"></script>
-	
+	<script type="text/javascript" src="${root}/resources/javascript/customerCenter/storeMap.js"></script>
 <script type="text/javascript">
 	var slideIndex = 0;
 	showSlides();
@@ -80,7 +80,6 @@
 <c:if test="${todayDto.book_id != null}">
 <body>
 </c:if>
-
 	<jsp:include page="./header.jsp"></jsp:include>
 	<div id="content">
 		<div class="section1">
@@ -224,19 +223,19 @@
 								<b>지점안내<br /></b><b>바로가기</b>
 							</div>
 						</div>
-						<div class="spot_m"><img id="spot_img" style="width:100%; height:100%;" src="${root}/resources/images/index/index_map.PNG"></div>
+						<div class="spot_m"><a href="${root}/customerCenter/storeMap.do"><img id="spot_img" style="width:100%; height:100%;" src="${root}/resources/images/index/index_map.PNG"></a></div>
 						<div class="spot_r">
 							<div class="spot_r_inside">
 								<ul class="spot_list">
-									<li><a>강남점</a></li>
-									<li><a>천호점</a></li>
-									<li><a>군자역점</a></li>
-									<li><a>발산점</a></li>
-									<li><a>목동점</a></li>
-									<li><a>상봉점</a></li>
-									<li><a>홍대점</a></li>
-									<li><a>신촌점</a></li>
-									<li><a>코엑스점</a></li>
+									<li>강남점</li>
+									<li>천호점</li>
+									<li>군자역점</li>
+									<li>발산점</li>
+									<li>목동점</li>
+									<li>상봉점</li>
+									<li>홍대점</li>
+									<li>신촌점</li>
+									<li>코엑스점</li>
 								</ul>
 							</div>
 						</div>

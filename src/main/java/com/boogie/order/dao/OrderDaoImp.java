@@ -131,8 +131,51 @@ public class OrderDaoImp implements OrderDao {
 	public String getBookName(int book_id) {
 		return sqlSessionTemplate.selectOne("selectBookName",book_id);
 	}
-	
-	
 
-
+	@Override
+	public int cartDeleteButton(String[] book_id, String member_id) {
+		HashMap<String, Object> map = null;
+		int check = 0;
+		
+		for(int i=0;i<book_id.length; i++) {
+			map = new HashMap<String, Object>();
+			map.put("book_id", Integer.parseInt(book_id[i]));
+			map.put("member_id", (String)member_id);
+			System.out.println(book_id[i] + member_id);
+			check = sqlSessionTemplate.delete("dao.orderMapper.cartDeleteButton", map);
+			
+			System.out.println(check);
+		}
+		return check;
+	}
+	@Override
+	public int cartCount(String member_id) {
+		return sqlSessionTemplate.selectOne("cartCount", member_id);
+	}
+	@Override
+	public OrderDto NonMemberAddCart(int book_id) {
+		return sqlSessionTemplate.selectOne("NonMemberAddCart",book_id);
+	}
+	
+	@Override
+	public int NonMemberAddOrder(int total, String member_id) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("total",(Integer)total);
+		map.put("member_id",(String)member_id);
+		return sqlSessionTemplate.insert("NonMemberAddOrder",map);
+	}
+	@Override
+	public int NonMemberAddOrderDetail(int order_id, String book_id, int quantity, int price) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("order_id",(Integer)order_id);
+		map.put("book_id",(String)book_id);
+		map.put("quantity",(Integer)quantity);
+		map.put("price",(Integer)price);
+		return sqlSessionTemplate.insert("NonMemberAddOrderDetail",map);
+	}
+	
+	@Override
+	public OrderDto NonMemberGetOrderInfo(int order_id) {
+		return sqlSessionTemplate.selectOne("NonMemberGetOrderInfo",order_id);
+	}
 }

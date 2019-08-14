@@ -87,5 +87,10 @@ public class MemberDaoImp implements MemberDao {
 	public int memberKaKaoDelete(String id) {
 		return sqlSession.delete("dao.MemberMapper.memberKaKaoDelete", id);
 	}
+
+	@Override
+	public int NonMemberAdd(MemberDto memberDto) {
+		return sqlSession.insert("dao.MemberMapper.NonMemberAdd",memberDto);
+	}
 	
 }

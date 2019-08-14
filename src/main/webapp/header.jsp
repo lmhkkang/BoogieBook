@@ -68,6 +68,21 @@
                });
               
           });
+          
+          $(function(){
+        	 var count = 0;
+        	 $.ajax({
+                 type : "get",
+                 url : "${root}/order/cartCount.do",
+                 dataType : "text",
+                 success : function(data) { 
+                    	$("#cartCount").text(data);
+                    }
+                 ,error : function(){
+                	 alert("failed ");
+                 }                
+             });
+          });
       </script>
 </head>
 <body>
@@ -75,11 +90,11 @@
       <div id="result"></div>
       <div class="gnb">
          <ul class="center">
-            <li class="topHeader_l"><a href="${root}/customerCenter/storeMap.do">매장안내</a><span>∨</span></li>
+            <li class="topHeader_l"><a href="${root}/customerCenter/storeMap.do">매장안내</a><span></span></li>
             <li class="topHeader_l"><a href="#">회원혜택</a><span>∨</span></li>
             <li></li>
             <li class="topHeader_r"><a href="#"></a></li>
-            <li class="topHeader_r"><a href="${root}/order/cart.do"><img width="13px" height="13px" src="${root}/resources/images/keep.jpg"><span>0</span></a></li>
+            <li class="topHeader_r"><a href="${root}/order/cart.do"><img width="13px" height="13px" src="${root}/resources/images/keep.jpg"><span id="cartCount">0</span></a></li>
             <li class="topHeader_r"><a href="${root}/customerCenter/customerService.do">고객센터</a></li>
             <li class="topHeader_r"><a href="#">주문배송</a></li>
 

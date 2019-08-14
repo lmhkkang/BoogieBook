@@ -71,17 +71,19 @@
 			document.getElementById("todayBook_des").innerHTML = "미리보기내역이 존재하지 않습니다.";
 		}
 	}
-	
+	 
 </script>
 </head>
 <c:if test="${todayDto.book_id == null}">
 <body onload="indexStart('${root}');">
+  
 </c:if>
 <c:if test="${todayDto.book_id != null}">
 <body>
 </c:if>
 
 	<jsp:include page="./header.jsp"></jsp:include>
+	<jsp:include page="./recent_product.jsp"></jsp:include>
 	<div id="content">
 		<div class="section1">
 			<div class="center" id="center">
@@ -244,7 +246,7 @@
 				</div>
 			</div>
 		</div>
-
+		
 	</div>
 	<jsp:include page="./footer.jsp"></jsp:include>
 

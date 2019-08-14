@@ -11,16 +11,16 @@ li{list-style-type: none;}
 	line-height: 2;
 }
 .row_all > .books{
-	width: 180px; height: 200px;
-	border: 1px solid #cccccc;
+	width: 160px; height: 200px;
+	border: 1px solid #5e6b9e;
 	font-family: "고딕";
-	float: left;
-	margin-right: 20px;
+	text-align: center;
+	margin: 10px 18px;
 }
 .img_file{
 	width: 100px; height: 100px;
 	border: 0px solid red;
-	margin: 0 auto;
+	margin: 10px auto;
 }
 .img_file>img{
 	width: 100px; height: 100px;
@@ -28,6 +28,13 @@ li{list-style-type: none;}
 }
 .book_info {
 	font-size: 11px;
-	text-align: left;
+	text-align: center;
 	border-right: : 1px solid #cccccc;
+}
+
+.book_info li{
+	text-overflow: ellipsis;
+    height: 25px;
+    overflow: hidden;
+    white-space: nowrap;
 }

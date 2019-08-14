@@ -19,6 +19,7 @@
    html .ui-autocomplete {
       height: 300px;
    }
+   .ui-autocomplete-term { font-weight: bold; color: blue; }
    </style>
    <link
       href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Maven+Pro|Play&display=swap"
@@ -49,7 +50,8 @@
    <script src="https://code.jquery.com/jquery.js"></script>
    <!-- jQuery ui library -->
    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-   <script type="text/javascript">    
+   <script type="text/javascript"> 
+  
           $(function() {
              var bookList = new Array();
              $.ajax({
@@ -63,6 +65,7 @@
                       }
                       $("#term").autocomplete({              
                           source : bookList
+                          
                       });
                    }
                });

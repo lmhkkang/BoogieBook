@@ -604,5 +604,6 @@ public class OrderServiceImp implements OrderService {
 		mav.addObject("orderList", orderList);	
 		mav.setViewName("member/nonMemberOrderDetailSearch");
 		
-	}	
+	}
+
 }

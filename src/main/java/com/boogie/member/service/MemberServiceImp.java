@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -405,5 +406,19 @@ public class MemberServiceImp implements MemberService {
 			BookAspect.logger.info(BookAspect.logMsg + "member_id: " + memberDto.toString());
 		}
 		mav.addObject("memberDto", memberDto);
+	}
+
+	@Override
+	public void searchOrder(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpSession session = request.getSession();
+		String member_id = (String)session.getAttribute("id");
+		
+		BookAspect.logger.info(BookAspect.logMsg + member_id);
+		
+		MemberDto memberDto = memberDao.memberSearch(member_id);
+		mav.addObject("memberDto", memberDto);
+		
 	}
 }

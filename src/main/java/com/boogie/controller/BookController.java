@@ -440,8 +440,19 @@ public class BookController {
 		orderService.nonMemberOrderDetailSearch(mav);
 		
 		return mav;
+	}
+	
+	@RequestMapping(value = "/member/searchOrder.do", method = RequestMethod.GET)
+	public ModelAndView searchOrder(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		
+		memberService.searchOrder(mav);
+		orderService.nonMemberOrderDetailSearch(mav);
+	
+		return mav;
 	}	
-			
+				
 	@RequestMapping(value = "/search/detailSearch.do", method = RequestMethod.GET)
 	public ModelAndView detailSearchMain(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();

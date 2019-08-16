@@ -10,3 +10,12 @@ function searchForm(obj){
 		return false;
 	}
 }
+
+function keywordcheck(obj){
+//	alert("OK");
+	if(obj.content.value==""){
+		alert("검색어를 입력하세요");
+		obj.content.focus();
+		return false;
+	}
+}

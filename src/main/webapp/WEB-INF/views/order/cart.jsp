@@ -15,12 +15,18 @@
     <script type="text/javascript" src="${root}/resources/javascript/order/cart.js"></script>
     <script type="text/javascript">
     	function reload(root){
+    		
+    		$("#bar").hide(0);
+    		
     		var url = location.href;
     		var parameter = (url.slice(url.indexOf('?') + 1, url.length)).split('&');
     		if(parameter.length > 1){
     			location.href=root+"/order/cart.do";
     		}
     	}
+    	
+		
+	
     </script> 
 </head>
 

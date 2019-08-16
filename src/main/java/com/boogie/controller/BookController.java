@@ -867,13 +867,30 @@ public class BookController {
 	}
 	
 	@RequestMapping(value = "/search/delcookies.do", method = RequestMethod.GET)
-	public ModelAndView delCookiees(HttpServletRequest request, HttpServletResponse response) {
+	public void delCookiees(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("request", request);
+		System.out.println("test");
+		String id=request.getParameter("id");
+		id="id"+id;
+		Cookie[] cookies = request.getCookies();
 		
+		for(int i=0; i< cookies.length; i++){
+			System.out.println(cookies[i].getName());
+			if(cookies[i].getName().equals(id)) {
+			Cookie cookie=new Cookie(cookies[i].getName(),"");
+			cookie.setPath("/");
+			cookie.setMaxAge(0); // 유효시간을 0으로 설정
+			response.addCookie(cookie); // 응답 헤더에 추가
+
+			}
+		}
 		
+		/*
+		 * System.out.println("쿠키id : "+id); Cookie kc = new Cookie(id, null); //
+		 * choiceCookieName(쿠키 이름)에 대한 값을 null로 지정 kc.setMaxAge(0); // 유효시간을 0으로 설정
+		 * 
+		 * response.addCookie(kc);
+		 */
 		
-		
-	return mav;	
 	}
 }

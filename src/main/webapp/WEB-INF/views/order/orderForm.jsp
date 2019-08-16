@@ -16,6 +16,11 @@
     <script type="text/javascript" src="${root}/resources/javascript/order/orderForm.js"></script>
 	<script type="text/javascript" src="${root}/resources/javascript/jquery.js"></script>
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#bar").hide(0);
+		});
+	</script>
 </head>
 <body>
 <c:set var="book_id" value="${book_id}"/>

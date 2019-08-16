@@ -18,7 +18,13 @@
 	<script type="text/javascript" src="${root}/resources/javascript/book/bookInfo.js"></script>
 	<script type="text/javascript" src="${root}/resources/javascript/xhr/xhr.js"></script>
 </head>
-<body>
+<script type="text/javascript">
+	function head(){
+	$("#ul_center > li:eq(2)").css("background","white");
+	$("#ul_center > li:eq(2) > a").css("color","#5e6b9e");
+	}
+</script>
+<body onload="head();">
 	<jsp:include page="../../../header.jsp"></jsp:include>
 	<div class="center">
 		<div class="section1_l">
@@ -72,8 +78,8 @@
 								</div>
 								<div class="interest_des" id="interest_des"></div>
 								<div class="interest_btn">
-									<button type="button" class="btn" style="border: 1px solid #5e6b9e;" onclick="javascript:moveToCart('${root}','${newBook.book_id}','1')">장바구니담기</button>
-									<button type="button" class="btn" style="border: 1px solid #5e6b9e;" onclick="javascript:moveToOrderForm('${root}','${newBook.book_id}','1')">바로구매</button>
+									<button type="button" class="btn" style="border: 1px solid #5e6b9e;" onclick="javascript:moveToCart2('${root}','${newBook.book_id}','1')">장바구니담기</button>
+									<button type="button" class="btn" style="border: 1px solid #5e6b9e;" onclick="javascript:moveToOrderForm2('${root}','${newBook.book_id}','1')">바로구매</button>
 								</div>
 							</div>
 						</div>		

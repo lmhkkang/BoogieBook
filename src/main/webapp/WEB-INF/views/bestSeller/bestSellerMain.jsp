@@ -20,9 +20,14 @@
 	<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
 	<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
 </head>
-
-<body>
-	<jsp:include page="../../../header.jsp"></jsp:include>
+<script type="text/javascript">
+	function head(){
+	$("#ul_center > li:eq(1)").css("background","white");
+	$("#ul_center > li:eq(1) > a").css("color","#5e6b9e");
+	}
+</script>
+<body onload="head();">
+	<jsp:include page="../../../header.jsp"></jsp:include>	
 	<div class="center">
 		<div class="section1_l">
 			<ul class="book_list" id="book_menu">
@@ -75,8 +80,8 @@
 								</div>
 								<div class="interest_des" id="interest_des"></div>
 								<div class="interest_btn">
-									<button type="button" class="btn" style="border: 1px solid #5e6b9e;" onclick="javascript:moveToCart('${root}','${bestSeller.book_id}','1')">장바구니담기</button>
-									<button type="button" class="btn" style="border: 1px solid #5e6b9e;" onclick="javascript:moveToOrderForm('${root}','${bestSeller.book_id}','1')">바로구매</button>
+									<button type="button" class="btn" style="border: 1px solid #5e6b9e;" onclick="javascript:moveToCart2('${root}','${bestSeller.book_id}','1')">장바구니담기</button>
+									<button type="button" class="btn" style="border: 1px solid #5e6b9e;" onclick="javascript:moveToOrderForm2('${root}','${bestSeller.book_id}','1')">바로구매</button>
 								</div>
 							</div>
 						</div>		

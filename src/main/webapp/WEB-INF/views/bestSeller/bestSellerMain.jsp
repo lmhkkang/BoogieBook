@@ -20,9 +20,14 @@
 	<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
 	<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
 </head>
-
-<body>
-	<jsp:include page="../../../header.jsp"></jsp:include>
+<script type="text/javascript">
+	function head(){
+	$("#ul_center > li:eq(1)").css("background","white");
+	$("#ul_center > li:eq(1) > a").css("color","#5e6b9e");
+	}
+</script>
+<body onload="head();">
+	<jsp:include page="../../../header.jsp"></jsp:include>	
 	<div class="center">
 		<div class="section1_l">
 			<ul class="book_list" id="book_menu">

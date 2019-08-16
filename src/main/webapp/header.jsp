@@ -167,7 +167,7 @@
 
       <div class="lnb">
          <div id="center">
-            <ul class="center">
+            <ul class="center" id="ul_center">
                <li><a href="${root}/koreanBook/koreanBookMain.do">국내도서</a></li>
                <li><a href="${root}/bestSeller/bestSellerMain.do">베스트셀러</a></li>
                <li><a href="${root}/newBook/newBookMain.do">신간도서</a></li>

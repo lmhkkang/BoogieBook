@@ -67,6 +67,10 @@
 		$(".tap").find("a").eq(0).css({"color":"black"});
 		appendMonth();
 		appendYear();
+		
+		$("#ul_center > li:eq(3)").css("background","white");
+		$("#ul_center > li:eq(3) > a").css("color","#5e6b9e");
+		
 	}
 	
 	
@@ -259,18 +263,18 @@
 			</form>
 		</div>
 		</div>
-		<form action="${root}/search/Several.do" method="post">
+		<form action="${root}/search/Several.do" method="post" onsubmit="return keywordcheck(this)">
 		<div id="message2">
 			<div class="da_content">
-					<label>도서명이나 저자 또는 ISBN중 하나를 입력해 주세요 </label>
+					<label>도서를 입력해 주세요 </label>
 				<div class="mid">
 					<div class="textarea">
 						<textarea name="content"></textarea>
 					</div>
 				<div class="subtext">
 					<ul>
-						<li>최대 20개까지 검색할 수 있습니다.</li>
-						<li>검색창에 도서명이나 저자명(역자) 또는 ISBN중 하나를 입력 하세요.</li>
+						<li>최대 5개까지 검색할 수 있습니다.</li>
+						<li>검색창에 도서명을 입력 하세요.</li>
 						<li>검색어와 검색어 사이에는 '엔터'키를 눌러 구분 해 주세요.</li>
 						<li>엑셀 등에서 복사 후 일괄 붙여넣기도 가능합니다.</li>
 					</ul>

@@ -118,8 +118,6 @@
                <li class="topHeader_r"><a href="${root}/member/logout.do">로그아웃</a></li>
                <li class="topHeader_r"><b>${name}님 환영합니다.</b></li>
             </c:if>
-
-
          </ul>
       </div>
 

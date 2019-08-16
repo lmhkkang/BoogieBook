@@ -22,4 +22,6 @@ public interface OrderService {
 
 	void NonMemberOrderInfo(ModelAndView mav);
 
+	void NonMemberDirectOrder(ModelAndView mav);
+
 }

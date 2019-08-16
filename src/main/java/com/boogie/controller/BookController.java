@@ -461,19 +461,19 @@ public class BookController {
 	      mav.addObject("request", request);
 	      mav.addObject("response",response);
 	      
-	      Cookie[] getCookie = request.getCookies();
-	      
+	      Cookie[] getCookie = request.getCookies();    
 	      String book_id  = request.getParameter("book_id");
 	      System.out.println(book_id);
 	      
-	      if(book_id != null && member_id != null) {
-	         orderService.addToCart(mav);
-	      }else if(book_id != null && getCookie != null) {   //비회원
+	      if(member_id != null) {
+	    	  System.out.println("going to addToCart");
+	    	  orderService.addToCart(mav);
+	    	  System.out.println("going to getCartInfo");
+	    	  orderService.getCartInfo(mav);
+	      }else if(member_id == null && getCookie != null) {   //비회원
+	    	  System.out.println("gooing to NonMemberAddCart");
 	         orderService.NonMemberAddCart(mav);
-	      }else if(book_id == null){
-	         orderService.getCartInfo(mav);
 	      }
-
 	      return mav;
 	   }
 
@@ -484,13 +484,20 @@ public class BookController {
 	      
 	      ModelAndView mav = new ModelAndView();
 	      mav.addObject("request", request);
+	      mav.addObject("response",response);
 	      
+	      if(member_id != null && member_id.length() > 3) {
+	    	  if(member_id.substring(0,4)=="NaM") {
+		    	  member_id = null;
+		      }
+	      }
+
 	      String book_id  = request.getParameter("book_id");
 	      
 	      if(book_id != null && member_id != null) {   //회원아이디가잇고 바로구매 버튼클릭시
 	         orderService.addOrder(mav);
-	      }else if(book_id == null && member_id != null){
-	         
+	      }else if(member_id == null || member_id == ""){
+	         orderService.NonMemberDirectOrder(mav);
 	      }
 	      orderService.getOrderForm(mav); //회원아이디 있고 장바구니에서 넘어올때
 	      
@@ -511,8 +518,14 @@ public class BookController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
-
-		orderService.writeOrderInfo(mav);
+	    mav.addObject("response",response);
+	    
+		if(member_id == null || member_id.substring(0,4) =="NaM") {
+			orderService.NonMemberOrderInfo(mav);
+		}else {
+			orderService.writeOrderInfo(mav);
+		}
+		
 
 		return mav;
 	}
@@ -564,7 +577,6 @@ public class BookController {
 			try {
 				response.setContentType("text/html; charset=UTF-8");
 				response.getWriter().print(count);
-				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

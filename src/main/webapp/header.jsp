@@ -184,4 +184,5 @@
       </div>
    </header>
 </body>
+<jsp:include page="./recent_product.jsp"></jsp:include>
 </html>

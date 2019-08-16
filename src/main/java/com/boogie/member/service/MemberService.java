@@ -16,4 +16,5 @@ public interface MemberService {
 	public void memberKaKaoEditOk(ModelAndView mav);
 	public void memberWithdrawalOk(ModelAndView mav);
 	public void memberKaKaoWithdrawalOk(ModelAndView mav);
+	public void nonMemberOrderDetailSearch(ModelAndView mav);
 }

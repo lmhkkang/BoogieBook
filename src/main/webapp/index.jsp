@@ -63,6 +63,7 @@
    function processXML() {
       var xmlDoc = xhr.responseXML;
 
+
       var discription = xmlDoc.getElementsByTagName("description");
       if (discription.length > 1) {
          //alert(discription[1].childNodes[0].nodeValue);
@@ -72,19 +73,20 @@
       }
    }
    
-   	var bestSellerList;
+      var bestSellerList;
 
-   
 </script>
 </head>
 <c:if test="${todayDto.book_id == null}">
 <body onload="indexStart('${root}');">
+  
 </c:if>
 <c:if test="${todayDto.book_id != null}">
 <body>
 </c:if>
 
    <jsp:include page="./header.jsp"></jsp:include>
+   <jsp:include page="./recent_product.jsp"></jsp:include>
    <div id="content">
       <div class="section1">
          <div class="center" id="center">
@@ -150,27 +152,27 @@
 
 
 <script type="text/javascript">
-	var path = "/homepage/bestSeller/indexBestSeller.do";
-	$.ajax({
-	    url:path,
-	    type:'get',
-	    dataType : 'json',
-	    success:function(data){
-	    	getBestSeller(data);
-	    },
-	    error:function(){
-	            alert("에러입니다");
-	    }
-	});
-	
-	function getBestSeller(bestSellerList){
-		for(var i=1; i<9; i++){
-			document.getElementById("img_bestSeller"+i).innerHTML="<a href='${root}/book/bookInfo.do?book_id=" + bestSellerList[i-1].book_id + "'><img src='" + bestSellerList[i-1].img_path + "'width='100%' height='100%' style='line-height: 0px;'></a>";
-			document.getElementById("type_bestSeller"+i).innerHTML="<a href = '${root}/book/bookInfo.do?book_id=" + bestSellerList[i-1].book_id + "'class='th_txt'>" + bestSellerList[i-1].type02 + "</a>";
-			document.getElementById("sub_bestSeller"+i).innerHTML="<a href = '${root}/book/bookInfo.do?book_id=" + bestSellerList[i-1].book_id + "'class='su_txt'>" + bestSellerList[i-1].book_name + "</a>";			
-		}
-		
-	}
+   var path = "/homepage/bestSeller/indexBestSeller.do";
+   $.ajax({
+       url:path,
+       type:'get',
+       dataType : 'json',
+       success:function(data){
+          getBestSeller(data);
+       },
+       error:function(){
+               alert("에러입니다");
+       }
+   });
+   
+   function getBestSeller(bestSellerList){
+      for(var i=1; i<9; i++){
+         document.getElementById("img_bestSeller"+i).innerHTML="<a href='${root}/book/bookInfo.do?book_id=" + bestSellerList[i-1].book_id + "'><img src='" + bestSellerList[i-1].img_path + "'width='100%' height='100%' style='line-height: 0px;'></a>";
+         document.getElementById("type_bestSeller"+i).innerHTML="<a href = '${root}/book/bookInfo.do?book_id=" + bestSellerList[i-1].book_id + "'class='th_txt'>" + bestSellerList[i-1].type02 + "</a>";
+         document.getElementById("sub_bestSeller"+i).innerHTML="<a href = '${root}/book/bookInfo.do?book_id=" + bestSellerList[i-1].book_id + "'class='su_txt'>" + bestSellerList[i-1].book_name + "</a>";         
+      }
+      
+   }
 </script>
       <div class="section3">
          <div class="center" id="center">
@@ -240,6 +242,7 @@
          </div>
       </div>
 
+
       <div class="section4">
          <div class="center" id="center">
             <div class="tmp3">
@@ -249,19 +252,19 @@
                         <b>지점안내<br /></b><b>바로가기</b>
                      </div>
                   </div>
-                  <div class="spot_m"><img id="spot_img" style="width:100%; height:100%;" src="${root}/resources/images/index/index_map.PNG"></div>
+                  <div class="spot_m"><a href="${root}/customerCenter/storeMap.do"><img id="spot_img" style="width:100%; height:100%;" src="${root}/resources/images/index/index_map.PNG"></a></div>
                   <div class="spot_r">
                      <div class="spot_r_inside">
                         <ul class="spot_list">
-                           <li><a>강남점</a></li>
-                           <li><a>천호점</a></li>
-                           <li><a>군자역점</a></li>
-                           <li><a>발산점</a></li>
-                           <li><a>목동점</a></li>
-                           <li><a>상봉점</a></li>
-                           <li><a>홍대점</a></li>
-                           <li><a>신촌점</a></li>
-                           <li><a>코엑스점</a></li>
+                           <li>강남점</li>
+                           <li>천호점</li>
+                           <li>군자역점</li>
+                           <li>발산점</li>
+                           <li>목동점</li>
+                           <li>상봉점</li>
+                           <li>홍대점</li>
+                           <li>신촌점</li>
+                           <li>코엑스점</li>
                         </ul>
                      </div>
                   </div>

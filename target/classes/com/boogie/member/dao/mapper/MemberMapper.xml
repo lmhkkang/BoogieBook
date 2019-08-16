@@ -61,4 +61,12 @@
 		delete from member where member_id=#{id}
 </delete>
 
+<insert id="NonMemberAdd" parameterType="com.boogie.member.dto.MemberDto">
+		insert into member (member_num, member_id, name, email, phone, addr1, addr2, zipcode, non_member, sns_num, register_date)
+		values(member_num_seq.nextval, #{member_id},#{name},#{email},#{phone},#{addr1},#{addr2},#{zipcode},#{non_member},#{sns_num},sysdate)
+</insert>
+
+<select id="nonMemberOrder" parameterType="java.util.HashMap" resultType="com.boogie.member.dto.MemberDto">
+		select * from member where name=#{name} and email=#{email} and non_member=0
+</select>
 </mapper>

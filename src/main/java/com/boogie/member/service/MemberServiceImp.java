@@ -390,4 +390,20 @@ public class MemberServiceImp implements MemberService {
 		mav.setViewName("member/KaKaoWithdrawalOk");
 		
 	}
+
+	@Override
+	public void nonMemberOrderDetailSearch(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		
+		String name = request.getParameter("username");
+		String email = request.getParameter("email");
+		BookAspect.logger.info(BookAspect.logMsg + name + "," + email);
+		
+		MemberDto memberDto = memberDao.nonMemberOrderDetailSearch(name, email);
+		if(memberDto!=null) {
+			BookAspect.logger.info(BookAspect.logMsg + "member_id: " + memberDto.toString());
+		}
+		mav.addObject("memberDto", memberDto);
+	}
 }

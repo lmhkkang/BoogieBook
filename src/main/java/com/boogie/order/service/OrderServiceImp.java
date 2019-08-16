@@ -1,5 +1,6 @@
 package com.boogie.order.service;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,7 +32,6 @@ import com.boogie.order.dto.OrderDto;
  * 2019. 8. 1.
  * @description: 이민호 장바구니 정보 getCartInfo
  */
-
 
 /**
  * @author : 이민호
@@ -89,7 +89,11 @@ public class OrderServiceImp implements OrderService {
 			memberDto =  orderDao.getOrderForm(member_id);
 			BookAspect.logger.info(BookAspect.logMsg + memberDto.toString());
 			
-			mav.addObject("member_id", member_id);
+			if(member_id == null || member_id =="") {
+				mav.addObject("member_id", null);
+			}else {
+				mav.addObject("member_id", member_id);
+			}
 			mav.addObject("memberDto",memberDto);
 			
 		}
@@ -98,8 +102,6 @@ public class OrderServiceImp implements OrderService {
 		mav.setViewName("order/orderForm");
 	}
 	
-	
-
 	//주문정보페이지 정보 write
 	@Override
 	public void writeOrderInfo(ModelAndView mav) {
@@ -358,35 +360,46 @@ public class OrderServiceImp implements OrderService {
 		
 		String book_id = request.getParameter("book_id");
 		String amount = request.getParameter("amount");
-		
+		if(amount == null) {
+			amount = "1";
+		}
 		response.setCharacterEncoding("utf-8");
-		Cookie cookie = new Cookie("book_id",book_id);
+		Cookie cookie = new Cookie("book_id"+book_id,book_id);
 		cookie.setMaxAge(60*60);
 		response.addCookie(cookie);
 		
 		Cookie[] cookies = request.getCookies();
-		String book_identification = null;
+		ArrayList<String> book_identification = new ArrayList<String>();
 		
 		if(cookies != null) {
 			System.out.println("cookies are not null");
 			for(int i=0; i<cookies.length; i++) {
 				System.out.println(cookies[i].getName() +" : " + cookies[i].getValue());
-				if(cookies[i].getName().equals("book_id")) {
-					System.out.println("------------book_id not null---------------");
-					book_identification = cookies[i].getValue();
+				if(cookies[i].getName().length() > 6) {
+					if(cookies[i].getName().substring(0,7).equals("book_id")) {
+						System.out.println("------------book_id not null---------------");
+						book_identification.add(cookies[i].getValue());
+					}
 				}
 			}
 		}
-		System.out.println(book_identification + " ------------------book_identification------------------");		
+		System.out.println(book_identification.size() + " ------------------book_identification size------------------");		
 		ArrayList<OrderDto> cartList = new ArrayList<OrderDto>();
-		OrderDto orderDto = new OrderDto();
+		OrderDto orderDto = null;
 		
-		orderDto = orderDao.NonMemberAddCart(Integer.parseInt(book_identification));
-		orderDto.setQuantity(Integer.parseInt(amount));
-		BookAspect.logger.info(BookAspect.logMsg+orderDto.toString());
-		
-		cartList.add(orderDto);
-		
+		for(int i=0; i<book_identification.size(); i++) {
+			if(book_identification.get(i) == null || book_identification.get(i) == "") {
+				continue;
+			}
+			System.out.println("orderservice 392line ----------- book id : " + book_identification.get(i));
+			orderDto = new OrderDto();
+			orderDto = orderDao.NonMemberAddCart(Integer.parseInt(book_identification.get(i)));
+			orderDto.setQuantity(Integer.parseInt(amount));
+			
+			cartList.add(orderDto);
+			BookAspect.logger.info(BookAspect.logMsg+orderDto.toString());
+		}
+
 		mav.addObject("cartList", cartList);
 		mav.setViewName("order/cart");
 	}
@@ -395,25 +408,40 @@ public class OrderServiceImp implements OrderService {
 	public void NonMemberOrderInfo(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		HttpServletResponse response = (HttpServletResponse) map.get("respone");
+		HttpServletResponse response = (HttpServletResponse) map.get("response");
+		ArrayList<String> bookIdList = new ArrayList<String>();
+		List<OrderDto> bookList = new ArrayList<OrderDto>();
+		
 		String member_id = null;
-				
+		if(member_id == null) {
+			DateFormat sdFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+			Date now = new Date();
+			String nowDate = sdFormat.format(now);
+			member_id = "NaM"+nowDate;
+			
+			Cookie cookie = new Cookie("member_id", member_id);
+			cookie.setMaxAge(60*60);
+			cookie.setPath("/");
+			
+			response.addCookie(cookie);
+		}
+		
+		
 		Cookie[] cookies = request.getCookies();
 		String book_id = null;
 		if(cookies != null) {
 			System.out.println("cookies are not null");
 			for(int i=0; i<cookies.length; i++) {
 				System.out.println(cookies[i].getName() +" : " + cookies[i].getValue());
-				if(cookies[i].getName().equals("book_id")) {
-					System.out.println("------------book_id not null---------------");
-					book_id = cookies[i].getValue();
-				}else if(cookies[i].getName().equals("cp_sessionid")) {
-					member_id = "NAM"+cookies[i].getValue();
+				if(cookies[i].getName().length() > 6) {
+					if(cookies[i].getName().substring(0,7).equals("book_id")) {
+						System.out.println("------------book_id not null---------------");
+						bookIdList.add(cookies[i].getValue());
+					}
 				}
 			}
 		}
-		 
-				
+		 				
 		MemberDto memberDto = new MemberDto();
 		memberDto.setMember_id(member_id);
 		memberDto.setName(request.getParameter("name"));
@@ -432,29 +460,52 @@ public class OrderServiceImp implements OrderService {
 		if(checkMem > 0) {
 			int checkOrder = orderDao.NonMemberAddOrder(Integer.parseInt(request.getParameter("total")),member_id);
 			BookAspect.logger.info(BookAspect.logMsg +  "checkOrder:  "+ checkOrder);
-			
+			int price = 0;
+			int checkOrderDetail = 0;
 			if(checkOrder > 0) {
+				
 				int order_id = orderDao.selectMyOrderNum(member_id);
-				int price = orderDao.getBookPrice(Integer.parseInt(book_id));
-				int checkOrderDetail = orderDao.NonMemberAddOrderDetail(order_id,book_id,Integer.parseInt(request.getParameter("quantity")),price);
-				BookAspect.logger.info(BookAspect.logMsg +  "checkOrderDetail:  "+ checkOrderDetail);
+				
+				for(int i=0; i<cookies.length; i++) {
+					if(cookies[i].getName().length() > 6) {
+						if(cookies[i].getName().substring(0,7).equals("book_id")) {
+							if(cookies[i].getValue() == null || cookies[i].getValue()=="") {
+								continue;
+							}
+							book_id = cookies[i].getValue();
+							price = orderDao.getBookPrice(Integer.parseInt(book_id));
+							checkOrderDetail = orderDao.NonMemberAddOrderDetail(order_id,book_id,Integer.parseInt(request.getParameter("quantity")),price);
+							BookAspect.logger.info(BookAspect.logMsg +  "checkOrderDetail:  "+ checkOrderDetail);
+						}
+					}
+				}
 				
 				if(checkOrderDetail>0) {
 					//paymentComplete에 뿌릴정보 select
 					OrderDto orderDto = new OrderDto();
 					orderDto = orderDao.NonMemberGetOrderInfo(order_id);
-					orderDto.setBook_name(orderDao.getBookName(Integer.parseInt(book_id)));
 					orderDto.setAddr1(request.getParameter("addr1"));
 					orderDto.setAddr2(request.getParameter("addr2"));
 					orderDto.setName(request.getParameter("name"));
-					
-					BookAspect.logger.info(BookAspect.logMsg +  "=============="+ orderDto.toString());
-					
-					orderInfoSendEmail(member_id, orderDto, null);
-			
+					orderDto.setTotal_price(Integer.parseInt(request.getParameter("total")));
+									
+					//book_id 로 book_name & quantity -> bookList에 저장
+					for(int i=0; i<bookIdList.size(); i++) {
+						if(bookIdList.get(i) == null || bookIdList.get(i) == "") {
+							continue;
+						}
+						int bookId = Integer.parseInt(bookIdList.get(i));
+						System.out.println("book_id값 : " + bookId);
+						OrderDto dto = new OrderDto();
+						dto = orderDao.getPayInfoByBookId(bookId);
+						bookList.add(dto);
+						BookAspect.logger.info(BookAspect.logMsg +  "=============="+ dto.toString());
+					}
+
+					orderInfoSendEmail(member_id, orderDto, bookList);
 			
 					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					String transDate = format.format(orderDto.getOrder_date());
+					String transDate = format.format(new Date());
 					try {
 						Date date = format.parse(transDate);
 						orderDto.setOrder_date(date);
@@ -463,19 +514,96 @@ public class OrderServiceImp implements OrderService {
 					}
 		
 					mav.addObject("orderDto", orderDto);
-					mav.addObject("bookList", null);
+					mav.addObject("bookList", bookList);
+					
+					Cookie[] cookiesList = request.getCookies();
+					if(bookList.size() != 0 && cookies != null) {
+						System.out.println("Cookie Delete function");
+						OrderDto oDto = new OrderDto();
+						for(int i=0; i<bookIdList.size(); i++) {
+							System.out.println("cookie 지우는 곳!!!!! " + bookIdList.get(i));
+							for(int j=0; j<cookiesList.length; j++) {
+								if(cookiesList[j].getName().substring(7).equals(bookIdList.get(i))) {
+									System.out.println(cookiesList[j].getName()+"============detlete book_id cookie================");
+									Cookie cookie = new Cookie(cookiesList[j].getName(),"");
+									cookie.setMaxAge(0);
+									response.addCookie(cookie);
+									System.out.println("북아이디지워짐~!~!~!~!~");
+								}else if(cookiesList[j].getName().equals("member_id")) {
+									member_id = null;
+									Cookie cookie = new Cookie(cookiesList[j].getName(),"");
+									cookie.setMaxAge(0);
+									cookie.setPath("/");
+									response.addCookie(cookie);
+									System.out.println("member_id delete from cookie--------------");
+								}
+							}
+						}
+					}
 				}
 			}
 		}
-		
-		mav.setViewName("order/paymentComplete");
-		if(cookies != null) {
-			for(int i=0; i<cookies.length; i++) {
-				cookies[i].setMaxAge(0);
-				response.addCookie(cookies[i]);
-			}
-		}
+		mav.setViewName("order/paymentComplete");	
 	}
-	
-	
+
+	@Override
+	public void NonMemberDirectOrder(ModelAndView mav) {
+		 Map<String, Object> map = mav.getModelMap();
+	      HttpServletRequest request = (HttpServletRequest) map.get("request");
+	      HttpServletResponse response = (HttpServletResponse) map.get("respone");
+	      HttpSession  session = request.getSession();
+
+	      
+	      String member_id = (String) session.getAttribute("id");
+	      String book_id = request.getParameter("book_id");
+	      String quantity = request.getParameter("amount");
+	      
+	      if(quantity==null || quantity == "") {
+	         quantity = "1";
+	      }
+	      if(book_id != null) {
+	    	   Cookie cookie = new Cookie("book_id"+book_id, book_id);
+	 	      cookie.setMaxAge(60*60);
+	 	      cookie.setPath("/");
+	 	      response.addCookie(cookie);
+	      }
+   
+//	      Cookie[] cookies = request.getCookies();
+//	      if(cookies != null && member_id == null) {
+//	         for(int i=0; i<cookies.length; i++) {
+//	            if(cookies[i].getName().equals("cp_sessionid")) {
+//	               member_id = "NaM"+cookies[i].getValue();
+//	            }
+//	         }
+//	      }
+	      System.out.println("=======NON MEMBER ID AND BOOKID====================" + member_id +" : "+ book_id);
+	      
+	      mav.addObject("member_id", member_id);
+	      mav.addObject("book_id", book_id);
+	      mav.addObject("quantity", quantity);
+	}
+
+	@Override
+	public void nonMemberOrderDetailSearch(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		MemberDto memberDto = (MemberDto) map.get("memberDto");
+		List<OrderDto> orderList = new ArrayList<OrderDto>();;
+		
+		System.out.println(memberDto.toString());
+		
+		String member_id = memberDto.getMember_id();
+		
+		BookAspect.logger.info(BookAspect.logMsg + "member_id : " + member_id);
+		orderList = orderDao.nonMemberOrderDetailSearch(member_id);
+		
+		BookAspect.logger.info(BookAspect.logMsg + orderList.size());
+		orderList.get(0).setAddr1(memberDto.getAddr1());
+		orderList.get(0).setAddr2(memberDto.getAddr2());
+		orderList.get(0).setName(memberDto.getName());
+		
+		mav.addObject("orderList", orderList);	
+		mav.setViewName("member/nonMemberOrderDetailSearch");
+		
+	}
+
 }

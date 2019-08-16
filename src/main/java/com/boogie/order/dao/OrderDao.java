@@ -55,5 +55,7 @@ public interface OrderDao {
 	int NonMemberAddOrderDetail(int order_id, String book_id, int quantity, int price);
 
 	OrderDto NonMemberGetOrderInfo(int order_id);
+	
+	List<OrderDto> nonMemberOrderDetailSearch(String member_id);
 
 }

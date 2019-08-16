@@ -64,21 +64,31 @@
    <div class="center">
       <div class="section1_l">
          <ul class="book_list">
-            <li><a>종합</a></li>
-            <li><a>소설</a></li>
-            <li><a>시/에세이/기행</a></li>
-            <li><a>자기계발</a></li>
-            <li><a>가정/생활/요리</a></li>
-            <li><a>건강/의학/미용</a></li>
-            <li><a>인문/교양/철학</a></li>
-            <li><a>역사/신화/문화</a></li>
-            <li><a>유아</a></li>
-            <li><a>어린이</a></li>
-            <li><a>예술/대중문화</a></li>
-            <li><a>여행/취미/레져</a></li>
-            <li><a>잡지</a></li>
-            <li><a>만화</a></li>
-            <li><a>컴퓨터/IT</a></li>
+         	<c:if test="${page == 'koreanBook'}">
+         		<c:set var="pageName" value="${root}/koreanBook/koreanBookMain.do"/>
+         	</c:if>
+         	<c:if test="${page == 'newBook'}">
+         		<c:set var="pageName" value="${root}/newBook/newBookMain.do"/>
+         	</c:if>
+         	<c:if test="${page == 'bestSeller'}">
+         		<c:set var="pageName" value="${root}/bestSeller/bestSellerMain.do"/>
+         	</c:if>
+            <li><a href="${pageName}">종합</a></li>
+            <li><a href="${pageName}?bookType=소설">소설</a></li>
+            <li><a href="${pageName}?bookType=시/에세이">시/에세이</a></li>
+            <li><a href="${pageName}?bookType=소설">자기계발</a></li>
+            <li><a href="${pageName}?bookType=가정/육아">가정/육아</a></li>
+            <li><a href="${pageName}?bookType=건강">건강</a></li>
+            <li><a href="${pageName}?bookType=인문">인문</a></li>
+            <li><a href="${pageName}?bookType=역사/문화">역사/문화</a></li>
+            <li><a href="${pageName}?bookType=취업/수험서">취업/수험서</a></li>
+            <li><a href="${pageName}?bookType=취미/실용/스포츠">취미/실용/스포츠</a></li>
+            <li><a href="${pageName}?bookType=예술/대중문화">예술/대중문화</a></li>
+            <li><a href="${pageName}?bookType=여행">여행</a></li>
+            <li><a href="${pageName}?bookType=잡지">잡지</a></li>
+            <li><a href="${pageName}?bookType=만화">만화</a></li>
+            <li><a href="${pageName}?bookType=컴퓨터/IT">컴퓨터/IT</a></li>
+            
          </ul>
       </div>
       <div class="section1_r">

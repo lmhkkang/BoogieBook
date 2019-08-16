@@ -178,4 +178,9 @@ public class OrderDaoImp implements OrderDao {
 	public OrderDto NonMemberGetOrderInfo(int order_id) {
 		return sqlSessionTemplate.selectOne("NonMemberGetOrderInfo",order_id);
 	}
+
+	@Override
+	public List<OrderDto> nonMemberOrderDetailSearch(String member_id) {
+		return sqlSessionTemplate.selectList("dao.orderMapper.nonMemberOrderDetailSearch", member_id);
+	}
 }

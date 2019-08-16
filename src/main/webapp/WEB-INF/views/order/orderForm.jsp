@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
+
 <!doctype html>
 <html>
 <head>
@@ -15,6 +16,11 @@
     <script type="text/javascript" src="${root}/resources/javascript/order/orderForm.js"></script>
 	<script type="text/javascript" src="${root}/resources/javascript/jquery.js"></script>
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#bar").hide(0);
+		});
+	</script>
 </head>
 <body>
 <c:set var="book_id" value="${book_id}"/>
@@ -27,7 +33,6 @@
 <c:set var="phone" value="${memberDto.phone}"/>
 <c:set var="quantity" value="${quantity}"/>
 <c:set var="total" value="${total}"/>
-
 <jsp:include page="../../../header.jsp"></jsp:include>
 <div style="height: 100px; width: 800px;"></div>
 
@@ -40,7 +45,7 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col"><h3>배송정보</h3></th>
+                                <th scope="col"><h3>배송정보</h3></th>            
                                 <th scope="col">
                                     <!-- Default unchecked -->
                                     <button type="button" class="btn btn-outline-primary" onclick="oldInfo('${name}','${zipcode}','${addr1}','${addr2}','${phone}')">기존정보</button>
@@ -48,7 +53,7 @@
                                 </th>   
                                  <th scope="col">
                                     <!-- Default unchecked -->
-                                    
+                                    ${member_id}
                                 </th>   
                             </tr>
                         </thead>
@@ -61,7 +66,7 @@
                                 <td></td>
                                 <td class="text-right"></td>
                                 <td class="text-right"></td>
-                            </tr>
+                            </tr> 
                             <c:if test="${member_id == null}">
                             	<tr>
 	                                <td style="padding-left:70px"><label>이메일</label></td>

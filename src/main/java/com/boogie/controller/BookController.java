@@ -418,11 +418,41 @@ public class BookController {
 		
 		bookInfoService.koreanBookMain(mav);
 		return mav;
+	}
+	
+	@RequestMapping(value = "/member/nonMemberCheck.do", method = RequestMethod.GET)
+	public ModelAndView nonMemberCheck(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		
+		memberService.nonMemberOrderDetailSearch(mav);
+		mav.setViewName("member/nonMemberOk");
+		return mav;
+	}
+	
+	
+	@RequestMapping(value = "/member/nonMember.do", method = RequestMethod.GET)
+	public ModelAndView nonMember(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		
+		memberService.nonMemberOrderDetailSearch(mav);
+		orderService.nonMemberOrderDetailSearch(mav);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/member/searchOrder.do", method = RequestMethod.GET)
+	public ModelAndView searchOrder(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		
+		memberService.searchOrder(mav);
+		orderService.nonMemberOrderDetailSearch(mav);
+	
+		return mav;
 	}	
-	
-	
 				
-
 	@RequestMapping(value = "/search/detailSearch.do", method = RequestMethod.GET)
 	public ModelAndView detailSearchMain(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
@@ -461,19 +491,19 @@ public class BookController {
 	      mav.addObject("request", request);
 	      mav.addObject("response",response);
 	      
-	      Cookie[] getCookie = request.getCookies();
-	      
+	      Cookie[] getCookie = request.getCookies();    
 	      String book_id  = request.getParameter("book_id");
 	      System.out.println(book_id);
 	      
-	      if(book_id != null && member_id != null) {
-	         orderService.addToCart(mav);
-	      }else if(book_id != null && getCookie != null) {   //비회원
+	      if(member_id != null) {
+	    	  System.out.println("going to addToCart");
+	    	  orderService.addToCart(mav);
+	    	  System.out.println("going to getCartInfo");
+	    	  orderService.getCartInfo(mav);
+	      }else if(member_id == null && getCookie != null) {   //비회원
+	    	  System.out.println("gooing to NonMemberAddCart");
 	         orderService.NonMemberAddCart(mav);
-	      }else if(book_id == null){
-	         orderService.getCartInfo(mav);
 	      }
-
 	      return mav;
 	   }
 
@@ -484,13 +514,20 @@ public class BookController {
 	      
 	      ModelAndView mav = new ModelAndView();
 	      mav.addObject("request", request);
+	      mav.addObject("response",response);
 	      
+	      if(member_id != null && member_id.length() > 3) {
+	    	  if(member_id.substring(0,4)=="NaM") {
+		    	  member_id = null;
+		      }
+	      }
+
 	      String book_id  = request.getParameter("book_id");
 	      
 	      if(book_id != null && member_id != null) {   //회원아이디가잇고 바로구매 버튼클릭시
 	         orderService.addOrder(mav);
-	      }else if(book_id == null && member_id != null){
-	         
+	      }else if(member_id == null || member_id == ""){
+	         orderService.NonMemberDirectOrder(mav);
 	      }
 	      orderService.getOrderForm(mav); //회원아이디 있고 장바구니에서 넘어올때
 	      
@@ -511,8 +548,14 @@ public class BookController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
-
-		orderService.writeOrderInfo(mav);
+	    mav.addObject("response",response);
+	    
+		if(member_id == null || member_id.substring(0,4) =="NaM") {
+			orderService.NonMemberOrderInfo(mav);
+		}else {
+			orderService.writeOrderInfo(mav);
+		}
+		
 
 		return mav;
 	}
@@ -564,7 +607,6 @@ public class BookController {
 			try {
 				response.setContentType("text/html; charset=UTF-8");
 				response.getWriter().print(count);
-				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -574,7 +616,6 @@ public class BookController {
 	}
 	
 	@RequestMapping(value="/book/bookInfo.do", method=RequestMethod.GET)
-
 	public ModelAndView writeBookInfo(HttpServletRequest request, HttpServletResponse response) {
 		// 쿠키생성
 				String book_id = request.getParameter("book_id");

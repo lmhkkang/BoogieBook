@@ -15,4 +15,5 @@ public interface MemberDao {
 	public int memberDelete(String id, String password);
 	public int memberKaKaoDelete(String id);
 	public int NonMemberAdd(MemberDto memberDto);
+	public MemberDto nonMemberOrderDetailSearch(String name, String email);
 }

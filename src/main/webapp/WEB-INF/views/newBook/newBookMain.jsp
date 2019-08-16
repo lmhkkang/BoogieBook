@@ -58,7 +58,7 @@
 					<c:set var = "num" value = "${num+1}"/>							
 						<div class="interest_body" style="float:left; width: 650px;">
 							<div class="interest_img">
-								<a href="${root}/book/bookInfo.do?book_id=${newBook.book_id}"><img src="${newBook.img_path}" width="100%" height="100%"></a>
+								<a href="${root}/book/bookInfo.do?book_id=${newBook.book_id}&page=newBook"><img src="${newBook.img_path}" width="100%" height="100%"></a>
 							</div>
 							<div class="interest_subject_form">
 								<div class="interest_sub">
@@ -68,7 +68,7 @@
 												pattern="yyyy-MM-dd" />
 										</div>
 										<div class="interest_subject2">
-											<a href="${root}/book/bookInfo.do?book_id=${newBook.book_id}"><b>${newBook.book_name}</b></a>
+											<a href="${root}/book/bookInfo.do?book_id=${newBook.book_id}&page=newBook"><b>${newBook.book_name}</b></a>
 										</div>
 										<div class="interest_subject3">
 											인터넷 판매가: <b style="color: red"><fmt:formatNumber value="${newBook.price}" pattern="#,###" />원</b>
@@ -78,8 +78,8 @@
 								</div>
 								<div class="interest_des" id="interest_des"></div>
 								<div class="interest_btn">
-									<button type="button" class="btn" style="border: 1px solid #5e6b9e;" onclick="javascript:moveToCart('${root}','${newBook.book_id}','1')">장바구니담기</button>
-									<button type="button" class="btn" style="border: 1px solid #5e6b9e;" onclick="javascript:moveToOrderForm('${root}','${newBook.book_id}','1')">바로구매</button>
+									<button type="button" class="btn" style="border: 1px solid #5e6b9e;" onclick="javascript:moveToCart2('${root}','${newBook.book_id}','1')">장바구니담기</button>
+									<button type="button" class="btn" style="border: 1px solid #5e6b9e;" onclick="javascript:moveToOrderForm2('${root}','${newBook.book_id}','1')">바로구매</button>
 								</div>
 							</div>
 						</div>		

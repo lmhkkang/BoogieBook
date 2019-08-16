@@ -106,7 +106,7 @@
                <li class="topHeader_r"><a href="javascript:OpenLoginFrame()">로그인</a></li>
             </c:if>
             <c:if test="${name !=null}">
-               <li class="topHeader_r"><a href="#">마이페이지</a></li>
+               <li class="topHeader_r"><a href="${root}/member/searchOrder.do">주문조회</a></li>
                <c:if test="${snsNum == 3}">
                   <li class="topHeader_r"><a
                      href="${root}/member/memberEdit.do?id=${id}">회원정보수정</a></li>
@@ -118,8 +118,6 @@
                <li class="topHeader_r"><a href="${root}/member/logout.do">로그아웃</a></li>
                <li class="topHeader_r"><b>${name}님 환영합니다.</b></li>
             </c:if>
-
-
          </ul>
       </div>
 

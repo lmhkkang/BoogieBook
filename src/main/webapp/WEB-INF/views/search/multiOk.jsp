@@ -21,10 +21,11 @@
 	<jsp:include page="../../../header.jsp"></jsp:include>
 	<div class="center">
 		<c:if test="${count==0 ||searchPageResult.size()==0}">
-			<p>전체 "${keyword}"검색결과 총 0건</p>
+			<div class="result_top">전체 검색결과 총 ${count}건</div>
 		</c:if>
 		<c:if test="${count>0||searchPageResult.size()>0}">
-			<div class="result_top">전체 검색결과 총 ${count}건</div>
+			<div class="result_top">총 ${count}건 검색</div>
+			
 			<c:forEach var="searchDto" items="${searchPageResult}">
 				  <div class="section1_r">
                 <div class="section2">

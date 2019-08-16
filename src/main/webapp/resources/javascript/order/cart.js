@@ -21,11 +21,11 @@ function deleteFromCart(root){
 		dataType: "json",
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		success : function(data){
-			alert(data);
+			//alert(data);
 			location.reload();		
 		},
 		error : function(){
-			alert("delete 실패");
+			//alert("delete 실패");
 		}
 	});
 }

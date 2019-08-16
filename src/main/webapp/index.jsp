@@ -86,7 +86,6 @@
 </c:if>
 
    <jsp:include page="./header.jsp"></jsp:include>
-   <jsp:include page="./recent_product.jsp"></jsp:include>
    <div id="content">
       <div class="section1">
          <div class="center" id="center">

@@ -44,10 +44,11 @@
    </select>
    
    <select id="getPayInfoByBookId" parameterType="int" resultType="com.boogie.order.dto.OrderDto">
-   		select b.book_name, o.quantity
+   		select distinct(b.book_name), o.quantity
    		from book b, order_detail o
    		where b.book_id = o.book_id
    		and b.book_id = #{book_id}
+   		and o.order_id = (select max(order_id) from book_order)
    </select>
    
    <select id="selectIdArray" parameterType="int" resultType="int">
@@ -155,7 +156,7 @@
    </insert>
    
    <select id="NonMemberGetOrderInfo" parameterType="int" resultType="com.boogie.order.dto.OrderDto">
-   		select * 
+   		select distinct(b.order_id), b.member_id, b.order_date, b.total_price
 		from book_order b, order_detail o
 		where b.order_id = o.order_id
 		and b.order_id = #{order_id}

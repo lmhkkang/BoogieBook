@@ -98,10 +98,10 @@
 									</form>
                                     <button type="submit" class="btn"
 									style="border: 1px solid #5e6b9e;"
-									onclick="javascript:moveToCart2('${root}','${book_id}')">장바구니담기</button>
+									onclick="javascript:moveToCart2('${root}','${book_id}','1')">장바구니담기</button>
 								<button type="submit" class="btn"
 									style="border: 1px solid #5e6b9e;"
-									onclick="javascript:moveToOrderForm2('${root}','${book_id}')">바로구매</button>                                </div>
+									onclick="javascript:moveToOrderForm2('${root}','${book_id}','1')">바로구매</button>                                </div>
                             </div>
                         </div>
                     </div>

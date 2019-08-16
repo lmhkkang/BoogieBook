@@ -12,10 +12,25 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link type="text/css" rel="stylesheet" href="${root}/resources/css/order/cart.css"/>
-    <script type="text/javascript" src="${root}/resources/javascript/order/cart.js"></script> 
+    <script type="text/javascript" src="${root}/resources/javascript/order/cart.js"></script>
+    <script type="text/javascript">
+    	function reload(root){
+    		
+    		$("#bar").hide(0);
+    		
+    		var url = location.href;
+    		var parameter = (url.slice(url.indexOf('?') + 1, url.length)).split('&');
+    		if(parameter.length > 1){
+    			location.href=root+"/order/cart.do";
+    		}
+    	}
+    	
+		
+	
+    </script> 
 </head>
 
-<body>
+<body onload="reload('${root}')">
 	<c:set var="cartList" value="${cartList}"/>
 	<jsp:include page="../../../header.jsp"></jsp:include>
   	<div style="height: 100px; width: 800px;"></div>

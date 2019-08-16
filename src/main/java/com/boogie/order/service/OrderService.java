@@ -24,4 +24,6 @@ public interface OrderService {
 	
 	void nonMemberOrderDetailSearch(ModelAndView mav);
 
+	void NonMemberDirectOrder(ModelAndView mav);
+
 }

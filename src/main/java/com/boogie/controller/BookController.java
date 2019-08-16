@@ -480,19 +480,19 @@ public class BookController {
 	      mav.addObject("request", request);
 	      mav.addObject("response",response);
 	      
-	      Cookie[] getCookie = request.getCookies();
-	      
+	      Cookie[] getCookie = request.getCookies();    
 	      String book_id  = request.getParameter("book_id");
 	      System.out.println(book_id);
 	      
-	      if(book_id != null && member_id != null) {
-	         orderService.addToCart(mav);
-	      }else if(book_id != null && getCookie != null) {   //비회원
+	      if(member_id != null) {
+	    	  System.out.println("going to addToCart");
+	    	  orderService.addToCart(mav);
+	    	  System.out.println("going to getCartInfo");
+	    	  orderService.getCartInfo(mav);
+	      }else if(member_id == null && getCookie != null) {   //비회원
+	    	  System.out.println("gooing to NonMemberAddCart");
 	         orderService.NonMemberAddCart(mav);
-	      }else if(book_id == null){
-	         orderService.getCartInfo(mav);
 	      }
-
 	      return mav;
 	   }
 
@@ -503,13 +503,20 @@ public class BookController {
 	      
 	      ModelAndView mav = new ModelAndView();
 	      mav.addObject("request", request);
+	      mav.addObject("response",response);
 	      
+	      if(member_id != null && member_id.length() > 3) {
+	    	  if(member_id.substring(0,4)=="NaM") {
+		    	  member_id = null;
+		      }
+	      }
+
 	      String book_id  = request.getParameter("book_id");
 	      
 	      if(book_id != null && member_id != null) {   //회원아이디가잇고 바로구매 버튼클릭시
 	         orderService.addOrder(mav);
-	      }else if(book_id == null && member_id != null){
-	         
+	      }else if(member_id == null || member_id == ""){
+	         orderService.NonMemberDirectOrder(mav);
 	      }
 	      orderService.getOrderForm(mav); //회원아이디 있고 장바구니에서 넘어올때
 	      
@@ -530,8 +537,14 @@ public class BookController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
-
-		orderService.writeOrderInfo(mav);
+	    mav.addObject("response",response);
+	    
+		if(member_id == null || member_id.substring(0,4) =="NaM") {
+			orderService.NonMemberOrderInfo(mav);
+		}else {
+			orderService.writeOrderInfo(mav);
+		}
+		
 
 		return mav;
 	}
@@ -583,7 +596,6 @@ public class BookController {
 			try {
 				response.setContentType("text/html; charset=UTF-8");
 				response.getWriter().print(count);
-				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -593,7 +605,6 @@ public class BookController {
 	}
 	
 	@RequestMapping(value="/book/bookInfo.do", method=RequestMethod.GET)
-
 	public ModelAndView writeBookInfo(HttpServletRequest request, HttpServletResponse response) {
 		// 쿠키생성
 				String book_id = request.getParameter("book_id");
@@ -875,13 +886,30 @@ public class BookController {
 	}
 	
 	@RequestMapping(value = "/search/delcookies.do", method = RequestMethod.GET)
-	public ModelAndView delCookiees(HttpServletRequest request, HttpServletResponse response) {
+	public void delCookiees(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("request", request);
+		System.out.println("test");
+		String id=request.getParameter("id");
+		id="id"+id;
+		Cookie[] cookies = request.getCookies();
 		
+		for(int i=0; i< cookies.length; i++){
+			System.out.println(cookies[i].getName());
+			if(cookies[i].getName().equals(id)) {
+			Cookie cookie=new Cookie(cookies[i].getName(),"");
+			cookie.setPath("/");
+			cookie.setMaxAge(0); // 유효시간을 0으로 설정
+			response.addCookie(cookie); // 응답 헤더에 추가
+
+			}
+		}
 		
+		/*
+		 * System.out.println("쿠키id : "+id); Cookie kc = new Cookie(id, null); //
+		 * choiceCookieName(쿠키 이름)에 대한 값을 null로 지정 kc.setMaxAge(0); // 유효시간을 0으로 설정
+		 * 
+		 * response.addCookie(kc);
+		 */
 		
-		
-	return mav;	
 	}
 }

@@ -118,8 +118,6 @@
                <li class="topHeader_r"><a href="${root}/member/logout.do">로그아웃</a></li>
                <li class="topHeader_r"><b>${name}님 환영합니다.</b></li>
             </c:if>
-
-
          </ul>
       </div>
 
@@ -167,7 +165,7 @@
 
       <div class="lnb">
          <div id="center">
-            <ul class="center">
+            <ul class="center" id="ul_center">
                <li><a href="${root}/koreanBook/koreanBookMain.do">국내도서</a></li>
                <li><a href="${root}/bestSeller/bestSellerMain.do">베스트셀러</a></li>
                <li><a href="${root}/newBook/newBookMain.do">신간도서</a></li>
@@ -184,4 +182,5 @@
       </div>
    </header>
 </body>
+<jsp:include page="./recent_product.jsp"></jsp:include>
 </html>

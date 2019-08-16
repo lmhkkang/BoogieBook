@@ -142,6 +142,7 @@
   <input type="hidden" name="member_id" value="${member_id}" id="member_id" />
   <input type="hidden" name="total" value="${total}"/>
   <input type="hidden" name="quantity" value="${quantity}"/>
+  <input type="hidden" name="book_id" value="${book_id}"/>
 </form>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>

@@ -458,7 +458,15 @@ public class OrderServiceImp implements OrderService {
 		BookAspect.logger.info(BookAspect.logMsg +  "checkMem:  "+ checkMem);
 		
 		if(checkMem > 0) {
-			int checkOrder = orderDao.NonMemberAddOrder(Integer.parseInt(request.getParameter("total")),member_id);
+			int checkOrder = 0;
+			int total = 0;
+			if(request.getParameter("total") == null || request.getParameter("total") == "") {
+				total = orderDao.getBookPrice(Integer.parseInt(request.getParameter("book_id")));
+				checkOrder = orderDao.NonMemberAddOrder(total,member_id);
+			}else {
+				checkOrder = orderDao.NonMemberAddOrder(Integer.parseInt(request.getParameter("total")),member_id);
+			}
+			
 			BookAspect.logger.info(BookAspect.logMsg +  "checkOrder:  "+ checkOrder);
 			int price = 0;
 			int checkOrderDetail = 0;
@@ -474,7 +482,12 @@ public class OrderServiceImp implements OrderService {
 							}
 							book_id = cookies[i].getValue();
 							price = orderDao.getBookPrice(Integer.parseInt(book_id));
-							checkOrderDetail = orderDao.NonMemberAddOrderDetail(order_id,book_id,Integer.parseInt(request.getParameter("quantity")),price);
+							if(request.getParameter("quantity")==null || request.getParameter("quantity")=="") {
+								checkOrderDetail = orderDao.NonMemberAddOrderDetail(order_id,book_id,1,price);
+							}else {
+								checkOrderDetail = orderDao.NonMemberAddOrderDetail(order_id,book_id,Integer.parseInt(request.getParameter("quantity")),price);
+							}
+							
 							BookAspect.logger.info(BookAspect.logMsg +  "checkOrderDetail:  "+ checkOrderDetail);
 						}
 					}
@@ -487,7 +500,11 @@ public class OrderServiceImp implements OrderService {
 					orderDto.setAddr1(request.getParameter("addr1"));
 					orderDto.setAddr2(request.getParameter("addr2"));
 					orderDto.setName(request.getParameter("name"));
-					orderDto.setTotal_price(Integer.parseInt(request.getParameter("total")));
+					if(request.getParameter("total")==null || request.getParameter("total") == "") {
+						orderDto.setTotal_price(orderDao.getBookPrice(Integer.parseInt(request.getParameter("book_id"))));
+					}else {
+						orderDto.setTotal_price(price);
+					}
 									
 					//book_id 로 book_name & quantity -> bookList에 저장
 					for(int i=0; i<bookIdList.size(); i++) {
@@ -550,7 +567,7 @@ public class OrderServiceImp implements OrderService {
 	public void NonMemberDirectOrder(ModelAndView mav) {
 		 Map<String, Object> map = mav.getModelMap();
 	      HttpServletRequest request = (HttpServletRequest) map.get("request");
-	      HttpServletResponse response = (HttpServletResponse) map.get("respone");
+	      HttpServletResponse response = (HttpServletResponse) map.get("response");
 	      HttpSession  session = request.getSession();
 
 	      

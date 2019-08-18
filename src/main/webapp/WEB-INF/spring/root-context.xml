@@ -18,26 +18,26 @@
 
 
        <!-- POOL  -->
-      <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-         <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
-         <property name="url" value="jdbc:oracle:thin:@192.168.12.42:1521:xe"></property>
-         <property name="username" value="boogie"></property>
-         <property name="password" value="1234"></property>
-   
-         <property name="maxActive" value="50"></property>
-         <property name="maxIdle" value="10"></property>
-      </bean>
-   
-      <!-- 내가 만든 데이터베이스 -->
 <!--       <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> -->
 <!--          <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property> -->
-<!--          <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property> -->
-<!--          <property name="username" value="boogiebooktest"></property> -->
+<!--          <property name="url" value="jdbc:oracle:thin:@192.168.12.42:1521:xe"></property> -->
+<!--          <property name="username" value="boogie"></property> -->
 <!--          <property name="password" value="1234"></property> -->
    
 <!--          <property name="maxActive" value="50"></property> -->
 <!--          <property name="maxIdle" value="10"></property> -->
 <!--       </bean> -->
+   
+      <!-- 내가 만든 데이터베이스 -->
+      <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+         <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+         <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
+         <property name="username" value="boogiebooktest"></property>
+         <property name="password" value="1234"></property>
+   
+         <property name="maxActive" value="50"></property>
+         <property name="maxIdle" value="10"></property>
+      </bean>
 
 
        <!-- MyBatis : sqlSessionFactoryBean  -->

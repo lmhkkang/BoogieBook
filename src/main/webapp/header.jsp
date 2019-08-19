@@ -73,16 +73,16 @@
           });
           
           $(function(){
-        	 var count = 0;
-        	 $.ajax({
+            var count = 0;
+            $.ajax({
                  type : "get",
                  url : "${root}/order/cartCount.do",
                  dataType : "text",
                  success : function(data) { 
-                    	$("#cartCount").text(data);
+                       $("#cartCount").text(data);
                     }
                  ,error : function(){
-                	 alert("failed ");
+                    alert("failed ");
                  }                
              });
           });

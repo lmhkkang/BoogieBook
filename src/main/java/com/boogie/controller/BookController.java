@@ -780,27 +780,240 @@ public class BookController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/admin/adminMemMng.do", method = RequestMethod.GET)
-	public ModelAndView adminMemMng(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("request", request);
-		mav.addObject("MemberDto", memberDto);
 
-		adminService.adminMemMng(mav);
+	 @RequestMapping(value="/admin/adminMemMng.do", method=RequestMethod.GET)
+	   public ModelAndView adminMemMng(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto){
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("request", request);
+	      mav.addObject("MemberDto", memberDto);
+		 
+	      adminService.adminMemMng(mav);
+	      
+	      return mav;
+	   }
+	 
+	 @RequestMapping(value="/admin/adminMemSearchId.do", method=RequestMethod.GET)
+	   public ModelAndView adminMemSearchId(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto){
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("request", request);
+	      mav.addObject("MemberDto", memberDto);
+		 
+	      adminService.adminMemSearchId(mav);
+	      
+	      return mav;
+	   }
+	  
+	 @RequestMapping(value="/admin/adminMemMngEdit.do", method=RequestMethod.GET)
+	   public ModelAndView adminMemMngEdit(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto){
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("request", request);
+	      mav.addObject("memberDto", memberDto);
+	      
+	      adminService.adminMemMngEdit(mav);
+	      
+	      return mav;
 
-		return mav;
 	}
+	 	 
+	 @RequestMapping(value="/admin/adminBookMng.do", method=RequestMethod.GET)
+	   public ModelAndView adminBookMng(HttpServletRequest request, HttpServletResponse response, BookInfoDto bookInfoDto){
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("request",request);
+	      mav.addObject("bookInfoDto",bookInfoDto);
+	      
+	      adminService.adminBookMng(mav);
+	      
+	      return mav;
+	   }
+	 
+	 @RequestMapping(value="/admin/adminBookMngInsert.do", method=RequestMethod.GET)
+	   public ModelAndView adminBookMngInsert(HttpServletRequest request, HttpServletResponse response, BookInfoDto bookInfoDto){
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("request",request);
+	      mav.addObject("bookInfoDto",bookInfoDto);
+	      
+	      adminService.adminBookMngInsert(mav);
+	      
+	      return mav;
+	   }
+	 
+	 @RequestMapping(value="/admin/adminBookEditMng.do", method=RequestMethod.GET)
+	   public ModelAndView adminBookEditMng(HttpServletRequest request, HttpServletResponse response, BookInfoDto bookInfoDto){
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("request",request);
+	      mav.addObject("bookInfoDto",bookInfoDto);
 
-	@RequestMapping(value = "/admin/adminMemMngEdit.do", method = RequestMethod.GET)
-	public ModelAndView adminMemMngEdit(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("request", request);
-		mav.addObject("memberDto", memberDto);
+	      adminService.adminBookEditMng(mav);
+	      
+	      return mav;
+	   }
+	 
+	 @RequestMapping(value="/admin/adminBookMngUpdate.do", method=RequestMethod.GET)
+	   public ModelAndView adminBookMngUpdate(HttpServletRequest request, HttpServletResponse response, BookInfoDto bookInfoDto){
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("request",request);
+	      mav.addObject("bookInfoDto",bookInfoDto);
+	      
+	      adminService.adminBookMngUpdate(mav);
+	      
+	      return mav;
+	   }
+	 
+	 @RequestMapping(value="/admin/adminBookDelMng.do", method=RequestMethod.GET)
+	   public ModelAndView adminBookDelMng(HttpServletRequest request, HttpServletResponse response, BookInfoDto bookInfoDto){
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("request",request);
+	      mav.addObject("bookInfoDto",bookInfoDto);
 
-		adminService.adminMemMngEdit(mav);
+	      adminService.adminBookDelMng(mav);
+	      
+	      return mav;
+	   } 
+	 //FAQ관리
+	 @RequestMapping(value="/admin/adminFAQRegMng.do", method=RequestMethod.GET)
+	   public ModelAndView adminFAQRegMng(HttpServletRequest request, HttpServletResponse response){
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("request", request);
+	      
+	      adminService.adminFAQRegMng(mav);
+	      
+	      return mav;
+	   }
+	 //FAQ등록
+	 @RequestMapping(value="/admin/adminFAQMng.do", method=RequestMethod.GET)
+	   public ModelAndView adminFAQMng(HttpServletRequest request, HttpServletResponse response){
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("request", request);
+	      
+	      adminService.adminFAQMng(mav);
+	      
+	      return mav;
+	   }
+	 
+	 //FAQ 질문유형 변경
+	 @RequestMapping(value="/admin/adminFAQStat.do", method=RequestMethod.GET)
+	   public ModelAndView adminFAQStat(HttpServletRequest request, HttpServletResponse response, FaqBoardDto faqBoardDto){
+		  ModelAndView mav = new ModelAndView();
+		  mav.addObject("request", request);
+		  mav.addObject("faqBoardDto", faqBoardDto);
+		  
+		  adminService.adminFAQStat(mav);
+	      
+	      return mav;
+	   }
+	 
+	 @RequestMapping(value="/admin/adminFAQEditMng.do", method=RequestMethod.GET)
+	   public ModelAndView adminFAQEditMng(HttpServletRequest request, HttpServletResponse response, FaqBoardDto faqBoardDto){
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("request",request);
+	      mav.addObject("faqBoardDto",faqBoardDto);
 
-		return mav;
-	}
+	      adminService.adminFAQEditMng(mav);
+	      
+	      return mav;
+	   }
+	 
+	 @RequestMapping(value="/admin/adminFAQUpdate.do", method=RequestMethod.GET)
+	   public ModelAndView adminFAQUpdate(HttpServletRequest request, HttpServletResponse response, FaqBoardDto faqBoardDto){
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("request",request);
+	      mav.addObject("faqBoardDto",faqBoardDto);
+
+	      adminService.adminFAQUpdate(mav);
+	      
+	      return mav;
+	   }
+	 
+	 @RequestMapping(value="/admin/adminFAQDelMng.do", method=RequestMethod.GET)
+	   public ModelAndView adminFAQDelMng(HttpServletRequest request, HttpServletResponse response, FaqBoardDto faqBoardDto){
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("request",request);
+	      mav.addObject("faqBoardDto",faqBoardDto);
+
+	      adminService.adminFAQDelMng(mav);
+	      
+	      return mav;
+	   }
+	 
+	 @RequestMapping(value="/admin/adminOrdSearchMng.do", method=RequestMethod.GET)
+	   public ModelAndView adminOrdSearchMng(HttpServletRequest request, HttpServletResponse response, OrderDto orderDto){
+		  ModelAndView mav = new ModelAndView();
+		  mav.addObject("request", request);
+		  mav.addObject("orderDto", orderDto);
+		  
+		  adminService.adminOrdSearchMng(mav);
+	      
+	      return mav;
+	   }
+	 
+	 @RequestMapping(value="/admin/adminOrdMng.do", method=RequestMethod.GET)
+	   public ModelAndView adminOrdMng(HttpServletRequest request, HttpServletResponse response, OrderDto orderDto){
+		  ModelAndView mav = new ModelAndView();
+		  mav.addObject("request", request);
+		  mav.addObject("orderDto", orderDto);
+		  
+		  adminService.adminOrdMng(mav);
+	      
+	      return mav;
+	   }
+	 
+	 
+	 @RequestMapping(value="/admin/adminOrdStat.do", method=RequestMethod.GET)
+	   public ModelAndView adminOrdStat(HttpServletRequest request, HttpServletResponse response, OrderDto orderDto){
+		  ModelAndView mav = new ModelAndView();
+		  mav.addObject("request", request);
+		  mav.addObject("orderDto", orderDto);
+		  
+		  adminService.adminOrdStat(mav);
+	      
+	      return mav;
+	   }
+	 
+	 @RequestMapping(value="/admin/adminChangeOrdStat.do", method=RequestMethod.GET)
+	   public ModelAndView adminChangeOrdStat(HttpServletRequest request, HttpServletResponse response, OrderDto orderDto){
+		  ModelAndView mav = new ModelAndView();
+		  mav.addObject("request", request);
+		  mav.addObject("orderDto", orderDto);
+		  
+		  adminService.adminChangeOrdStat(mav);
+	      
+	      return mav;
+	   }
+	 
+	 @RequestMapping(value="/admin/adminDelOrder.do", method=RequestMethod.GET)
+	   public ModelAndView adminDelOrder(HttpServletRequest request, HttpServletResponse response, OrderDto orderDto){
+		  ModelAndView mav = new ModelAndView();
+		  mav.addObject("request", request);
+		  mav.addObject("orderDto", orderDto);
+		  
+		  adminService.adminDelOrd(mav);
+	      
+	      return mav;
+	   }
+	 
+	 @RequestMapping(value="/admin/adminBookRegMng.do", method=RequestMethod.GET)
+	   public ModelAndView adminBookRegMng(HttpServletRequest request, HttpServletResponse response, BookInfoDto bookInfoDto){
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("request",request);
+	      mav.addObject("bookInfoDto",bookInfoDto);
+	      
+	      adminService.adminBookMngInsert(mav);
+	      
+	      return mav;
+	   }
+	 
+	 @RequestMapping(value="/admin/adminBookSearchMng.do", method=RequestMethod.GET)
+	   public ModelAndView adminBookSearchMng(HttpServletRequest request, HttpServletResponse response, BookInfoDto bookInfoDto){
+		 System.out.println("search controller");
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("request",request);
+	      mav.addObject("bookInfoDto",bookInfoDto);
+	      
+	      adminService.adminBookSearchMng(mav);
+	      
+	      return mav;
+	   }
+
 
 	// 아직 안만듬 ajax쓸예정이고 안된다면 지워야함.
 	@RequestMapping(value = "/admin/adminMemMngEditOk.do", method = RequestMethod.GET)
@@ -827,62 +1040,10 @@ public class BookController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/admin/adminBookMng.do", method = RequestMethod.GET)
-	public ModelAndView adminBookMng(HttpServletRequest request, HttpServletResponse response,
-			BookInfoDto bookInfoDto) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("request", request);
-		mav.addObject("bookInfoDto", bookInfoDto);
 
-		adminService.adminBookMng(mav);
 
-		return mav;
-	}
 
-	@RequestMapping(value = "/admin/adminBookMngInsert.do", method = RequestMethod.GET)
-	public ModelAndView adminBookMngInsert(HttpServletRequest request, HttpServletResponse response,
-			BookInfoDto bookInfoDto) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("request", request);
-		mav.addObject("bookInfoDto", bookInfoDto);
 
-		adminService.adminBookMngInsert(mav);
-
-		return mav;
-	}
-
-	@RequestMapping(value = "/admin/adminFAQMng.do", method = RequestMethod.GET)
-	public ModelAndView adminFAQMng(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("request", request);
-
-		adminService.adminFAQMng(mav);
-
-		return mav;
-	}
-
-	@RequestMapping(value = "/admin/adminOrdMng.do", method = RequestMethod.GET)
-	public ModelAndView adminOrdMng(HttpServletRequest request, HttpServletResponse response, OrderDto orderDto) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("request", request);
-		mav.addObject("orderDto", orderDto);
-
-		adminService.adminOrdMng(mav);
-
-		return mav;
-	}
-
-	@RequestMapping(value = "/admin/adminBookRegMng.do", method = RequestMethod.GET)
-	public ModelAndView adminBookRegMng(HttpServletRequest request, HttpServletResponse response,
-			BookInfoDto bookInfoDto) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("request", request);
-		mav.addObject("bookInfoDto", bookInfoDto);
-
-		adminService.adminBookMngInsert(mav);
-
-		return mav;
-	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/search/getcookies.do", method = RequestMethod.GET)

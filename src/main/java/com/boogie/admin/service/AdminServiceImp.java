@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.boogie.admin.dao.AdminDao;
 import com.boogie.aop.BookAspect;
 import com.boogie.bookInfo.dto.BookInfoDto;
+import com.boogie.customerCenter.dto.FaqBoardDto;
 import com.boogie.member.dto.MemberDto;
 import com.boogie.order.dto.OrderDto;
 
@@ -71,12 +72,31 @@ public class AdminServiceImp implements AdminService {
 	public void adminMemMng(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		HashMap<String,Object> hMap = new HashMap<String, Object>();
+		
+		String pageNumber = request.getParameter("pageNumber");
+		if(pageNumber == null) pageNumber = "1";
+		
+		int listSize = 10;
+		int currentPage = Integer.parseInt(pageNumber);
+		int startRow = (currentPage-1)*listSize+1;
+		int endRow = currentPage*listSize;
+		
+		int count=adminDao.memberCount();
 		
 		//member 테이블에 있는 회원의 정보들을 가져옴.
-		List<MemberDto> memberList = adminDao.getMemberDto();
-		System.out.println("memberList:" + memberList.toString());
-	    int count=adminDao.memberCount();
-	    System.out.println("count : " + count);
+		
+		hMap.put("startRow", startRow);
+		hMap.put("endRow", endRow);
+		
+		List<MemberDto> memberList= null;
+		if(count>0) {
+			memberList = adminDao.getMemberDto(hMap);
+			System.out.println("count: "+count+"currentPage :"+currentPage);
+		}
+		
+		mav.addObject("listSize",listSize);
+		mav.addObject("currentPage",currentPage);
 		mav.addObject("memberList",memberList);
 		mav.addObject("count",count);
 	}
@@ -211,7 +231,7 @@ public class AdminServiceImp implements AdminService {
 	}
 
 	@Override
-	public void adminFAQMng(ModelAndView mav) {
+	public void adminFAQRegMng(ModelAndView mav) {
 		Map<String,Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		HashMap<String,Object> hMap = new HashMap<String,Object>();
@@ -220,6 +240,7 @@ public class AdminServiceImp implements AdminService {
 		int question_code = Integer.parseInt(request.getParameter("questionCode"));
 		String answer = request.getParameter("answer");
 		String question_type = null;
+		System.out.println("현재 question_code:" + question_code);
 		switch(question_code) {
 		case 1:
 			question_type = "반품/교환/환불";
@@ -250,12 +271,347 @@ public class AdminServiceImp implements AdminService {
 	public void adminOrdMng(ModelAndView mav) {
 		Map<String,Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
-				
-		//주문테이블에 있는 주문정보를 가져옴
-		List<OrderDto> orderList = adminDao.getOrderDto();
-		System.out.println(orderList);
+		
+		String pageNumber = request.getParameter("pageNumber");
+		if(pageNumber == null) pageNumber = "1";
+		
+		int listSize = 10;
+		int currentPage = Integer.parseInt(pageNumber);
+		int startRow = (currentPage-1)*listSize+1;
+		int endRow = currentPage*listSize;
+		
+		int count = adminDao.getOrderCount();
+		System.out.println(count);
+		
+		HashMap<String,Object> hMap = new HashMap<String,Object>();
+		hMap.put("startRow", startRow);
+		hMap.put("endRow", endRow);
+		
+		
+			
+		List<OrderDto> orderList= null;
+		if(count>0) {
+			orderList = adminDao.getOrderDto(hMap);
+			System.out.println("count: "+count+"currentPage :"+currentPage);
+		}
 			
 		mav.addObject("orderList", orderList);
+		mav.addObject("listSize",listSize);    
+		mav.addObject("currentPage",currentPage); //요청 페이지
+		mav.addObject("count", count);
+	}
+	//도서 검색
+	@Override
+	public void adminBookSearchMng(ModelAndView mav) {
+		Map<String,Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		
+		String book_name = request.getParameter("book_name");
+		//책이름으로 검색했을때 해당 조건에 맞는 list를 가져옴
+		List<BookInfoDto> bookSearchList = adminDao.getSearchBookList(book_name);
+		System.out.println(bookSearchList);
+		
+		int count = adminDao.getCountSearchBook(book_name);
+		System.out.println(count);
+		
+		String pageNumber = request.getParameter("pageNumber");
+		if(pageNumber == null) pageNumber = "1";
+		
+		//한 페이지당 요청 책의 갯수
+		int listSize = 20;
+		int currentPage = Integer.parseInt(pageNumber);
+		int startRow = (currentPage-1)*listSize+1;
+		int endRow = currentPage*listSize;
+		
+		mav.addObject("listSize",listSize);    
+		mav.addObject("currentPage",currentPage); //요청 페이지
+		mav.addObject("bookSearchList", bookSearchList);
+		mav.addObject("count", count);
+		mav.setViewName("admin/adminBookSearchMng");
+	}
+	//id받고 도서수정페이지로 이동하게 하는 서비스
+	@Override
+	public void adminBookEditMng(ModelAndView mav) {
+		Map<String,Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		
+		int book_id = Integer.parseInt(request.getParameter("num"));
+		System.out.println(book_id);
+		
+		List<BookInfoDto> selectBookDto = adminDao.getSelectBookDto(book_id);
+		System.out.println(selectBookDto);
+		
+		mav.addObject("selectBookDto", selectBookDto);
+		mav.setViewName("admin/adminBookEditMng");
+		
+	}
+    //도서 수정페이지
+	@Override
+	public void adminBookMngUpdate(ModelAndView mav) {
+		Map<String,Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		HashMap<String,Object> hMap = new HashMap<String,Object>();
+		
+		
+		
+		String type01 = request.getParameter("category");
+		//장르 밸류값의 인덱스 적용전.
+		String type02BeforeIndex = request.getParameter("genre");
+		int index = type02BeforeIndex.indexOf(":");
+		//장르 밸류 값의     : 다음에 나오는 문자열을 담는 코드
+		String type02 = type02BeforeIndex.substring(index+1);
+		String type03 = request.getParameter("genre_detail");
+		String book_name = request.getParameter("book_name");
+		String author = request.getParameter("author");
+		String publisher = request.getParameter("publisher");
+		String publish_date = request.getParameter("publish_date");
+		int price = Integer.parseInt(request.getParameter("price"));
+		System.out.println("너이자식 : " + request.getParameter("book_id"));
+		int book_id = Integer.parseInt(request.getParameter("book_id"));
+		int stock = Integer.parseInt(request.getParameter("stock"));
+		String story = request.getParameter("story");
+		String img_path = request.getParameter("img_path");
+		
+		hMap.put("type01", (String)type01);
+		hMap.put("type02", (String)type02);
+		hMap.put("type03", (String)type03);
+		hMap.put("book_name", (String)book_name);
+		hMap.put("author", (String)author);
+		hMap.put("publisher", (String)publisher);
+		hMap.put("publish_date", (String)publish_date);
+		hMap.put("price", (Integer)price);
+		hMap.put("book_id", (int)book_id);
+		hMap.put("stock", (Integer)stock);
+		hMap.put("story", (String)story);
+		hMap.put("img_path", (String)img_path);
+		
+		System.out.println("hMap: " + hMap);
+		
+		int check = adminDao.bookUpdate(hMap);
+		mav.addObject("check",check);
+		mav.addObject("img_path",img_path);
+		mav.setViewName("admin/adminBookEditOk");
+	}
+	//회원 삭제
+	@Override
+	public void adminBookDelMng(ModelAndView mav) {
+		Map<String,Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		
+		int book_id = Integer.parseInt(request.getParameter("num"));
+		System.out.println(book_id);
+		
+		int check = adminDao.bookDelete(book_id);
+		System.out.println(check);
+		
+		mav.addObject("check",check);
+		mav.setViewName("admin/adminBookDelOk");
+	}
+	
+	@Override
+	public void adminOrdStat(ModelAndView mav) {
+		Map<String,Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		
+		int ordStat = Integer.parseInt(request.getParameter("order_Status"));
+		
+		List<OrderDto> ordStatList = adminDao.getOrdStatList(ordStat);
+		System.out.println(ordStatList);
+		
+		
+		String pageNumber = request.getParameter("pageNumber");
+		if(pageNumber == null) pageNumber = "1";
+		
+		int listSize = 20;
+		int currentPage = Integer.parseInt(pageNumber);
+		int startRow = (currentPage-1)*listSize+1;
+		int endRow = currentPage*listSize;
+		int count = adminDao.getCountSearchOrder(ordStat);
+		int order_status = ordStat;
+		
+		mav.addObject("listSize",listSize);    
+		mav.addObject("currentPage",currentPage); //요청 페이지
+		mav.addObject("count", count);
+		mav.addObject("ordStatList", ordStatList);
+		mav.addObject("order_status",order_status);
+		mav.setViewName("admin/adminOrdStatMng");	
+	}
+	//회원정보 검색
+	@Override
+	public void adminMemSearchId(ModelAndView mav) {
+		Map<String,Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		
+		String searchId = request.getParameter("searchId");
+		System.out.println(searchId);
+		
+		List<MemberDto> memberSearchList = adminDao.getSearchMemId(searchId);
+		System.out.println(memberSearchList);
+		int count = memberSearchList.size();
+		System.out.println(count);
+		
+		mav.addObject("memberSearchList", memberSearchList);
+		mav.addObject("count", count);
+	}
+
+	@Override
+	public void adminChangeOrdStat(ModelAndView mav) {
+		Map<String,Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		HashMap<String, Object> hMap = new HashMap<String,Object>();
+		
+		int order_Status = Integer.parseInt(request.getParameter("order_status"));		
+		int order_id = Integer.parseInt(request.getParameter("order_id"));
+		
+		hMap.put("order_Status", order_Status);
+		hMap.put("order_id", order_id);
+		
+		int check = adminDao.getEditOrdStat(hMap);
+		System.out.println(check);
+		
+		mav.addObject("check", check);
+		
+		mav.setViewName("admin/adminOrdEditOk");
+	}
+
+	@Override
+	public void adminDelOrd(ModelAndView mav) {
+		Map<String,Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		
+		int order_id = Integer.parseInt(request.getParameter("orderId"));
+		
+		int check = adminDao.DelOrd(order_id);
+		System.out.println(check);
+		
+		mav.addObject("check", check);
+		
+		mav.setViewName("admin/adminOrdDelOk");
+	}
+
+	@Override
+	public void adminOrdSearchMng(ModelAndView mav) {
+		Map<String,Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		List<OrderDto> searchOrderList = new ArrayList<OrderDto>();
+		
+		String searchOrderId = request.getParameter("searchOrderId");
+		System.out.println(searchOrderId);
+		
+		searchOrderList = adminDao.getSearchOrderId(searchOrderId);
+		System.out.println(searchOrderList);
+		
+		int count = searchOrderList.size();
+		System.out.println("check!: " + count);
+		
+		mav.addObject("searchOrderList", searchOrderList);
+		mav.addObject("count",count);
+	}
+
+	@Override
+	public void adminFAQMng(ModelAndView mav) {
+		Map<String,Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		
+		
+	}
+
+	@Override
+	public void adminFAQStat(ModelAndView mav) {
+		Map<String,Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		
+		int faqStat = Integer.parseInt(request.getParameter("questionCode"));
+		
+		List<FaqBoardDto> faqStatList = adminDao.getFaqStatList(faqStat);
+		System.out.println(faqStatList);
+		
+		String pageNumber = request.getParameter("pageNumber");
+		if(pageNumber == null) pageNumber = "1";
+		
+		int listSize = 5;
+		int currentPage = Integer.parseInt(pageNumber);
+		int startRow = (currentPage-1)*listSize+1;
+		int endRow = currentPage*listSize;
+		int count = faqStatList.size();
+		int faq_status = faqStat;
+		
+		mav.addObject("listSize",listSize);    
+		mav.addObject("currentPage",currentPage); //요청 페이지
+		mav.addObject("count", count);
+		mav.addObject("faqStatList", faqStatList);
+		mav.addObject("faq_status",faq_status);
+		mav.setViewName("admin/adminFAQStatMng");
+	}
+
+	@Override
+	public void adminFAQEditMng(ModelAndView mav) {
+		Map<String,Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		HashMap<String,Object> hMap = new HashMap<String,Object>();
+		
+		
+		int board_number = Integer.parseInt(request.getParameter("num"));
+		System.out.println(board_number);
+		
+		int qCode = Integer.parseInt(request.getParameter("qcode"));
+		System.out.println(qCode);
+		
+		hMap.put("board_number", board_number);
+		hMap.put("qCode", qCode);
+		
+		List<FaqBoardDto> selectFaqDto = adminDao.getSelectFaqDto(hMap);
+		System.out.println(selectFaqDto);
+		
+		mav.addObject("selectFaqDto", selectFaqDto);
+		mav.setViewName("admin/adminFAQEditMng");	
+	}
+
+	@Override
+	public void adminFAQUpdate(ModelAndView mav) {
+		Map<String,Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		HashMap<String,Object> hMap = new HashMap<String,Object>();
+		
+		
+		int board_number = Integer.parseInt(request.getParameter("board_number"));
+		//바뀌기전 질문유형코드
+		int question_code = Integer.parseInt(request.getParameter("question_code"));
+		String question = request.getParameter("question");
+		//바꾸기를 희망하는 질문유형코드
+		int questionCode = Integer.parseInt(request.getParameter("questionCode"));
+		String answer = request.getParameter("answer");
+		
+		hMap.put("board_number", board_number);
+		hMap.put("question_code", question_code);
+		hMap.put("question", question);
+		hMap.put("questionCode", questionCode);
+		hMap.put("answer", answer);
+		
+		int check = adminDao.FAQUpdate(hMap);
+		System.out.println(check);
+		
+		mav.addObject("check", check);
+		mav.setViewName("admin/adminFAQEditOk");
+	}
+
+	@Override
+	public void adminFAQDelMng(ModelAndView mav) {
+		Map<String,Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		HashMap<String,Object> hMap = new HashMap<String, Object>();
+		
+		int num = Integer.parseInt(request.getParameter("num"));
+		int qcode = Integer.parseInt(request.getParameter("qcode"));
+		
+		hMap.put("num", num);
+		hMap.put("qcode", qcode);
+		
+		int check = adminDao.DelFAQ(hMap);
+		System.out.println(check);
+		
+		mav.addObject("check", check);
+		mav.setViewName("admin/adminFAQDelOk");
 	}
 
 }

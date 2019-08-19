@@ -12,7 +12,7 @@ function deleteFromCart(root){
 	});
 	
 
-	alert(deleteList);
+	//alert(deleteList);
 	
 	$.ajax({
 		url : root+"/order/cartDelete.do",

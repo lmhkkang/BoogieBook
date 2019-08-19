@@ -9,47 +9,19 @@
     <meta charset="utf-8">
     <title>관리자 페이지</title>
     <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Maven+Pro|Play&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="${root}/resources/css/admin/admin_header.css"/>
+    
     <link rel="stylesheet" type="text/css" href="${root}/resources/css/admin/admin_content.css"/>
     <link rel="stylesheet" type="text/css" href="${root}/resources/css/admin/admin_table.css"/>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" type="text/css" href="${root}/resources/css/admin/admin_header.css"/>
     <script type="text/javascript" src="${root}/resources/javascript/admin/updateMember.js"></script>
     <script type="text/javascript" src="${root}/resources/javascript/admin/deleteMember.js"></script>
     <script type="text/javascript" src="${root}/resources/jquery/jquery.js"></script>
   </head>
   <body>
-    <header>
-			<div class="gnb">
-				<ul class="center">
-					<li class="topHeader_r"><a href="#">로그아웃</a></li>
-					<li class="topHeader_r"><a href="#">홈으로</a></li>
-				</ul>
-			</div>
-            <div class="center">
-                <div class="middleHeader">
-                    <div class="logo"><a href="${root}/index/index.do"><img id="logoImg" src="${root}/resources/images/BoogieBook_Logo.png"/></a></div>
-                    <div class="search_form">
-                        <div class="search_top"></div>
-                        <div class="search"><b>Administrator</b></div>
-                    </div>
-                </div>
-            </div>
-
-			<div class="lnb">
-				<ul class="center">
-					<li><a href="admin.do">사용자 통계</a></li>
-					<li><a href="adminMemMng.do">회원관리</a></li>
-					<li><a href="adminBookRegMng.do">도서등록</a></li>
-					<li><a href="adminBookMng.do">도서관리</a></li>
-					<li><a href="adminFAQRegMng.do">FAQ등록</a></li>
-					<li><a href="adminFAQMng.do">FAQ관리</a></li>
-					<li><a href="adminOrdMng.do">주문 관리</a></li>
-				</ul>
-			</div>
-		</header>
-
+   <jsp:include page="admin_header.jsp"></jsp:include>
     <div id="content">
       <div class="section1">
         <div class="center">

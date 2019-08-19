@@ -204,7 +204,7 @@ public class SearchServiceImp implements SearchService {
 				String name = c.getName(); // 쿠키 이름 가져오기
 				String check = "";
 				check = name.substring(0, 2);				
-				
+				if(check!="") {
 				if (check.equals("id")) {
 					cnt++;
 					String book_id = c.getValue(); // 쿠키 값 가져오기
@@ -214,7 +214,8 @@ public class SearchServiceImp implements SearchService {
 					
 					System.out.println(dto.toString());
 					list.add(dto);
-				}												
+				}
+				}
 			}
 		}
 		return list;

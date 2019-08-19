@@ -57,7 +57,25 @@
 <body onload="head();">
 	<jsp:include page="../../../header.jsp"></jsp:include>
 	<div class="center">
-		
+		<div class="section1_l">
+			<ul class="book_list">
+				<li><a>종합</a></li>
+				<li><a>소설</a></li>
+				<li><a>시/에세이/기행</a></li>
+				<li><a>자기계발</a></li>
+				<li><a>가정/생활/요리</a></li>
+				<li><a>건강/의학/미용</a></li>
+				<li><a>인문/교양/철학</a></li>
+				<li><a>역사/신화/문화</a></li>
+				<li><a>유아</a></li>
+				<li><a>어린이</a></li>
+				<li><a>예술/대중문화</a></li>
+				<li><a>여행/취미/레져</a></li>
+				<li><a>잡지</a></li>
+				<li><a>만화</a></li>
+				<li><a>컴퓨터/IT</a></li>
+			</ul>
+		</div>
 		
 		<div class="section1_r">
 		<c:if test="${interestDto.book_name != null}">

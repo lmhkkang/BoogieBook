@@ -70,7 +70,7 @@
             </div>
             <div class="tmpOrdLineTwo" style="margin-top:15px;">
               <b style="color:#5e6b9e">주문 상태</b>
-              <form action="${root}/admin/adminOrdStat.do" onsubmit="return adminOrdStat(this)" name="ordStatForm">
+              <form name = "order" action="${root}/admin/adminOrdStat.do">
 	              <select name="order_Status">
 	                <option value="1">결제완료</option>
 	                <option value="2">배송중</option>
@@ -79,7 +79,7 @@
 	              </select>
 	              <button class="btn btn-primary" style="height:70%;" type="submit" value="Submit">검색</button>
               </form>
-			            <form action="adminOrdSearchMng.do" method="get" name="ordSearchForm">
+              <form action="adminOrdSearchMng.do" method="get" name="ordSearchForm">
 			            	<div class="ab" style="width:1000px; height:30px; display: flex; margin-top:10px;">	
 			            		<div style="width:300px; height:40px;">
 	                           		<input type="text" class="search-query form-control"
@@ -91,12 +91,14 @@
 	                              	</button>
 	                            </div>
                             </div>  	                           		
-                        </form>				      
+              </form>			
+              <script type="text/javascript">
+              	order.order_Status.value ="${order_status}";
+              </script>
             </div>
             <div class="tmpOrdLineThree" style="border:0px solid blue; margin-top:20px;">
               <div class="container" style="padding-left:0px;">
                 <div class="row col-md-13 col-md-offset-2 custyle" style="margin-left:0px;">
-                <c:if test="${count > 0}">
                 <table class="table table-striped custab" style="margin-top:0px;">
                 <thead>
                     <tr>
@@ -110,7 +112,7 @@
                         <th class="text-center">수정/삭제</th>
                     </tr>
                 </thead>
-               		<c:forEach var="orderItem" items="${orderList}">
+               		<c:forEach var="orderItem" items="${ordStatList}">
                 		<tr>               			
                 			<td>${orderItem.order_id}</td>
                             <td>${orderItem.member_id}</td>
@@ -142,8 +144,7 @@
                         </tr>
                		</c:forEach>
                 </table>
-                </c:if>
-                		<div align="center" style="width:100%;">
+      					<div align="center">
 			            	<c:if test="${count > 0}">
 			            		<c:set var="pageBlock" value="${10}"/>
 			            		<fmt:parseNumber var="pageCount" value="${count/listSize + (count%listSize == 0?0:1)}" integerOnly="true"/>
@@ -156,15 +157,15 @@
 			            		</c:if>
 			            		
 			            		<c:if test="${startPage > pageBlock}">
-			            			<a href="adminOrdMng.do?pageNumber=${startPage-pageBlock}">[이전]</a>
+			            			<a href="adminOrdStat.do?order_status=${order_status}&pageNumber=${startPage-pageBlock}">[이전]</a>
 			            		</c:if>
 			            		
 			            		<c:forEach var="i" begin="${startPage}" end="${endPage}">
-			            			<a href="adminOrdMng.do?pageNumber=${i}">[${i}]</a>
+			            			<a href="adminOrdStat.do?order_Status=${order_status}&pageNumber=${i}">[${i}]</a>
 			            		</c:forEach>
 			            		
 			            		<c:if test="${endPage < pageCount}">
-			            			<a href="adminOrdMng.do?pageNumber=${startPage+pageBlock}">[다음]</a>
+			            			<a href="adminOrdStat.do?order_status=${order_status}&pageNumber=${startPage+pageBlock}">[다음]</a>
 			            		</c:if>
 			            	</c:if>
 			            </div>

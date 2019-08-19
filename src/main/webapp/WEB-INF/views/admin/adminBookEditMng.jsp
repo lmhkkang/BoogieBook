@@ -115,12 +115,13 @@
         <div class="center">
           <div class="tmp1">
             <div class="borbtmeff" style="margin-bottom: 15px;">
-              <b style="color:#5e6b9e; font-size:20px;">도서 등록</b>
+              <b style="color:#5e6b9e; font-size:20px;">도서 관리</b>
             </div>
             <div class="tmp2BookLineOne">
-				<form action="${root}/admin/adminBookMngInsert.do">
+				<form action="${root}/admin/adminBookMngUpdate.do">
+				  <input type="hidden" value="${selectBookDto[0].book_id}" name="book_id"/>
 				  <div class="form-group">
-				    <h2 class="heading">도서등록</h2>
+				    <h2 class="heading">도서수정</h2>
 					<div class="row">
 					  <div class="col-md-4 mb-3">
 					  	<label for="validationCustom02">카테고리</label>
@@ -149,15 +150,15 @@
 						</div>
 					  </div>
 					</div>
-									    
+					
 				    <div class="controls">
-				      <b>책이름</b><input type="text" id="book_name" name="book_name" placeholder="책이름">
+				      <b>책이름</b><input type="text" id="book_name" name="book_name" placeholder="책이름" value="${selectBookDto[0].book_name}">
 				    </div>
 				    <div class="controls">
-				      <b>저자</b><input type="text" id="author" placeholder="저자" name="author">
+				      <b>저자</b><input type="text" id="author" placeholder="저자" name="author" value="${selectBookDto[0].author}">
 				    </div>       
 				    <div class="controls">
-				      <b>출판사</b><input type="tel" id="publisher" placeholder="출판사" name="publisher">
+				      <b>출판사</b><input type="tel" id="publisher" placeholder="출판사" name="publisher" value="${selectBookDto[0].publisher}">
 				    </div>
 				    <div class="grid">
 				    <div class="col-1-4 col-1-4-sm">
@@ -169,17 +170,17 @@
 				    </div>
 				    </div>				    
 				      <div class="controls">
-				        <b>가격</b><input type="text" id="country" placeholder="가격" name="price">				  
+				        <b>가격</b><input type="text" id="country" placeholder="가격" name="price" value="${selectBookDto[0].price}">				  
 				      </div>
 				      <div class="controls">
-				        <b>재고</b><input type="text" id="country" placeholder="재고" name="stock">
+				        <b>재고</b><input type="text" id="country" placeholder="재고" name="stock" value="${selectBookDto[0].stock}">
 				      </div>
 				      <div class="controls">
-				          <b>줄거리</b><textarea id="story" placeholder="줄거리" name="story"></textarea>
+				          <b>줄거리</b><textarea id="story" placeholder="${selectBookDto[0].story}" name="story"></textarea>
 				      </div>
 				      <div>
 				      	<b style="margin-bottom:0px;">이미지</b>
-				      	<input type="file" id="country" class="floatLabel" name="img_path" style="margin-top:12px;line-height: 30px;">
+				      	<input type="file" id="country" class="floatLabel" name="img_path" style="margin-top:12px;line-height: 30px;" value="${selectBookDto[0].img_path}">
 				      </div>
 				  </div>
 				  <br/>

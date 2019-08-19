@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.boogie.bookInfo.dto.BookInfoDto;
 import com.boogie.search.dto.SearchDto;
 
 @Component
@@ -30,15 +31,17 @@ public class SearchDaoImp implements SearchDao {
 
 	@Override
 	public List<SearchDto> pageList(String keyword, int startRow, int endRow) {
-		HashMap<String, Object> hMap=new HashMap<String, Object>();
+		HashMap<String, Object> hMap = new HashMap<String, Object>();
 		hMap.put("startRow", startRow);
 		hMap.put("endRow", endRow);
 		hMap.put("keyword", keyword);
 		return sqlSessionTemplate.selectList("dao.searchMapper.PageList", hMap);
 	}
+
 	@Override
-	public int searchCount(String type, String book_name, String author, String publisher, String startDay, String endDay, int price01, int price02) {
-		HashMap<String, Object> hMap=new HashMap<String, Object>();
+	public int searchCount(String type, String book_name, String author, String publisher, String startDay,
+			String endDay, int price01, int price02) {
+		HashMap<String, Object> hMap = new HashMap<String, Object>();
 		hMap.put("book_name", book_name);
 		hMap.put("type", type);
 		hMap.put("author", author);
@@ -49,10 +52,11 @@ public class SearchDaoImp implements SearchDao {
 		hMap.put("price02", price02);
 		return sqlSessionTemplate.selectOne("dao.searchMapper.searchCount", hMap);
 	}
+
 	@Override
 	public List<SearchDto> multiPageList(String type, String book_name, String author, String publisher, int startRow,
 			int endRow, String startDay, String endDay, int price01, int price02) {
-		HashMap<String, Object> hMap=new HashMap<String, Object>();
+		HashMap<String, Object> hMap = new HashMap<String, Object>();
 		hMap.put("type", type);
 		hMap.put("book_name", book_name);
 		hMap.put("author", author);
@@ -65,15 +69,24 @@ public class SearchDaoImp implements SearchDao {
 		hMap.put("price02", price02);
 		return sqlSessionTemplate.selectList("dao.searchMapper.multiList", hMap);
 	}
+
 	@Override
 	public List<SearchDto> listAll2() {
 		return sqlSessionTemplate.selectList("dao.searchMapper.autoList");
 	}
+
+	@Override
+	public List<SearchDto> bookList(String book_name) {
+		return sqlSessionTemplate.selectList("dao.searchMapper.bookList", book_name);
+	}
+
 	@Override
 	public SearchDto getOneBook(String id) {
-		System.out.println(id.trim());
-		int ids = Integer.parseInt(id.trim());
+		System.out.println("id"+id.trim());
+		if(id!="") {
+		int ids = Integer.parseInt(id.trim());		
 		System.out.println(ids);
-		return sqlSessionTemplate.selectOne("dao.searchMapper.searchOneBook",ids);	
+		return sqlSessionTemplate.selectOne("dao.searchMapper.searchOneBook", ids);
+		}else return null;
 	}
 }

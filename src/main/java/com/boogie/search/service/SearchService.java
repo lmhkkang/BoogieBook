@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.boogie.bookInfo.dto.BookInfoDto;
 import com.boogie.search.dto.SearchDto;
 
 public interface SearchService {

@@ -64,6 +64,7 @@
    <div class="center">
       <div class="section1_l">
          <ul class="book_list">
+         <c:set var="pageName" value="${root}/koreanBook/koreanBookMain.do"/>
          	<c:if test="${page == 'koreanBook'}">
          		<c:set var="pageName" value="${root}/koreanBook/koreanBookMain.do"/>
          	</c:if>

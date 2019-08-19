@@ -68,6 +68,7 @@
       <div id="memSection">
         <div class="container" style="padding-left:0px;">
           <div class="row col-md-13 col-md-offset-2 custyle" style="margin-left:0px;">
+          <c:if test="${count > 0}">
           <table class="table table-striped custab" style="margin-top:0px;">
           <thead>
               <tr>
@@ -79,64 +80,39 @@
                   <th>이메일</th>
               </tr>
           </thead>
-            <!-- 회원 데이터 출력 -->
-            <c:if test="${count>0}">
-	            <c:forEach var="memberDto" items="${memberList}">
-	            	<tr>
-	            		<td style="width:16%;">${memberDto.member_num}</td>
-	            		<td style="width:16%;">${memberDto.name}</td>
-	            		<td style="width:16%;">${memberDto.member_id}</td>
-	            		<td style="width:16%;">
-	            			<c:if test="${memberDto.gender == 1}">
-	            				남
-	            			</c:if>
-	            			<c:if test="${memberDto.gender == 2}">
-	            				여
-	            			</c:if>
-	            		</td>
-	            		<td style="width:16%;">${memberDto.phone}</td>
-	            		<td style="width:17%;">${memberDto.email}</td>
-	            	</tr>
-	            	
-	            	<tr style="display:none;" class="editInput" id="${memberDto.member_num}">            	   		
-			            <td style="width:16%;"><input class="col-md-8" type="text" name="num"  id="num${memberDto.member_num}" disabled="disabled" value="${memberDto.member_num}"/></td>
-			            <td style="width:16%;"><input class="col-md-8" type="text" name="name" id="name${memberDto.member_num}"placeholder="이름"/></td>
-			            <td style="width:16%;"><input class="col-md-8" type="text" name="id"  id="id${memberDto.member_num}"disabled="disabled" value="${memberDto.member_id}"/></td>
-			            <td style="width:16%;"><input class="col-md-8" type="text" name="gender" id="gender${memberDto.member_num}"disabled="disabled" value="${memberDto.gender}"></td>	            		
-			            <td style="width:16%;"><input class="col-md-8" type="text" name="phone"  id="phone${memberDto.member_num}" placeholder="전화번호"></td>
-			            <td style="width:17%;"><input class="col-md-8" type="text" name="email" id="email${memberDto.member_num}" placeholder="이메일"></td>        	          	
-	            	</tr>
-	            </c:forEach>
-            </c:if>
-            <c:if test="${count == 0}">
-            	<b>회원정보가 없습니다.</b>
-            </c:if>
+            <!-- 회원 데이터 출력 -->         
+            <c:forEach var="memberDto" items="${memberSearchList}">
+            	<tr>
+            		<td style="width:16%;">${memberDto.member_num}</td>
+            		<td style="width:16%;">${memberDto.name}</td>
+            		<td style="width:16%;">${memberDto.member_id}</td>
+            		<td style="width:16%;">
+            			<c:if test="${memberDto.gender == 1}">
+            				남
+            			</c:if>
+            			<c:if test="${memberDto.gender == 2}">
+            				여
+            			</c:if> 
+            		</td>
+            		<td style="width:16%;">${memberDto.phone}</td>
+            		<td style="width:17%;">${memberDto.email}</td>
+            	</tr>      	
+            	<tr style="display:none;" class="editInput" id="${memberDto.member_num}">            	   		
+		            <td style="width:16%;"><input class="col-md-8" type="text" name="num"  id="num${memberDto.member_num}" disabled="disabled" value="${memberDto.member_num}"/></td>
+		            <td style="width:16%;"><input class="col-md-8" type="text" name="name" id="name${memberDto.member_num}"placeholder="이름"/></td>
+		            <td style="width:16%;"><input class="col-md-8" type="text" name="id"  id="id${memberDto.member_num}"disabled="disabled" value="${memberDto.member_id}"/></td>
+		            <td style="width:16%;"><input class="col-md-8" type="text" name="gender" id="gender${memberDto.member_num}"disabled="disabled" value="${memberDto.gender}"></td>	            		
+		            <td style="width:16%;"><input class="col-md-8" type="text" name="phone"  id="phone${memberDto.member_num}" placeholder="전화번호"></td>
+		            <td style="width:17%;"><input class="col-md-8" type="text" name="email" id="email${memberDto.member_num}" placeholder="이메일"></td>        	          	
+            	</tr>
+           </c:forEach> 
           </table>
-          <div align="center" style="width:100%;">
-			            	<c:if test="${count > 0}">
-			            		<c:set var="pageBlock" value="${10}"/>
-			            		<fmt:parseNumber var="pageCount" value="${count/listSize + (count%listSize == 0?0:1)}" integerOnly="true"/>
-			            		
-			            		<fmt:parseNumber var="result" value="${(currentPage-1)/pageBlock}" integerOnly="true"/>
-			            		<c:set var="startPage" value="${result * pageBlock+1}"/>
-			            		<c:set var="endPage" value="${startPage + pageBlock - 1}"/>
-			            		<c:if test="${endPage > pageCount}">
-			            			<c:set var="endPage" value="${pageCount}"/>
-			            		</c:if>
-			            		
-			            		<c:if test="${startPage > pageBlock}">
-			            			<a href="adminMemMng.do?pageNumber=${startPage-pageBlock}">[이전]</a>
-			            		</c:if>
-			            		
-			            		<c:forEach var="i" begin="${startPage}" end="${endPage}">
-			            			<a href="adminMemMng.do?pageNumber=${i}">[${i}]</a>
-			            		</c:forEach>
-			            		
-			            		<c:if test="${endPage < pageCount}">
-			            			<a href="adminMemMng.do?pageNumber=${startPage+pageBlock}">[다음]</a>
-			            		</c:if>
-			            	</c:if>
-		  </div>
+          </c:if>
+          <c:if test="${count == 0}">
+          	<div style="width:100%; text-align:center;">
+          		<b style="font-size:2em; color:red; text-align:center;">일치하는 회원정보가 없습니다.</b>
+          	</div>
+          </c:if>
           </div>
       </div>
     </div>

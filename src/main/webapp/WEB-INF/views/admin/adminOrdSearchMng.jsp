@@ -110,7 +110,7 @@
                         <th class="text-center">수정/삭제</th>
                     </tr>
                 </thead>
-               		<c:forEach var="orderItem" items="${orderList}">
+               		<c:forEach var="orderItem" items="${searchOrderList}">
                 		<tr>               			
                 			<td>${orderItem.order_id}</td>
                             <td>${orderItem.member_id}</td>
@@ -143,40 +143,3 @@
                		</c:forEach>
                 </table>
                 </c:if>
-                		<div align="center" style="width:100%;">
-			            	<c:if test="${count > 0}">
-			            		<c:set var="pageBlock" value="${10}"/>
-			            		<fmt:parseNumber var="pageCount" value="${count/listSize + (count%listSize == 0?0:1)}" integerOnly="true"/>
-			            		
-			            		<fmt:parseNumber var="result" value="${(currentPage-1)/pageBlock}" integerOnly="true"/>
-			            		<c:set var="startPage" value="${result * pageBlock+1}"/>
-			            		<c:set var="endPage" value="${startPage + pageBlock - 1}"/>
-			            		<c:if test="${endPage > pageCount}">
-			            			<c:set var="endPage" value="${pageCount}"/>
-			            		</c:if>
-			            		
-			            		<c:if test="${startPage > pageBlock}">
-			            			<a href="adminOrdMng.do?pageNumber=${startPage-pageBlock}">[이전]</a>
-			            		</c:if>
-			            		
-			            		<c:forEach var="i" begin="${startPage}" end="${endPage}">
-			            			<a href="adminOrdMng.do?pageNumber=${i}">[${i}]</a>
-			            		</c:forEach>
-			            		
-			            		<c:if test="${endPage < pageCount}">
-			            			<a href="adminOrdMng.do?pageNumber=${startPage+pageBlock}">[다음]</a>
-			            		</c:if>
-			            	</c:if>
-			            </div>
-                </div>
-              </div>
-            </div>
-          </div>
-				</div>
-			</div>
-      </div>
-		</div>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-  </body>
-</html>

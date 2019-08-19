@@ -60,7 +60,7 @@
 					<c:set var = "num" value = "${num+1}"/>							
 						<div class="interest_body" style="float:left; width: 650px;">
 							<div class="interest_img">
-								<a href="${root}/book/bookInfo.do?book_id=${koreanBook.book_id}"><img src="${koreanBook.img_path}" width="100%" height="100%"></a>
+								<a href="${root}/book/bookInfo.do?book_id=${koreanBook.book_id}&page=koreanBook"><img src="${koreanBook.img_path}" width="100%" height="100%"></a>
 							</div>
 							<div class="interest_subject_form">
 								<div class="interest_sub">
@@ -70,7 +70,7 @@
 												pattern="yyyy-MM-dd" />
 										</div>
 										<div class="interest_subject2">
-											<a href="${root}/book/bookInfo.do?book_id=${koreanBook.book_id}"><b>${koreanBook.book_name}</b></a>
+											<a href="${root}/book/bookInfo.do?book_id=${koreanBook.book_id}&page=koreanBook"><b>${koreanBook.book_name}</b></a>
 										</div>
 										<div class="interest_subject3">
 											인터넷 판매가: <b style="color: red"><fmt:formatNumber value="${koreanBook.price}" pattern="#,###" />원</b>

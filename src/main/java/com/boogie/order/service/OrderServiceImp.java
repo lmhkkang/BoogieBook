@@ -250,21 +250,18 @@ public class OrderServiceImp implements OrderService {
 				"                </tr>" + 
 				"" + 
 				"                <tr>" + 
-				"                    <td></td>";
+				"                    <td></td>" ; 
 				if(bookList != null) {
 					for(int i=0; i<bookList.size(); i++) {
 						OrderDto orderDto = new OrderDto();
 						orderDto = bookList.get(i);
-						content += "<td style=\"padding-left:60px;\">책이름(권)<label>"+ orderDto.getBook_name()+"("+orderDto.getQuantity()+")" +"</label></td>";
+						content += "<td style=\"padding-left:60px;\"><label>"+ orderDto.getBook_name()+"("+orderDto.getQuantity()+")" +"</label></td>";
 					}
 				}else {
-					content += "<td style=\"padding-left:60px;\">책이름(권)<label>"+ oDto.getBook_name()+"("+oDto.getQuantity()+")" +"</label></td>";
+					content += "<td style=\"padding-left:60px;\"><label>"+ oDto.getBook_name()+"("+oDto.getQuantity()+")" +"</label></td>";
 				}
-				
 				content += "                        <td>" + 
 				"                        </td>" + 
-
-				"                    <td></td>" + 
 				"                    <td><strong></strong></td>" + 
 				"                    <td class=\"text-right\"><strong></strong></td>" + 
 				"                </tr>" + 
@@ -539,20 +536,22 @@ public class OrderServiceImp implements OrderService {
 						OrderDto oDto = new OrderDto();
 						for(int i=0; i<bookIdList.size(); i++) {
 							System.out.println("cookie 지우는 곳!!!!! " + bookIdList.get(i));
-							for(int j=0; j<cookiesList.length; j++) {
-								if(cookiesList[j].getName().substring(7).equals(bookIdList.get(i))) {
-									System.out.println(cookiesList[j].getName()+"============detlete book_id cookie================");
-									Cookie cookie = new Cookie(cookiesList[j].getName(),"");
-									cookie.setMaxAge(0);
-									response.addCookie(cookie);
-									System.out.println("북아이디지워짐~!~!~!~!~");
-								}else if(cookiesList[j].getName().equals("member_id")) {
-									member_id = null;
-									Cookie cookie = new Cookie(cookiesList[j].getName(),"");
-									cookie.setMaxAge(0);
-									cookie.setPath("/");
-									response.addCookie(cookie);
-									System.out.println("member_id delete from cookie--------------");
+							if(bookIdList.get(i) != null || bookIdList.get(i) != "") {
+								for(int j=0; j<cookiesList.length; j++) {
+									if(cookiesList[j].getName().substring(7).equals(bookIdList.get(i))) {
+										System.out.println(cookiesList[j].getName()+"============detlete book_id cookie================");
+										Cookie cookie = new Cookie(cookiesList[j].getName(),"");
+										cookie.setMaxAge(0);
+										response.addCookie(cookie);
+										System.out.println("북아이디지워짐~!~!~!~!~");
+									}else if(cookiesList[j].getName().equals("member_id")) {
+										member_id = null;
+										Cookie cookie = new Cookie(cookiesList[j].getName(),"");
+										cookie.setMaxAge(0);
+										cookie.setPath("/");
+										response.addCookie(cookie);
+										System.out.println("member_id delete from cookie--------------");
+									}
 								}
 							}
 						}
@@ -599,6 +598,28 @@ public class OrderServiceImp implements OrderService {
 	      mav.addObject("book_id", book_id);
 	      mav.addObject("quantity", quantity);
 	}
-	
-	
+
+	@Override
+	public void nonMemberOrderDetailSearch(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		MemberDto memberDto = (MemberDto) map.get("memberDto");
+		List<OrderDto> orderList = new ArrayList<OrderDto>();;
+		
+		System.out.println(memberDto.toString());
+		
+		String member_id = memberDto.getMember_id();
+		
+		BookAspect.logger.info(BookAspect.logMsg + "member_id : " + member_id);
+		orderList = orderDao.nonMemberOrderDetailSearch(member_id);
+		
+		BookAspect.logger.info(BookAspect.logMsg + orderList.size());
+		orderList.get(0).setAddr1(memberDto.getAddr1());
+		orderList.get(0).setAddr2(memberDto.getAddr2());
+		orderList.get(0).setName(memberDto.getName());
+		
+		mav.addObject("orderList", orderList);	
+		mav.setViewName("member/nonMemberOrderDetailSearch");
+		
+	}
+
 }

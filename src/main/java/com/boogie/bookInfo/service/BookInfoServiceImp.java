@@ -56,9 +56,8 @@ public class BookInfoServiceImp implements BookInfoService {
 			mav.addObject("rate_average",rate_average);
 		}
 			
-		
-		
-		
+		mav.addObject("page",request.getParameter("page"));
+
 		mav.addObject("idList",idList);
 		mav.addObject("book_id",book_id);
 		mav.addObject("reviewList_size",reviewList.size());

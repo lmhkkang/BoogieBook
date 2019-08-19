@@ -418,11 +418,41 @@ public class BookController {
 		
 		bookInfoService.koreanBookMain(mav);
 		return mav;
+	}
+	
+	@RequestMapping(value = "/member/nonMemberCheck.do", method = RequestMethod.GET)
+	public ModelAndView nonMemberCheck(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		
+		memberService.nonMemberOrderDetailSearch(mav);
+		mav.setViewName("member/nonMemberOk");
+		return mav;
+	}
+	
+	
+	@RequestMapping(value = "/member/nonMember.do", method = RequestMethod.GET)
+	public ModelAndView nonMember(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		
+		memberService.nonMemberOrderDetailSearch(mav);
+		orderService.nonMemberOrderDetailSearch(mav);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/member/searchOrder.do", method = RequestMethod.GET)
+	public ModelAndView searchOrder(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		
+		memberService.searchOrder(mav);
+		orderService.nonMemberOrderDetailSearch(mav);
+	
+		return mav;
 	}	
-	
-	
 				
-
 	@RequestMapping(value = "/search/detailSearch.do", method = RequestMethod.GET)
 	public ModelAndView detailSearchMain(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();

@@ -71,7 +71,9 @@ public class SearchDaoImp implements SearchDao {
 	}
 	@Override
 	public SearchDto getOneBook(String id) {
-		int ids =Integer.parseInt(id);
+		System.out.println(id.trim());
+		int ids = Integer.parseInt(id.trim());
+		System.out.println(ids);
 		return sqlSessionTemplate.selectOne("dao.searchMapper.searchOneBook",ids);	
 	}
 }

@@ -161,4 +161,11 @@
 		where b.order_id = o.order_id
 		and b.order_id = #{order_id}
    </select>
+   
+   <select id="nonMemberOrderDetailSearch" parameterType="String" resultType="com.boogie.order.dto.OrderDto">
+select * 
+		from book_order b, order_detail o, book k
+		where b.order_id = o.order_id and o.book_id = k.book_id
+		and b.member_id = #{member_id}
+   </select>
 </mapper>

@@ -36,7 +36,7 @@
 <jsp:include page="../../../header.jsp"></jsp:include>
 <div style="height: 100px; width: 800px;"></div>
 
-<form action="${root}/order/paymentComplete.do" method="post" onsubmit="javascript:payProgress('${root}')">
+<form action="${root}/order/paymentComplete.do" method="post" onsubmit="return payProgress('${root}')">
     <div class="container mb-4">
         <div class="row">
             <div class="col-12">

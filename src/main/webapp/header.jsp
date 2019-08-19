@@ -106,7 +106,7 @@
                <li class="topHeader_r"><a href="javascript:OpenLoginFrame()">로그인</a></li>
             </c:if>
             <c:if test="${name !=null}">
-               <li class="topHeader_r"><a href="#">마이페이지</a></li>
+               <li class="topHeader_r"><a href="${root}/member/searchOrder.do">주문조회</a></li>
                <c:if test="${snsNum == 3}">
                   <li class="topHeader_r"><a
                      href="${root}/member/memberEdit.do?id=${id}">회원정보수정</a></li>
@@ -126,32 +126,15 @@
             <div class="logo">
                <a href="${root}/index.jsp"><img src="${root}/resources/images/BoogieBook_Logo.png"></a>
             </div>
-            <div class="search_form">
-               <div class="search_top">
-                  <ul class="search_top_ul">
-                     <li class="search_top_li"><a href="#">수학</a></li>
-                     <li class="search_top_li"><a href="#">수능</a></li>
-                     <li class="search_top_li"><a href="#">저스티스</a></li>
-                     <li class="search_top_li" style="border-right: 0px;"><a
-                        href="#">언제까지</a></li>
-                     <li class="search_top_li" style="width: 12px; border-right: 0px;"><a
-                        href="#" style="border-right: 0px;"><img
-                           src="${root}/resources/images/before.png" width="11px"
-                           height="12px"></a></li>
-                     <li class="search_top_li" style="width: 12px; border-right: 0px;"><a
-                        href="#" style="border-right: 0px;"><img
-                           src="${root}/resources/images/forward.png" width="11px"
-                           height="12px"></a></li>
-                  </ul>
-               </div>
-               <div class="search">
+            <div class="search_form">  
+               <div class="search" >
                   <form action="${root}/search/searchOk.do" method="get">
                      <div id="custom-search-input">
                         <div class="input-group col-md-12">
                            <input type="text" class="  search-query form-control"
-                              name="keyword" id="term" placeholder="Search" /> <span
+                              name="keyword" id="term" placeholder="Search" style="margin-top:25px;"/> <span
                               class="input-group-btn">
-                              <button class="btn btn-danger" type="submit">
+                              <button class="btn btn-danger" type="submit" style="margin-top:25px;">
                                  <span class=" glyphicon glyphicon-search"></span>
                               </button>
                            </span>

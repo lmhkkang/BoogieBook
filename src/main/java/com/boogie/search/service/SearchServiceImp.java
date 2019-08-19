@@ -209,7 +209,9 @@ public class SearchServiceImp implements SearchService {
 					cnt++;
 					String book_id = c.getValue(); // 쿠키 값 가져오기
 					System.out.println(book_id);
+					
 					dto=searchDao.getOneBook(book_id);
+					
 					System.out.println(dto.toString());
 					list.add(dto);
 				}												

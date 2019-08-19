@@ -21,6 +21,8 @@ public interface OrderService {
 	void NonMemberAddCart(ModelAndView mav);
 
 	void NonMemberOrderInfo(ModelAndView mav);
+	
+	void nonMemberOrderDetailSearch(ModelAndView mav);
 
 	void NonMemberDirectOrder(ModelAndView mav);
 

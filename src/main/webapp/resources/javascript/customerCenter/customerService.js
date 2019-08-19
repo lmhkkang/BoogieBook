@@ -34,7 +34,7 @@ function getQuestionCode(question_code,root){
 				var a = document.createElement("a");
 				
 				a.setAttribute("id", "bn"+board_number_arr[i]);
-				a.setAttribute("onclick", "getAnswer("+board_number_arr[i]+"); this.onclick=null;");
+				a.setAttribute("onclick", "getAnswer("+board_number_arr[i]+");this.onclick=null");		
 				a.style.fontSize = "1.2em";
 				a.innerHTML =  question_arr[i+1];
 				
@@ -68,12 +68,13 @@ function getAnswer(board_number){
 			button.setAttribute("onclick", "closeFaq("+board_number+")");
 			button.style.width = "40px";
 			button.style.height = "30px";
-
+			button.style.borderRadius = "30px";
+			button.style.backgroundColor ="#000099";
+			button.style.color = "#5e6b9e";
 			p.innerHTML = "<br/>"+ data;
 			
 			$("#bn"+board_number).append(button);
-			$("#bn"+board_number).append(p);
-			
+			$("#bn"+board_number).append(p);	
 		},
 		error : function(){
 			alert("답변을 가져오는데 실패하였습니다.");
@@ -82,5 +83,7 @@ function getAnswer(board_number){
 }
 
 function closeFaq(board_number){
+	//$("#bn"+board_number).attr("onclick","getAnswer("+board_number+");this.onclick=null");
 	$("p").remove("#pn"+board_number);
+	$("#button"+board_number).remove();
 }

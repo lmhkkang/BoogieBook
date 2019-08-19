@@ -30,6 +30,20 @@ function loginForm(obj){
 	}
 }
 
+function nonMemberForm(obj){
+	if(obj.username.value==""){
+		alert("이름을 입력하세요");
+		obj.username.focus();
+		return false;
+	}
+	
+	if(obj.email.value==""){
+		alert("이메일을 입력하세요.");
+		obj.email.focus();
+		return false;
+	}
+}
+
 function registerFun(){
     setTimeout(function() {
     opener.location = "/homepage/member/register.do";

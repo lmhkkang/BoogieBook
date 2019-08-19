@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.boogie.bookInfo.dto.BookInfoDto;
 import com.boogie.search.dto.SearchDto;
 
 @Component
@@ -68,5 +69,10 @@ public class SearchDaoImp implements SearchDao {
 	@Override
 	public List<SearchDto> listAll2() {
 		return sqlSessionTemplate.selectList("dao.searchMapper.autoList");
+	}
+
+	@Override
+	public List<SearchDto> bookList(String book_name) {
+		return sqlSessionTemplate.selectList("dao.searchMapper.bookList", book_name);
 	}
 }

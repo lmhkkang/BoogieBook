@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.boogie.bookInfo.dto.BookInfoDto;
 import com.boogie.search.dto.SearchDto;
 
 public interface SearchService {
@@ -13,4 +14,5 @@ public interface SearchService {
 	public void multiOk(ModelAndView mav) throws ParseException;
 	public List<SearchDto> autocomplete(ModelAndView mav);
 	public void severalSearch(ModelAndView mav);
+	public List<SearchDto> bookSearch(ModelAndView mav);
 }

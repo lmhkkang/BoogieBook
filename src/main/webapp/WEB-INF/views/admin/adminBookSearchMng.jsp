@@ -88,20 +88,20 @@
                         </form>				      
 			            </div>
 			           	<c:if test="${count > 0}">
-				            <table class="table table-striped table-bordered" style="width:1000px;">
+				            <table class="table table-striped table-bordered" style="width:1000px;"> 
 				                <thead>
 				                    <tr>
-				                        	<td>책 번호</td>
-				                        	<td>책 이름</td>
-				                        	<td>저자</td>
-				                        	<td>출판사</td>
-				                        	<td>출판일</td>
-				                        	<td class="text-center"> 수정/삭제 </td>
+				                        	<td style="width:63px;">책 번호</td>
+				                        	<td style="width:346px;">책 이름</td>
+				                        	<td style="width:179px;">저자</td>
+				                        	<td style="width:115px;">출판사</td>
+				                        	<td style="width:74px;">출판일</td>
+				                        	<td style="width:124px;" class="text-center"> 수정/삭제 </td>
 				                    </tr>
 				                </thead>
 				                <tbody>
-				                	<c:forEach var="bookDto" items="${bookList}">
-				                		<tr>
+				                	<c:forEach var="bookDto" items="${bookSearchList}">
+				                		<tr style="width:100%;">
 				                			<td>${bookDto.book_id}</td>
 				                			<td>${bookDto.book_name}</td>
 				                			<td>${bookDto.author}</td>
@@ -113,6 +113,11 @@
 				                </tbody>
 				            </table>
 			            </c:if>
+			             <c:if test="${count == 0}">
+				          	<div style="width:100%; text-align:center;">
+				          		<b style="font-size:2em; color:red; text-align:center;">해당 도서를 찾을 수 없습니다.</b>
+				          	</div>
+				          </c:if>
 			            <div align="center">
 			            	<c:if test="${count > 0}">
 			            		<c:set var="pageBlock" value="${10}"/>

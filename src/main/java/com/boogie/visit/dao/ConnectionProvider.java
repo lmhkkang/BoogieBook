@@ -10,8 +10,8 @@ public class ConnectionProvider {
 		Connection conn = null;
 		
 		try {
-			String url="jdbc:oracle:thin:@192.168.12.42:1521:xe";
-			String id = "boogie";
+			String url="jdbc:oracle:thin:@localhost:1521:xe";
+			String id = "projectSH";
 			String pass = "1234";
 			
 			conn = DriverManager.getConnection(url,id,pass);

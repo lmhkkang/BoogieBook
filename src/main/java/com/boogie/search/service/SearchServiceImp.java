@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.boogie.aop.BookAspect;
+import com.boogie.bookInfo.dto.BookInfoDto;
 import com.boogie.search.dao.SearchDao;
 import com.boogie.search.dto.SearchDto;
 
@@ -185,5 +186,18 @@ public class SearchServiceImp implements SearchService {
 		}				
 		mav.addObject("content", content);
 		mav.setViewName("search/severalSearchOk");
+	}
+
+	@Override
+	public List<SearchDto> bookSearch(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		HttpServletResponse response = (HttpServletResponse) map.get("response");
+		
+		String book_name = request.getParameter("book_name");
+		
+		List<SearchDto> list = searchDao.bookList(book_name); 
+		
+		return list;
 	}
 }

@@ -104,7 +104,9 @@ header > .middleHeader{
 	border: 0px dotted green;
 }
 .search{
-    height: 48px;
+    height: 96px;
+    margin: 32px 20px;
+
 }
 
 header > .lnb{
@@ -126,6 +128,7 @@ header > .lnb li{
 
 header > .lnb a{
 	color:white; font-size: 1.3em;
+	font-weight: bold !important;
 }
 
 #custom-search-input {

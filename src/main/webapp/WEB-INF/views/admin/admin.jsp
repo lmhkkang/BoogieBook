@@ -7,40 +7,11 @@
   <head>
     <meta charset="utf-8">
     <title>관리자 페이지</title>
-    <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Maven+Pro|Play&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="${root}/resources/css/admin/admin_header.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Maven+Pro|Play&display=swap" rel="stylesheet">    
     <link rel="stylesheet" type="text/css" href="${root}/resources/css/admin_content.css"/>
   </head>
   <body>
-    <header>
-			<div class="gnb">
-				<ul class="center">
-					<li class="topHeader_r"><a href="#">로그아웃</a></li>
-					<li class="topHeader_r"><a href="#">홈으로</a></li>
-				</ul>
-			</div>
-            <div class="center">
-                <div class="middleHeader">
-                    <div class="logo"><a href="http://naver.com"><img id="logoImg" src="${root}/resources/images/BoogieBook_Logo.png"/></a></div>
-                    <div class="search_form">
-                        <div class="search_top"></div>
-                        <div class="search"><b>Administrator</b></div>
-                    </div>
-                </div>
-            </div>
-
-			<div class="lnb">
-				<ul class="center">
-					<li><a href="admin.do">사용자 통계</a></li>
-					<li><a href="adminMemMng.do">회원관리</a></li>
-					<li><a href="adminBookRegMng.do">도서등록</a></li>
-					<li><a href="adminBookMng.do">도서관리</a></li>
-					<li><a href="adminFAQMng.do">고객센터관리</a></li>
-					<li><a href="adminOrdMng.do">주문 관리</a></li>
-				</ul>
-			</div>
-		</header>
-	<b></b>
+    <jsp:include page="admin_header.jsp"></jsp:include>
     <div id="content">
       <div class="section1">
         <div class="center">
@@ -50,9 +21,7 @@
             </div>
             <div id="adminSection1">
               <div id="cndtjd" style="margin-top:50px">
-	              <input type="button" value="날짜별로"/>
-	              <input type="button" value="보여주는"/>
-	              <input type="button" value="버튼이다"/>
+
               </div>
               <div id="chart_div" style="width: 1000px; height: 500px; margin: 50px auto 0px auto;"></div>
                 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

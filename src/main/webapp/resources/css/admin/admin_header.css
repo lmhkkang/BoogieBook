@@ -4,6 +4,7 @@
 a{text-decoration: none;}
 li{list-style-type: none;}
 
+
 header{
 	width: 100%; margin: 0px auto;
 }
@@ -36,6 +37,7 @@ header >.gnb a{color:black;}
 
 .topHeader_r{
     float: right;
+    font-size: 0.8em !important;
 }
 
 header > .middleHeader{
@@ -43,22 +45,22 @@ header > .middleHeader{
 }
 
 .logo{
-	width: 250px; height: 100px; border: 1px solid #cccccc;
+	width: 250px; height: 100px; border: 0px solid #cccccc;
 	text-align: center; line-height: 100px; float: left
 }
 
 #logoImg{
-	width: 250px; height: 100px; 
+	width: 250px; height: 96px; 
 }
 
 .search_form{
-	width: 500px; height: 100px; border: 1px solid #cccccc;
+	width: 500px; height: 100px; border: 0px solid #cccccc;
 	text-align: right; line-height: 50px; float: right;
 	font-size: 20px;
 }
 
 .search_form > div{
-    border: 1px solid #cccccc;
+    border: 0px solid #cccccc;
 }
 
 .search_top{
@@ -70,7 +72,7 @@ header > .middleHeader{
 }
 
 header > .lnb{
-	width: 100%; border:1px solid #cccccc;
+	width: 100%; border:0px solid #cccccc;
 	overflow: hidden; background-color: #5e6b9e; height: 50px;
 }
 header > .lnb >ul{
@@ -83,9 +85,10 @@ header > .lnb li{
 	border:0px solid #cccccc;
 	float:left; width: 100px; height:50px; line-height: 50px;
 	text-align: center;
-    font-family: 'Black Han Sans', sans-serif;
+    font-family: 'Do Hyeon', sans-serif !important;
 }
 
 header > .lnb a{
-	color:white; font-size: 1.1em;
+	color:white; font-size: 15px;
+	font-weight: bold;
 }

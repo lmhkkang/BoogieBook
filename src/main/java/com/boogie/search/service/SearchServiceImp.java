@@ -24,6 +24,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.boogie.aop.BookAspect;
+import com.boogie.bookInfo.dto.BookInfoDto;
 import com.boogie.search.dao.SearchDao;
 import com.boogie.search.dto.SearchDto;
 
@@ -187,14 +188,13 @@ public class SearchServiceImp implements SearchService {
 		mav.setViewName("search/severalSearchOk");
 	}
 
-	@Override
 	public List<SearchDto> getCookies(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		int cnt=0;
-		ArrayList<SearchDto> list=new ArrayList<SearchDto>();
+		int cnt = 0;
+		ArrayList<SearchDto> list = new ArrayList<SearchDto>();
 		Cookie[] getCookie = request.getCookies();
-		SearchDto dto=new SearchDto();
+		SearchDto dto = new SearchDto();
 		if (getCookie != null) {
 
 			for (int i = 0; i < getCookie.length; i++) {
@@ -203,18 +203,19 @@ public class SearchServiceImp implements SearchService {
 
 				String name = c.getName(); // 쿠키 이름 가져오기
 				String check = "";
-				check = name.substring(0, 2);				
-				
-				if (check.equals("id")) {
-					cnt++;
-					String book_id = c.getValue(); // 쿠키 값 가져오기
-					System.out.println(book_id);
-					
-					dto=searchDao.getOneBook(book_id);
-					
-					System.out.println(dto.toString());
-					list.add(dto);
-				}												
+				check = name.substring(0, 2);
+				if (check != "" || check!=null) {
+					if (check.equals("id")) {
+						cnt++;
+						String book_id = c.getValue(); // 쿠키 값 가져오기
+						System.out.println(book_id);
+
+						dto = searchDao.getOneBook(book_id);
+
+						System.out.println(dto.toString());
+						list.add(dto);
+					}
+				}
 			}
 		}
 		return list;

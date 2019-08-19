@@ -127,29 +127,13 @@
                <a href="${root}/index.jsp"><img src="${root}/resources/images/BoogieBook_Logo.png"></a>
             </div>
             <div class="search_form">
-               <div class="search_top">
-                  <ul class="search_top_ul">
-                     <li class="search_top_li"><a href="#">수학</a></li>
-                     <li class="search_top_li"><a href="#">수능</a></li>
-                     <li class="search_top_li"><a href="#">저스티스</a></li>
-                     <li class="search_top_li" style="border-right: 0px;"><a
-                        href="#">언제까지</a></li>
-                     <li class="search_top_li" style="width: 12px; border-right: 0px;"><a
-                        href="#" style="border-right: 0px;"><img
-                           src="${root}/resources/images/before.png" width="11px"
-                           height="12px"></a></li>
-                     <li class="search_top_li" style="width: 12px; border-right: 0px;"><a
-                        href="#" style="border-right: 0px;"><img
-                           src="${root}/resources/images/forward.png" width="11px"
-                           height="12px"></a></li>
-                  </ul>
-               </div>
+               
                <div class="search">
                   <form action="${root}/search/searchOk.do" method="get">
                      <div id="custom-search-input">
                         <div class="input-group col-md-12">
                            <input type="text" class="  search-query form-control"
-                              name="keyword" id="term" placeholder="Search" /> <span
+                              name="keyword" id="term" placeholder="검색어를 입력하세요" /> <span
                               class="input-group-btn">
                               <button class="btn btn-danger" type="submit">
                                  <span class=" glyphicon glyphicon-search"></span>

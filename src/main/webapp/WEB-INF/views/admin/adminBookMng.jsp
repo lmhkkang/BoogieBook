@@ -15,41 +15,17 @@
     <link rel="stylesheet" type="text/css" href="${root}/resources/css/admin/admin_book.css"/>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script type="text/javascript" src="${root}/resources/javascript/admin/editBook.js"></script>
+    <script type="text/javascript" src="${root}/resources/javascript/admin/delBook.js"></script>
+    <script type="text/javascript" src="${root}/resources/jquery/jquery.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script type="text/javascript">
-    	
+	  
 	</script>
   </head>
-  <body>
-    <header>
-			<div class="gnb">
-				<ul class="center">
-					<li class="topHeader_r"><a href="#">로그아웃</a></li>
-					<li class="topHeader_r"><a href="#">홈으로</a></li>
-				</ul>
-			</div>
-            <div class="center">
-                <div class="middleHeader">
-                    <div class="logo"><a href="http://naver.com"><img id="logoImg" src="${root}/resources/images/BoogieBook_Logo.png"/></a></div>
-                    <div class="search_form">
-                        <div class="search_top"></div>
-                        <div class="search"><b>Administrator</b></div>
-                    </div>
-                </div>
-            </div>
 
-			<div class="lnb">
-				<ul class="center">
-					<li><a href="admin.do">사용자 통계</a></li>
-					<li><a href="adminMemMng.do">회원관리</a></li>
-					<li><a href="adminBookRegMng.do">도서등록</a></li>
-					<li><a href="adminBookMng.do">도서관리</a></li>
-					<li><a href="adminFAQMng.do">고객센터관리</a></li>
-					<li><a href="adminOrdMng.do">주문 관리</a></li>
-				</ul>
-			</div>
-		</header>
-	<div>
+  <body>
+    <jsp:include page="admin_header.jsp"></jsp:include>
     <div id="content">
       <div class="section1">
         <div class="center">
@@ -70,17 +46,29 @@
 			    <hr>
 			    <div class="row">
 			        <div>
-			            <div>			      
+			            <div>
+			            <form action="adminBookSearchMng.do" method="get">
+			            	<div class="input-group col-md-12">
+                           		<input type="text" class="search-query form-control"
+                              	name="book_name" id="term" placeholder="책이름으로 검색" /> <span
+                              	class="input-group-btn">
+                              	<button class="btn btn-primary" type="submit">
+                                 	<span class=" glyphicon glyphicon-search"></span>
+                              	</button>
+                           		</span>
+                        	</div>
+                        </form>				      
 			            </div>
 			           	<c:if test="${count > 0}">
-				            <table class="table table-striped table-bordered">
+				            <table class="table table-striped table-bordered" style="width:1000px;">
 				                <thead>
 				                    <tr>
-				                        <th><input type="text" class="form-control" placeholder="책번호로 검색"></th>
-				                        <th><input type="text" class="form-control" placeholder="책이름으로 검색"></th>
-				                        <th><input type="text" class="form-control" placeholder="저자로 검색"></th>
-				                        <th><input type="text" class="form-control" placeholder="출판사로 검색"></th>
-				                        <th><input type="text" class="form-control" placeholder="출판일로 검색"></th>
+				                        	<td>책 번호</td>
+				                        	<td>책 이름</td>
+				                        	<td>저자</td>
+				                        	<td>출판사</td>
+				                        	<td>출판일</td>
+				                        	<td class="text-center"> 수정/삭제 </td>
 				                    </tr>
 				                </thead>
 				                <tbody>
@@ -91,6 +79,7 @@
 				                			<td>${bookDto.author}</td>
 				                			<td>${bookDto.publisher}</td>
 				                			<td><fmt:formatDate value="${bookDto.publish_date}" pattern="yy-MM-dd"/></td>
+				                			<td class="text-center"><a class='btn btn-info btn-xs' href="javascript:editBook('${root}','${bookDto.book_id}')" id="editBtn${bookDto.book_id}"><span class="glyphicon glyphicon-edit"></span> 수정</a> <a href="javascript:delBook('${root}','${bookDto.book_id}')" class="btn btn-danger btn-xs" id="deleteBtn${bookDto.book_id}"><span class="glyphicon glyphicon-remove"></span> 삭제</a></td>
 				                		</tr>
 				                	</c:forEach>    
 				                </tbody>

@@ -48,7 +48,13 @@
 	
 </script>
 </head>
-<body>
+<script type="text/javascript">
+	function head(){
+	$("#ul_center > li:eq(4)").css("background","white");
+	$("#ul_center > li:eq(4) > a").css("color","#5e6b9e");
+	}
+</script>
+<body onload="head();">
 	<jsp:include page="../../../header.jsp"></jsp:include>
 	<div class="center">
 		<div class="section1_l">

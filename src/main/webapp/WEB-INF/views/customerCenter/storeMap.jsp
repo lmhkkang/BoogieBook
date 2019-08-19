@@ -12,52 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="${root}/resources/css/customerCenter/storeMap.css" />
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=083fd23ec02eeeda62d90dc0754b0c49"></script>
 	<script type="text/javascript" src="${root}/resources/jquery/jquery.js"></script>
-	<script type="text/javascript">
-		function sendLocationCode(location_code, root){
-			var code = location_code.toString();
-			var latitude;
-			var longtitude;
-			var store_addr;
-			var store_name;
-			var store_phone;
-			$.ajax({
-				url : root + "/customerCenter/storeMapChange.do",
-				type : "get",
-				data : {location_code:code},
-				dataType : "text",
-				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-				success : function(data){
-					data = data.split("/");
-					latitude = Number(data[0]);
-					longtitude = Number(data[1]);
-					store_addr = "매장주소: "+data[2];
-					store_name = "매장이름: "+data[3];
-					store_phone = "전화번호: "+data[4];
-					initMap(latitude, longtitude);
-					$("#store_name").text(store_name);
-					$("#store_addr").text(store_addr);
-					$("#store_phone").text(store_phone);
-				},
-				error : function(){
-					alert("data 가져오기 실패");
-				}
-			});
-		}
-		
-		function initMap(latitude,longtitude){
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-			mapOption = { 
-			    center: new kakao.maps.LatLng(latitude, longtitude), // 지도의 중심좌표
-			    level: 3 // 지도의 확대 레벨
-			};
-			var map = new kakao.maps.Map(mapContainer, mapOption); 
-			var markerPosition  = new kakao.maps.LatLng(latitude, longtitude); 
-			var marker = new kakao.maps.Marker({
-			    position: markerPosition
-			});
-			marker.setMap(map);
-		}
-	</script>
+	<script type="text/javascript" src="${root}/resources/javascript/customerCenter/storeMap.js"></script>
 </head>
 <body onload="sendLocationCode(1,'${root}')">
 	<div>

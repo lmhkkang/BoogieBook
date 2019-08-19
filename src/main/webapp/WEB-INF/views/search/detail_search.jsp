@@ -63,27 +63,35 @@
 	
 	function a(){
 		$("#message2").hide();
-		$(".tap").find("li").eq(0).css({"background-color":"#cee7ff"});
+		$(".tap").find("li").eq(0).css({"background-color":"#778bae !important"});
 		$(".tap").find("a").eq(0).css({"color":"black"});
 		appendMonth();
 		appendYear();
+		
+		$("#ul_center > li:eq(3)").css("background","white");
+		$("#ul_center > li:eq(3) > a").css("color","#5e6b9e");
+		
 	}
+	
 	
 	$(function(){
 		
 		$("#1mbtn").click(function(){
-			 var num = $("#month2 option:selected").val()-2;
+			var num = $("#month2 option:selected").val()-2;
 			$("#month option:eq("+num+")").attr("selected","selecetd");
+			
 		});
 		
 		$("#3mbtn").click(function(){
 			 var num = $("#month2 option:selected").val()-4;
 			$("#month option:eq("+num+")").attr("selected","selecetd");
+			
 		});
 		
 		$("#6mbtn").click(function(){
 			 var num = $("#month2 option:selected").val()-7;
 			$("#month option:eq("+num+")").attr("selected","selecetd");
+			
 		});
 		
 		$("#1ybtn").click(function(){
@@ -92,19 +100,19 @@
 		});
 		
 		$("#menu1").click(function(){
-			$(".tap").find("li").eq(0).css({"background-color":"#cee7ff"});
+			$(".tap").find("li").eq(0).css({"background-color":"#778bae !important"});
 			$(".tap").find("a").eq(0).css({"color":"black"});
-			$(".tap").find("li").eq(1).css({"background-color":"#003a75"});
-			$(".tap").find("a").eq(1).css({"color":"white"});
+			$(".tap").find("li").eq(1).css({"background-color":"#f0f0f0"});
+			$(".tap").find("a").eq(1).css({"color":"black"});
 			$("#message2").hide()
 			$("#message1").show()
 		});				
 				
 		$("#menu2").click(function(){
-			$(".tap").find("li").eq(1).css({"background-color":"#cee7ff"});
+			$(".tap").find("li").eq(1).css({"background-color":"#778bae !important"});
 			$(".tap").find("a").eq(1).css({"color":"black"});
-			$(".tap").find("li").eq(0).css({"background-color":"#003a75"});
-			$(".tap").find("a").eq(0).css({"color":"white"});
+			$(".tap").find("li").eq(0).css({"background-color":"#f0f0f0"});
+			$(".tap").find("a").eq(0).css({"color":"black"});
 			$("#message1").hide()
 			$("#message2").show()
 		});
@@ -117,15 +125,13 @@
 </head>
 <body onload="a()">
 <jsp:include page="../../../header.jsp"></jsp:include>
+
 	<div class="all">
 		<div class="tap">
 			<ul>
 				<li><a href="#" id="menu1">상세검색</a></li>
 				<li><a href="#" id="menu2">다권검색</a></li>
 				<li><a href="#" id="menu3">쉽게찾기</a></li>
-			</ul>
-			<ul class="text">
-				<li style="background-color: white; border:none; height: 25px;">두 가지 이상 입력시 보다 정확히 검색됩니다.</li>
 			</ul>
 		</div>
 		
@@ -257,17 +263,18 @@
 			</form>
 		</div>
 		</div>
+		<form action="${root}/search/Several.do" method="post" onsubmit="return keywordcheck(this)">
 		<div id="message2">
 			<div class="da_content">
-					<label>도서명이나 저자 또는 ISBN중 하나를 입력해 주세요 </label>
+					<label>도서를 입력해 주세요 </label>
 				<div class="mid">
 					<div class="textarea">
-						<textarea></textarea>
+						<textarea name="content"></textarea>
 					</div>
 				<div class="subtext">
 					<ul>
-						<li>최대 20개까지 검색할 수 있습니다.</li>
-						<li>검색창에 도서명이나 저자명(역자) 또는 ISBN중 하나를 입력 하세요.</li>
+						<li>최대 5개까지 검색할 수 있습니다.</li>
+						<li>검색창에 도서명을 입력 하세요.</li>
 						<li>검색어와 검색어 사이에는 '엔터'키를 눌러 구분 해 주세요.</li>
 						<li>엑셀 등에서 복사 후 일괄 붙여넣기도 가능합니다.</li>
 					</ul>
@@ -278,7 +285,8 @@
 					<input type="reset" value="초기화"/>
 				</div>
 			</div>
-		</div>				
+		</div>
+		</form>				
 	</div>
 	 <jsp:include page="../../../footer.jsp"></jsp:include>
 </body>

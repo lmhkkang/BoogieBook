@@ -1,5 +1,6 @@
 package com.boogie.search.dao;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -36,17 +37,21 @@ public class SearchDaoImp implements SearchDao {
 		return sqlSessionTemplate.selectList("dao.searchMapper.PageList", hMap);
 	}
 	@Override
-	public int searchCount(String type, String book_name, String author, String publisher) {
+	public int searchCount(String type, String book_name, String author, String publisher, String startDay, String endDay, int price01, int price02) {
 		HashMap<String, Object> hMap=new HashMap<String, Object>();
 		hMap.put("book_name", book_name);
 		hMap.put("type", type);
 		hMap.put("author", author);
-		hMap.put("publisher", publisher);		
+		hMap.put("publisher", publisher);
+		hMap.put("startDay", startDay);
+		hMap.put("endDay", endDay);
+		hMap.put("price01", price01);
+		hMap.put("price02", price02);
 		return sqlSessionTemplate.selectOne("dao.searchMapper.searchCount", hMap);
 	}
 	@Override
 	public List<SearchDto> multiPageList(String type, String book_name, String author, String publisher, int startRow,
-			int endRow) {
+			int endRow, String startDay, String endDay, int price01, int price02) {
 		HashMap<String, Object> hMap=new HashMap<String, Object>();
 		hMap.put("type", type);
 		hMap.put("book_name", book_name);
@@ -54,10 +59,21 @@ public class SearchDaoImp implements SearchDao {
 		hMap.put("publisher", publisher);
 		hMap.put("startRow", startRow);
 		hMap.put("endRow", endRow);
+		hMap.put("startDay", startDay);
+		hMap.put("endDay", endDay);
+		hMap.put("price01", price01);
+		hMap.put("price02", price02);
 		return sqlSessionTemplate.selectList("dao.searchMapper.multiList", hMap);
 	}
 	@Override
 	public List<SearchDto> listAll2() {
 		return sqlSessionTemplate.selectList("dao.searchMapper.autoList");
+	}
+	@Override
+	public SearchDto getOneBook(String id) {
+		System.out.println(id.trim());
+		int ids = Integer.parseInt(id.trim());
+		System.out.println(ids);
+		return sqlSessionTemplate.selectOne("dao.searchMapper.searchOneBook",ids);	
 	}
 }

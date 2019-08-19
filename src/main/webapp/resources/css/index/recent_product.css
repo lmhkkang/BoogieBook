@@ -1,0 +1,72 @@
+@charset "UTF-8";
+
+.bar {
+	width: 100px;
+	height: 400px;
+	position: fixed;
+	border: 0px solid #5e6b9e;
+	/* float: right; */
+	margin: 10px;
+	right: 10px;
+	background: rgb(245, 245, 245);
+}
+
+.imgvie {
+	/*     border: 1px red solid; */
+	width: 60px;
+    height: 70px;
+    display: flex;
+    margin: 12px 24px;
+}
+
+.close_btn {
+	width: 10px;
+	height: 15px;
+	text-align: center;
+	line-height: 3px;
+	background: #5e6b9e;
+	color: #ffffff;
+}
+
+.p {
+	border-bottom: 2px solid white;
+	height: 40px;
+	text-align: center;
+	background: #5e6b9e;
+	color: white;
+	font-family: 'Do Hyeon', sans-serif;
+}
+
+#product_cnt {
+	width: 10px;
+	height: 17px;
+	margin: 0px auto;
+	text-align: center;
+	border: 1px solid red;
+	border-radius: 45px;
+	display: block;
+	background: red;
+}
+
+.next_btn {
+	width: 100px;
+	height: 20px;
+	border: 0px red solid;
+	background: #5e6b9e;
+	color: white;
+}
+
+#bar_content {
+	width: 100px;
+	height: 340px;
+	overflow: hidden;
+}
+.top_btn {
+    width: 100px;
+    margin: 16px 26px;
+}
+
+.top_btn > a{
+
+    transition: all 0.2s;	
+}

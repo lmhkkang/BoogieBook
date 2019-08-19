@@ -39,6 +39,8 @@
     <context:component-scan base-package="com.boogie.email"/>
     <context:component-scan base-package="com.boogie.bookInfo.*"/>
     <context:component-scan base-package="com.boogie.index.*"/>
+    <context:component-scan base-package="com.boogie.visit.*"/>
+    <context:component-scan base-package="com.boogie.admin.*"/>
 
     <!-- AOP -->
     <aop:aspectj-autoproxy/>

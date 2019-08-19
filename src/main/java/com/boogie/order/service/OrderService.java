@@ -14,4 +14,16 @@ public interface OrderService {
 
 	void addOrder(ModelAndView mav);
 
+	int cartDeleteButton(String[] book_id, String member_id);
+
+	int cartCount(String member_id);
+
+	void NonMemberAddCart(ModelAndView mav);
+
+	void NonMemberOrderInfo(ModelAndView mav);
+	
+	void nonMemberOrderDetailSearch(ModelAndView mav);
+
+	void NonMemberDirectOrder(ModelAndView mav);
+
 }

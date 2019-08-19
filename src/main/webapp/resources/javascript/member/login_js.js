@@ -30,6 +30,20 @@ function loginForm(obj){
 	}
 }
 
+function nonMemberForm(obj){
+	if(obj.username.value==""){
+		alert("이름을 입력하세요");
+		obj.username.focus();
+		return false;
+	}
+	
+	if(obj.email.value==""){
+		alert("이메일을 입력하세요.");
+		obj.email.focus();
+		return false;
+	}
+}
+
 function registerFun(){
     setTimeout(function() {
     opener.location = "/homepage/member/register.do";
@@ -39,13 +53,13 @@ function registerFun(){
 
 function forgetIdFun(){
 	var url="/homepage/member/forgetId.do"; 
-	window.open(url, "", "width=380, height=350, left=450, top=250, scrollbars=0, menubar=no, toolbar=0");
+	window.open(url, "", "width=470, height=350, left=450, top=250, scrollbars=0, menubar=no, toolbar=0");
 
 }
 
 function forgetPasswordFun(){
 	var url="/homepage/member/forgetPassword.do";
-	window.open(url, "", "width=380, height=350, left=450, top=250, scrollbars=0, menubar=no, toolbar=0");
+	window.open(url, "", "width=470, height=350, left=450, top=250, scrollbars=0, menubar=no, toolbar=0");
 }
 
 $(document).ready(function(){

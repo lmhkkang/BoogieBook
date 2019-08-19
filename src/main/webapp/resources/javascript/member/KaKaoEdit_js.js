@@ -84,7 +84,7 @@ function zipcodeRead(){
 
 function KaKaoWithdrawal(id){
 	var url="/homepage/member/KaKaoWithdrawal.do?" + "id=" + id ;
-	window.open(url, "", "width=400, height=200, left=450, top=250, scrollbars=0, menubar=no, toolbar=0");
+	window.open(url, "", "width=470, height=200, left=450, top=250, scrollbars=0, menubar=no, toolbar=0");
 	
 }
 

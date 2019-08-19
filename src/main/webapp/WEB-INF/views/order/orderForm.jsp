@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
+
 <!doctype html>
 <html>
 <head>
@@ -12,22 +13,29 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link type="text/css" rel="stylesheet" href="${root}/resources/css/order/orderForm.css"/> 
-    <script src="${root}/resources/javascript/order/orderForm.js/"/>
+    <script type="text/javascript" src="${root}/resources/javascript/order/orderForm.js"></script>
 	<script type="text/javascript" src="${root}/resources/javascript/jquery.js"></script>
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#bar").hide(0);
+		});
+	</script>
 </head>
 <body>
 <c:set var="book_id" value="${book_id}"/>
 <c:set var="member_id" value="${member_id}"/>
 <c:set var="memberDto" value="${memberDto}"/>
-<jsp:include page="../../../header.jsp"></jsp:include>
-<div style="height: 100px; width: 800px;"></div>
 <c:set var="name" value="${memberDto.name}"/>
 <c:set var="zipcode" value="${memberDto.zipcode}"/>
 <c:set var="addr1" value="${memberDto.addr1}"/>
 <c:set var="addr2" value="${memberDto.addr2}"/>
 <c:set var="phone" value="${memberDto.phone}"/>
+<c:set var="quantity" value="${quantity}"/>
 <c:set var="total" value="${total}"/>
+<jsp:include page="../../../header.jsp"></jsp:include>
+<div style="height: 100px; width: 800px;"></div>
+
 <form action="${root}/order/paymentComplete.do" method="post" onsubmit="javascript:payProgress('${root}')">
     <div class="container mb-4">
         <div class="row">
@@ -37,7 +45,7 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col"><h3>배송정보</h3></th>
+                                <th scope="col"><h3>배송정보</h3></th>            
                                 <th scope="col">
                                     <!-- Default unchecked -->
                                     <button type="button" class="btn btn-outline-primary" onclick="oldInfo('${name}','${zipcode}','${addr1}','${addr2}','${phone}')">기존정보</button>
@@ -45,7 +53,7 @@
                                 </th>   
                                  <th scope="col">
                                     <!-- Default unchecked -->
-                                    
+                                    ${member_id}
                                 </th>   
                             </tr>
                         </thead>
@@ -58,14 +66,24 @@
                                 <td></td>
                                 <td class="text-right"></td>
                                 <td class="text-right"></td>
-                            </tr>
+                            </tr> 
+                            <c:if test="${member_id == null}">
+                            	<tr>
+	                                <td style="padding-left:70px"><label>이메일</label></td>
+	                                <td><input class="form-control" type="text" name="email" id="email" value="" style="width:200px;"/></td>
+	                                <td></td>
+	                                <td></td>
+	                                <td class="text-right"></td>
+	                                <td class="text-right"></td>
+	                            </tr>
+                            </c:if>	                                                    
                             <tr>
                                 <td style="padding-left:70px"><label>배송지</label> </td>
                                 <td>
-                                    <input class="form-control" type="text" id="zipcode" value="${memberDto.zipcode}" style="width:100px; float:left;" />
+                                    <input class="form-control" type="text" id="zipcode" name="zipcode" value="${memberDto.zipcode}" style="width:100px; float:left;" />
                                     <button type="button" class="btn btn-primary" name="zipcodeFinder"  style="float:left;" onclick="zipcodeRead()">우편번호</button>
-                                    <input class="form-control" type="text" id="addr1" value="${memberDto.addr1}"/>
-                                    <input class="form-control" type="text" placeholder="상세주소입력" id="addr2" value="${memberDto.addr2}"/>
+                                    <input class="form-control" type="text" id="addr1" name="addr1" value="${memberDto.addr1}"/>
+                                    <input class="form-control" type="text" placeholder="상세주소입력" id="addr2" name="addr2" value="${memberDto.addr2}"/>
                                 </td>
                                 <td></td>
                                 <td></td>
@@ -120,9 +138,10 @@
         </div>
     </div>
     <div style="height: 100px; width: 800px;"></div>
- <jsp:include page="../../../footer.jsp"></jsp:include>  
- <input type="hidden" name="member_id" value="${member_id}" id="member_id" />
+  <jsp:include page="../../../footer.jsp"></jsp:include>  
+  <input type="hidden" name="member_id" value="${member_id}" id="member_id" />
   <input type="hidden" name="total" value="${total}"/>
+  <input type="hidden" name="quantity" value="${quantity}"/>
 </form>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>

@@ -1,5 +1,6 @@
 package com.boogie.bookInfo.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -39,6 +40,27 @@ public class BookInfoDaoImp implements BookInfoDao {
 	@Override
 	public List<BookInfoDto> getBestSeller(String bookType) {
 		return sqlSessionTemplate.selectList("selectBestSeller", bookType);
+	}
+
+	@Override
+	public List<BookInfoDto> getNewBook(String bookType) {
+		return sqlSessionTemplate.selectList("selectNewBook", bookType);
+	}
+
+
+	@Override
+	public List<BookInfoDto> BookList(int startRow, int endRow, String bookType) {
+		HashMap<String, Object> hMap = new HashMap<String, Object>();
+		hMap.put("startRow", startRow);
+		hMap.put("endRow", endRow);
+		hMap.put("bookType", bookType);
+		
+		return sqlSessionTemplate.selectList("selectKoreanBook", hMap);
+	}
+
+	@Override
+	public int bookCount() {
+		return sqlSessionTemplate.selectOne("bookCount");
 	}
 
 }

@@ -4,12 +4,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -138,7 +140,6 @@ public class SearchServiceImp implements SearchService {
 		mav.addObject("book_name", book_name);
 		mav.addObject("author", author);
 		mav.addObject("publisher", publisher);
-		
 
 		mav.addObject("year01", year01);
 		mav.addObject("month01", month01);
@@ -146,7 +147,7 @@ public class SearchServiceImp implements SearchService {
 		mav.addObject("month02", month02);
 		mav.addObject("price02", price02);
 		mav.addObject("price01", price01);
-		
+
 		mav.setViewName("search/multiOk");
 	}
 
@@ -176,19 +177,19 @@ public class SearchServiceImp implements SearchService {
 
 		BookAspect.logger.info(BookAspect.logMsg + "keywords: " + keyword.length);
 		HashMap<Integer, List<SearchDto>> listMap = new HashMap<Integer, List<SearchDto>>();
-		
-				
-		for(int i=0; i<keyword.length; i++) {
-			 listMap.put(i, searchDao.keywordSearch(keyword[i]));
-			 mav.addObject("searchResult"+i, listMap.get(i));
-			 mav.addObject("count"+i, listMap.get(i).size());
-			 mav.addObject("keyword"+i, keyword[i]);
-		}				
+
+		for (int i = 0; i < keyword.length; i++) {
+			listMap.put(i, searchDao.keywordSearch(keyword[i]));
+			mav.addObject("searchResult" + i, listMap.get(i));
+			mav.addObject("count" + i, listMap.get(i).size());
+			mav.addObject("keyword" + i, keyword[i]);
+		}
 		mav.addObject("content", content);
 		mav.setViewName("search/severalSearchOk");
 	}
 
 	@Override
+<<<<<<< HEAD
 	public List<SearchDto> bookSearch(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
@@ -198,6 +199,37 @@ public class SearchServiceImp implements SearchService {
 		
 		List<SearchDto> list = searchDao.bookList(book_name); 
 		
+=======
+	public List<SearchDto> getCookies(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		int cnt=0;
+		ArrayList<SearchDto> list=new ArrayList<SearchDto>();
+		Cookie[] getCookie = request.getCookies();
+		SearchDto dto=new SearchDto();
+		if (getCookie != null) {
+
+			for (int i = 0; i < getCookie.length; i++) {
+
+				Cookie c = getCookie[i];
+
+				String name = c.getName(); // 쿠키 이름 가져오기
+				String check = "";
+				check = name.substring(0, 2);				
+				
+				if (check.equals("id")) {
+					cnt++;
+					String book_id = c.getValue(); // 쿠키 값 가져오기
+					System.out.println(book_id);
+					
+					dto=searchDao.getOneBook(book_id);
+					
+					System.out.println(dto.toString());
+					list.add(dto);
+				}												
+			}
+		}
+>>>>>>> db3e596307ba2e33e6ac27dbc0877355832f1f66
 		return list;
 	}
 }

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <c:set var="root" value="${pageContext.request.contextPath }"/>
 <!doctype html>
 <html>
@@ -12,9 +14,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link type="text/css" rel="stylesheet" href="${root}/resources/css/order/paymentComplete.css"/>
+    <script type="text/javascript">
+		$(document).ready(function(){
+			$("#bar").hide(0);
+		});
+	</script>
 </head>
 <body>
-<%-- <c:set var="orderDto" ${orderDto}/> --%>
+<c:set var="orderDto" value="${orderDto}"/>
    <jsp:include page="../../../header.jsp"></jsp:include>
 
     <div id="OrderOkLine">
@@ -44,7 +51,8 @@
                              <tr>
                                 <td style="padding-left:60px;"><label>주문날짜</label> </td>
                                 <td></td>
-                                <td>${orderDto.order_date}</td>
+                                <td><fmt:formatDate value="${orderDto.order_date}" pattern="yyyy년 MM월 dd일" /> <br></td>
+                                
                                 <td></td>
                                 <td class="text-right"></td>
                                 <td class="text-right"></td>
@@ -69,14 +77,16 @@
                             <tr>
                                 <td style="padding-left:60px;"><label>제목(수량)</label></td>
                                 <td></td>
-                                <c:if test="${bookList.size()==0}">
-                                	<c:forEach var="orderDetail" items="${bookList}">
+                                <c:if test="${bookList != null}">
+                                	
 	                                	<td>
-	                          				${orderDetail.book_name}(${orderDetail.quantity}권) <br/> 
+	                                		<c:forEach var="orderDetail" items="${bookList}">
+	                          					${orderDetail.book_name}(${orderDetail.quantity}권) <br/> 
+	                          				</c:forEach> 
 	                          			</td>
-                               		</c:forEach> 
+                               		
                                 </c:if>
-                                <c:if test="${bookList.size()!=0}">
+                                <c:if test="${bookList == null}">
                                 	<td>
                                 		${orderDto.book_name}(${orderDto.quantity}권)
                                 	</td>

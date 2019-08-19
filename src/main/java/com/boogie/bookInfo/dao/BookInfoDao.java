@@ -12,5 +12,8 @@ public interface BookInfoDao {
 	public String getIdList(int member_num);
 	public float getRateAverage(int book_id);
 	public List<BookInfoDto> getBestSeller(String bookType);
+	public List<BookInfoDto> getNewBook(String bookType);
+	public List<BookInfoDto> BookList(int startRow, int endRow, String bookType);
+	public int bookCount();
 
 }

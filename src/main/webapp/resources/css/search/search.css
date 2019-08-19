@@ -113,6 +113,7 @@ color: white;
 }
 .row select{
 	width: 100px;
+	margin-left: 15px;
 }
 .content_body2{
 	width: 410px;height: 280px;

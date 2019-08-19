@@ -19,6 +19,7 @@
    html .ui-autocomplete {
       height: 300px;
    }
+   .ui-autocomplete-term { font-weight: bold; color: blue; }
    </style>
    <link
       href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Maven+Pro|Play&display=swap"
@@ -49,7 +50,8 @@
    <script src="https://code.jquery.com/jquery.js"></script>
    <!-- jQuery ui library -->
    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-   <script type="text/javascript">    
+   <script type="text/javascript"> 
+  
           $(function() {
              var bookList = new Array();
              $.ajax({
@@ -63,10 +65,26 @@
                       }
                       $("#term").autocomplete({              
                           source : bookList
+                          
                       });
                    }
                });
               
+          });
+          
+          $(function(){
+        	 var count = 0;
+        	 $.ajax({
+                 type : "get",
+                 url : "${root}/order/cartCount.do",
+                 dataType : "text",
+                 success : function(data) { 
+                    	$("#cartCount").text(data);
+                    }
+                 ,error : function(){
+                	 alert("failed ");
+                 }                
+             });
           });
       </script>
 </head>
@@ -75,11 +93,11 @@
       <div id="result"></div>
       <div class="gnb">
          <ul class="center">
-            <li class="topHeader_l"><a href="${root}/customerCenter/storeMap.do">매장안내</a><span>∨</span></li>
+            <li class="topHeader_l"><a href="${root}/customerCenter/storeMap.do">매장안내</a><span></span></li>
             <li class="topHeader_l"><a href="#">회원혜택</a><span>∨</span></li>
             <li></li>
             <li class="topHeader_r"><a href="#"></a></li>
-            <li class="topHeader_r"><a href="${root}/order/cart.do"><img width="13px" height="13px" src="${root}/resources/images/keep.jpg"><span>0</span></a></li>
+            <li class="topHeader_r"><a href="${root}/order/cart.do"><img width="13px" height="13px" src="${root}/resources/images/keep.jpg"><span id="cartCount">0</span></a></li>
             <li class="topHeader_r"><a href="${root}/customerCenter/customerService.do">고객센터</a></li>
             <li class="topHeader_r"><a href="#">주문배송</a></li>
 
@@ -88,7 +106,7 @@
                <li class="topHeader_r"><a href="javascript:OpenLoginFrame()">로그인</a></li>
             </c:if>
             <c:if test="${name !=null}">
-               <li class="topHeader_r"><a href="#">마이페이지</a></li>
+               <li class="topHeader_r"><a href="${root}/member/searchOrder.do">주문조회</a></li>
                <c:if test="${snsNum == 3}">
                   <li class="topHeader_r"><a
                      href="${root}/member/memberEdit.do?id=${id}">회원정보수정</a></li>
@@ -100,8 +118,6 @@
                <li class="topHeader_r"><a href="${root}/member/logout.do">로그아웃</a></li>
                <li class="topHeader_r"><b>${name}님 환영합니다.</b></li>
             </c:if>
-
-
          </ul>
       </div>
 
@@ -111,29 +127,13 @@
                <a href="${root}/index.jsp"><img src="${root}/resources/images/BoogieBook_Logo.png"></a>
             </div>
             <div class="search_form">
-               <div class="search_top">
-                  <ul class="search_top_ul">
-                     <li class="search_top_li"><a href="#">수학</a></li>
-                     <li class="search_top_li"><a href="#">수능</a></li>
-                     <li class="search_top_li"><a href="#">저스티스</a></li>
-                     <li class="search_top_li" style="border-right: 0px;"><a
-                        href="#">언제까지</a></li>
-                     <li class="search_top_li" style="width: 12px; border-right: 0px;"><a
-                        href="#" style="border-right: 0px;"><img
-                           src="${root}/resources/images/before.png" width="11px"
-                           height="12px"></a></li>
-                     <li class="search_top_li" style="width: 12px; border-right: 0px;"><a
-                        href="#" style="border-right: 0px;"><img
-                           src="${root}/resources/images/forward.png" width="11px"
-                           height="12px"></a></li>
-                  </ul>
-               </div>
+               
                <div class="search">
                   <form action="${root}/search/searchOk.do" method="get">
                      <div id="custom-search-input">
                         <div class="input-group col-md-12">
                            <input type="text" class="  search-query form-control"
-                              name="keyword" id="term" placeholder="Search" /> <span
+                              name="keyword" id="term" placeholder="검색어를 입력하세요" /> <span
                               class="input-group-btn">
                               <button class="btn btn-danger" type="submit">
                                  <span class=" glyphicon glyphicon-search"></span>
@@ -149,10 +149,10 @@
 
       <div class="lnb">
          <div id="center">
-            <ul class="center">
-               <li><a href="#">국내도서</a></li>
+            <ul class="center" id="ul_center">
+               <li><a href="${root}/koreanBook/koreanBookMain.do">국내도서</a></li>
                <li><a href="${root}/bestSeller/bestSellerMain.do">베스트셀러</a></li>
-               <li><a href="#">신간도서</a></li>
+               <li><a href="${root}/newBook/newBookMain.do">신간도서</a></li>
                <li><a href="${root}/search/detailSearch.do">상세검색</a></li>
                <c:if test="${id != null}">
                   <li><a href="${root}/recommend/recommendMain.do?id=${id}">추천도서</a></li>
@@ -166,4 +166,5 @@
       </div>
    </header>
 </body>
+<jsp:include page="./recent_product.jsp"></jsp:include>
 </html>

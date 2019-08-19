@@ -17,12 +17,20 @@
 	<link rel="styleSheet" type="text/css" href="${root}/resources/css/recommend/recommend_content.css" />
 	<script type="text/javascript" src="${root}/resources/javascript/book/bookInfo.js"></script>
 	<script type="text/javascript" src="${root}/resources/javascript/xhr/xhr.js"></script>
+	<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+	<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
 </head>
-<body>
-	<jsp:include page="../../../header.jsp"></jsp:include>
+<script type="text/javascript">
+	function head(){
+	$("#ul_center > li:eq(1)").css("background","white");
+	$("#ul_center > li:eq(1) > a").css("color","#5e6b9e");
+	}
+</script>
+<body onload="head();">
+	<jsp:include page="../../../header.jsp"></jsp:include>	
 	<div class="center">
 		<div class="section1_l">
-			<ul class="book_list">
+			<ul class="book_list" id="book_menu">
 				<li><a href="${root}/bestSeller/bestSellerMain.do">종합</a></li>
 				<li><a href="${root}/bestSeller/bestSellerMain.do?bookType=소설">소설</a></li>
 				<li><a href="${root}/bestSeller/bestSellerMain.do?bookType=시/에세이">시/에세이</a></li>
@@ -52,7 +60,7 @@
 					<c:set var = "num" value = "${num+1}"/>							
 						<div class="interest_body" style="float:left; width: 650px;">
 							<div class="interest_img">
-								<a href="${root}/book/bookInfo.do?book_id=${bestSeller.book_id}"><img src="${bestSeller.img_path}" width="100%" height="100%"></a>
+								<a href="${root}/book/bookInfo.do?book_id=${bestSeller.book_id}&page=bestSeller"><img src="${bestSeller.img_path}" width="100%" height="100%"></a>
 							</div>
 							<div class="interest_subject_form">
 								<div class="interest_sub">
@@ -62,7 +70,7 @@
 												pattern="yyyy-MM-dd" />
 										</div>
 										<div class="interest_subject2">
-											<a href="${root}/book/bookInfo.do?book_id=${bestSeller.book_id}"><b>${bestSeller.book_name}</b></a>
+											<a href="${root}/book/bookInfo.do?book_id=${bestSeller.book_id}&page=bestSeller"><b>${bestSeller.book_name}</b></a>
 										</div>
 										<div class="interest_subject3">
 											인터넷 판매가: <b style="color: red"><fmt:formatNumber value="${bestSeller.price}" pattern="#,###" />원</b>
@@ -72,8 +80,8 @@
 								</div>
 								<div class="interest_des" id="interest_des"></div>
 								<div class="interest_btn">
-									<button type="button" class="btn" style="border: 1px solid #5e6b9e;" onclick="javascript:moveToCart('${root}','${bestSeller.book_id}','1')">장바구니담기</button>
-									<button type="button" class="btn" style="border: 1px solid #5e6b9e;" onclick="javascript:moveToOrderForm('${root}','${bestSeller.book_id}','1')">바로구매</button>
+									<button type="button" class="btn" style="border: 1px solid #5e6b9e;" onclick="javascript:moveToCart2('${root}','${bestSeller.book_id}','1')">장바구니담기</button>
+									<button type="button" class="btn" style="border: 1px solid #5e6b9e;" onclick="javascript:moveToOrderForm2('${root}','${bestSeller.book_id}','1')">바로구매</button>
 								</div>
 							</div>
 						</div>		

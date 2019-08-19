@@ -73,25 +73,20 @@
 									</div>
 								</form>
 								<form id="register-form"
-									action="https://phpoll.com/register/process" method="post"
-									role="form" style="display: none;">
+									action="${root}/member/nonMemberCheck.do" method="get"
+									role="form" style="display: none;" onsubmit="return nonMemberForm(this)">
 									<div class="form-group">
 										<input type="text" name="username" id="username" tabindex="1"
 											class="form-control" placeholder="이름" value="">
 									</div>
 									<div class="form-group">
-										<input type="email" name="email" id="email" tabindex="1"
+										<input type="text" name="email" id="email" tabindex="1"
 											class="form-control" placeholder="이메일" value="">
-									</div>
-									<div class="form-group">
-										<input type="password" name="password" id="password"
-											tabindex="2" class="form-control"
-											placeholder="주문 시 입력하신 비밀번호를 입력해주세요">
 									</div>
 									<div class="form-group">
 										<div class="form-group-p">
 											<p>- 비회원으로 주문하신 내역이 있는 분만 이용이 가능합니다.</p>
-											<p>- 비회원 주문 시 입력한 이름과 이메일, 비밀번호로 로그인해주세요.</p>
+											<p>- 비회원 주문 시 입력한 이름과 이메일을 입력해주세요.</p>
 										</div>
 									</div>
 									<div style="font-size: 12px;">
@@ -218,15 +213,7 @@ Kakao.Auth.createLoginButton({
     }
 });
  
-// 로그아웃 처리
-function logoutWithKakao(){
-    Kakao.Auth.logout();
-    alert('카카오 로그아웃 완료!');
-    setCookie("kakao_login","",-1);  // 쿠키삭제 (로그아웃)
-    //deleteCookie( "kakao_login" ); 쿠키삭제 다른 방법
-    createLoginKakao();
-    window.location.href="/homepage/index.jsp";
-}
+
  
  
  

@@ -70,9 +70,18 @@ public class SearchDaoImp implements SearchDao {
 	public List<SearchDto> listAll2() {
 		return sqlSessionTemplate.selectList("dao.searchMapper.autoList");
 	}
+<<<<<<< HEAD
 
 	@Override
 	public List<SearchDto> bookList(String book_name) {
 		return sqlSessionTemplate.selectList("dao.searchMapper.bookList", book_name);
+=======
+	@Override
+	public SearchDto getOneBook(String id) {
+		System.out.println(id.trim());
+		int ids = Integer.parseInt(id.trim());
+		System.out.println(ids);
+		return sqlSessionTemplate.selectOne("dao.searchMapper.searchOneBook",ids);	
+>>>>>>> db3e596307ba2e33e6ac27dbc0877355832f1f66
 	}
 }

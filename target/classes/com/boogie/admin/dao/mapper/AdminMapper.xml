@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="dao.adminMapper">
 	<select id="AdminSelectDw" resultType="int">
 		select distinct to_char(sysdate, 'D') from manager
@@ -40,9 +39,9 @@
 		select nvl(sat_count,0) from dw_count
 	</select>
 	
-	<select id="AdminGetMemberDto" resultType="com.boogie.member.dto.MemberDto">
+	<select id="AdminGetMemberDto" parameterType="java.util.HashMap" resultType="com.boogie.member.dto.MemberDto">
 		<![CDATA[
-			select * from member
+			select b.* from (select rownum rnum , a.* from (select * from member)a)b where b.rnum >= #{startRow} and b.rnum <= #{endRow}
 		]]>
 	</select>
 	
@@ -55,7 +54,7 @@
 	</update>
 	
 	<delete id="AdminMemberDelete" parameterType="int">
-		delete member where member_num = #{num}
+		delete from member where member_num = #{num}
 	</delete>
 	
 	<select id="AdminGetBookList" resultType="com.boogie.bookInfo.dto.BookInfoDto" parameterType="java.util.HashMap">
@@ -76,15 +75,111 @@
 		insert into faq_board values(board_number_seq.nextval,#{question_code},#{question},#{answer})
 	</insert>
 	
-	<select id="AdminGetOrderList" resultType="com.boogie.order.dto.OrderDto">
-		select c.*, d.book_name from
+	<select id="AdminGetOrderList" resultType="com.boogie.order.dto.OrderDto" parameterType="java.util.HashMap">
+		<![CDATA[
+			select * from (select rownum rnum, c.*, d.book_name from
 		(select a.*, b.book_id, b.quantity from 
 		(select o.order_id,o.member_id,o.order_date,o.total_price,s.status 
 		  from book_order o inner join order_status s on (o.order_status = s.order_status))a inner join order_detail b on(a.order_id = b.order_id))c 
-		  inner join book d on (c.book_id = d.book_id)
+		  inner join book d on (c.book_id = d.book_id) order by order_id desc)e where e.rnum >= #{startRow} and e.rnum <= #{endRow}
+		]]>	
 	</select>
 	
 	<update id="AdminDwInit">
 		update dw_count set sun_count=0, mon_count=0, tue_count=0, wed_count=0, thu_count=0, fri_count=0, sat_count=0
 	</update>
+	
+	<select id="AdminGetSearchBookList" resultType="com.boogie.bookInfo.dto.BookInfoDto">
+		<![CDATA[
+			select book_id, book_name, author, publisher, publish_date from book where book_name like '%' || #{book_name} || '%'
+		]]> 
+	</select>
+	
+	<select id="AdminGetSearchBookCount" resultType="int">
+		<![CDATA[
+			select count(*) from book where book_name like '%' || #{book_name} || '%'
+		]]>
+	</select>
+	
+	<select id="AdminGetSelectBookDto" resultType="com.boogie.bookInfo.dto.BookInfoDto">
+		select * from book where book_id = #{book_id}
+	</select>
+	
+	<update id="AdminBookUpdate" parameterType="java.util.HashMap">
+		<![CDATA[
+			update book set type01=#{type01},type02 =#{type02},type03 =#{type03},img_path =#{img_path},book_name =#{book_name}, author =#{author}, publisher =#{publisher}, publish_date = to_date(#{publish_date}), price = #{price}, book_id = #{book_id}, stock = #{stock} where book_id = #{book_id}
+		]]>
+	</update>
+	
+	<delete id="AdminBookDelete">
+		delete from book where book_id = #{book_id}
+	</delete>
+	
+	<select id="AdminGetOrdStatList" resultType="com.boogie.order.dto.OrderDto">
+		<![CDATA[
+		select c.*, d.book_name from
+		(select a.*, b.book_id, b.quantity from 
+		(select o.order_id,o.member_id,o.order_date,o.total_price,s.status 
+		  from book_order o inner join order_status s on (o.order_status = s.order_status) and o.order_status=#{ordStat})a inner join order_detail b on(a.order_id = b.order_id))c 
+		  inner join book d on (c.book_id = d.book_id) order by order_id desc	
+		]]>	
+	</select>
+	
+	<select id="AdminGetCountSearchOrder" resultType="int">
+		select count(*) from book_order where order_status=#{ordStat}
+	</select>
+	
+	<select id="AdminGetSearchMemId" parameterType="String" resultType="com.boogie.member.dto.MemberDto">
+		select * from member where member_id = #{searchId}
+	</select>
+	
+	<update id="AdminGetEditOrdStat" parameterType="java.util.HashMap">
+		update book_order set order_status=#{order_Status} where order_id = #{order_id}
+	</update>
+	
+	<delete id="AdminDelOrd">
+		delete from book_order where order_id = #{order_id}
+	</delete>
+	
+	<select id="AdminGetOrderCount" resultType="int">
+		select nvl(count(*),0) from book_order
+	</select>
+	
+	<select id="AdminGetSearchOrderId" parameterType="int" resultType="com.boogie.order.dto.OrderDto">
+		<![CDATA[
+		select c.*, d.book_name from
+		(select a.*, b.book_id, b.quantity from 
+		(select o.order_id,o.member_id,o.order_date,o.total_price,s.status 
+		  from book_order o inner join order_status s on (o.order_status = s.order_status) and o.order_id=#{id})a inner join order_detail b on(a.order_id = b.order_id))c 
+		  inner join book d on (c.book_id = d.book_id)
+		]]>	
+	</select>
+	
+	<select id="AdminGetCountSearchOrderId" parameterType="String" resultType="int">
+		<![CDATA[
+		select nvl(count(*),0) from(select c.*, d.book_name from
+		(select a.*, b.book_id, b.quantity from 
+		(select o.order_id,o.member_id,o.order_date,o.total_price,s.status 
+		  from book_order o inner join order_status s on (o.order_status = s.order_status) and o.order_id=#{searchOrderId})a inner join order_detail b on(a.order_id = b.order_id))c 
+		  inner join book d on (c.book_id = d.book_id))
+		]]>
+	</select>
+	
+	<select id="AdminGetFaqStatList" parameterType="int" resultType="com.boogie.customerCenter.dto.FaqBoardDto">
+		<![CDATA[
+			select rownum rnum, a.* from (select * from faq_board where question_code = #{faqstat})a
+		]]>
+	</select> 
+	
+	<select id="AdminGetSelectFaqDto" parameterType="java.util.HashMap" resultType="com.boogie.customerCenter.dto.FaqBoardDto">
+		select * from faq_board where board_number = #{board_number} and question_code = #{qCode}
+	</select>
+	
+	<update id="AdminFAQUpdate" parameterType="java.util.HashMap">
+		update faq_board set question_code = #{questionCode}, question = #{question}, answer = #{answer}, board_number = faq_board_seq.nextval where board_number = #{board_number} and question_code = #{question_code}
+	</update>
+	
+	<delete id="AdminDelFAQ" parameterType="java.util.HashMap">
+		delete from faq_board where question_code = #{qcode} and board_number = #{num}
+	</delete>
 </mapper>

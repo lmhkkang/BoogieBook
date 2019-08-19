@@ -90,7 +90,7 @@
 			</div>
             <div class="center">
                 <div class="middleHeader">
-                    <div class="logo"><a href="http://naver.com"><img id="logoImg" src="${root}/resources/images/BoogieBook_Logo.png"/></a></div>
+                    <div class="logo"><a href="${root}/index/index.do"><img id="logoImg" src="${root}/resources/images/BoogieBook_Logo.png"/></a></div>
                     <div class="search_form">
                         <div class="search_top"></div>
                         <div class="search"><b>Administrator</b></div>
@@ -104,7 +104,8 @@
 					<li><a href="adminMemMng.do">회원관리</a></li>
 					<li><a href="adminBookRegMng.do">도서등록</a></li>
 					<li><a href="adminBookMng.do">도서관리</a></li>
-					<li><a href="adminFAQMng.do">고객센터관리</a></li>
+					<li><a href="adminFAQRegMng.do">FAQ등록</a></li>
+					<li><a href="adminFAQMng.do">FAQ관리</a></li>
 					<li><a href="adminOrdMng.do">주문 관리</a></li>
 				</ul>
 			</div>

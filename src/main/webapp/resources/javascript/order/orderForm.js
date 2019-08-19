@@ -96,9 +96,7 @@ function payProgress(root){
 		}
 		return check;
 	}
-	if(name.value != "" && phone.value != "" && zipcode.value != "" && addr1.value != "" && addr2.value != ""){
-		var win = window.open(root+"/order/payProgress.do","PopupWin", "width=530, height=500, resizable=yes ,left=500, top=200");
-	}
+	
 }
 
 function chkEmail(str) {

@@ -1,0 +1,891 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.3" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <interface id="1" language="java" name="com.boogie.member.service.MemberService" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/member/service/MemberService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="9845" y="406"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="2" language="java" name="com.boogie.recommend.service.RecommendService" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/recommend/service/RecommendService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7605" y="280"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="3" language="java" name="com.boogie.customerCenter.dao.CustomerCenterDaoImp" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/customerCenter/dao/CustomerCenterDaoImp.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="5186" y="-1227"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="4" language="java" name="com.boogie.customerCenter.service.CustomerCenterService" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/customerCenter/service/CustomerCenterService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7089" y="298"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="5" language="java" name="com.boogie.homepage.HomeController" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/homepage/HomeController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="251" y="-1245"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="6" language="java" name="com.boogie.recommend.dao.RecommendDao" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/recommend/dao/RecommendDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="6082" y="343"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="7" language="java" name="com.boogie.email.EmailSender" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/email/EmailSender.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="9087" y="298"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="8" language="java" name="com.boogie.index.service.IndexService" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/index/service/IndexService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8558" y="280"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="9" language="java" name="com.boogie.manager.dto.ManagerDto" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/manager/dto/ManagerDto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="424" y="-1263"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="10" language="java" name="com.boogie.bookInfo.dao.BookInfoDao" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/bookInfo/dao/BookInfoDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10133" y="343"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="11" language="java" name="com.boogie.visit.listener.VisitSessionListener" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/visit/listener/VisitSessionListener.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="636" y="-1227"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="com.boogie.review.dto.ReviewDto" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/review/dto/ReviewDto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="913" y="-1056"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="13" language="java" name="com.boogie.bookInfo.service.BookInfoService" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/bookInfo/service/BookInfoService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8830" y="316"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="14" language="java" name="com.boogie.location.dao.LocationDao" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/location/dao/LocationDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4974" y="271"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="15" language="java" name="com.boogie.order.dto.OrderDto" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/order/dto/OrderDto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1153" y="-822"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="com.boogie.visit.dao.VisitCountDao" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/visit/dao/VisitCountDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1351" y="-1155"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="com.boogie.recommend.dto.RecommendMarkDto" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/recommend/dto/RecommendMarkDto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1725" y="-894"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="com.boogie.admin.service.AdminServiceImp" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/admin/service/AdminServiceImp.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="6849" y="-1056"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="com.boogie.location.service.LocationServiceImp" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/location/service/LocationServiceImp.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3212" y="-1263"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="20" language="java" name="com.boogie.search.dao.SearchDao" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/search/dao/SearchDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="6481" y="343"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="21" language="java" name="com.boogie.visit.dao.ConnectionProvider" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/visit/dao/ConnectionProvider.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2088" y="-1254"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="com.boogie.search.dao.SearchDaoImp" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/search/dao/SearchDaoImp.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="6481" y="-1182"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="com.boogie.order.dao.OrderDaoImp" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/order/dao/OrderDaoImp.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10434" y="-1029"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="24" language="java" name="com.boogie.order.service.OrderService" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/order/service/OrderService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="9346" y="370"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="25" language="java" name="com.boogie.member.dto.MemberDto" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/member/dto/MemberDto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2288" y="-822"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="26" language="java" name="com.boogie.search.service.SearchService" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/search/service/SearchService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8294" y="325"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="27" language="java" name="com.boogie.review.service.ReviewServiceImp" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/review/service/ReviewServiceImp.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7618" y="-1254"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="com.boogie.index.service.IndexServiceImp" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/index/service/IndexServiceImp.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8407" y="-1254"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="com.boogie.member.dao.MemberDaoImp" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/member/dao/MemberDaoImp.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10763" y="-1137"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="com.boogie.customerCenter.dto.StoreMapDto" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/customerCenter/dto/StoreMapDto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2495" y="-1065"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="31" language="java" name="com.boogie.index.dao.IndexDao" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/index/dao/IndexDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8053" y="280"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="32" language="java" name="com.boogie.recommend.service.RecommendServiceImp" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/recommend/service/RecommendServiceImp.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7378" y="-1254"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="com.boogie.search.service.SearchServiceImp" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/search/service/SearchServiceImp.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7880" y="-1209"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="com.boogie.bookInfo.dao.BookInfoDaoImp" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/bookInfo/dao/BookInfoDaoImp.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="9825" y="-1182"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="com.boogie.recommend.dto.RecommendInterestDto" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/recommend/dto/RecommendInterestDto.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2863" y="-894"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="36" language="java" name="com.boogie.location.service.LocationService" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/location/service/LocationService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3207" y="271"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="37" language="java" name="com.boogie.member.dao.MemberDao" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/member/dao/MemberDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10755" y="-54"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="38" language="java" name="com.boogie.bookInfo.dto.BookInfoDto" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/bookInfo/dto/BookInfoDto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3400" y="-876"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="com.boogie.location.dao.LocationDaoImp" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/location/dao/LocationDaoImp.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4977" y="-1263"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="com.boogie.location.dto.LocationDto" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/location/dto/LocationDto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3574" y="-1263"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="com.boogie.recommend.dao.RecommendDaoImp" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/recommend/dao/RecommendDaoImp.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="5855" y="-1182"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="42" language="java" name="com.boogie.admin.service.AdminService" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/admin/service/AdminService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7342" y="478"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="43" language="java" name="com.boogie.customerCenter.service.CustomerCenterServiceImp" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/customerCenter/service/CustomerCenterServiceImp.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="6138" y="-1236"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="44" language="java" name="com.boogie.customerCenter.dao.CustomerCenterDao" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/customerCenter/dao/CustomerCenterDao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="5431" y="298"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="45" language="java" name="com.boogie.review.service.ReviewService" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/review/service/ReviewService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7845" y="280"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="46" language="java" name="com.boogie.customerCenter.dto.FaqBoardDto" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/customerCenter/dto/FaqBoardDto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3754" y="-1119"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="47" language="java" name="com.boogie.search.dto.SearchDto" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/search/dto/SearchDto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3958" y="-903"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="48" language="java" name="com.boogie.admin.dao.AdminDaoImp" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/admin/dao/AdminDaoImp.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="5501" y="-993"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="49" language="java" name="com.boogie.aop.BookAspect" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/aop/BookAspect.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4176" y="-1236"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="50" language="java" name="com.boogie.index.dto.IndexDto" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/index/dto/IndexDto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4520" y="-894"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="51" language="java" name="com.boogie.manager.dao.ManagerDao" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/manager/dao/ManagerDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="11186" y="271"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="52" language="java" name="com.boogie.review.dao.ReviewDao" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/review/dao/ReviewDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="6843" y="280"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="53" language="java" name="com.boogie.order.dao.OrderDao" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/order/dao/OrderDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10426" y="54"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="54" language="java" name="com.boogie.admin.dao.AdminDao" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/admin/dao/AdminDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="5728" y="532"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="55" language="java" name="com.boogie.manager.service.ManagerService" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/manager/service/ManagerService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="11017" y="-171"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="56" language="java" name="com.boogie.email.Email" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/email/Email.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="9595" y="370"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="57" language="java" name="com.boogie.visit.dao.DriverProvider" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/visit/dao/DriverProvider.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4823" y="-1254"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="58" language="java" name="com.boogie.controller.BookController" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/controller/BookController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8781" y="-552"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="59" language="java" name="com.boogie.index.dao.IndexDaoImp" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/index/dao/IndexDaoImp.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8159" y="-1245"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="60" language="java" name="com.boogie.review.dao.ReviewDaoImp" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/review/dao/ReviewDaoImp.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7121" y="-1245"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="61" language="java" name="com.boogie.member.service.MemberServiceImp" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/member/service/MemberServiceImp.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10115" y="-1128"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="62" language="java" name="com.boogie.bookInfo.service.BookInfoServiceImp" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/bookInfo/service/BookInfoServiceImp.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="9196" y="-1218"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="63" language="java" name="com.boogie.manager.service.ManagerServiceImp" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/manager/service/ManagerServiceImp.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="11020" y="-1263"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="64" language="java" name="com.boogie.order.service.OrderServiceImp" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/order/service/OrderServiceImp.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="9523" y="-1137"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="65" language="java" name="com.boogie.manager.dao.ManagerDaoImp" project="BoogieBook" 
+    file="/BoogieBook/src/main/java/com/boogie/manager/dao/ManagerDaoImp.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="11187" y="-1263"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="66">    
+    <end type="SOURCE" refId="64" navigable="false">      
+      <attribute id="67" name="memberDao"/>      
+      <multiplicity id="68" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="69">    
+    <end type="SOURCE" refId="64"/>    
+    <end type="TARGET" refId="24"/>  
+  </realization>  
+  <association id="70">    
+    <end type="SOURCE" refId="58" navigable="false">      
+      <attribute id="71" name="indexService"/>      
+      <multiplicity id="72" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="73">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="42"/>  
+  </realization>  
+  <association id="74">    
+    <end type="SOURCE" refId="64" navigable="false">      
+      <attribute id="75" name="orderDao"/>      
+      <multiplicity id="76" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="53" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="77">    
+    <end type="SOURCE" refId="60"/>    
+    <end type="TARGET" refId="52"/>  
+  </realization>  
+  <realization id="78">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="26"/>  
+  </realization>  
+  <association id="79">    
+    <end type="SOURCE" refId="58" navigable="false">      
+      <attribute id="80" name="searchService"/>      
+      <multiplicity id="81" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="82">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="36"/>  
+  </realization>  
+  <association id="83">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="84" name="reviewDao"/>      
+      <multiplicity id="85" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="52" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="86">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <association id="87">    
+    <end type="SOURCE" refId="58" navigable="false">      
+      <attribute id="88" name="adminService"/>      
+      <multiplicity id="89" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="42" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="90">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="53"/>  
+  </realization>  
+  <association id="91">    
+    <end type="SOURCE" refId="43" navigable="false">      
+      <attribute id="92" name="customerCenterDao"/>      
+      <multiplicity id="93" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="44" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="94">    
+    <end type="SOURCE" refId="61" navigable="false">      
+      <attribute id="95" name="memberDao"/>      
+      <multiplicity id="96" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="97">    
+    <end type="SOURCE" refId="41"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <association id="98">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="99" name="searchDao"/>      
+      <multiplicity id="100" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="101">    
+    <end type="SOURCE" refId="63"/>    
+    <end type="TARGET" refId="55"/>  
+  </realization>  
+  <realization id="102">    
+    <end type="SOURCE" refId="59"/>    
+    <end type="TARGET" refId="31"/>  
+  </realization>  
+  <association id="103">    
+    <end type="SOURCE" refId="62" navigable="false">      
+      <attribute id="104" name="bookInfoDao"/>      
+      <multiplicity id="105" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="106">    
+    <end type="SOURCE" refId="58" navigable="false">      
+      <attribute id="107" name="email"/>      
+      <multiplicity id="108" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="56" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="109">    
+    <end type="SOURCE" refId="43"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <realization id="110">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <realization id="111">    
+    <end type="SOURCE" refId="61"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <association id="112">    
+    <end type="SOURCE" refId="58" navigable="false">      
+      <attribute id="113" name="orderService"/>      
+      <multiplicity id="114" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="115">    
+    <end type="SOURCE" refId="62"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <association id="116">    
+    <end type="SOURCE" refId="64" navigable="false">      
+      <attribute id="117" name="email"/>      
+      <multiplicity id="118" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="56" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="119">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="44"/>  
+  </realization>  
+  <association id="120">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="121" name="instance"/>      
+      <multiplicity id="122" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="123">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <realization id="124">    
+    <end type="SOURCE" refId="48"/>    
+    <end type="TARGET" refId="54"/>  
+  </realization>  
+  <association id="125">    
+    <end type="SOURCE" refId="58" navigable="false">      
+      <attribute id="126" name="customerCenterService"/>      
+      <multiplicity id="127" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="128">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="129" name="adminDao"/>      
+      <multiplicity id="130" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="131">    
+    <end type="SOURCE" refId="64" navigable="false">      
+      <attribute id="132" name="emailSender"/>      
+      <multiplicity id="133" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="134">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="37"/>  
+  </realization>  
+  <realization id="135">    
+    <end type="SOURCE" refId="65"/>    
+    <end type="TARGET" refId="51"/>  
+  </realization>  
+  <association id="136">    
+    <end type="SOURCE" refId="58" navigable="false">      
+      <attribute id="137" name="memberService"/>      
+      <multiplicity id="138" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="139">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="140" name="recommandDao"/>      
+      <multiplicity id="141" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="142">    
+    <end type="SOURCE" refId="58" navigable="false">      
+      <attribute id="143" name="bookInfoService"/>      
+      <multiplicity id="144" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="145">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="146" name="indexDao"/>      
+      <multiplicity id="147" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="148">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="8"/>  
+  </realization>  
+  <realization id="149">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="14"/>  
+  </realization>  
+  <realization id="150">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <association id="151">    
+    <end type="SOURCE" refId="58" navigable="false">      
+      <attribute id="152" name="recommendService"/>      
+      <multiplicity id="153" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="154">    
+    <end type="SOURCE" refId="58" navigable="false">      
+      <attribute id="155" name="emailSender"/>      
+      <multiplicity id="156" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="157">    
+    <end type="SOURCE" refId="58" navigable="false">      
+      <attribute id="158" name="reviewService"/>      
+      <multiplicity id="159" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

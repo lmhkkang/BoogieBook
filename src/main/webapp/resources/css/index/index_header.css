@@ -104,7 +104,9 @@ header > .middleHeader{
 	border: 0px dotted green;
 }
 .search{
-    height: 48px;
+    height: 96px;
+    margin: 32px 20px;
+
 }
 
 header > .lnb{

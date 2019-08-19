@@ -73,16 +73,16 @@
           });
           
           $(function(){
-        	 var count = 0;
-        	 $.ajax({
+            var count = 0;
+            $.ajax({
                  type : "get",
                  url : "${root}/order/cartCount.do",
                  dataType : "text",
                  success : function(data) { 
-                    	$("#cartCount").text(data);
+                       $("#cartCount").text(data);
                     }
                  ,error : function(){
-                	 alert("failed ");
+                    alert("failed ");
                  }                
              });
           });
@@ -126,15 +126,16 @@
             <div class="logo">
                <a href="${root}/index.jsp"><img src="${root}/resources/images/BoogieBook_Logo.png"></a>
             </div>
-            <div class="search_form">  
-               <div class="search" >
+            <div class="search_form">
+               
+               <div class="search">
                   <form action="${root}/search/searchOk.do" method="get">
                      <div id="custom-search-input">
                         <div class="input-group col-md-12">
                            <input type="text" class="  search-query form-control"
-                              name="keyword" id="term" placeholder="Search" style="margin-top:25px;"/> <span
+                              name="keyword" id="term" placeholder="검색어를 입력하세요" /> <span
                               class="input-group-btn">
-                              <button class="btn btn-danger" type="submit" style="margin-top:25px;">
+                              <button class="btn btn-danger" type="submit">
                                  <span class=" glyphicon glyphicon-search"></span>
                               </button>
                            </span>

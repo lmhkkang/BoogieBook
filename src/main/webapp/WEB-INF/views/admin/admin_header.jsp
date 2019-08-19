@@ -7,15 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="${root}/resources/css/admin/admin_header.css"/>
+   <link href="https://fonts.googleapis.com/css?family=Gothic+A1|Lacquer|Noto+Sans+KR&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Maven+Pro|Play&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="${root}/resources/css/admin/admin_header.css"/>
 </head>
 <body>
 <header>
 <div class="gnb">
-				<ul class="center">
-					<li class="topHeader_r"><a href="#">로그아웃</a></li>
-					<li class="topHeader_r"><a href="#">홈으로</a></li>
-				</ul>
 			</div>
             <div class="center">
                 <div class="middleHeader">

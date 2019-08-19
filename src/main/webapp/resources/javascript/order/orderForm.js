@@ -96,7 +96,6 @@ function payProgress(root){
 		}
 		return check;
 	}
-	
 }
 
 function chkEmail(str) {

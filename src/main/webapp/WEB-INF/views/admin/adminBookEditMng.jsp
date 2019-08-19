@@ -81,7 +81,7 @@
 	</script>
 </head>
 <body>
-       <jsp:include page="admin_header.jsp"></jsp:include>
+     <jsp:include page="admin_header.jsp"></jsp:include>
     <div id="content">
       <div class="section1">
         <div class="center">

@@ -64,7 +64,12 @@
    <div class="center">
       <div class="section1_l">
          <ul class="book_list">
+<<<<<<< HEAD
+         	<c:set var="pageName" value="${root}/koreanBook/koreanBookMain.do"/>
+         	
+=======
          <c:set var="pageName" value="${root}/koreanBook/koreanBookMain.do"/>
+>>>>>>> 926f1abda7d6947e96e294ec57f0d8d8dd94d71f
          	<c:if test="${page == 'koreanBook'}">
          		<c:set var="pageName" value="${root}/koreanBook/koreanBookMain.do"/>
          	</c:if>

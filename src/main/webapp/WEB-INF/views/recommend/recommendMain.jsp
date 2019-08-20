@@ -20,6 +20,10 @@
 <script type="text/javascript">
 	
 	function toServer(root, book_name) {
+		
+ 		$("#ul_center > li:eq(4)").css("background","white");
+ 		$("#ul_center > li:eq(4) > a").css("color","#5e6b9e");
+ 		
 		var url = root + "/recommend/recommendProcxy.do?bookName=" + book_name;
 
 		//alert(markList);
@@ -45,16 +49,10 @@
 			document.getElementById("interest_des").innerHTML = "미리보기내역이 존재하지 않습니다.";
 		}
 	}
-	
+		
 </script>
 </head>
-<script type="text/javascript">
-	function head(){
-	$("#ul_center > li:eq(4)").css("background","white");
-	$("#ul_center > li:eq(4) > a").css("color","#5e6b9e");
-	}
-</script>
-<body onload="head();">
+<body onload="toServer('${root}','${interestDto.book_name}')">
 	<jsp:include page="../../../header.jsp"></jsp:include>
 	<div class="center">
 		<div class="section1_l">
@@ -80,7 +78,7 @@
 		<div class="section1_r">
 		<c:if test="${interestDto.book_name != null}">
 			<div class="section2">
-				<body onload="toServer('${root}','${interestDto.book_name}')">
+				<body>
 				<div class="interest">
 					<div class="interest_top">
 						<div class="interest_top_l">${name} 님의 관심분야책</div>

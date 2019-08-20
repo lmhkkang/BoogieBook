@@ -55,5 +55,53 @@ function memoInsert(memo){
 }
 
 function payProgress(root){
-	var win = window.open(root+"/order/payProgress.do","PopupWin", "width=530, height=500, resizable=yes ,left=500, top=200");
+	var name = document.getElementById("name");
+	var phone = document.getElementById("phone");
+	var zipcode = document.getElementById("zipcode");
+	var addr1 = document.getElementById("addr1");
+	var addr2 = document.getElementById("addr2");
+	var email = document.getElementById("email");
+	
+	if(name.value==null || name.value==""){
+		alert("이름을 입력해주세요.");
+		name.focus();
+		return false;
+	}
+	if(phone.value==null || phone.value==""){
+		alert("전화번호를 입력해주세요.");
+		phone.focus();
+		return false;
+	}
+	if(zipcode.value==null || zipcode.value==""){
+		alert("우편번호를 입력해주세요.");
+		phone.focus();
+		return false;
+	}
+	if(addr1.value==null || addr1.value==""){
+		alert("주소를 입력해주세요.");
+		addr1.focus();
+		return false;
+	}
+	if(addr2.value==null || addr2.value==""){
+		alert("상세주소를 입력해주세요.");
+		addr2.focus();
+		return false;
+	}
+	if(email.value != null){
+		var check = new Boolean(false);
+		check = chkEmail(email.value);
+		if(check==false){
+			alert("유효한 메일 형식이 아닙니다.");
+			email.focus();
+		}
+		return check;
+	}
+	
 }
+
+function chkEmail(str) {
+    var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    if (regExp.test(str)) return true;
+    else return false;
+}
+

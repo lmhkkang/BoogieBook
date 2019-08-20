@@ -30,9 +30,7 @@
 				<div class="collapse navbar-collapse" id="navbar4"
 					style="float: right;">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link" href="#">홈으로</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
+						<li class="nav-item"><a class="nav-link" href="${root}/index/index.do">홈으로</a></li>
 					</ul>
 				</div>
 			</div>

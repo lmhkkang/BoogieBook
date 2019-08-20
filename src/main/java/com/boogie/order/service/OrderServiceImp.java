@@ -250,21 +250,18 @@ public class OrderServiceImp implements OrderService {
 				"                </tr>" + 
 				"" + 
 				"                <tr>" + 
-				"                    <td></td>";
+				"                    <td></td>" ; 
 				if(bookList != null) {
 					for(int i=0; i<bookList.size(); i++) {
 						OrderDto orderDto = new OrderDto();
 						orderDto = bookList.get(i);
-						content += "<td style=\"padding-left:60px;\">책이름(권)<label>"+ orderDto.getBook_name()+"("+orderDto.getQuantity()+")" +"</label></td>";
+						content += "<td style=\"padding-left:60px;\"><label>"+ orderDto.getBook_name()+"("+orderDto.getQuantity()+")" +"</label></td>";
 					}
 				}else {
-					content += "<td style=\"padding-left:60px;\">책이름(권)<label>"+ oDto.getBook_name()+"("+oDto.getQuantity()+")" +"</label></td>";
+					content += "<td style=\"padding-left:60px;\"><label>"+ oDto.getBook_name()+"("+oDto.getQuantity()+")" +"</label></td>";
 				}
-				
 				content += "                        <td>" + 
 				"                        </td>" + 
-
-				"                    <td></td>" + 
 				"                    <td><strong></strong></td>" + 
 				"                    <td class=\"text-right\"><strong></strong></td>" + 
 				"                </tr>" + 
@@ -458,7 +455,15 @@ public class OrderServiceImp implements OrderService {
 		BookAspect.logger.info(BookAspect.logMsg +  "checkMem:  "+ checkMem);
 		
 		if(checkMem > 0) {
-			int checkOrder = orderDao.NonMemberAddOrder(Integer.parseInt(request.getParameter("total")),member_id);
+			int checkOrder = 0;
+			int total = 0;
+			if(request.getParameter("total") == null || request.getParameter("total") == "") {
+				total = orderDao.getBookPrice(Integer.parseInt(request.getParameter("book_id")));
+				checkOrder = orderDao.NonMemberAddOrder(total,member_id);
+			}else {
+				checkOrder = orderDao.NonMemberAddOrder(Integer.parseInt(request.getParameter("total")),member_id);
+			}
+			
 			BookAspect.logger.info(BookAspect.logMsg +  "checkOrder:  "+ checkOrder);
 			int price = 0;
 			int checkOrderDetail = 0;
@@ -474,7 +479,12 @@ public class OrderServiceImp implements OrderService {
 							}
 							book_id = cookies[i].getValue();
 							price = orderDao.getBookPrice(Integer.parseInt(book_id));
-							checkOrderDetail = orderDao.NonMemberAddOrderDetail(order_id,book_id,Integer.parseInt(request.getParameter("quantity")),price);
+							if(request.getParameter("quantity")==null || request.getParameter("quantity")=="") {
+								checkOrderDetail = orderDao.NonMemberAddOrderDetail(order_id,book_id,1,price);
+							}else {
+								checkOrderDetail = orderDao.NonMemberAddOrderDetail(order_id,book_id,Integer.parseInt(request.getParameter("quantity")),price);
+							}
+							
 							BookAspect.logger.info(BookAspect.logMsg +  "checkOrderDetail:  "+ checkOrderDetail);
 						}
 					}
@@ -487,7 +497,11 @@ public class OrderServiceImp implements OrderService {
 					orderDto.setAddr1(request.getParameter("addr1"));
 					orderDto.setAddr2(request.getParameter("addr2"));
 					orderDto.setName(request.getParameter("name"));
-					orderDto.setTotal_price(Integer.parseInt(request.getParameter("total")));
+					if(request.getParameter("total")==null || request.getParameter("total") == "") {
+						orderDto.setTotal_price(orderDao.getBookPrice(Integer.parseInt(request.getParameter("book_id"))));
+					}else {
+						orderDto.setTotal_price(price);
+					}
 									
 					//book_id 로 book_name & quantity -> bookList에 저장
 					for(int i=0; i<bookIdList.size(); i++) {
@@ -522,20 +536,22 @@ public class OrderServiceImp implements OrderService {
 						OrderDto oDto = new OrderDto();
 						for(int i=0; i<bookIdList.size(); i++) {
 							System.out.println("cookie 지우는 곳!!!!! " + bookIdList.get(i));
-							for(int j=0; j<cookiesList.length; j++) {
-								if(cookiesList[j].getName().substring(7).equals(bookIdList.get(i))) {
-									System.out.println(cookiesList[j].getName()+"============detlete book_id cookie================");
-									Cookie cookie = new Cookie(cookiesList[j].getName(),"");
-									cookie.setMaxAge(0);
-									response.addCookie(cookie);
-									System.out.println("북아이디지워짐~!~!~!~!~");
-								}else if(cookiesList[j].getName().equals("member_id")) {
-									member_id = null;
-									Cookie cookie = new Cookie(cookiesList[j].getName(),"");
-									cookie.setMaxAge(0);
-									cookie.setPath("/");
-									response.addCookie(cookie);
-									System.out.println("member_id delete from cookie--------------");
+							if(bookIdList.get(i) != null || bookIdList.get(i) != "") {
+								for(int j=0; j<cookiesList.length; j++) {
+									if(cookiesList[j].getName().substring(7).equals(bookIdList.get(i))) {
+										System.out.println(cookiesList[j].getName()+"============detlete book_id cookie================");
+										Cookie cookie = new Cookie(cookiesList[j].getName(),"");
+										cookie.setMaxAge(0);
+										response.addCookie(cookie);
+										System.out.println("북아이디지워짐~!~!~!~!~");
+									}else if(cookiesList[j].getName().equals("member_id")) {
+										member_id = null;
+										Cookie cookie = new Cookie(cookiesList[j].getName(),"");
+										cookie.setMaxAge(0);
+										cookie.setPath("/");
+										response.addCookie(cookie);
+										System.out.println("member_id delete from cookie--------------");
+									}
 								}
 							}
 						}
@@ -550,7 +566,7 @@ public class OrderServiceImp implements OrderService {
 	public void NonMemberDirectOrder(ModelAndView mav) {
 		 Map<String, Object> map = mav.getModelMap();
 	      HttpServletRequest request = (HttpServletRequest) map.get("request");
-	      HttpServletResponse response = (HttpServletResponse) map.get("respone");
+	      HttpServletResponse response = (HttpServletResponse) map.get("response");
 	      HttpSession  session = request.getSession();
 
 	      

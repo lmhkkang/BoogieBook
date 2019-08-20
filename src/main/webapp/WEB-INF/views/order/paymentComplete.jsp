@@ -18,9 +18,13 @@
 		$(document).ready(function(){
 			$("#bar").hide(0);
 		});
+		function payProgress(root){
+			window.open(root+"/order/payProgress.do","PopupWin", "width=530, height=500, resizable=yes ,left=500, top=200");
+		}
+		
 	</script>
 </head>
-<body>
+<body onload="payProgress('${root}')">
 <c:set var="orderDto" value="${orderDto}"/>
    <jsp:include page="../../../header.jsp"></jsp:include>
 

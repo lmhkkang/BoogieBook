@@ -29,9 +29,7 @@
 				<div class="collapse navbar-collapse" id="navbar4"
 					style="float: right;">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link" href="${root}/index.jsp">홈으로</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
+						<li class="nav-item"><a class="nav-link" href="${root}/index/index.do">홈으로</a></li>
 					</ul>
 				</div>
 			</div>
@@ -130,11 +128,7 @@
 					<ul class="pagination justify-content-center mt-1" id="pageNumber">
 						<li class="page-item"><a class="page-link" href="#"> <span>«</span></a>
 						</li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">4</a></li>
-						<li class="page-item"><a class="page-link" href="#">5</a></li>
+							<li class="page-item"><a class="page-link" href="#">1</a></li>
 						<li class="page-item"><a class="page-link" href="#"> <span>»</span></a>
 						</li>
 					</ul>

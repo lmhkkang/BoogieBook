@@ -64,12 +64,8 @@
    <div class="center">
       <div class="section1_l">
          <ul class="book_list">
-<<<<<<< HEAD
          	<c:set var="pageName" value="${root}/koreanBook/koreanBookMain.do"/>
-         	
-=======
          <c:set var="pageName" value="${root}/koreanBook/koreanBookMain.do"/>
->>>>>>> 926f1abda7d6947e96e294ec57f0d8d8dd94d71f
          	<c:if test="${page == 'koreanBook'}">
          		<c:set var="pageName" value="${root}/koreanBook/koreanBookMain.do"/>
          	</c:if>
@@ -93,8 +89,7 @@
             <li><a href="${pageName}?bookType=여행">여행</a></li>
             <li><a href="${pageName}?bookType=잡지">잡지</a></li>
             <li><a href="${pageName}?bookType=만화">만화</a></li>
-            <li><a href="${pageName}?bookType=컴퓨터/IT">컴퓨터/IT</a></li>
-            
+            <li><a href="${pageName}?bookType=컴퓨터/IT">컴퓨터/IT</a></li>            
          </ul>
       </div>
       <div class="section1_r">

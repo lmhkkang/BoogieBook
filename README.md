@@ -6,7 +6,7 @@
 
 개발 환경 : JDK12, JSP, JavaScript, css, Oracle 11g Release, Apache Tomcat 8.5, Spring Maven, myBais
 기본기능 : 국내도서, 베스트셀러, 신간도서, 장바구니, 주문서작성, 결제완료, 고객센터(FAQ)
-주요기능 : 1. 추천도서 (협엽 알고리즘)
+주요기능 : 1. 추천도서 (협업 알고리즘)
            2. 상세검색 (DB필터링, myBatis 동적 쿼리문)
            3. 일일 사용자통계
            4. KaKao로그인
